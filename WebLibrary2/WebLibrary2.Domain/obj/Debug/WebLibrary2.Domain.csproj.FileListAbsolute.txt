@@ -1,0 +1,11 @@
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\WebLibrary2.Domain.dll
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\WebLibrary2.Domain.pdb
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\obj\Debug\WebLibrary2.Domain.csprojResolveAssemblyReference.cache
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\obj\Debug\WebLibrary2.Domain.csproj.CoreCompileInputs.cache
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\obj\Debug\WebLibrary2.Domain.dll
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\obj\Debug\WebLibrary2.Domain.pdb
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\WebLibrary2.Domain.dll.config
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\EntityFramework.dll
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\EntityFramework.SqlServer.dll
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\EntityFramework.xml
+F:\7_semestr\WebLibrary2\WebLibrary2.Domain\bin\Debug\EntityFramework.SqlServer.xml
