@@ -12,12 +12,12 @@
 </div>
 
 <div class="row">
-    @foreach(var book in Model)
+    @foreach (var book in Model)
     {
-    <div class="col-md-4">
-       @book.idBook
-    </div>
-    <div class="col-md-4">
+        <div @*class="col-md-4"*@>
+            @book.idBook
+        </div>
+    @*<div class="col-md-4">
         @book.idAuthor
     </div>
     <div class="col-md-4">
@@ -25,6 +25,6 @@
     </div>
     <div class="col-md-4">
       @book.YearOfPublish
-    </div>
+    </div>*@
     }
 </div>
