@@ -8,10 +8,10 @@ namespace WebLibrary2.Domain.Entity
 {
     public class Book
     {   [Key]
-        public int idBook { get; set; }
-        public int idAuthor { get; set; }
-        public int idGenre { get; set; }
-        public string NameOfBook { get; set; }
-        public int YearOfPublish { get; set; }
+        public int BookID { get; set; }
+        public int AuthorID { get; set; }
+        public int GenreID { get; set; }
+        public string BookName { get; set; }
+       // public int YearOfPublish { get; set; }
     }
 }
