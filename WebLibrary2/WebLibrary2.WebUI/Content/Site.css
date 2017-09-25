@@ -16,6 +16,12 @@
     white-space: normal;
 }
 
+table, th, tr, td {
+    border: 2.5px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

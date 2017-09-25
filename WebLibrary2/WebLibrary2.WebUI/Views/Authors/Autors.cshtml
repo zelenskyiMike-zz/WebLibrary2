@@ -1,0 +1,28 @@
+﻿@using WebLibrary2.Domain.Entity;
+@model IEnumerable<Authors>
+@{
+    ViewBag.Title = "Авторы";
+}
+
+<h3>@ViewBag.Message</h3>
+<div>
+    <table>
+        <tr>
+            <th>
+                <h4>Автор</h4>
+            </th>
+        </tr>
+        @foreach (var author in Model)
+        { 
+        <tr>
+            <td>
+                <h4>@author.AuthorName</h4>
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+
+<p>Use this area to provide additional information.</p>
+
+

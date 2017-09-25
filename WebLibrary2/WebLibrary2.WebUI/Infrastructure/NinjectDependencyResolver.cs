@@ -30,6 +30,7 @@ namespace WebLibrary2.WebUI.Infrastructure
         private void AddBindings()
         {
               kernel.Bind<IBookRepository>().To<EFBookRepository>();
+              kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
         }
     }
 }

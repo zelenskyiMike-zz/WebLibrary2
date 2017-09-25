@@ -47,9 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAuthorsRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
+    <Compile Include="Concrete\EFAuthorRepository.cs" />
     <Compile Include="Concrete\EFBookRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Entity\Authors.cs" />
     <Compile Include="Entity\Books.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

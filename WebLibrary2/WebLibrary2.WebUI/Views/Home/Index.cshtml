@@ -1,30 +1,34 @@
 ﻿@using WebLibrary2.Domain.Entity;
-@model IEnumerable<Book>
+@model IEnumerable<Books>
+
 
 @{
     ViewBag.Title = "List of books";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">WebLibrary is a cool analog of a library</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div>
+    <h2>Список книг</h2>
+    @*<p class="lead">WebLibrary is a cool analog of a library</p>*@
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+    <br />
 
-<div class="row">
-    @foreach (var book in Model)
-    {
-        <div @*class="col-md-4"*@>
-            @book.BookID
-        </div>
-    @*<div class="col-md-4">
-        @book.idAuthor
+        <table>
+            <tr>
+                <th><h4>Автор</h4></th>
+                <th><h4>Назнвание</h4></th>
+                <th><h4>Жанр</h4></th>
+                <th><h4>Год публикации</h4></th>
+            </tr>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td><h4>@book.AuthorID</h4></td>
+                    <td><h4>@book.BookName</h4></td>
+                    <td><h4>@book.GenreID</h4></td>
+                    <td><h4>@book.YearOfPublish</h4></td>
+                </tr>
+            }
+        </table>
     </div>
-    <div class="col-md-4">
-        @book.NameOfBook
-    </div>
-    <div class="col-md-4">
-      @book.YearOfPublish
-    </div>*@
-    }
-</div>
+
+@*class="jumbotron"*@

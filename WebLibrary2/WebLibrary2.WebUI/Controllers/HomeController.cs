@@ -10,25 +10,20 @@ namespace WebLibrary2.WebUI.Controllers
     public class HomeController : Controller
     {
         private IBookRepository repository;
+     
 
         public HomeController(IBookRepository bookRepository)
         {
             this.repository = bookRepository;
         }
-
-       
+      
         public ViewResult Index()
         {
+            
             return View(repository.Books);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
+     
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
