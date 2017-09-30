@@ -1,5 +1,7 @@
 ﻿@using WebLibrary2.Domain.Entity;
-@model IEnumerable<Books>
+@using System.Linq;
+@using WebLibrary2.WebUI.Models;
+@model  IQueryable<QueryRepository>
 
 
 @{
@@ -22,10 +24,11 @@
             @foreach (var book in Model)
             {
                 <tr>
-                    <td><h4>@book.AuthorID</h4></td>
+                    @*<td><h4>@book.AuthorID</h4></td>
                     <td><h4>@book.BookName</h4></td>
                     <td><h4>@book.GenreID</h4></td>
-                    <td><h4>@book.YearOfPublish</h4></td>
+                    <td><h4>@book.YearOfPublish</h4></td>*@
+                    <td>@book.queryBooks</td>
                 </tr>
             }
         </table>

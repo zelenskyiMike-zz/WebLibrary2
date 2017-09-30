@@ -8,7 +8,7 @@ using WebLibrary2.Domain.Entity;
 
 namespace WebLibrary2.Domain.Concrete
 {
-    class EFDbContext : DbContext
+     public class EFDbContext : DbContext
     {
         static EFDbContext()
         {
@@ -17,7 +17,5 @@ namespace WebLibrary2.Domain.Concrete
 
         public DbSet<Books> Books { get; set; }
         public DbSet<Authors> Authors { get; set; }
-
-   
-    }
+     }
 }

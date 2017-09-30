@@ -19,7 +19,6 @@ namespace WebLibrary2.WebUI.Controllers
       
         public ViewResult Index()
         {
-            
             return View(repository.Books);
         }
 

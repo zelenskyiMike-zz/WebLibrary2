@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebLibrary2.Domain.Entity
 {
@@ -10,5 +11,6 @@ namespace WebLibrary2.Domain.Entity
         public int GenreID { get; set; }
         public string BookName { get; set; }
         public int YearOfPublish { get; set; }
+
     }
 }
