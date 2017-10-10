@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebLibrary2.Domain.Entity
@@ -8,10 +8,12 @@ namespace WebLibrary2.Domain.Entity
         [Key]
         public int AuthorID { get; set; }
         public string AuthorName { get; set; }
-
-        internal static object Where()
+        
+        ICollection<Books> Books { get; set; }
+        public Authors()
         {
-            throw new NotImplementedException();
+            Books = new List<Books>();
         }
+        
     }
 }

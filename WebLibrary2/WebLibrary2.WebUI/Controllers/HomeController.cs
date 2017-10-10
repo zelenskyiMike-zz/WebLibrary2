@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract;
+using WebLibrary2.Domain.Concrete;
+using WebLibrary2.Domain.Entity;
+using System.Data.Entity;
 
 namespace WebLibrary2.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private IBookRepository repository;
-     
-
-        public HomeController(IBookRepository bookRepository)
-        {
-            this.repository = bookRepository;
-        }
-      
+        private EFDbContext context = new EFDbContext();
+              
         public ViewResult Index()
         {
-            return View(repository.Books);
+            var books = context.Books.Include(p => p.Authors);
+            return View(books.ToList());
         }
 
      
@@ -29,5 +27,6 @@ namespace WebLibrary2.WebUI.Controllers
 
             return View();
         }
+
     }
 }

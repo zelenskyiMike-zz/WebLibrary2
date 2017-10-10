@@ -10,12 +10,14 @@ namespace WebLibrary2.Domain.Concrete
 {
      public class EFDbContext : DbContext
     {
-        static EFDbContext()
+        public EFDbContext()
         {
             Database.SetInitializer<EFDbContext>(null);
         }
 
         public DbSet<Books> Books { get; set; }
         public DbSet<Authors> Authors { get; set; }
+        public DbSet<Genres> Genres { get; set; }
+
      }
 }

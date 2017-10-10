@@ -54,6 +54,7 @@
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Entity\Authors.cs" />
     <Compile Include="Entity\Books.cs" />
+    <Compile Include="Entity\Genres.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

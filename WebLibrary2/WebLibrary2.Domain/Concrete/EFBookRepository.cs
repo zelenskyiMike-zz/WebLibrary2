@@ -15,13 +15,5 @@ namespace WebLibrary2.Domain.Concrete
             get { return context.Books; }
         }
 
-        public IQueryable<Books> TolstoiBooks
-        {
-            get
-            {
-                return context.Books;
-            }
-
-        }
     }
 }

@@ -12,12 +12,13 @@ namespace WebLibrary2.WebUI.Models
     {
         public QueryRepository()
         {
-           EFDbContext context = new EFDbContext();
-
-           public IQueryable<Books> queryBooks = from book in context.Books
-                                                  select book;
-
+           
         }
+       //static EFDbContext context = new EFDbContext();
+       // public IQueryable<Books> queryBooks = from book in context.Books
+       //                                       select book;
+
+
     }
 
 }

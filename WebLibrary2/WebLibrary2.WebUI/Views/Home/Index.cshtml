@@ -1,7 +1,6 @@
-﻿@using WebLibrary2.Domain.Entity;
-@using System.Linq;
-@using WebLibrary2.WebUI.Models;
-@model  IQueryable<QueryRepository>
+﻿@using System.Data.Entity;
+@using System.Linq.Expressions;
+@model IEnumerable<WebLibrary2.Domain.Entity.Books>
 
 
 @{
@@ -10,8 +9,9 @@
 
 <div>
     <h2>Список книг</h2>
-    @*<p class="lead">WebLibrary is a cool analog of a library</p>*@
-    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+    <h4>
+        @Html.ActionLink("Добавить книгу", "Authors");
+    </h4>
     <br />
 
         <table>
@@ -20,15 +20,21 @@
                 <th><h4>Назнвание</h4></th>
                 <th><h4>Жанр</h4></th>
                 <th><h4>Год публикации</h4></th>
+                <th><h4>Действие</h4></th>
             </tr>
             @foreach (var book in Model)
             {
                 <tr>
-                    @*<td><h4>@book.AuthorID</h4></td>
-                    <td><h4>@book.BookName</h4></td>
-                    <td><h4>@book.GenreID</h4></td>
-                    <td><h4>@book.YearOfPublish</h4></td>*@
-                    <td>@book.queryBooks</td>
+                    <td><h4>@Html.DisplayFor(modelItem => book.Authors.AuthorName)</h4></td>
+                    <td><h4>@Html.DisplayFor(modelItem => book.BookName)</h4></td>
+                    <td><h4>@Html.DisplayFor(modelItem => book.GenreID)</h4></td>
+                    <td><h4>@Html.DisplayFor(modelItem => book.YearOfPublish)</h4></td>
+
+                    <td><h4>@Html.ActionLink("Редактировать", "Authors") |
+                    @Html.ActionLink("Удалить", "Authors")</h4></td>
+
+                    @**@
+                   
                 </tr>
             }
         </table>
