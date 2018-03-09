@@ -1,0 +1,22 @@
+﻿@model WebLibrary2.Domain.Entity.Author
+
+@{
+    ViewBag.Title = "DeleteAuthor";
+}
+
+<h2>DeleteAuthor</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        @Html.DisplayFor(model => model.AuthorName)
+    </div><br />
+    <input class="btn btn-default" type="submit" value="Delete" />
+    <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+
+}
+

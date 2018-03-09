@@ -1,0 +1,19 @@
+﻿@using WebLibrary2.Domain.Entity;
+@model  Author
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<h3>@Html.DisplayFor(model => model.AuthorName)</h3><br />
+
+@foreach (Book b in Model.Books)
+{
+    @b.BookName<br />
+}
+<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+
+
+

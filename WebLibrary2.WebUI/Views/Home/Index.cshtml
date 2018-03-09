@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebLibrary2.Domain.Entity.Author>
+
+@{
+    ViewBag.Title = "List of books";
+}
+<div>
+    <h2>Список авторов</h2>
+    <div class="btn btn-default">
+        <h4>
+            @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor")
+        </h4>
+    </div>
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th><h4>Автор</h4></th>
+            <th><h4>Действие</h4></th>
+        </tr>
+        @foreach (var author in Model)
+        {
+            <tr>
+
+                <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+
+                <td>
+                    <h4>
+                        @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null) |
+                        @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null) |
+                        @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </h4>
+                </td>
+
+
+            </tr>
+        }
+    </table>
+</div>

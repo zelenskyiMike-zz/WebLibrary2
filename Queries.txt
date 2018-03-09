@@ -1,0 +1,27 @@
+create table Authors
+(
+	AuthorID int primary key identity(1,1),
+	AuthorName nvarchar(MAX) not null
+)
+create table Genres
+(
+	GenreID int primary key identity(1,1),
+	GenreName nvarchar(MAX) not null
+)
+create table Books
+(
+	BookID int primary key identity(1,1),
+	AuthorID int foreign key references Authors(AuthorID),
+	GenreID int foreign key references Genres(GenreID),
+	BookName nvarchar(MAX) not null,
+	YearOfPublish int not null
+)
+
+create table AuthorBook
+(
+BookID int foreign key references Books(BookID) not null,
+AuthorID int foreign key references Authors(AuthorID) not null,
+)
+
+Alter table AuthorBook
+add constraint PK_AuthorBook primary key (BookID,AuthorID)

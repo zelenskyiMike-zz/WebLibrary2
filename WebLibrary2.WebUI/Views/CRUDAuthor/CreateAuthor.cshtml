@@ -1,0 +1,24 @@
+﻿@model WebLibrary2.Domain.Entity.Author
+@{
+    ViewBag.Title = "CreateAuthor";
+}
+
+<h2>CreateAuthor</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <h3>Write a name</h3>
+    <div>
+        @Html.EditorFor(model => model.AuthorName)
+        @Html.ValidationMessageFor(model => model.AuthorName)
+    </div><br />
+
+    <input  class="btn btn-default" type="submit" value="Добавить" />
+    <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+}
+
+
+
