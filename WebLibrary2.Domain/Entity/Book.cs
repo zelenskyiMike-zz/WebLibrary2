@@ -17,10 +17,9 @@ namespace WebLibrary2.Domain.Entity
         [Range(868,2018,ErrorMessage ="Книга не могла быть издана раньше 868 и поже 2018 года")]
         public int YearOfPublish { get; set; }
 
-        public virtual Genre Genres { get; set; }
+        public Genre Genres { get; set; }
 
-        //public List<Author> Authors { get; set; }
-        public virtual ICollection<Author> Authors { get; set; }
+        public ICollection<Author> Authors { get; set; }
 
 
         public Book()

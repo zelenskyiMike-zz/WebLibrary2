@@ -59,6 +59,7 @@
     <Compile Include="Concrete\EFGenreRepository.cs" />
     <Compile Include="Entity\Author.cs" />
     <Compile Include="Entity\Book.cs" />
+    <Compile Include="Entity\BookAuthor.cs" />
     <Compile Include="Entity\Genre.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddABookViewModel.cs" />
