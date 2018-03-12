@@ -78,9 +78,9 @@ namespace WebLibrary2.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBook(Book addABookViewModel)
+        public ActionResult EditBook(Book book)
         {
-            var bookToUpdate = bookRepository.GetBookByID(addABookViewModel.BookID);
+            var bookToUpdate = bookRepository.GetBookByID(book.BookID);
 
             if (TryUpdateModel(bookToUpdate))
             {

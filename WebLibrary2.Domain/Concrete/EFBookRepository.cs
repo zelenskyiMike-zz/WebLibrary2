@@ -42,7 +42,8 @@ namespace WebLibrary2.Domain.Concrete
                 BookID = bookVM.BookID,
                 BookName = bookVM.BookName,
                 GenreID = bookVM.GenreID,
-                YearOfPublish = bookVM.YearOfPublish
+                YearOfPublish = bookVM.YearOfPublish,
+                AuthorID = bookVM.AuthorID
             };
             context.Books.Add(book);
         }

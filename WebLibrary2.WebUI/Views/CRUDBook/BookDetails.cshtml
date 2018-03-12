@@ -1,47 +1,50 @@
 ﻿@using WebLibrary2.Domain.Entity
 @model Book
 
-<h2>Details</h2>
+    <h2>Details</h2>
 
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Book
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BookName)
-        </dd>
-        <dt>
-            Authors
-        </dt>
-        @foreach (Author author in Model.Authors)
-        {
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Book
+            </dt>
             <dd>
-                @author.AuthorName
+                @Html.DisplayFor(model => model.BookName)
             </dd>
-        }
+            <dt>
+                Authors
+            </dt>
+            @foreach (var author in Model.Authors)
+            {
+                <dd>
+                    @author.AuthorID
+                </dd>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genres.GenreName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AuthorID);
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genres.GenreName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genres.GenreName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.GenreID)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.YearOfPublish)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.YearOfPublish)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.YearOfPublish)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.YearOfPublish)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    <div class="btn btn-default"> @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = Model.BookID },null)</div>
-    <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
-</p>
+        </dl>
+    </div>
+    <p>
+        <div class="btn btn-default"> @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = Model.BookID }, null)</div>
+        <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
+    </p>

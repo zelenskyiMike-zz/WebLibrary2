@@ -25,3 +25,7 @@ AuthorID int foreign key references Authors(AuthorID) not null,
 
 Alter table AuthorBook
 add constraint PK_AuthorBook primary key (BookID,AuthorID)
+
+
+DBCC CHECKIDENT ('[AuthorBook]', RESEED, 1);
+GO

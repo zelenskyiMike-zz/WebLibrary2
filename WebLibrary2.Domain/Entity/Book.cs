@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.Domain.Entity
 {
@@ -9,6 +10,7 @@ namespace WebLibrary2.Domain.Entity
         [Key]
         public int BookID { get; set; }
         public int GenreID { get; set; }
+        public int AuthorID { get; set; }
 
         [Required(ErrorMessage ="Неободимо добавить название книги")]
         public string BookName { get; set; }
@@ -18,8 +20,10 @@ namespace WebLibrary2.Domain.Entity
         public int YearOfPublish { get; set; }
 
         public Genre Genres { get; set; }
+       // public AuthorBook BookAuthors { get; set; }
 
         public ICollection<Author> Authors { get; set; }
+        public ICollection<AddABookViewModel> AddABookViewModels { get; set; }
 
 
         public Book()
