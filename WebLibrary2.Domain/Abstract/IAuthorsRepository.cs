@@ -8,5 +8,7 @@ namespace WebLibrary2.Domain.Abstract
     public interface IAuthorsRepository
     {
         IEnumerable<Author> Authors { get; }
+
+        void makeJson(List<Author> author);
     }
 }

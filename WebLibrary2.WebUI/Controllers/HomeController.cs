@@ -9,19 +9,38 @@ using WebLibrary2.Domain.Entity;
 using System.Data.Entity;
 using System.Net;
 using System.Data;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace WebLibrary2.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private EFDbContext context = new EFDbContext();
-        
 
-        public ViewResult Index()
+        IAuthorsRepository repositry;
+        public HomeController(IAuthorsRepository authorRepo)
+        {
+            this.repositry = authorRepo;
+        }
+
+        private EFDbContext context = new EFDbContext();
+
+        
+        public ActionResult Index()
         {
             var author = context.Authors;
+            repositry.makeJson(author.ToList());
             return View(author.ToList());
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Index(Author author)
+        //{
+        //    var authorR = context.Authors;
+            
+        //    return View();
+        //}
 
         public ActionResult Contact()
         {
