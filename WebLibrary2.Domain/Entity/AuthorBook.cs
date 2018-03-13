@@ -11,14 +11,13 @@ namespace WebLibrary2.Domain.Entity
     public class AuthorBook
     {
         [Key]
-        public int ID { get; set; }
-        [Key,ForeignKey("BookID")]
-        public Book BookID { get; set; }
+        [Column(Order =1)]
+        public int BookID { get; set; }
+        public Book Books { get; set; }
 
-        [Key,ForeignKey("AuthorID")]
-        public Author AuthorID { get; set; }
-
-        public virtual IEnumerable<Book> Books { get; set; }
-        public virtual IEnumerable<Author> Authors { get; set; }
+        [Key]
+        [Column(Order =2)]
+        public int AuthorID { get; set; }
+        public Author Authors { get; set; }
     }
 }

@@ -23,8 +23,8 @@ namespace WebLibrary2.Domain.Entity
        // public AuthorBook BookAuthors { get; set; }
 
         public ICollection<Author> Authors { get; set; }
-        public ICollection<AddABookViewModel> AddABookViewModels { get; set; }
-
+        //public ICollection<AuthorBook> AuthorBooks { get; set; }
+        //public ICollection<AddABookViewModel> AddABookViewModels { get; set; }
 
         public Book()
         {

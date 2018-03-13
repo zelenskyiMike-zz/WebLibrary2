@@ -1,5 +1,5 @@
-﻿@using WebLibrary2.Domain.Entity;
-@model  Author
+﻿@using WebLibrary2.Domain.Models;
+@model  AddABookViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -7,11 +7,10 @@
 
 <h2>Details</h2>
 
-<h3>@Html.DisplayFor(model => model.AuthorName)</h3><br />
 
-@foreach (Book b in Model.Books)
+@foreach (var b in Model.Books)
 {
-    @b.BookName<br />
+    @b.Authors<br />
 }
 <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
 

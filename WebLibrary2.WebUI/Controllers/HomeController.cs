@@ -29,8 +29,8 @@ namespace WebLibrary2.WebUI.Controllers
         public ActionResult Index()
         {
             var author = context.Authors;
-            repositry.makeJson(author.ToList());
-            return View(author.ToList());
+           // repositry.makeJson(author.ToList());
+            return View(author);
         }
 
         //[HttpPost]

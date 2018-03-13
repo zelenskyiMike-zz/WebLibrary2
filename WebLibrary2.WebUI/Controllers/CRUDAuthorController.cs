@@ -9,6 +9,7 @@ using WebLibrary2.Domain.Entity;
 using System.Data.Entity;
 using System.Net;
 using System.Data;
+using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.WebUI.Controllers
 {
@@ -40,7 +41,12 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult AuthorsDetails(int id = 0)
         {
-            Author author = context.Authors.Find(id);
+            //Author author = context.Authors.Find(id);
+            AddABookViewModel author = new AddABookViewModel()
+            {
+                Authors = context.Authors,
+                Books = context.Books
+            };
             if (author == null)
             {
                 return HttpNotFound();

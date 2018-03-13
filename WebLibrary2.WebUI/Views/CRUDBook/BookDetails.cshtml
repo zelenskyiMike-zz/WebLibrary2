@@ -1,5 +1,5 @@
-﻿@using WebLibrary2.Domain.Entity
-@model Book
+﻿@using WebLibrary2.Domain.Models
+@model AddABookViewModel
 
     <h2>Details</h2>
 
@@ -10,9 +10,7 @@
             <dt>
                 Book
             </dt>
-            <dd>
-                @Html.DisplayFor(model => model.BookName)
-            </dd>
+     
             <dt>
                 Authors
             </dt>
@@ -20,31 +18,15 @@
             {
                 <dd>
                     @author.AuthorID
+                    @author.AuthorName
                 </dd>
             }
 
-            <dd>
-                @Html.DisplayFor(model => model.AuthorID);
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Genres.GenreName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.GenreID)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.YearOfPublish)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.YearOfPublish)
-            </dd>
+ 
 
         </dl>
     </div>
     <p>
-        <div class="btn btn-default"> @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = Model.BookID }, null)</div>
+        @*<div class="btn btn-default"> @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = Model.BookID }, null)</div>*@
         <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
     </p>
