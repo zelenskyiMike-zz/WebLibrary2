@@ -11,7 +11,7 @@ namespace WebLibrary2.Domain.Concrete
 {
      public class EFDbContext : DbContext
     {
-        public EFDbContext() : base("EFDbContext")
+        public EFDbContext()
         {
             Database.SetInitializer<EFDbContext>(null);
            

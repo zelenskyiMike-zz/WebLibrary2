@@ -49,13 +49,15 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult BookDetails(int id = 0)
         {
-            Book book = bookRepository.GetBookByID(id);
-            if (book == null)
+            GetM2MViewModel bookInfo = bookRepository.GetMultileInfo(id);
+
+            //Book book = context.Books.Find(id);
+            if (bookInfo == null)
             {
                 return HttpNotFound();
             }
 
-            return View(book);
+            return View(bookInfo);
         }
 
         [HttpGet]

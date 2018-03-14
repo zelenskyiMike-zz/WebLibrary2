@@ -35,6 +35,23 @@ namespace WebLibrary2.Domain.Concrete
             return context.Books.Find(bookID);
         }
 
+        public GetM2MViewModel GetMultileInfo(int id)
+        {         
+            //var getM2MViewModel = from book in context.Books
+            //           join authorBook in context.AuthorBooks on book.BookID equals authorBook.BookID
+            //           join author in context.Authors on authorBook.AuthorID equals author.AuthorID
+            //           select new GetM2MViewModel { AuthorName = author.AuthorName, BookName = book.BookName };
+
+            //GetM2MViewModel result = new GetM2MViewModel();
+            //foreach(var item in getM2MViewModel)
+            //{
+            //    result.AuthorName = item.AuthorName;
+            //    result.BookName = item.BookName;
+            //}
+
+            return null;
+        }
+
         public void InsertBook(AddABookViewModel bookVM)
         {
             //Book book = new Book()
@@ -59,6 +76,6 @@ namespace WebLibrary2.Domain.Concrete
             context.Entry(book).State = EntityState.Modified;
         }
 
-        
+
     }
 }

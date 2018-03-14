@@ -16,6 +16,7 @@ namespace WebLibrary2.Domain.Abstract
         void UpdateBook(Book book);
         void DeleteBook(int? bookID);
         int GetAddedID();
+        GetM2MViewModel GetMultileInfo(int id);
         void SaveBook();
 
     }

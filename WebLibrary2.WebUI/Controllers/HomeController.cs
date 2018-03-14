@@ -29,18 +29,9 @@ namespace WebLibrary2.WebUI.Controllers
         public ActionResult Index()
         {
             var author = context.Authors;
-           // repositry.makeJson(author.ToList());
-            return View(author);
-        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Index(Author author)
-        //{
-        //    var authorR = context.Authors;
-            
-        //    return View();
-        //}
+            return View(author.ToList());
+        }
 
         public ActionResult Contact()
         {

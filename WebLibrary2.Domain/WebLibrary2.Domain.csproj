@@ -64,8 +64,13 @@
     <Compile Include="Entity\Book.cs" />
     <Compile Include="Entity\AuthorBook.cs" />
     <Compile Include="Entity\Genre.cs" />
+    <Compile Include="Migrations\201803141347098_AuthorBookMigration.cs" />
+    <Compile Include="Migrations\201803141347098_AuthorBookMigration.Designer.cs">
+      <DependentUpon>201803141347098_AuthorBookMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddABookViewModel.cs" />
+    <Compile Include="Models\GetM2MViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +80,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803141347098_AuthorBookMigration.resx">
+      <DependentUpon>201803141347098_AuthorBookMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
