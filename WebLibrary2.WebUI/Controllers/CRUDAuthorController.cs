@@ -19,7 +19,12 @@ namespace WebLibrary2.WebUI.Controllers
         /// <summary>
         /// ПЕРЕДЕЛАЬ ПОД REPOSITORY, ОБЬЯВЛЕНИЕ ПЕРЕМЕННЫХ В КОНСТРУТОРЕ.
         /// </summary>
-        private EFDbContext context = new EFDbContext();
+        private EFDbContext context;
+
+        public CRUDAuthorController(EFDbContext dataContext)
+        {
+            this.context = dataContext;
+        }
      
         public ActionResult CreateAuthor()
         {
@@ -41,17 +46,23 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult AuthorsDetails(int id = 0)
         {
-            //Author author = context.Authors.Find(id);
-            AddABookViewModel author = new AddABookViewModel()
+            Author author = context.Authors.Find(id);
+            AuthorBook aBook = context.AuthorBooks.Find(author.AuthorID);
+            
+            //Book bookName = context.Books.Find(aBook.BookID);
+            IEnumerable<Book> book = context.Books.SqlQuery("Select * from Books where BookID in (Select AuthorBooks.BookID from AuthorBooks where AuthorBooks.AuthorID = " + id +")").ToList();
+        
+            AddABookViewModel authorVM = new AddABookViewModel()
             {
-                Authors = context.Authors,
-                Books = context.Books
+                AuthorID = author.AuthorID,
+                AuthorName = author.AuthorName,
+                Books = book
             };
             if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(author);
+            return View(authorVM);
         }
 
         public ActionResult EditAuthor(int? id)

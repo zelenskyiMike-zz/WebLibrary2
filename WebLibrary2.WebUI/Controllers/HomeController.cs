@@ -16,7 +16,6 @@ namespace WebLibrary2.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-
         IAuthorsRepository repositry;
         public HomeController(IAuthorsRepository authorRepo)
         {
@@ -25,6 +24,7 @@ namespace WebLibrary2.WebUI.Controllers
 
         private EFDbContext context = new EFDbContext();
 
+        // Make through repository!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
         public ActionResult Index()
         {

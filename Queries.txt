@@ -19,12 +19,11 @@ create table Books
 
 create table AuthorBook
 (
+ID int primary key identity(1,1),
 BookID int foreign key references Books(BookID) not null,
 AuthorID int foreign key references Authors(AuthorID) not null,
 )
 
-Alter table AuthorBook
-add constraint PK_AuthorBook primary key (BookID,AuthorID)
 
 
 DBCC CHECKIDENT ('[AuthorBook]', RESEED, 1);

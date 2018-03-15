@@ -9,7 +9,7 @@ namespace WebLibrary2.Domain.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(WebLibrary2.Domain.Concrete.EFDbContext context)

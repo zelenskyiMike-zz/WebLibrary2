@@ -68,6 +68,14 @@
     <Compile Include="Migrations\201803141347098_AuthorBookMigration.Designer.cs">
       <DependentUpon>201803141347098_AuthorBookMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803151148131_InitSchema.cs" />
+    <Compile Include="Migrations\201803151148131_InitSchema.Designer.cs">
+      <DependentUpon>201803151148131_InitSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803151219275_InitAuthorBook.cs" />
+    <Compile Include="Migrations\201803151219275_InitAuthorBook.Designer.cs">
+      <DependentUpon>201803151219275_InitAuthorBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddABookViewModel.cs" />
     <Compile Include="Models\GetM2MViewModel.cs" />
@@ -83,6 +91,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803141347098_AuthorBookMigration.resx">
       <DependentUpon>201803141347098_AuthorBookMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803151148131_InitSchema.resx">
+      <DependentUpon>201803151148131_InitSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803151219275_InitAuthorBook.resx">
+      <DependentUpon>201803151219275_InitAuthorBook.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

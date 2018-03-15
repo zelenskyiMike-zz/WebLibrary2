@@ -22,9 +22,18 @@ namespace WebLibrary2.Domain.Entity
             Books = new List<Book>();
         }
 
+        private IEnumerable Authors()
+        {
+            yield return AuthorID;
+            yield return AuthorName;
+        }
         public IEnumerator GetEnumerator()
         {
-            throw new NotImplementedException();
+            return Authors().GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

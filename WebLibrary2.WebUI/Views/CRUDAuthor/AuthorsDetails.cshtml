@@ -6,13 +6,18 @@
 }
 
 <h2>Details</h2>
+<dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
+<dd>@Html.DisplayFor(model => model.AuthorName)</dd>
 
-
+<dt>Book name</dt>
 @foreach (var b in Model.Books)
 {
-    @b.Authors<br />
+    <dd> @b.BookName</dd>
+
 }
-<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+<button>@Html.ActionLink("Назад к списку", "Index", "Home",null, new { @class = "btn" })</button>
+
+
 
 
 

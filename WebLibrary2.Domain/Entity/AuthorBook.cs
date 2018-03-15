@@ -11,13 +11,12 @@ namespace WebLibrary2.Domain.Entity
     public class AuthorBook
     {
         [Key]
-        [Column(Order =1)]
+        public int ID { get; set; }
+                
         public int BookID { get; set; }
-       // public Book Books { get; set; }
-
-        [Key]
-        [Column(Order =2)]
         public int AuthorID { get; set; }
-       // public Author Authors { get; set; }
+
+        public Book Books { get; set; }
+        public Author Authors { get; set; }
     }
 }
