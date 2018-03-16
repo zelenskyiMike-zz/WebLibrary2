@@ -25,7 +25,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             this.context = dataContext;
         }
-     
+
         public ActionResult CreateAuthor()
         {
             return View();
@@ -39,7 +39,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 context.Authors.Add(author);
                 context.SaveChanges();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(author);
         }
@@ -47,21 +47,23 @@ namespace WebLibrary2.WebUI.Controllers
         public ActionResult AuthorsDetails(int id = 0)
         {
             Author author = context.Authors.Find(id);
+
+            if (author == null)
+            {
+                return HttpNotFound();
+            }
+
             AuthorBook aBook = context.AuthorBooks.Find(author.AuthorID);
-            
-            //Book bookName = context.Books.Find(aBook.BookID);
-            IEnumerable<Book> book = context.Books.SqlQuery("Select * from Books where BookID in (Select AuthorBooks.BookID from AuthorBooks where AuthorBooks.AuthorID = " + id +")").ToList();
-        
-            AddABookViewModel authorVM = new AddABookViewModel()
+
+            ///////////////////////////////////////////Make through LINQ////////////////////////////////////////////////////////////////
+            IEnumerable<Book> book = context.Books.SqlQuery("Select * from Books where BookID in (Select AuthorBooks.BookID from AuthorBooks where AuthorBooks.AuthorID = " + id + ")").ToList();
+
+            GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
             {
                 AuthorID = author.AuthorID,
                 AuthorName = author.AuthorName,
                 Books = book
             };
-            if (author == null)
-            {
-                return HttpNotFound();
-            }
             return View(authorVM);
         }
 
@@ -93,7 +95,7 @@ namespace WebLibrary2.WebUI.Controllers
                     ModelState.AddModelError("", "Unable to save");
                 }
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult DeleteAuthor(int? id)
@@ -124,7 +126,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 return RedirectToAction("DeleteAuthor", new { id = id });
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
     }

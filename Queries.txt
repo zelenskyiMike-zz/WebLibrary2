@@ -25,6 +25,4 @@ AuthorID int foreign key references Authors(AuthorID) not null,
 )
 
 
-
-DBCC CHECKIDENT ('[AuthorBook]', RESEED, 1);
-GO
+	

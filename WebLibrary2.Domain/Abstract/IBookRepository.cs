@@ -15,8 +15,8 @@ namespace WebLibrary2.Domain.Abstract
         void InsertBook(AddABookViewModel book);
         void UpdateBook(Book book);
         void DeleteBook(int? bookID);
-        int GetAddedID();
-        GetM2MViewModel GetMultileInfo(int id);
+        GetM2MCRUDBookVM GetMultileInfo(int id);
+        GetBookGenreCRUDBookVM GetBooksWithGenres(int? id);
         void SaveBook();
 
     }

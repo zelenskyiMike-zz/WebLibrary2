@@ -1,5 +1,7 @@
-﻿@using WebLibrary2.Domain.Entity
-@model Book
+﻿@using WebLibrary2.Domain.Models
+@model GetBookGenreCRUDBook
+
+@*WebLibrary2.Domain.Entity*@
 
 @{
     ViewBag.Title = "DeleteBook";
@@ -18,11 +20,11 @@
             @Html.DisplayFor(model => model.BookName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Genres.GenreName)
+            @Html.DisplayNameFor(model => model.GenreName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Genres.GenreName)
+            @Html.DisplayFor(model => model.GenreName)
         </dd>
 
         <dt>
@@ -35,12 +37,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Удалить" class="btn btn-default" /> 
-        <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
-    </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+            <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
+        </div>
     }
 </div>

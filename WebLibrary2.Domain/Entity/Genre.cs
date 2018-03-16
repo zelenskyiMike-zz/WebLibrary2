@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WebLibrary2.Domain.Entity
 {
-    public class Genre : IEnumerable
+    public class Genre 
     {
         [Key]
         public int GenreID { get; set; }
@@ -23,9 +23,5 @@ namespace WebLibrary2.Domain.Entity
             Books = new List<Book>();
         }
 
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

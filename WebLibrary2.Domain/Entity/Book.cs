@@ -20,5 +20,10 @@ namespace WebLibrary2.Domain.Entity
 
         public Genre Genres { get; set; }  
         
+        //public Book()
+        //{
+        //    Genres = new List<Genre>();
+        //}
+        
     }
 }

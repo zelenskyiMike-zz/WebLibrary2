@@ -25,17 +25,29 @@ namespace WebLibrary2.Domain.Concrete
             context.Books.Remove(book);
         }
 
-        public int GetAddedID()
-        {
-            throw new NotImplementedException();
-        }
-
         public Book GetBookByID(int? bookID)
         {
             return context.Books.Find(bookID);
         }
 
-        public GetM2MViewModel GetMultileInfo(int id)
+        public GetBookGenreCRUDBookVM GetBooksWithGenres(int? id)
+        {
+            Book book = GetBookByID(id);
+            var genreName = (from g in context.Genres
+                             where g.GenreID == book.GenreID
+                             select g.GenreName).SingleOrDefault();
+
+            GetBookGenreCRUDBookVM bookVM = new GetBookGenreCRUDBookVM()
+            {
+                BookID = book.BookID,
+                BookName = book.BookName,
+                YearOfPublish = book.YearOfPublish,
+                GenreName = genreName
+            };
+            return bookVM;
+        }
+
+        public GetM2MCRUDBookVM GetMultileInfo(int id)
         {         
             //var getM2MViewModel = from book in context.Books
             //           join authorBook in context.AuthorBooks on book.BookID equals authorBook.BookID
@@ -54,15 +66,13 @@ namespace WebLibrary2.Domain.Concrete
 
         public void InsertBook(AddABookViewModel bookVM)
         {
-            //Book book = new Book()
-            //{
-            //    BookID = bookVM.BookID,
-            //    BookName = bookVM.BookName,
-            //    GenreID = bookVM.GenreID,
-            //    YearOfPublish = bookVM.YearOfPublish,
-            //    AuthorID = bookVM.AuthorID
-            //};
-            //context.Books.Add(book);
+            Book book = new Book()
+            {
+                BookName = bookVM.BookName,
+                GenreID = bookVM.GenreID,
+                YearOfPublish = bookVM.YearOfPublish,
+            };
+            context.Books.Add(book);
         }
 
 

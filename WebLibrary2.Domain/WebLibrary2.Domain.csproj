@@ -78,7 +78,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AddABookViewModel.cs" />
-    <Compile Include="Models\GetM2MViewModel.cs" />
+    <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
+    <Compile Include="Models\GetBookGenreCRUDBookVM.cs" />
+    <Compile Include="Models\GetM2MCRUDBookVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

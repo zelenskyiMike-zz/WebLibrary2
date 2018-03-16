@@ -15,12 +15,12 @@ namespace WebLibrary2.Domain.Entity
         public string AuthorName { get; set; }
 
         //public IEnumerable<Book> Books { get; set; }
-        public ICollection<Book> Books { get; set; }
+        //public ICollection<Book> Books { get; set; }
 
-        public Author()
-        {
-            Books = new List<Book>();
-        }
+        //public Author()
+        //{
+        //    Books = new List<Book>();
+        //}
 
         private IEnumerable Authors()
         {

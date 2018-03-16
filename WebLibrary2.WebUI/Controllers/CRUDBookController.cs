@@ -49,15 +49,26 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult BookDetails(int id = 0)
         {
-            GetM2MViewModel bookInfo = bookRepository.GetMultileInfo(id);
+            Book book = context.Books.Find(id);
 
-            //Book book = context.Books.Find(id);
-            if (bookInfo == null)
+            if (book == null)
             {
                 return HttpNotFound();
             }
 
-            return View(bookInfo);
+            AuthorBook aBook = context.AuthorBooks.Find(book.BookID);
+
+            ///////////////////////////////////////////Make through LINQ////////////////////////////////////////////////////////////////
+            IEnumerable<Author> authorList = context.Authors.SqlQuery("Select * from Authors where AuthorID in (Select AuthorBooks.AuthorID from AuthorBooks where AuthorBooks.BookID = " + id + ")").ToList();
+
+            GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
+            {
+                BookID = book.BookID,
+                BookName = book.BookName,
+                Authors = authorList
+            };
+                    
+            return View(bookVM);
         }
 
         [HttpGet]
@@ -106,7 +117,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = bookRepository.GetBookByID(id);
+            GetBookGenreCRUDBookVM book = bookRepository.GetBooksWithGenres(id);
             if (book == null)
             {
                 return HttpNotFound();

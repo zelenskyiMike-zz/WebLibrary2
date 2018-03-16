@@ -7,9 +7,11 @@ using WebLibrary2.Domain.Entity;
 
 namespace WebLibrary2.Domain.Models
 {
-    public class GetM2MViewModel
+    public class GetBookGenreCRUDBookVM
     {
+        public int BookID { get; set; }
         public string BookName { get; set; }
-        public string AuthorName { get; set; }
+        public string GenreName { get; set; }
+        public int YearOfPublish { get; set; }
     }
 }
