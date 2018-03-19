@@ -12,12 +12,14 @@ namespace WebLibrary2.Domain.Abstract
     {
         IEnumerable<Book> Books { get; }
         Book GetBookByID(int? bookID);
+
         void InsertBook(AddABookViewModel book);
         void UpdateBook(Book book);
         void DeleteBook(int? bookID);
-        GetM2MCRUDBookVM GetMultileInfo(int id);
-        GetBookGenreCRUDBookVM GetBooksWithGenres(int? id);
         void SaveBook();
+        
+        GetBookGenreCRUDBookVM GetBooksWithGenres(int? id);
+
 
     }
 }

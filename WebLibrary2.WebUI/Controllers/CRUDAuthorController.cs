@@ -15,10 +15,6 @@ namespace WebLibrary2.WebUI.Controllers
 {
     public class CRUDAuthorController : Controller
     {
-
-        /// <summary>
-        /// ПЕРЕДЕЛАЬ ПОД REPOSITORY, ОБЬЯВЛЕНИЕ ПЕРЕМЕННЫХ В КОНСТРУТОРЕ.
-        /// </summary>
         private EFDbContext context;
 
         public CRUDAuthorController(EFDbContext dataContext)

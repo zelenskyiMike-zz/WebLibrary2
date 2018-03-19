@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityFramework.Triggers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebLibrary2.Domain.Models;
@@ -18,12 +19,14 @@ namespace WebLibrary2.Domain.Entity
         [Range(868,2018,ErrorMessage ="Книга не могла быть издана раньше 868 и поже 2018 года")]
         public int YearOfPublish { get; set; }
 
-        public Genre Genres { get; set; }  
+        public Genre Genres { get; set; } 
         
-        //public Book()
-        //{
-        //    Genres = new List<Genre>();
-        //}
-        
+        public Book()
+        {
+            Triggers<Book>.Inserted += e =>
+            {
+
+            };
+        }
     }
 }

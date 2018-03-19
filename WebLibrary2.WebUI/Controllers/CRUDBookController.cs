@@ -39,6 +39,7 @@ namespace WebLibrary2.WebUI.Controllers
         public ActionResult CreateBook(AddABookViewModel book)
         {
             /*Works, but not write into AuthorBook*/
+
             bookRepository.InsertBook(book);
             bookRepository.SaveBook();
 

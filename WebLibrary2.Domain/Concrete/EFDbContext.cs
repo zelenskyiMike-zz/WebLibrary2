@@ -14,12 +14,13 @@ namespace WebLibrary2.Domain.Concrete
         public EFDbContext()
         {
             Database.SetInitializer<EFDbContext>(null);
-           
+
         }
         
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<AuthorBook> AuthorBooks { get; set; }
+        
     }
 }
