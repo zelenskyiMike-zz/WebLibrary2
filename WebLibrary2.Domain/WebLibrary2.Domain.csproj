@@ -66,9 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractUnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Abstract\IAuthorBooksRepository.cs" />
     <Compile Include="Abstract\IAuthorsRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\IGenreRepository.cs" />
+    <Compile Include="Concrete\EFAuthorBooksRepository.cs" />
     <Compile Include="Concrete\EFAuthorRepository.cs" />
     <Compile Include="Concrete\EFBookRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
@@ -92,6 +94,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookViewModel.cs" />
+    <Compile Include="Models\GetAuthorBookVM.cs" />
     <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
     <Compile Include="Models\GetBookGenreCRUDBookVM.cs" />
     <Compile Include="Models\GetM2MCRUDBookVM.cs" />

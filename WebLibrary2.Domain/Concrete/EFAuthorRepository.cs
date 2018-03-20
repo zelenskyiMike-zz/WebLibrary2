@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Data.Entity;
 using System.Linq;
 using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Entity;
+using System.Web;
 using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.Domain.Concrete
@@ -24,8 +25,9 @@ namespace WebLibrary2.Domain.Concrete
             Save();
         }
 
-        public void DeleteAuthor(Author author)
+        public void DeleteAuthor(int? id)
         {
+            Author author = GetAuthorByID(id);
             context.Authors.Remove(author);
             Save();
         }
@@ -39,15 +41,14 @@ namespace WebLibrary2.Domain.Concrete
         {
             Author author = context.Authors.Find(id);
             AuthorBook aBook = context.AuthorBooks.Find(author.AuthorID);
-
-            ///////////////////////////////////////////Make through LINQ////////////////////////////////////////////////////////////////
-            IEnumerable<Book> book = context.Books.SqlQuery("Select * from Books where BookID in (Select AuthorBooks.BookID from AuthorBooks where AuthorBooks.AuthorID = " + id + ")").ToList();
-
+          
+            var bookList = context.AuthorBooks.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
+          
             GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
             {
                 AuthorID = author.AuthorID,
                 AuthorName = author.AuthorName,
-                Books = book
+                Books = bookList
             };
             return authorVM;
         }

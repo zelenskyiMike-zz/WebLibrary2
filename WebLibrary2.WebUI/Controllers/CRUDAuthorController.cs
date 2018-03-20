@@ -16,12 +16,12 @@ namespace WebLibrary2.WebUI.Controllers
     public class CRUDAuthorController : Controller
     {
         private EFDbContext context;
-        IAuthorsRepository repository;
+        IAuthorsRepository authorRepository;
 
-        public CRUDAuthorController(IAuthorsRepository authorRepository, EFDbContext dataContext)
+        public CRUDAuthorController(IAuthorsRepository authorsRepository, EFDbContext dataContext)
         {
             this.context = dataContext;
-            this.repository = authorRepository;
+            this.authorRepository = authorsRepository;
         }
 
         public ActionResult CreateAuthor()
@@ -43,13 +43,13 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult AuthorsDetails(int id = 0)
         {
-            var authorVM = repository.GetBookDetails(id);
+            var authorVM = authorRepository.GetBookDetails(id);
             return View(authorVM);
         }
 
         public ActionResult EditAuthor(int? id)
         {
-            Author author = repository.GetAuthorByID(id);
+            Author author = authorRepository.GetAuthorByID(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -62,13 +62,13 @@ namespace WebLibrary2.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAuthor(int id)
         {
-            var authorToUpdate = repository.GetAuthorByID(id);
+            var authorToUpdate = authorRepository.GetAuthorByID(id);
 
             if (TryUpdateModel(authorToUpdate))
             {
                 try
                 {
-                    repository.Save();
+                    authorRepository.Save();
                 }
                 catch (DataException)
                 {
@@ -84,7 +84,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = repository.GetAuthorByID(id);
+            Author author = authorRepository.GetAuthorByID(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -98,8 +98,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             try
             {
-                Author author = repository.GetAuthorByID(id);
-                repository.DeleteAuthor(author);
+                authorRepository.DeleteAuthor(id);
             }
             catch (DataException)
             {
@@ -107,6 +106,5 @@ namespace WebLibrary2.WebUI.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

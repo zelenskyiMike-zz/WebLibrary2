@@ -69,7 +69,6 @@ namespace WebLibrary2.Domain.Concrete
         public GetM2MCRUDBookVM GetBooksDetails(int? id)
         {
             Book book = context.Books.Find(id);
-            AuthorBook aBook = context.AuthorBooks.Find(book.BookID);
             var authorList = context.AuthorBooks.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
 
             GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
@@ -79,6 +78,12 @@ namespace WebLibrary2.Domain.Concrete
                 Authors = authorList
             };
             return bookVM;
+        }
+
+        public Book GetLastBook()
+        {
+            Book book = context.Books.ToList().Last();
+            return book;
         }
     }
 }

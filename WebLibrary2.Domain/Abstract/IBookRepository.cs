@@ -22,6 +22,6 @@ namespace WebLibrary2.Domain.Abstract
 
         GetM2MCRUDBookVM GetBooksDetails(int? id);
 
-
+        Book GetLastBook();
     }
 }

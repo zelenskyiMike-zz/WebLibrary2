@@ -18,9 +18,12 @@ namespace WebLibrary2.WebUI.Controllers
         private EFDbContext context;
 
         IBookRepository bookRepository;
-        public CRUDBookController(IBookRepository bookRepository, EFDbContext dataContext)
+        IAuthorsRepository authorRepository;
+      
+        public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, EFDbContext dataContext)
         {
-            this.bookRepository = bookRepository;
+            this.bookRepository = booksRepository;
+            this.authorRepository = authorsRepository;
             this.context = dataContext;
         }
 
@@ -43,7 +46,9 @@ namespace WebLibrary2.WebUI.Controllers
             bookRepository.InsertBook(book);
             bookRepository.SaveBook();
 
+            //authorBookRepository.InsertAuthorBook(book);
 
+            //return RedirectToAction("AddAuthorsToBook", "CRUDBook");
             return RedirectToAction("BooksView", "Books");
         }
 
@@ -116,5 +121,31 @@ namespace WebLibrary2.WebUI.Controllers
             bookRepository.SaveBook();
             return RedirectToAction("BooksView", "Books");
         }
+
+
+        //[HttpGet]
+        //public ActionResult AddAuthorsToBook(int? id)
+        //{
+        //    Book book = bookRepository.GetLastBook();
+        //    SelectList authors = new SelectList(context.Authors, "AuthorID", "AuthorName");
+        //    ViewBag.Authors = authors;
+
+        //    //GetAuthorBookVM authorBookVM = new GetAuthorBookVM()
+        //    //{
+        //    //    BookID = book.BookID,
+        //    //    BookName = book.BookName
+        //    //};
+
+
+        //    return View(/*authorBookVM*/);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddAuthorsToBook(BookViewModel getAuthorBookVM)
+        //{
+        //    authorBookRepository.InsertAuthorBook(getAuthorBookVM);
+        //    return RedirectToAction("BooksView", "Books");
+        //}
     }
 }

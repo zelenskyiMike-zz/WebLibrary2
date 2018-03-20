@@ -1,0 +1,26 @@
+﻿@model WebLibrary2.Domain.Models.BookViewModel
+    @*GetAuthorBookVM*@
+
+
+@{
+    ViewBag.Title = "AddAuthorsToBook";
+}
+
+<h2>Please, add an author to current book</h2>
+<dt>
+    @Html.DisplayNameFor(model => model.BookID)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.BookName)
+</dd>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.AuthorID, "AuthorID", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+
+        @Html.DropDownListFor(model => model.AuthorID, ViewBag.Authors as SelectList, htmlAttributes: new { @class = "form-control" })
+        <h2>AddAuthorsToBook</h2>
+    </div>
+</div>
+<input type="submit" value="Confirm" class="btn btn-default" />
+

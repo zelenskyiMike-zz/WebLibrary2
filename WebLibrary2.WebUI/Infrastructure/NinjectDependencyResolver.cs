@@ -32,6 +32,7 @@ namespace WebLibrary2.WebUI.Infrastructure
             kernel.Bind<IBookRepository>().To<EFBookRepository>();
             kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
             kernel.Bind<IGenreRepository>().To<EFGenreRepository>();
+            kernel.Bind<IAuthorBooksRepository>().To<EFAuthorBooksRepository>();
         }
     }
 }

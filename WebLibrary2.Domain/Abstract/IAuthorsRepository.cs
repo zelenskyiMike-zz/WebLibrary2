@@ -12,9 +12,10 @@ namespace WebLibrary2.Domain.Abstract
         //void makeJson(List<Author> author);
         void CreateAuthor(Author author);
         Author GetAuthorByID(int? id);
-        void DeleteAuthor(Author author);
+        void DeleteAuthor(int? id);
         void Save();
         GetM2MCRUDAuthorVM GetBookDetails(int? id);
+
 
     }
 }
