@@ -13,8 +13,7 @@ namespace WebLibrary2.Domain.Concrete
     {
         public EFDbContext()
         {
-            Database.SetInitializer<EFDbContext>(null);
-
+            //Database.SetInitializer<EFDbContext>(null);
         }
         
         public DbSet<Author> Authors { get; set; }

@@ -16,10 +16,12 @@ namespace WebLibrary2.WebUI.Controllers
     public class CRUDAuthorController : Controller
     {
         private EFDbContext context;
+        IAuthorsRepository repository;
 
-        public CRUDAuthorController(EFDbContext dataContext)
+        public CRUDAuthorController(IAuthorsRepository authorRepository, EFDbContext dataContext)
         {
             this.context = dataContext;
+            this.repository = authorRepository;
         }
 
         public ActionResult CreateAuthor()
@@ -33,8 +35,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Authors.Add(author);
-                context.SaveChanges();
+                CreateAuthor(author);
                 return RedirectToAction("Index", "Home");
             }
             return View(author);
@@ -42,30 +43,13 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult AuthorsDetails(int id = 0)
         {
-            Author author = context.Authors.Find(id);
-
-            if (author == null)
-            {
-                return HttpNotFound();
-            }
-
-            AuthorBook aBook = context.AuthorBooks.Find(author.AuthorID);
-
-            ///////////////////////////////////////////Make through LINQ////////////////////////////////////////////////////////////////
-            IEnumerable<Book> book = context.Books.SqlQuery("Select * from Books where BookID in (Select AuthorBooks.BookID from AuthorBooks where AuthorBooks.AuthorID = " + id + ")").ToList();
-
-            GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
-            {
-                AuthorID = author.AuthorID,
-                AuthorName = author.AuthorName,
-                Books = book
-            };
+            var authorVM = repository.GetBookDetails(id);
             return View(authorVM);
         }
 
         public ActionResult EditAuthor(int? id)
         {
-            Author author = context.Authors.Find(id);
+            Author author = repository.GetAuthorByID(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -78,13 +62,13 @@ namespace WebLibrary2.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAuthor(int id)
         {
-            var authorToUpdate = context.Authors.Find(id);
+            var authorToUpdate = repository.GetAuthorByID(id);
 
             if (TryUpdateModel(authorToUpdate))
             {
                 try
                 {
-                    context.SaveChanges();
+                    repository.Save();
                 }
                 catch (DataException)
                 {
@@ -100,7 +84,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = context.Authors.Find(id);
+            Author author = repository.GetAuthorByID(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -114,9 +98,8 @@ namespace WebLibrary2.WebUI.Controllers
         {
             try
             {
-                var author = context.Authors.Find(id);
-                context.Authors.Remove(author);
-                context.SaveChanges();
+                Author author = repository.GetAuthorByID(id);
+                repository.DeleteAuthor(author);
             }
             catch (DataException)
             {

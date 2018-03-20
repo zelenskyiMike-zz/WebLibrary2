@@ -15,13 +15,13 @@ namespace WebLibrary2.WebUI.Controllers
 {
     public class CRUDBookController : Controller
     {
-        EFDbContext context = new EFDbContext();
+        private EFDbContext context;
 
         IBookRepository bookRepository;
-        public CRUDBookController(IBookRepository bookRepository)
+        public CRUDBookController(IBookRepository bookRepository, EFDbContext dataContext)
         {
             this.bookRepository = bookRepository;
-          
+            this.context = dataContext;
         }
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace WebLibrary2.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBook(AddABookViewModel book)
+        public ActionResult CreateBook(BookViewModel book)
         {
             /*Works, but not write into AuthorBook*/
 
@@ -50,25 +50,7 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult BookDetails(int id = 0)
         {
-            Book book = context.Books.Find(id);
-
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-
-            AuthorBook aBook = context.AuthorBooks.Find(book.BookID);
-
-            ///////////////////////////////////////////Make through LINQ////////////////////////////////////////////////////////////////
-            IEnumerable<Author> authorList = context.Authors.SqlQuery("Select * from Authors where AuthorID in (Select AuthorBooks.AuthorID from AuthorBooks where AuthorBooks.BookID = " + id + ")").ToList();
-
-            GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
-            {
-                BookID = book.BookID,
-                BookName = book.BookName,
-                Authors = authorList
-            };
-                    
+            var bookVM = bookRepository.GetBooksDetails(id);
             return View(bookVM);
         }
 
@@ -80,7 +62,7 @@ namespace WebLibrary2.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Book book = bookRepository.GetBookByID(id);
-            SelectList genres = new SelectList(context.Genres,"GenreID","GenreName",book.GenreID);
+            SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
             ViewBag.Genres = genres;
             if (book == null)
             {

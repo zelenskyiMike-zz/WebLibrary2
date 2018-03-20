@@ -14,6 +14,8 @@ namespace WebLibrary2.Domain.Entity
         [Required(ErrorMessage = "Необходимо ввести имя и фамилию автора")]
         public string AuthorName { get; set; }
 
+        //public virtual ICollection<AuthorBook> AuthorBooks { get; set; }
+
         private IEnumerable Authors()
         {
             yield return AuthorID;

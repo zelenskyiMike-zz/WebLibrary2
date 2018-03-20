@@ -20,8 +20,7 @@ namespace WebLibrary2.WebUI.Controllers
         public ViewResult BooksView()
         {
             var book = context.Books.Include(g => g.Genres);
-
-       
+                   
             return View(book);
         }
     }

@@ -16,16 +16,15 @@ namespace WebLibrary2.WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        private EFDbContext context;
         IAuthorsRepository repositry;
-        public HomeController(IAuthorsRepository authorRepo)
+
+        public HomeController(IAuthorsRepository authorRepo, EFDbContext dataContext)
         {
             this.repositry = authorRepo;
+            this.context = dataContext;
         }
 
-        private EFDbContext context = new EFDbContext();
-
-        // Make through repository!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
         public ActionResult Index()
         {
             var author = context.Authors;

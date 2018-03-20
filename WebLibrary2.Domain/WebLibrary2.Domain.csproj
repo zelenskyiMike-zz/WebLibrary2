@@ -77,6 +77,7 @@
     <Compile Include="Entity\Book.cs" />
     <Compile Include="Entity\AuthorBook.cs" />
     <Compile Include="Entity\Genre.cs" />
+    <Compile Include="Entity\MyInitialiser.cs" />
     <Compile Include="Migrations\201803141347098_AuthorBookMigration.cs" />
     <Compile Include="Migrations\201803141347098_AuthorBookMigration.Designer.cs">
       <DependentUpon>201803141347098_AuthorBookMigration.cs</DependentUpon>
@@ -90,7 +91,7 @@
       <DependentUpon>201803151219275_InitAuthorBook.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AddABookViewModel.cs" />
+    <Compile Include="Models\BookViewModel.cs" />
     <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
     <Compile Include="Models\GetBookGenreCRUDBookVM.cs" />
     <Compile Include="Models\GetM2MCRUDBookVM.cs" />

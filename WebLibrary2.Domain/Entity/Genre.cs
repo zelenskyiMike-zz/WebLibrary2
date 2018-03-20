@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
 namespace WebLibrary2.Domain.Entity
 {
     public class Genre 

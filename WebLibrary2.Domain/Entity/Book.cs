@@ -11,7 +11,7 @@ namespace WebLibrary2.Domain.Entity
         [Key]
         public int BookID { get; set; }
         public int GenreID { get; set; }
-        
+ 
         [Required(ErrorMessage ="Неободимо добавить название книги")]
         public string BookName { get; set; }
 
@@ -19,14 +19,9 @@ namespace WebLibrary2.Domain.Entity
         [Range(868,2018,ErrorMessage ="Книга не могла быть издана раньше 868 и поже 2018 года")]
         public int YearOfPublish { get; set; }
 
-        public Genre Genres { get; set; } 
-        
-        public Book()
-        {
-            Triggers<Book>.Inserted += e =>
-            {
+        public Genre Genres { get; set; }
 
-            };
-        }
+        public virtual ICollection<Author> Authors { get; set; }
+        //public virtual ICollection<AuthorBook> AuthorBooks { get; set; }
     }
 }
