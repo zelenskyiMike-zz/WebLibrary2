@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<ArrayOfAuthor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Author>
+    <AuthorID>1</AuthorID>
+    <AuthorName>Толстой Л.Н.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>2</AuthorID>
+    <AuthorName>Шевченко Т.Г.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>3</AuthorID>
+    <AuthorName>Дж.Р. Киплинг </AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>4</AuthorID>
+    <AuthorName>С.Э. Кинг</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>5</AuthorID>
+    <AuthorName>Рэй Брэдбэри</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>6</AuthorID>
+    <AuthorName>Э.М.Ремарк</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>7</AuthorID>
+    <AuthorName>Гоголь Н.В.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>8</AuthorID>
+    <AuthorName>Достоевкий Ф.М.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>9</AuthorID>
+    <AuthorName>Булгаков М.А.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>10</AuthorID>
+    <AuthorName>Пушкин А.С.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>11</AuthorID>
+    <AuthorName>Чуковский К.И.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>12</AuthorID>
+    <AuthorName>Э.М. Хемингуей </AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>14</AuthorID>
+    <AuthorName>Дж.Мартин</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>17</AuthorID>
+    <AuthorName>Леся Украинка</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>18</AuthorID>
+    <AuthorName>Солодченко К.Г.</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>25</AuthorID>
+    <AuthorName>Уилл Смитт</AuthorName>
+  </Author>
+  <Author>
+    <AuthorID>26</AuthorID>
+    <AuthorName>Роберт Рождественский</AuthorName>
+  </Author>
+</ArrayOfAuthor>
