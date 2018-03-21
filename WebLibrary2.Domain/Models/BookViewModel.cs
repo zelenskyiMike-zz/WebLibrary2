@@ -12,7 +12,7 @@ namespace WebLibrary2.Domain.Models
         public int BookID { get; set; }
         public string BookName { get; set; }
         public int GenreID { get; set; }
-        public int AuthorID { get; set; }
+        public ICollection<Author> AuthorID { get; set; }
         public int YearOfPublish { get; set; }
     }
 }

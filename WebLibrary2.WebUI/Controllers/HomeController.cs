@@ -35,7 +35,6 @@ namespace WebLibrary2.WebUI.Controllers
         public ActionResult Index()
         {
             var author = context.Authors.ToList();
-            //ViewBag.IsNoFile = false;
             return View(author);
         }
 
@@ -45,6 +44,7 @@ namespace WebLibrary2.WebUI.Controllers
 
             return View();
         }
+
 
         public ActionResult SerializeJSON()
         {

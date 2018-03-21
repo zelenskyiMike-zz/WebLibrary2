@@ -10,6 +10,6 @@ namespace WebLibrary2.Domain.Abstract
     public interface IAuthorBooksRepository
     {
         //now only one row per action
-        void InsertAuthorBook(BookViewModel authorBookVM);
+        void InsertAuthorBook(GetAuthorBookVM getAuthorBookVM);
     }
 }

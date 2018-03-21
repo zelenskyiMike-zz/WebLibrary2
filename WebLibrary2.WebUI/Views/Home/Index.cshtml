@@ -4,34 +4,6 @@
     ViewBag.Title = "List of books";
 }
 <div>
-
-    <script type="text/javascript">
-        function JSONSerializationDialog() {
-            if (confirm("Serialize this page to JSON? "))
-                return true;
-            else
-                return false;
-        }
-        function XMLSerializationDialog() {
-            if (confirm("Serialize this page to XML? "))
-                return true;
-            else
-                return false;
-        }
-        function JSONDeserializationDialog() {
-            if (confirm("Deserialize JSON version of this page? "))
-                return true;
-            else
-                return false;
-        }
-        function XMLDeserializationDialog() {
-            if (confirm("Deserialize XML version of this page? "))
-                return true;
-            else
-                return false;
-        }
-    </script>
-
     <h2>Список авторов</h2>
     <div>
         @Html.ActionLink("To JSON", "SerializeJSON", "Home", null, new { onclick = "return JSONSerializationDialog()", @class = "btn btn-light" })
@@ -63,8 +35,6 @@
                         @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
                     </h4>
                 </td>
-
-
             </tr>
         }
     </table>

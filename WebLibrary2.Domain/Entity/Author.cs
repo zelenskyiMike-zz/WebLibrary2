@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebLibrary2.Domain.Entity
 {
     [Serializable]
-    public class Author //: IEnumerable
+    public class Author
     {
         [Key]
         public int AuthorID { get; set; }
@@ -15,26 +15,7 @@ namespace WebLibrary2.Domain.Entity
         [Required(ErrorMessage = "Необходимо ввести имя и фамилию автора")]
         public string AuthorName { get; set; }
 
-
+        public virtual ICollection<Book> Books { get; set; }
         //public IList<AuthorBook> AuthorBooks { get; set; }
-
-
-
-
-
-
-        //private IEnumerable Authors()
-        //{
-        //    yield return AuthorID;
-        //    yield return AuthorName;
-        //}
-        //public IEnumerator GetEnumerator()
-        //{
-        //    return Authors().GetEnumerator();
-        //}
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return GetEnumerator();
-        //}
     }
 }

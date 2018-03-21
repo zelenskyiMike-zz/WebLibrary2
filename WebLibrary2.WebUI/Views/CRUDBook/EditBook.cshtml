@@ -48,6 +48,7 @@
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Сохранить изменения" class="btn btn-default" />
                 <div class="btn btn-default">@Html.ActionLink("Назад к списку","BooksView", "Books")</div>
+                <div class=" btn btn-default">@Html.ActionLink("Добавить автора", "AddRelations", "CRUDBook",null , new {  id = Model.BookID })</div>
             </div>
         </div>
     </div>

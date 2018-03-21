@@ -19,11 +19,13 @@ namespace WebLibrary2.WebUI.Controllers
 
         IBookRepository bookRepository;
         IAuthorsRepository authorRepository;
+        IAuthorBooksRepository authorBookRepository;
       
-        public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, EFDbContext dataContext)
+        public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, IAuthorBooksRepository authorBooksRepository, EFDbContext dataContext)
         {
             this.bookRepository = booksRepository;
             this.authorRepository = authorsRepository;
+            this.authorBookRepository = authorBooksRepository;
             this.context = dataContext;
         }
 
@@ -45,10 +47,6 @@ namespace WebLibrary2.WebUI.Controllers
 
             bookRepository.InsertBook(book);
             bookRepository.SaveBook();
-
-            //authorBookRepository.InsertAuthorBook(book);
-
-            //return RedirectToAction("AddAuthorsToBook", "CRUDBook");
             return RedirectToAction("BooksView", "Books");
         }
 
@@ -122,30 +120,24 @@ namespace WebLibrary2.WebUI.Controllers
             return RedirectToAction("BooksView", "Books");
         }
 
+        [HttpGet]
+        public ActionResult AddRelations(int? id)
+        {
+            SelectList authors = new SelectList(context.Authors, "AuthorID", "AuthorName");
+            ViewBag.Authors = authors;
 
-        //[HttpGet]
-        //public ActionResult AddAuthorsToBook(int? id)
-        //{
-        //    Book book = bookRepository.GetLastBook();
-        //    SelectList authors = new SelectList(context.Authors, "AuthorID", "AuthorName");
-        //    ViewBag.Authors = authors;
+            return View();
+        }
 
-        //    //GetAuthorBookVM authorBookVM = new GetAuthorBookVM()
-        //    //{
-        //    //    BookID = book.BookID,
-        //    //    BookName = book.BookName
-        //    //};
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddRelations(GetAuthorBookVM getAuthorBookVM)
+        {
+            authorBookRepository.InsertAuthorBook(getAuthorBookVM);
+            return RedirectToAction("BooksView", "Books");
+        }
 
 
-        //    return View(/*authorBookVM*/);
-        //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult AddAuthorsToBook(BookViewModel getAuthorBookVM)
-        //{
-        //    authorBookRepository.InsertAuthorBook(getAuthorBookVM);
-        //    return RedirectToAction("BooksView", "Books");
-        //}
     }
 }

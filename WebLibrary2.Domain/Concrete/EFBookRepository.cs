@@ -8,6 +8,7 @@ using WebLibrary2.Domain.Entity;
 using System.Web;
 using WebLibrary2.Domain.Models;
 
+
 namespace WebLibrary2.Domain.Concrete
 {
     public class EFBookRepository : IBookRepository
@@ -30,7 +31,7 @@ namespace WebLibrary2.Domain.Concrete
             {
                 BookName = bookVM.BookName,
                 GenreID = bookVM.GenreID,
-                YearOfPublish = bookVM.YearOfPublish,
+                YearOfPublish = bookVM.YearOfPublish
             };
             context.Books.Add(book);
         }
