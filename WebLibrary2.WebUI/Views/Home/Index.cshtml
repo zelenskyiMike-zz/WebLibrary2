@@ -4,14 +4,47 @@
     ViewBag.Title = "List of books";
 }
 <div>
+
+    <script type="text/javascript">
+        function JSONSerializationDialog() {
+            if (confirm("Serialize this page to JSON? "))
+                return true;
+            else
+                return false;
+        }
+        function XMLSerializationDialog() {
+            if (confirm("Serialize this page to XML? "))
+                return true;
+            else
+                return false;
+        }
+        function JSONDeserializationDialog() {
+            if (confirm("Deserialize JSON version of this page? "))
+                return true;
+            else
+                return false;
+        }
+        function XMLDeserializationDialog() {
+            if (confirm("Deserialize XML version of this page? "))
+                return true;
+            else
+                return false;
+        }
+    </script>
+
     <h2>Список авторов</h2>
-    <div class="btn btn-default">
-        <h4>
-            @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor")
-        </h4>
+    <div>
+        @Html.ActionLink("To JSON", "SerializeJSON", "Home", null, new { onclick = "return JSONSerializationDialog()", @class = "btn btn-light" })
+        @Html.ActionLink("To XML", "SerializeXML", "Home", null, new { onclick = "return XMLSerializationDialog()", @class = "btn btn-light" })
+        @Html.ActionLink("From JSON", "DeserializeJSON", "Home", null, new { onclick = "return JSONDeserializationDialog()", @class = "btn btn-light" })
+        @Html.ActionLink("From XML", "DeserializeXML", "Home", null, new { onclick = "return XMLDeserializationDialog()", @class = "btn btn-light" })
     </div>
     <br />
+    <div>
+            @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-light" })
+    </div>
     <br />
+
     <table>
         <tr>
             <th><h4>Автор</h4></th>
@@ -35,5 +68,5 @@
             </tr>
         }
     </table>
-    <input type="submit" value="To JSON" />
+    <br />
 </div>

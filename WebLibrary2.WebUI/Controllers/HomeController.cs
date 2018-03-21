@@ -21,54 +21,86 @@ namespace WebLibrary2.WebUI.Controllers
         private EFDbContext context;
         IAuthorsRepository repositry;
 
+        private string pathXML;
+        private string pathJSON;
+
         public HomeController(IAuthorsRepository authorRepo, EFDbContext dataContext)
         {
             this.repositry = authorRepo;
             this.context = dataContext;
+            pathXML = @"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\XmlAuthors.xml";
+            pathJSON = @"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\JsonAuthors.json";
         }
 
         public ActionResult Index()
         {
             var author = context.Authors.ToList();
-
-            //JSON Serialization
-            using (StreamWriter fs = new StreamWriter(@"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\JsonAuthors.json"))
-            {
-                JsonSerializer jsonSerializer = new JsonSerializer();
-                jsonSerializer.Serialize(fs,author);
-            }
-
-            //XML Serialization
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Author>));
-
-            using (FileStream fs = new FileStream(@"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\XmlAuthors.xml",FileMode.OpenOrCreate))
-            {
-                XmlSerializer.Serialize(fs,author);
-            }
-
+            //ViewBag.IsNoFile = false;
             return View(author);
-        }   
+        }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult SerializeJSON()
+        {
             var author = context.Authors.ToList();
-            //using (StreamReader sr = new StreamReader(@"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\Authors.json"))
-            //{
-            //    JsonSerializer serializer = new JsonSerializer();
-            //    //Author authors = (Author)serializer.Deserialize(sr,typeof(Author));
-            //    JsonConvert.DeserializeObject<List<Author>>(sr.ReadToEnd());
-            //}
+            using (StreamWriter fs = new StreamWriter(pathJSON))
+            {
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                jsonSerializer.Serialize(fs, author);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult DeserializeJSON()
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(pathJSON))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    ViewData["AuthorDataJSON"] = JsonConvert.DeserializeObject<List<Author>>(sr.ReadToEnd());
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View("Deserialize");
+        }
+
+
+        public ActionResult SerializeXML()
+        {
+            var author = context.Authors.ToList();
             XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Author>));
 
-            using (FileStream fs = new FileStream(@"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\XmlAuthors.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(pathXML, FileMode.OpenOrCreate))
             {
-                List<Author> authors = (List<Author>)XmlSerializer.Deserialize(fs);
-                ViewBag.Serialisation = author.ToList();
+                XmlSerializer.Serialize(fs, author);
             }
-
-            return View();
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult DeserializeXML()
+        {
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Author>));
+            try
+            {
+                using (FileStream fs = new FileStream(pathXML, FileMode.Open))
+                {
+                    List<Author> authors = (List<Author>)XmlSerializer.Deserialize(fs);
+                    ViewData["AuthorDataXML"] = authors;
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View("Deserialize");
         }
 
         protected override void Dispose(bool disposing)

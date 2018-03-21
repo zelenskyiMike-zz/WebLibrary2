@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Deserialize";
+
+    var authorDataXML = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataXML"];
+    var authorDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataJSON"];
+}
+
+<h2>Deserialize</h2>
+@if (authorDataXML != null)
+{
+    <h3>JSON Deserialization</h3>
+    foreach (var item in authorDataXML)
+    {
+        @item.AuthorName<br />
+    }
+}
+
+<br /><br />
+@if (authorDataJSON != null)
+{
+    <h3>XML Deserialization</h3>
+    foreach (var item2 in authorDataJSON)
+    {
+        @item2.AuthorName<br />
+    }
+}
+
+<br />
+
+
