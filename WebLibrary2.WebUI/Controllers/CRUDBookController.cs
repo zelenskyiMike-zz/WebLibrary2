@@ -29,11 +29,13 @@ namespace WebLibrary2.WebUI.Controllers
             this.context = dataContext;
         }
 
+
+
         [HttpGet]
         public ActionResult CreateBook()
         {
             SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName");
-            SelectList authors = new SelectList(context.Authors, "AuthorID", "AuthorName");
+            var authors = new MultiSelectList(context.Authors, "AuthorID", "AuthorName");
             ViewBag.Genres = genres;
             ViewBag.Authors = authors;
             return View();
@@ -41,9 +43,15 @@ namespace WebLibrary2.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBook(BookViewModel book)
+        public ActionResult CreateBook(Book book)
         {
             /*Works, but not write into AuthorBook*/
+            //var author = context.Authors.Find(10);
+            //foreach (var item in Authors)
+            //{
+            //    Authors.Add(/*(Author)Authors*/item);
+            //}
+           
 
             bookRepository.InsertBook(book);
             bookRepository.SaveBook();
@@ -120,13 +128,36 @@ namespace WebLibrary2.WebUI.Controllers
             return RedirectToAction("BooksView", "Books");
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet]
-        public ActionResult AddRelations(int? id)
+        public ActionResult AddRelations(Book id)
         {
+            //int bookID = (int)id;
+            GetAuthorBookVM authorBookVM = new GetAuthorBookVM()
+            {
+                BookID = id.BookID
+            };
             SelectList authors = new SelectList(context.Authors, "AuthorID", "AuthorName");
             ViewBag.Authors = authors;
 
-            return View();
+            return View(authorBookVM);
         }
 
         [HttpPost]

@@ -25,14 +25,21 @@ namespace WebLibrary2.Domain.Concrete
             return context.Books.Find(bookID);
         }
 
-        public void InsertBook(BookViewModel bookVM)
+        public void InsertBook(Book book)
         {
-            Book book = new Book()
-            {
-                BookName = bookVM.BookName,
-                GenreID = bookVM.GenreID,
-                YearOfPublish = bookVM.YearOfPublish
-            };
+            //Book book = new Book()
+            //{
+            //    BookName = bookVM.BookName,
+            //    GenreID = bookVM.GenreID,
+            //    YearOfPublish = bookVM.YearOfPublish
+            //};
+
+            //foreach (var item in Authors)
+            //{
+            //    //var author = context.Authors.Find(item);
+            //    book.Authors.Add(item);
+            //}
+
             context.Books.Add(book);
         }
         public void UpdateBook(Book book)

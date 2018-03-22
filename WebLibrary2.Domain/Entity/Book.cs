@@ -24,6 +24,6 @@ namespace WebLibrary2.Domain.Entity
         public virtual ICollection<Author> Authors { get; set; }
 
 
-        public IList<AuthorBook> AuthorBooks { get; set; }
+        //public IList<AuthorBook> AuthorBooks { get; set; }
     }
 }

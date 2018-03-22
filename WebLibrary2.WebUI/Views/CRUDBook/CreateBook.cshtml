@@ -1,57 +1,57 @@
-﻿<!--model WebLibrary2.Domain.Entity.Book-->
-@using WebLibrary2.Domain.Models
-@model BookViewModel
+﻿<!--model WebLibrary2.Domain.Entity.Book    WebLibrary2.Domain.Models     -->
+@using WebLibrary2.Domain.Entity
+@model Book
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h2>Create Book</h2>
-    <hr />
-    <div class="form-group">
-        @Html.LabelFor(model => model.BookName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h2>Create Book</h2>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.BookName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BookName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BookName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.GenreID, "GenreID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.DropDownListFor(model => model.GenreID, ViewBag.Genres as SelectList, htmlAttributes: new { @class = "form-control" })
+
+
+                    @Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Authors, "Authors", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.ListBox("Authors", ViewBag.Authors as MultiSelectList@*, htmlAttributes: new { @class = "form-control" }*@)
+
+
+                    @Html.ValidationMessageFor(model => model.Authors, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.YearOfPublish, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.YearOfPublish, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.YearOfPublish, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Создать" class="btn btn-default" />
+                    <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
+                </div>
+            </div>
         </div>
-    </div>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.GenreID, "GenreID", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-
-            @Html.DropDownListFor(model => model.GenreID, ViewBag.Genres as SelectList, htmlAttributes: new { @class = "form-control" })
-
-
-            @Html.ValidationMessageFor(model => model.GenreID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.AuthorID, "AuthorID", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-
-            @Html.DropDownListFor(model => model.AuthorID, ViewBag.Authors as SelectList, htmlAttributes: new { @class = "form-control" })
-
-
-            @Html.ValidationMessageFor(model => model.AuthorID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.YearOfPublish, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.YearOfPublish, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.YearOfPublish, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Создать" class="btn btn-default" />
-            <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
-        </div>
-    </div>
-</div>
-}
+    }

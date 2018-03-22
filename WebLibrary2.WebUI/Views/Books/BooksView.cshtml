@@ -31,12 +31,15 @@
                 <h4>@book.Genres.GenreName</h4>
             </td>
             <td>
-                <h4>
-                    @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = book.BookID }, null) |
-                    @Html.ActionLink("Удалить", "DeleteBook", "CRUDBook", new { id = book.BookID }, null) |
-                    @Html.ActionLink("Детали", "BookDetails", "CRUDBook", new { id = book.BookID },null)
-                </h4>
-            </td>
+                <div class=" btn btn-default">
+                    @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = book.BookID }, null)</div> |
+                <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeleteBook", "CRUDBook", new { id = book.BookID }, null)</div> |
+                <div class=" btn btn-default">
+                            @Html.ActionLink("Детали", "BookDetails", "CRUDBook", new { id = book.BookID }, null)</div> 
+
+
+</td>
         </tr>
         }
     </table>

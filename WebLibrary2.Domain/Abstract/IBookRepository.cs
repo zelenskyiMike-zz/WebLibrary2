@@ -13,7 +13,7 @@ namespace WebLibrary2.Domain.Abstract
         IEnumerable<Book> Books { get; }
         Book GetBookByID(int? bookID);
 
-        void InsertBook(BookViewModel book);
+        void InsertBook(Book book);
         void UpdateBook(Book book);
         void DeleteBook(int? bookID);
         void SaveBook();

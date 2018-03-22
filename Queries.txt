@@ -24,5 +24,7 @@ BookID int foreign key references Books(BookID) not null,
 AuthorID int foreign key references Authors(AuthorID) not null,
 )
 
+DBCC CHECKIDENT (books, RESEED, 19)
+
 
 	
