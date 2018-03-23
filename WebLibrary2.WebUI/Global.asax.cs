@@ -14,7 +14,7 @@ namespace WebLibrary2.WebUI
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MyInitialiser());
+            //Database.SetInitializer(new MyContextInit());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

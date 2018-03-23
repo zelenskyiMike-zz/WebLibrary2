@@ -40,9 +40,9 @@ namespace WebLibrary2.Domain.Concrete
         public GetM2MCRUDAuthorVM GetBookDetails(int? id)
         {
             Author author = context.Authors.Find(id);
-            AuthorBook aBook = context.AuthorBooks.Find(author.AuthorID);
+           // BookAuthor aBook = context.BookAuthors.Find(author.AuthorID);
           
-            var bookList = context.AuthorBooks.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
+            var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
           
             GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
             {

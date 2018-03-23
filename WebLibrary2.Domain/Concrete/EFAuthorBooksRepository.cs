@@ -15,13 +15,13 @@ namespace WebLibrary2.Domain.Concrete
 
         public void InsertAuthorBook(GetAuthorBookVM getAuthorBookVM)
         {
-            AuthorBook authorBook = new AuthorBook()
-            {
-                BookID = getAuthorBookVM.BookID,
-                AuthorID = getAuthorBookVM.AuthorID // Int32.Parse(authorBookVM.AuthorID.ToString())
-            };
-            context.AuthorBooks.Add(authorBook);
-            context.SaveChanges();
+            //BookAuthor authorBook = new BookAuthor()
+            //{
+            //    BookID = getAuthorBookVM.BookID,
+            //    AuthorID = getAuthorBookVM.AuthorID // Int32.Parse(authorBookVM.AuthorID.ToString())
+            //};
+            //context.BookAuthors.Add(authorBook);
+            //context.SaveChanges();
         }
     }
 }

@@ -1,27 +1,17 @@
-﻿namespace WebLibrary2.Domain.Migrations
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebLibrary2.Domain.Concrete;
+
+namespace WebLibrary2.Domain.Entity
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using WebLibrary2.Domain.Entity;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<WebLibrary2.Domain.Concrete.EFDbContext>
+    public class MyContextInit : DropCreateDatabaseIfModelChanges<EFDbContext>
     {
-        public Configuration()
+        protected override void Seed(EFDbContext context)
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
-        }
-
-        private void SeedAuthors(WebLibrary2.Domain.Concrete.EFDbContext context)
-        {
-            if (context.Authors.Any())
-            {
-                return;
-            }
-
             Author a1 = new Author() { AuthorID = 1, AuthorName = "Толстой Л.Н." };
             Author a2 = new Author() { AuthorID = 2, AuthorName = "Шевченко Т.Г." };
             Author a3 = new Author() { AuthorID = 3, AuthorName = "Дж.Р. Киплинг " };
@@ -39,14 +29,7 @@
             Author a15 = new Author() { AuthorID = 15, AuthorName = "Леся Украинка" };
 
             context.Authors.AddRange(new List<Author> { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15 });
-            context.SaveChanges();
-        }
-        private void SeedGenres(WebLibrary2.Domain.Concrete.EFDbContext context)
-        {
-            if (context.Genres.Any())
-            {
-                return;
-            }
+
             Genre g1 = new Genre() { GenreID = 1, GenreName = "Роман" };
             Genre g2 = new Genre() { GenreID = 2, GenreName = "Поэзия" };
             Genre g3 = new Genre() { GenreID = 3, GenreName = "Рассказ" };
@@ -57,16 +40,10 @@
             Genre g8 = new Genre() { GenreID = 8, GenreName = "Роман-поэма" };
             Genre g9 = new Genre() { GenreID = 9, GenreName = "Сказка" };
             Genre g10 = new Genre() { GenreID = 10, GenreName = "Фэнтези" };
-            context.Genres.AddRange(new List<Genre> { g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 });
-            context.SaveChanges();
-        }
 
-        private void SeedBooks(WebLibrary2.Domain.Concrete.EFDbContext context)
-        {
-            if (context.Books.Any())
-            {
-                return;
-            }
+
+            context.Genres.AddRange(new List<Genre> { g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 });
+
             Book b1 = new Book() { BookID = 1, GenreID = 1, BookName = "Война и Мир. Том I", YearOfPublish = 1865, Authors = new List<Author>() };
             Book b2 = new Book() { BookID = 2, GenreID = 2, BookName = "Война и Мир. Том II", YearOfPublish = 1866, Authors = new List<Author>() };
             Book b3 = new Book() { BookID = 3, GenreID = 3, BookName = "Полное собрание стихотворений в одном томе", YearOfPublish = 1867, Authors = new List<Author>() };
@@ -76,13 +53,13 @@
             Book b7 = new Book() { BookID = 7, GenreID = 7, BookName = "Вино из одуванчиков", YearOfPublish = 1265, Authors = new List<Author>() };
             Book b8 = new Book() { BookID = 8, GenreID = 8, BookName = "Марсианские хроники", YearOfPublish = 1665, Authors = new List<Author>() };
             Book b9 = new Book() { BookID = 9, GenreID = 7, BookName = "Три товарища", YearOfPublish = 1835, Authors = new List<Author>() };
-            Book b10 = new Book() { BookID = 10, GenreID = 6, BookName = "Вий", YearOfPublish = 1165, Authors = new List<Author>() };
-            Book b11 = new Book() { BookID = 11, GenreID = 5, BookName = "Ночь перед Рождеством", YearOfPublish = 1875, Authors = new List<Author>() };
-            Book b12 = new Book() { BookID = 12, GenreID = 4, BookName = "Преступление и наказание", YearOfPublish = 1863, Authors = new List<Author>() };
-            Book b13 = new Book() { BookID = 13, GenreID = 3, BookName = "Мастер и Маргарита", YearOfPublish = 1825, Authors = new List<Author>() };
+            Book b10 = new Book() { BookID = 10, GenreID = 8, BookName = "Вий", YearOfPublish = 1165, Authors = new List<Author>() };
+            Book b11 = new Book() { BookID = 11, GenreID = 9, BookName = "Ночь перед Рождеством", YearOfPublish = 1875, Authors = new List<Author>() };
+            Book b12 = new Book() { BookID = 12, GenreID = 10, BookName = "Преступление и наказание", YearOfPublish = 1863, Authors = new List<Author>() };
+            Book b13 = new Book() { BookID = 13, GenreID = 9, BookName = "Мастер и Маргарита", YearOfPublish = 1825, Authors = new List<Author>() };
             Book b14 = new Book() { BookID = 14, GenreID = 2, BookName = "Собачье сердце", YearOfPublish = 1869, Authors = new List<Author>() };
             Book b15 = new Book() { BookID = 15, GenreID = 1, BookName = "Мойдодыр", YearOfPublish = 1665, Authors = new List<Author>() };
-            Book b16 = new Book() { BookID = 16, GenreID = 1, BookName = "Гарри Поттер и узник Азкабана", YearOfPublish = 1765, Authors = new List<Author>() };
+            Book b16 = new Book() { BookID = 16, GenreID = 8, BookName = "Гарри Поттер и узник Азкабана", YearOfPublish = 1765, Authors = new List<Author>() };
             Book b17 = new Book() { BookID = 17, GenreID = 2, BookName = "Success", YearOfPublish = 1869, Authors = new List<Author>() };
             Book b18 = new Book() { BookID = 18, GenreID = 3, BookName = "Весна и люди", YearOfPublish = 1965, Authors = new List<Author>() };
             Book b19 = new Book() { BookID = 19, GenreID = 4, BookName = "Story of life", YearOfPublish = 1844, Authors = new List<Author>() };
@@ -106,17 +83,9 @@
             context.Books.Add(b17);
             context.Books.Add(b18);
             context.Books.Add(b19);
-
             context.SaveChanges();
-        }
 
-        protected override void Seed(WebLibrary2.Domain.Concrete.EFDbContext context)
-        {
-        //    SeedAuthors(context);
-        //    SeedGenres(context);
-        //    SeedBooks(context);
-
-        //    base.Seed(context);
+            base.Seed(context);
         }
     }
 }

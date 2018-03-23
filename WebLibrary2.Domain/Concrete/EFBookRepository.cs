@@ -41,6 +41,7 @@ namespace WebLibrary2.Domain.Concrete
             //}
 
             context.Books.Add(book);
+            context.SaveChanges();
         }
         public void UpdateBook(Book book)
         {
@@ -77,7 +78,7 @@ namespace WebLibrary2.Domain.Concrete
         public GetM2MCRUDBookVM GetBooksDetails(int? id)
         {
             Book book = context.Books.Find(id);
-            var authorList = context.AuthorBooks.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
+            var authorList = context.BookAuthors.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
 
             GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
             {

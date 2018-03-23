@@ -51,10 +51,12 @@ namespace WebLibrary2.WebUI.Controllers
             //{
             //    Authors.Add(/*(Author)Authors*/item);
             //}
-           
 
+            Author author = authorRepository.Authors.FirstOrDefault(x => x.AuthorID == 4);
             bookRepository.InsertBook(book);
             bookRepository.SaveBook();
+            //bookRepository.Books.FirstOrDefault(x => x.BookID == book.BookID);
+            //context.SaveChanges();
             return RedirectToAction("BooksView", "Books");
         }
 

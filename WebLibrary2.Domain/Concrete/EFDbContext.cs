@@ -13,20 +13,19 @@ namespace WebLibrary2.Domain.Concrete
     {
         public EFDbContext()
         {
-            //Database.SetInitializer<EFDbContext>(null);
         }
         
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<AuthorBook> AuthorBooks { get; set; }
+        public DbSet<BookAuthor> BookAuthors { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-         //   modelBuilder.Entity<AuthorBook>().HasKey(ab => new { ab.BookID, ab.AuthorID });
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        // //   modelBuilder.Entity<AuthorBook>().HasKey(ab => new { ab.BookID, ab.AuthorID });
 
-            base.OnModelCreating(modelBuilder);
-        }
+        //    //base.OnModelCreating(modelBuilder);
+        //}
 
     }
 }
