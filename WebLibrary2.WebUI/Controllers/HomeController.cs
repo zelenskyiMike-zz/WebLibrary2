@@ -28,8 +28,8 @@ namespace WebLibrary2.WebUI.Controllers
         {
             this.repositry = authorRepo;
             this.context = dataContext;
-            pathXML = @"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\XmlAuthors.xml";
-            pathJSON = @"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\JsonAuthors.json";
+            pathXML = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\XmlAuthors.xml";
+            pathJSON = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\JsonAuthors.json";
         }
 
         public ActionResult Index()

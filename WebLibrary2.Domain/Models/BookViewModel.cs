@@ -9,7 +9,7 @@ namespace WebLibrary2.Domain.Models
 {
     public class BookViewModel
     {
-        public int BookID { get; set; }
+        //public int BookID { get; set; }
         public string BookName { get; set; }
         public int GenreID { get; set; }
         public IEnumerable<Author> Authors { get; set; }

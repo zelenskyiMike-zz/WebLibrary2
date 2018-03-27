@@ -27,18 +27,13 @@ namespace WebLibrary2.Domain.Concrete
 
         public void InsertBook(Book book)
         {
-            //Book book = new Book()
-            //{
-            //    BookName = bookVM.BookName,
-            //    GenreID = bookVM.GenreID,
-            //    YearOfPublish = bookVM.YearOfPublish
-            //};
+            //Book book = new Book();
+            foreach (var item in book.Authors)
+            {
+                var auhorsToAdd = context.Authors.Find(item.AuthorID);
 
-            //foreach (var item in Authors)
-            //{
-            //    //var author = context.Authors.Find(item);
-            //    book.Authors.Add(item);
-            //}
+                book.Authors.Add(new Author { AuthorID = auhorsToAdd.AuthorID, AuthorName = auhorsToAdd.AuthorName });
+            }
 
             context.Books.Add(book);
             context.SaveChanges();

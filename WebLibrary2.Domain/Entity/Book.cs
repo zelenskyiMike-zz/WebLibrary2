@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.Domain.Entity
@@ -22,6 +24,13 @@ namespace WebLibrary2.Domain.Entity
         public Genre Genres { get; set; }
 
         //public virtual ICollection<Author> Authors { get; set; }
-        public virtual IEnumerable<Author> Authors { get; set; }
+        [XmlIgnore]
+        [IgnoreDataMember]
+        public ICollection<Author> Authors { get; set; }
+
+        public Book()
+        {
+            Authors = new List<Author>();
+        }
     }
 }

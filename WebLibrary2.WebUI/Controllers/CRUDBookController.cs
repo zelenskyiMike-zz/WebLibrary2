@@ -35,7 +35,7 @@ namespace WebLibrary2.WebUI.Controllers
         public ActionResult CreateBook()
         {
             SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName");
-            var authors = new MultiSelectList(context.Authors, "AuthorID", "AuthorName");
+            MultiSelectList authors = new MultiSelectList(context.Authors, "AuthorID", "AuthorName");
             ViewBag.Genres = genres;
             ViewBag.Authors = authors;
             return View();
@@ -52,11 +52,10 @@ namespace WebLibrary2.WebUI.Controllers
             //    Authors.Add(/*(Author)Authors*/item);
             //}
 
-            Author author = authorRepository.Authors.FirstOrDefault(x => x.AuthorID == 4);
+            //Author author = authorRepository.Authors.FirstOrDefault(x => x.AuthorID == 4);
             bookRepository.InsertBook(book);
             bookRepository.SaveBook();
-            //bookRepository.Books.FirstOrDefault(x => x.BookID == book.BookID);
-            //context.SaveChanges();
+
             return RedirectToAction("BooksView", "Books");
         }
 
