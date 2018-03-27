@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WebLibrary2.Domain.Entity
 {
-    public class Genres
+    public class Genre
     {
 
-        ICollection<Books> Books { get; set; }
-        public Genres()
+        ICollection<Book> Books { get; set; }
+        public Genre()
         {
-            Books = new List<Books>();
+            Books = new List<Book>();
         }
     }
 }

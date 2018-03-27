@@ -9,6 +9,6 @@ namespace WebLibrary2.Domain.Abstract
 {
     public interface IBookRepository
     {
-        IEnumerable<Books> Books { get; }
+        IEnumerable<Book> Books { get; }
     }
 }

@@ -9,7 +9,7 @@ namespace WebLibrary2.Domain.Concrete
     {
         private EFDbContext context = new EFDbContext();
 
-        public IEnumerable<Authors> Authors 
+        public IEnumerable<Author> Authors 
         {
             get { return context.Authors; }
         }

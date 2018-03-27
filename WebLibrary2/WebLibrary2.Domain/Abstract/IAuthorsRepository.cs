@@ -7,6 +7,6 @@ namespace WebLibrary2.Domain.Abstract
 {
     public interface IAuthorsRepository
     {
-        IEnumerable<Authors> Authors { get; }
+        IEnumerable<Author> Authors { get; }
     }
 }

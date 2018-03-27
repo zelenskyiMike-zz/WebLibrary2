@@ -15,9 +15,9 @@ namespace WebLibrary2.Domain.Concrete
             Database.SetInitializer<EFDbContext>(null);
         }
 
-        public DbSet<Books> Books { get; set; }
-        public DbSet<Authors> Authors { get; set; }
-        public DbSet<Genres> Genres { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
      }
 }

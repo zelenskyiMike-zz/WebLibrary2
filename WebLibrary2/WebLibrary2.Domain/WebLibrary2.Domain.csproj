@@ -52,9 +52,9 @@
     <Compile Include="Concrete\EFAuthorRepository.cs" />
     <Compile Include="Concrete\EFBookRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
-    <Compile Include="Entity\Authors.cs" />
-    <Compile Include="Entity\Books.cs" />
-    <Compile Include="Entity\Genres.cs" />
+    <Compile Include="Entity\Author.cs" />
+    <Compile Include="Entity\Book.cs" />
+    <Compile Include="Entity\Genre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

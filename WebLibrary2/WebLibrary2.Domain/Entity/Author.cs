@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebLibrary2.Domain.Entity
 {
-    public class Authors
+    public class Author
     {
         [Key]
         public int AuthorID { get; set; }
         public string AuthorName { get; set; }
         
-        ICollection<Books> Books { get; set; }
-        public Authors()
+        ICollection<Book> Books { get; set; }
+        public Author()
         {
-            Books = new List<Books>();
+            Books = new List<Book>();
         }
         
     }

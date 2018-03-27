@@ -10,7 +10,7 @@ namespace WebLibrary2.Domain.Concrete
     {
         private EFDbContext context = new EFDbContext();
 
-        public IEnumerable<Books> Books
+        public IEnumerable<Book> Books
         {
             get { return context.Books; }
         }
