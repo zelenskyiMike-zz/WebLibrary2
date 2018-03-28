@@ -35,6 +35,21 @@ namespace WebLibrary2.Domain.Concrete
             };
             context.Books.Add(book);
             context.SaveChanges();
+
+            /////////////////////~SO HARD CODE~!!!!!//////////////////////////
+
+            foreach (var item in bookVM.AuthorsIDs)
+            {
+                BookAuthor bookAuthor = new BookAuthor()
+                {
+                    BookID = book.BookID,
+                    AuthorID = item
+                };
+                context.BookAuthors.Add(bookAuthor);
+                context.SaveChanges();
+            }
+
+            /////////////////////~SO HARD CODE~!!!!!//////////////////////////
         }
 
         public void UpdateBook(Book book)
