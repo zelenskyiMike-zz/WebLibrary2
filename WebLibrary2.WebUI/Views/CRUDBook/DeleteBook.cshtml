@@ -1,5 +1,5 @@
 ﻿@using WebLibrary2.Domain.Models
-@model GetBookGenreCRUDBookVM
+@model GetM2MCRUDBookVM
 
 
 
@@ -19,6 +19,13 @@
         <dd>
             @Html.DisplayFor(model => model.BookName)
         </dd>
+        <dt>Authors</dt>
+        @foreach (var author in Model.Authors)
+        {
+            <dd>
+                @author.AuthorName
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.GenreName)
         </dt>

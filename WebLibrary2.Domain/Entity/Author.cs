@@ -22,6 +22,10 @@ namespace WebLibrary2.Domain.Entity
         public virtual IEnumerable<Book> Books { get; set; }
         public IEnumerable<BookAuthor> BookAuthors { get; set; }
 
+        [XmlIgnore]
+        [IgnoreDataMember]
+        public List<int> BooksIDs { get; set; }
+
         public Author()
         {
             Books = new List<Book>();

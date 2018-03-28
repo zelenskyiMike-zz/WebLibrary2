@@ -1,5 +1,5 @@
-﻿@model WebLibrary2.Domain.Entity.Author
-
+﻿@using WebLibrary2.Domain.Models;
+@model  GetM2MCRUDAuthorVM
 @{
     ViewBag.Title = "DeleteAuthor";
 }
@@ -15,6 +15,12 @@
     <div>
         @Html.DisplayFor(model => model.AuthorName)
     </div><br />
+    <dt>Book name</dt>
+    foreach (var b in Model.Books)
+    {
+        <dd> @b.BookName</dd>
+
+    }
     <input class="btn btn-default" type="submit" value="Delete" />
     <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
 

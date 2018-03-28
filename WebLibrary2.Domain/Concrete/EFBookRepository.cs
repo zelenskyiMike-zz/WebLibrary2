@@ -23,7 +23,7 @@ namespace WebLibrary2.Domain.Concrete
         }
 
         public void InsertBook(BookViewModel bookVM)
-        {
+        { 
             var authorsList = context.Authors.Where(a => bookVM.AuthorsIDs.Contains(a.AuthorID)).ToList();
 
             Book book = new Book()
@@ -31,12 +31,10 @@ namespace WebLibrary2.Domain.Concrete
                 BookName = bookVM.BookName,
                 GenreID = bookVM.GenreID,
                 YearOfPublish = bookVM.YearOfPublish,
-                Authors = authorsList
+                Authors = authorsList //doesnt matter
             };
             context.Books.Add(book);
             context.SaveChanges();
-
-            /////////////////////~SO HARD CODE~!!!!!//////////////////////////
 
             foreach (var item in bookVM.AuthorsIDs)
             {
@@ -48,8 +46,6 @@ namespace WebLibrary2.Domain.Concrete
                 context.BookAuthors.Add(bookAuthor);
                 context.SaveChanges();
             }
-
-            /////////////////////~SO HARD CODE~!!!!!//////////////////////////
         }
 
         public void UpdateBook(Book book)
@@ -68,32 +64,38 @@ namespace WebLibrary2.Domain.Concrete
             context.SaveChanges();
         }
 
-        public GetBookGenreCRUDBookVM GetBooksWithGenres(int? id)
+        //public GetM2MCRUDBookVM GetBooksWithGenres(int? id)
+        //{
+        //    Book book = GetBookByID(id);
+        //    var genreName = (from g in context.Genres
+        //                     where g.GenreID == book.GenreID
+        //                     select g.GenreName).SingleOrDefault();
+
+        //    GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
+        //    {
+        //        BookID = book.BookID,
+        //        BookName = book.BookName,
+        //        YearOfPublish = book.YearOfPublish,
+        //        GenreName = genreName
+        //    };
+        //    return bookVM;
+        //}
+
+        public GetM2MCRUDBookVM GetBooksDetails(int? id)
         {
             Book book = GetBookByID(id);
             var genreName = (from g in context.Genres
                              where g.GenreID == book.GenreID
                              select g.GenreName).SingleOrDefault();
 
-            GetBookGenreCRUDBookVM bookVM = new GetBookGenreCRUDBookVM()
-            {
-                BookID = book.BookID,
-                BookName = book.BookName,
-                YearOfPublish = book.YearOfPublish,
-                GenreName = genreName
-            };
-            return bookVM;
-        }
-
-        public GetM2MCRUDBookVM GetBooksDetails(int? id)
-        {
-            Book book = context.Books.Find(id);
             var authorList = context.BookAuthors.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
 
             GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
             {
                 BookID = book.BookID,
                 BookName = book.BookName,
+                YearOfPublish = book.YearOfPublish,
+                GenreName = genreName,
                 Authors = authorList
             };
             return bookVM;

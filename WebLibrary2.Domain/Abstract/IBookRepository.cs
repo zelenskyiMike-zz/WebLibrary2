@@ -14,7 +14,7 @@ namespace WebLibrary2.Domain.Abstract
         void DeleteBook(int? bookID);
         void SaveBook();
 
-        GetBookGenreCRUDBookVM GetBooksWithGenres(int? id);
+       // GetM2MCRUDBookVM GetBooksWithGenres(int? id);
 
         GetM2MCRUDBookVM GetBooksDetails(int? id);
     }

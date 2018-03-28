@@ -26,24 +26,26 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult CreateAuthor()
         {
+            MultiSelectList books = new MultiSelectList(context.Books, "BookID", "BookName");
+            ViewData["Books"] = books;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAuthor(Author author)
+        public ActionResult CreateAuthor(AuthorViewModel authorVM)
         {
             if (ModelState.IsValid)
             {
-                CreateAuthor(author);
+                authorRepository.CreateAuthor(authorVM);
                 return RedirectToAction("Index", "Home");
             }
-            return View(author);
+            return View(authorVM);
         }
 
         public ActionResult AuthorsDetails(int id = 0)
         {
-            var authorVM = authorRepository.GetBookDetails(id);
+            var authorVM = authorRepository.GetAuthorDetails(id);
             return View(authorVM);
         }
 
@@ -84,7 +86,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = authorRepository.GetAuthorByID(id);
+            var author = authorRepository.GetAuthorDetails(id);
             if (author == null)
             {
                 return HttpNotFound();

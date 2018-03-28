@@ -9,12 +9,11 @@ namespace WebLibrary2.Domain.Abstract
     {
         IEnumerable<Author> Authors { get; }
 
-        //void makeJson(List<Author> author);
-        void CreateAuthor(Author author);
+        void CreateAuthor(AuthorViewModel authorVM);
         Author GetAuthorByID(int? id);
         void DeleteAuthor(int? id);
         void Save();
-        GetM2MCRUDAuthorVM GetBookDetails(int? id);
+        GetM2MCRUDAuthorVM GetAuthorDetails(int? id);
 
 
     }

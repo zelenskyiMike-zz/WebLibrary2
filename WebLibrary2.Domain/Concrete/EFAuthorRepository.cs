@@ -19,10 +19,25 @@ namespace WebLibrary2.Domain.Concrete
             get { return context.Authors; }
         }
 
-        public void CreateAuthor(Author author)
+        public void CreateAuthor(AuthorViewModel authorVM)
         {
+            Author author = new Author()
+            {
+                AuthorName = authorVM.AuthorName
+            };
             context.Authors.Add(author);
             Save();
+
+            foreach (var item in authorVM.BooksIDs)
+            {
+                BookAuthor bookAuthor = new BookAuthor()
+                {
+                    BookID = item,
+                    AuthorID = author.AuthorID
+                };
+                context.BookAuthors.Add(bookAuthor);
+                context.SaveChanges();
+            }
         }
 
         public void DeleteAuthor(int? id)
@@ -37,10 +52,9 @@ namespace WebLibrary2.Domain.Concrete
             return context.Authors.Find(id);
         }
 
-        public GetM2MCRUDAuthorVM GetBookDetails(int? id)
+        public GetM2MCRUDAuthorVM GetAuthorDetails(int? id)
         {
             Author author = context.Authors.Find(id);
-           // BookAuthor aBook = context.BookAuthors.Find(author.AuthorID);
           
             var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
           
@@ -57,14 +71,5 @@ namespace WebLibrary2.Domain.Concrete
         {
             context.SaveChanges();
         }
-
-        //public void makeJson(List<Author> author)
-        //{
-        //    using (StreamWriter file = File.CreateText(@"C:\Users\Anuitex-53\Documents\Visual Studio 2017\WebLibrary2-master\WebLibrary2\authors.json"))
-        //    {
-        //        JsonSerializer serializer = new JsonSerializer();
-        //        serializer.Serialize(file, author);
-        //    }
-        //}
     }
 }

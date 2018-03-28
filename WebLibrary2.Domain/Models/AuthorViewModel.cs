@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebLibrary2.Domain.Models
 {
-    public class GetAuthorBookVM
+    public class AuthorViewModel
     {
-        public int BookID { get; set; }
-
-        public int AuthorID { get; set; }
+        public string AuthorName { get; set; }
+        public List<int> BooksIDs { get; set; }
     }
 }
