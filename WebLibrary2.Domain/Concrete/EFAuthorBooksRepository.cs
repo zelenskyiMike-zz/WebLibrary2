@@ -13,7 +13,7 @@ namespace WebLibrary2.Domain.Concrete
     {
         private EFDbContext context = new EFDbContext();
 
-        public void InsertAuthorBook(GetAuthorBookVM getAuthorBookVM)
+        public void InsertBookAuthors(Book book)
         {
             //BookAuthor authorBook = new BookAuthor()
             //{

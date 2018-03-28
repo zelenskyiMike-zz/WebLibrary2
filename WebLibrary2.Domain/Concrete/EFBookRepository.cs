@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Entity;
-using System.Web;
 using WebLibrary2.Domain.Models;
 
 
@@ -25,23 +22,26 @@ namespace WebLibrary2.Domain.Concrete
             return context.Books.Find(bookID);
         }
 
-        public void InsertBook(Book book)
+        public void InsertBook(BookViewModel bookVM)
         {
-            //Book book = new Book();
-            foreach (var item in book.Authors)
+            var authorsList = context.Authors.Where(a => bookVM.AuthorsIDs.Contains(a.AuthorID)).ToList();
+
+            Book book = new Book()
             {
-                var auhorsToAdd = context.Authors.Find(item.AuthorID);
-
-                book.Authors.Add(new Author { AuthorID = auhorsToAdd.AuthorID, AuthorName = auhorsToAdd.AuthorName });
-            }
-
+                BookName = bookVM.BookName,
+                GenreID = bookVM.GenreID,
+                YearOfPublish = bookVM.YearOfPublish,
+                Authors = authorsList
+            };
             context.Books.Add(book);
             context.SaveChanges();
         }
+
         public void UpdateBook(Book book)
         {
             context.Entry(book).State = EntityState.Modified;
         }
+
         public void DeleteBook(int? bookID)
         {
             var book = GetBookByID(bookID);
@@ -82,12 +82,6 @@ namespace WebLibrary2.Domain.Concrete
                 Authors = authorList
             };
             return bookVM;
-        }
-
-        public Book GetLastBook()
-        {
-            Book book = context.Books.ToList().Last();
-            return book;
         }
     }
 }

@@ -26,7 +26,10 @@ namespace WebLibrary2.Domain.Entity
         //public virtual ICollection<Author> Authors { get; set; }
         [XmlIgnore]
         [IgnoreDataMember]
-        public ICollection<Author> Authors { get; set; }
+        public virtual IEnumerable<Author> Authors { get; set; }
+        public IEnumerable<BookAuthor> BookAuthors { get; set; }
+
+        public List<int> AuthorsIDs { get; set; }
 
         public Book()
         {

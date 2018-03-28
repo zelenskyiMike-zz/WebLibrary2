@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Concrete;
 using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Models;
-using System.Data.Entity;
 using System.Net;
 using System.Data;
 
@@ -43,18 +38,10 @@ namespace WebLibrary2.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBook(Book book)
+        public ActionResult CreateBook(BookViewModel bookVM)
         {
             /*Works, but not write into AuthorBook*/
-            //var author = context.Authors.Find(10);
-            //foreach (var item in Authors)
-            //{
-            //    Authors.Add(/*(Author)Authors*/item);
-            //}
-
-            //Author author = authorRepository.Authors.FirstOrDefault(x => x.AuthorID == 4);
-            bookRepository.InsertBook(book);
-            bookRepository.SaveBook();
+            bookRepository.InsertBook(bookVM);
 
             return RedirectToAction("BooksView", "Books");
         }
@@ -165,7 +152,7 @@ namespace WebLibrary2.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddRelations(GetAuthorBookVM getAuthorBookVM)
         {
-            authorBookRepository.InsertAuthorBook(getAuthorBookVM);
+            //authorBookRepository.InsertAuthorBook(getAuthorBookVM);
             return RedirectToAction("BooksView", "Books");
         }
 
