@@ -17,11 +17,13 @@ namespace WebLibrary2.WebUI.Controllers
     {
         private EFDbContext context;
         IAuthorsRepository authorRepository;
+        IBookAuthorsRepository bookAuthorRepository;
 
-        public CRUDAuthorController(IAuthorsRepository authorsRepository, EFDbContext dataContext)
+        public CRUDAuthorController(IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, EFDbContext dataContext)
         {
             this.context = dataContext;
             this.authorRepository = authorsRepository;
+            this.bookAuthorRepository = bookAuthorsRepository;
         }
 
         public ActionResult CreateAuthor()
@@ -51,25 +53,26 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult EditAuthor(int? id)
         {
-            Author author = authorRepository.GetAuthorByID(id);
-            if (author == null)
+            var authorVM = authorRepository.GetAuthorDetails(id);
+            if (authorVM == null)
             {
                 return HttpNotFound();
             }
 
-            return View(author);
+            return View(authorVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAuthor(int id)
+        public ActionResult EditAuthor(int authorID, int [] bookIDs)
         {
-            var authorToUpdate = authorRepository.GetAuthorByID(id);
+            var authorToUpdate = authorRepository.GetAuthorByID(authorID);
 
             if (TryUpdateModel(authorToUpdate))
             {
                 try
                 {
+                    bookAuthorRepository.DeleteBookFromAuthor(authorID,bookIDs);
                     authorRepository.Save();
                 }
                 catch (DataException)

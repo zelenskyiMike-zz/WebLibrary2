@@ -54,7 +54,7 @@ namespace WebLibrary2.Domain.Concrete
 
         public GetM2MCRUDAuthorVM GetAuthorDetails(int? id)
         {
-            Author author = context.Authors.Find(id);
+            Author author = GetAuthorByID(id);
           
             var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
           
@@ -66,6 +66,8 @@ namespace WebLibrary2.Domain.Concrete
             };
             return authorVM;
         }
+
+
 
         public void Save()
         {

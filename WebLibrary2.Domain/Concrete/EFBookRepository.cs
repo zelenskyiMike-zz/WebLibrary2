@@ -64,23 +64,6 @@ namespace WebLibrary2.Domain.Concrete
             context.SaveChanges();
         }
 
-        //public GetM2MCRUDBookVM GetBooksWithGenres(int? id)
-        //{
-        //    Book book = GetBookByID(id);
-        //    var genreName = (from g in context.Genres
-        //                     where g.GenreID == book.GenreID
-        //                     select g.GenreName).SingleOrDefault();
-
-        //    GetM2MCRUDBookVM bookVM = new GetM2MCRUDBookVM()
-        //    {
-        //        BookID = book.BookID,
-        //        BookName = book.BookName,
-        //        YearOfPublish = book.YearOfPublish,
-        //        GenreName = genreName
-        //    };
-        //    return bookVM;
-        //}
-
         public GetM2MCRUDBookVM GetBooksDetails(int? id)
         {
             Book book = GetBookByID(id);
@@ -94,6 +77,7 @@ namespace WebLibrary2.Domain.Concrete
             {
                 BookID = book.BookID,
                 BookName = book.BookName,
+                GenreID = book.GenreID,
                 YearOfPublish = book.YearOfPublish,
                 GenreName = genreName,
                 Authors = authorList

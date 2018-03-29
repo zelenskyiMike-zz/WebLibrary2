@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace WebLibrary2.Domain.Entity
 {
     [Serializable]
-    public class Author : IEnumerable
+    public class Author /*: IEnumerable*/
     {
         [Key]
         public int AuthorID { get; set; }
@@ -20,6 +20,8 @@ namespace WebLibrary2.Domain.Entity
         [XmlIgnore]
         [IgnoreDataMember]
         public virtual IEnumerable<Book> Books { get; set; }
+        [XmlIgnore]
+        [IgnoreDataMember]
         public IEnumerable<BookAuthor> BookAuthors { get; set; }
 
         [XmlIgnore]
@@ -31,9 +33,19 @@ namespace WebLibrary2.Domain.Entity
             Books = new List<Book>();
         }
 
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        //private IEnumerable Author()
+        //{
+        //    yield return AuthorID;
+        //    yield return AuthorName;
+        //}
+
+        //public IEnumerator GetEnumerator()
+        //{
+        //    return Author   
+        //}
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return GetEnumerator();
+        //}
     }
 }

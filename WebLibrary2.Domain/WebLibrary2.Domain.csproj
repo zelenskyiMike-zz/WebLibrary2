@@ -67,9 +67,11 @@
   <ItemGroup>
     <Compile Include="AbstractUnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Abstract\IAuthorsRepository.cs" />
+    <Compile Include="Abstract\IBookAuthorsRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\IGenreRepository.cs" />
     <Compile Include="Concrete\EFAuthorRepository.cs" />
+    <Compile Include="Concrete\EFBookAuthorRepository.cs" />
     <Compile Include="Concrete\EFBookRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFGenreRepository.cs" />

@@ -15,11 +15,13 @@ namespace WebLibrary2.WebUI.Controllers
 
         IBookRepository bookRepository;
         IAuthorsRepository authorRepository;
+        IBookAuthorsRepository bookAuthorRepository;
       
-        public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, EFDbContext dataContext)
+        public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, EFDbContext dataContext)
         {
             this.bookRepository = booksRepository;
             this.authorRepository = authorsRepository;
+            this.bookAuthorRepository = bookAuthorsRepository;
             this.context = dataContext;
         }
 
@@ -55,30 +57,30 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = bookRepository.GetBookByID(id);
+            var book = bookRepository.GetBooksDetails(id);
 
             SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
             ViewData["Genres"] = genres;
 
-            GetSelectListViewModel getSelectListViewModel = new GetSelectListViewModel()
-            {
-                BookID = book.BookID,
-                GenreID = book.GenreID,
-                BookName = book.BookName,
-                YearOfPublish = book.YearOfPublish
-            };
+            //GetSelectListViewModel getSelectListViewModel = new GetSelectListViewModel()
+            //{
+            //    BookID = book.BookID,
+            //    GenreID = book.GenreID,
+            //    BookName = book.BookName,
+            //    YearOfPublish = book.YearOfPublish
+            //};
 
-            if (getSelectListViewModel == null)
+            if (/*getSelectListViewModel*/book == null)
             {
                 return HttpNotFound();
             }
 
-            return View(getSelectListViewModel);
+            return View(/*getSelectListViewModel*/ book);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBook(GetSelectListViewModel book)
+        public ActionResult EditBook(GetSelectListViewModel book, int [] authorIDs)
         {
             var bookToUpdate = bookRepository.GetBookByID(book.BookID);
 
@@ -86,6 +88,7 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 try
                 {
+                    bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDs);
                     bookRepository.SaveBook();
                 }
                 catch (DataException)
