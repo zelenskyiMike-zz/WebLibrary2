@@ -25,15 +25,15 @@ namespace WebLibrary2.Domain.Concrete
         public List<Author> GetAuthorsNotExistInBook(int bookID)
         {
             var currBook = GetBookByID(bookID);
-            BookViewModel bookVM = new BookViewModel()
-            {
-                BookName = currBook.BookName,
-                GenreID = currBook.GenreID,
-                YearOfPublish = currBook.YearOfPublish,
-                AuthorsIDs = currBook.AuthorsIDs
-            };
 
-            return context.Authors.Where(a => !currBook.Authors.Select(aID => aID.AuthorID).Contains(a.AuthorID)).ToList(); //Passes all authors? but mustn't
+
+            //var authorList = context.BookAuthors.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
+
+
+            //var aaa = context.Authors; // get all authors
+            //context.BookAuthors.Where(a => a.AuthorID == authorList);
+
+            return null;// context.Authors.Where(a=> currBook.Authors.Select(id => context.BookAuthors.Find(a.AuthorID))).ToList();
         }
 
         public void InsertBook(BookViewModel bookVM)
