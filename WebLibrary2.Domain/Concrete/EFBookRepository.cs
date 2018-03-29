@@ -22,16 +22,27 @@ namespace WebLibrary2.Domain.Concrete
             return context.Books.Find(bookID);
         }
 
+        public List<Author> GetAuthorsNotExistInBook(int bookID)
+        {
+            var currBook = GetBookByID(bookID);
+            BookViewModel bookVM = new BookViewModel()
+            {
+                BookName = currBook.BookName,
+                GenreID = currBook.GenreID,
+                YearOfPublish = currBook.YearOfPublish,
+                AuthorsIDs = currBook.AuthorsIDs
+            };
+
+            return context.Authors.Where(a => !currBook.Authors.Select(aID => aID.AuthorID).Contains(a.AuthorID)).ToList(); //Passes all authors? but mustn't
+        }
+
         public void InsertBook(BookViewModel bookVM)
         { 
-            var authorsList = context.Authors.Where(a => bookVM.AuthorsIDs.Contains(a.AuthorID)).ToList();
-
             Book book = new Book()
             {
                 BookName = bookVM.BookName,
                 GenreID = bookVM.GenreID,
-                YearOfPublish = bookVM.YearOfPublish,
-                Authors = authorsList //doesnt matter
+                YearOfPublish = bookVM.YearOfPublish
             };
             context.Books.Add(book);
             context.SaveChanges();

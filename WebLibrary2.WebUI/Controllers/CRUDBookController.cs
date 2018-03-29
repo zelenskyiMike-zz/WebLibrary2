@@ -62,25 +62,20 @@ namespace WebLibrary2.WebUI.Controllers
             SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
             ViewData["Genres"] = genres;
 
-            //GetSelectListViewModel getSelectListViewModel = new GetSelectListViewModel()
-            //{
-            //    BookID = book.BookID,
-            //    GenreID = book.GenreID,
-            //    BookName = book.BookName,
-            //    YearOfPublish = book.YearOfPublish
-            //};
+            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook((int)id),"AuthorID","AuthorName",book.Authors);
+            ViewData["Authors"] = authors;
 
-            if (/*getSelectListViewModel*/book == null)
+            if (book == null)
             {
                 return HttpNotFound();
             }
 
-            return View(/*getSelectListViewModel*/ book);
+            return View(book);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBook(GetSelectListViewModel book, int [] authorIDs)
+        public ActionResult EditBook(GetM2MCRUDBookVM book, int [] authorIDsForDelete, int [] authorIDsForInsert)
         {
             var bookToUpdate = bookRepository.GetBookByID(book.BookID);
 
@@ -88,7 +83,8 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 try
                 {
-                    bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDs);
+                    bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDsForDelete);
+                    bookAuthorRepository.AddAuthorToBook(bookToUpdate.BookID, authorIDsForInsert);
                     bookRepository.SaveBook();
                 }
                 catch (DataException)
