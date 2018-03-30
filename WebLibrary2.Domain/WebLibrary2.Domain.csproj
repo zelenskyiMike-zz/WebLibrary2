@@ -79,6 +79,7 @@
     <Compile Include="Entity\Book.cs" />
     <Compile Include="Entity\BookAuthor.cs" />
     <Compile Include="Entity\Genre.cs" />
+    <Compile Include="Entity\Publication.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthorViewModel.cs" />
     <Compile Include="Models\BookViewModel.cs" />

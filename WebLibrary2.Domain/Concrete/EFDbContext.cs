@@ -19,6 +19,7 @@ namespace WebLibrary2.Domain.Concrete
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
+        public DbSet<Publication> Publications { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
