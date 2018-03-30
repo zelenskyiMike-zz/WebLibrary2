@@ -16,7 +16,7 @@ namespace WebLibrary2.WebUI.Controllers
         IBookRepository bookRepository;
         IAuthorsRepository authorRepository;
         IBookAuthorsRepository bookAuthorRepository;
-
+      
         public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, EFDbContext dataContext)
         {
             this.bookRepository = booksRepository;
@@ -71,7 +71,7 @@ namespace WebLibrary2.WebUI.Controllers
             SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
             ViewData["Genres"] = genres;
 
-            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook((int)id), "AuthorID", "AuthorName", book.Authors);
+            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook((int)id),"AuthorID","AuthorName",book.Authors);
             ViewData["Authors"] = authors;
 
             if (book == null)
@@ -84,33 +84,24 @@ namespace WebLibrary2.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBook(GetM2MCRUDBookVM book, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public ActionResult EditBook(GetM2MCRUDBookVM book, int [] authorIDsForDelete, int [] authorIDsForInsert)
         {
             var bookToUpdate = bookRepository.GetBookByID(book.BookID);
 
-            //if (TryUpdateModel(bookToUpdate))
-            //{
-            bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDsForDelete);
-            bookAuthorRepository.AddAuthorToBook(bookToUpdate.BookID, authorIDsForInsert);
-            try
+            if (TryUpdateModel(bookToUpdate))
             {
-                bookRepository.UpdateBook(bookToUpdate);
-                return RedirectToAction("BooksView", "Books");
+                try
+                {
+                    bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDsForDelete);
+                    bookAuthorRepository.AddAuthorToBook(bookToUpdate.BookID, authorIDsForInsert);
+                    bookRepository.SaveBook();
+                }
+                catch (DataException)
+                {
+                    ModelState.AddModelError("", "Unable to save");
+                }
             }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save");
-            }
-
-            //}
-
-            SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
-            ViewData["Genres"] = genres;
-
-            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook(book.BookID), "AuthorID", "AuthorName", book.Authors);
-            ViewData["Authors"] = authors;
-
-            return View(book);
+            return RedirectToAction("BooksView", "Books");
         }
 
 
