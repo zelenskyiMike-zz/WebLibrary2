@@ -15,6 +15,6 @@ namespace WebLibrary2.Domain.Abstract
         void Save();
         GetM2MCRUDAuthorVM GetAuthorDetails(int? id);
 
-
+        List<Book> GetBooksNotExistInAuthor(int authorID);
     }
 }

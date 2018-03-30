@@ -67,7 +67,23 @@ namespace WebLibrary2.Domain.Concrete
             return authorVM;
         }
 
+        public List<Book> GetBooksNotExistInAuthor(int authorID)
+        {
+            var currBook = GetAuthorByID(authorID);
 
+            var initBookAuthorList = context.BookAuthors.Where(x => x.AuthorID == currBook.AuthorID).Select(x => x.Books).ToList();
+
+            List<Book> finalListOfBooks = new List<Book>();
+
+            foreach (var item in context.Books.ToList())
+            {
+                if (!initBookAuthorList.Contains(item))
+                {
+                    finalListOfBooks.Add(item);
+                }
+            }
+            return finalListOfBooks;
+        }
 
         public void Save()
         {

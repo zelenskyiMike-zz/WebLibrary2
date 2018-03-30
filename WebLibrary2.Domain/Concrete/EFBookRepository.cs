@@ -26,14 +26,18 @@ namespace WebLibrary2.Domain.Concrete
         {
             var currBook = GetBookByID(bookID);
 
+            var initBookAuthorList = context.BookAuthors.Where(x => x.BookID == currBook.BookID).Select(x => x.Authors).ToList();
 
-            //var authorList = context.BookAuthors.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
+            List<Author> finalListOfAuthors = new List<Author>();
 
-
-            //var aaa = context.Authors; // get all authors
-            //context.BookAuthors.Where(a => a.AuthorID == authorList);
-
-            return null;// context.Authors.Where(a=> currBook.Authors.Select(id => context.BookAuthors.Find(a.AuthorID))).ToList();
+            foreach (var item in context.Authors.ToList())
+            {
+                if (!initBookAuthorList.Contains(item))
+                {
+                    finalListOfAuthors.Add(item);
+                }
+            }
+            return finalListOfAuthors;
         }
 
         public void InsertBook(BookViewModel bookVM)

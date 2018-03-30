@@ -59,7 +59,7 @@ namespace WebLibrary2.WebUI.Controllers
                 return HttpNotFound();
             }
 
-            MultiSelectList books = new MultiSelectList(context.Books, "BookID","BookName", authorVM.Books);
+            MultiSelectList books = new MultiSelectList(authorRepository.GetBooksNotExistInAuthor((int)id), "BookID","BookName", authorVM.Books);
             ViewData["Books"] = books;
             return View(authorVM);
         }
