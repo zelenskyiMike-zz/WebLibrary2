@@ -41,7 +41,7 @@ namespace WebLibrary2.Domain.Concrete
         }
 
         public void InsertBook(BookViewModel bookVM)
-        { 
+        {
             Book book = new Book()
             {
                 BookName = bookVM.BookName,

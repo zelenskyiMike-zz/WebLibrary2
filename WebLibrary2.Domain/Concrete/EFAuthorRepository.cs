@@ -26,7 +26,7 @@ namespace WebLibrary2.Domain.Concrete
                 AuthorName = authorVM.AuthorName
             };
             context.Authors.Add(author);
-            Save();
+            context.SaveChanges();
 
             foreach (var item in authorVM.BooksIDs)
             {

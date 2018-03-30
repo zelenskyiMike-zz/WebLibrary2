@@ -42,6 +42,9 @@ namespace WebLibrary2.WebUI.Controllers
                 authorRepository.CreateAuthor(authorVM);
                 return RedirectToAction("Index", "Home");
             }
+
+            MultiSelectList books = new MultiSelectList(context.Books, "BookID", "BookName");
+            ViewData["Books"] = books;
             return View(authorVM);
         }
 

@@ -5,6 +5,9 @@
 }
 
 <h2>CreateAuthor</h2>
+
+@{Html.EnableClientValidation();}
+@{Html.EnableUnobtrusiveJavaScript();}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -14,7 +17,7 @@
     <h3>Write a name</h3>
     <div>
         @Html.EditorFor(model => model.AuthorName)
-        @Html.ValidationMessageFor(model => model.AuthorName)
+        @Html.ValidationMessageFor(model => model.AuthorName, "", new { @class = "text-danger" })
     </div><br />
     <div class="form-group">
         @Html.LabelFor(model => model.BooksIDs, "Books", htmlAttributes: new { @class = "control-label col-md-2" })

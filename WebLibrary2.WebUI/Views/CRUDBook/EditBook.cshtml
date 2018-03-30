@@ -7,6 +7,8 @@
 
 <h2>EditBook</h2>
 
+@{Html.EnableClientValidation();}
+@{Html.EnableUnobtrusiveJavaScript();}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -45,7 +47,7 @@
         </div>
         <div class="form-row col-md-offset-2">
             <div class="col">
-                <p>Выберите авторов,что бы удалить их для этой книги</p> 
+                <p>Выберите авторов,что бы удалить их для этой книги</p>
                 @foreach (var item in Model.Authors)
                 {
                     <input type="checkbox" name="authorIDsForDelete" value="@item.AuthorID">
