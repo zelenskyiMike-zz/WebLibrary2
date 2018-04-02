@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Entity;
+using WebLibrary2.Domain.Entity.BookEntity;
 
 namespace WebLibrary2.Domain.Concrete
 {

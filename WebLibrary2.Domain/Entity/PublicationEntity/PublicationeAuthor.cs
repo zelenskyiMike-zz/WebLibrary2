@@ -6,16 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebLibrary2.Domain.Entity
+namespace WebLibrary2.Domain.Entity.PublicationEntity
 {
-    public class BookAuthor
+    public class PublicationeAuthor
     {
-        [Key,Column(Order = 1)]     
-        public int BookID { get; set; }
+        [Key, Column(Order = 1)]
+        public int PublicationID { get; set; }
         [Key, Column(Order = 2)]
         public int AuthorID { get; set; }
 
-        public Book Books { get; set; }
+        public Publication Publicationes { get; set; }
         public Author Authors { get; set; }
     }
 }

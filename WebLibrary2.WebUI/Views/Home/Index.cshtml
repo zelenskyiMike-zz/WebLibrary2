@@ -11,9 +11,18 @@
         @Html.ActionLink("From JSON", "DeserializeJSON", "Home", null, new { onclick = "return JSONDeserializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("From XML", "DeserializeXML", "Home", null, new { onclick = "return XMLDeserializationDialog()", @class = "btn btn-light" })
     </div>
+    @*@Html.BeginForm(){
+    <div>
+        <input type="button" id="showDialog" value="Open File Dialog" />
+        <input type="submit" value="save" />
+    </div>
+    }*@
+
+    @*<div style="display:none" id="divDialog"/>*@
+
     <br />
     <div>
-            @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-outline-primary" })
+        @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-outline-primary" })
     </div>
     <br />
 
@@ -29,19 +38,59 @@
                 <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
 
                 <td>
-                    
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
-                        </div> |
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
-                        </div>|
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)</div>
-                   
+
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div>|
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div>
+
                 </td>
             </tr>
         }
     </table>
     <br />
 </div>
+
+@*<script>
+    $(function () {
+        $("#showDialog").click(function () { DisplayUpdateCustomerDialog();})
+    });
+    function DisplayUpdateCustomerDialog() {
+        var applyButton = {
+            text: "OK",
+            click : OKButton
+        }
+        var cancelButton = {
+            text: "Cancel",
+            click: CloseDialog
+        }
+
+        $("#showDialog").dialog({
+            buttons: [applyButton, cancelButton],
+            height: 500,
+            width: 500,
+            modal: true,
+            title: "Open File Dialog Title"
+        });
+    }
+
+    function OKButton() {
+        $.get("/Home/SerializeJSON/",
+            function (serializeJSON) {
+                $("#showDialog").html(serializeJSON);
+        });
+        CloseDialog();
+    }
+    function CloseDialog() {
+        $("#showDialog").dialog("close");
+    }
+</script>
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<link href="~/Content/themes/base/all.css" rel="stylesheet" />*@

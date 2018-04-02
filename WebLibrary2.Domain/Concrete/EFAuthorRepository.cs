@@ -7,6 +7,7 @@ using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Entity;
 using System.Web;
 using WebLibrary2.Domain.Models;
+using WebLibrary2.Domain.Entity.BookEntity;
 
 namespace WebLibrary2.Domain.Concrete
 {

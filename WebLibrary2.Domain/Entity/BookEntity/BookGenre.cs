@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebLibrary2.Domain.Entity
+namespace WebLibrary2.Domain.Entity.BookEntity
 {
-    public class Genre 
+    public class BookGenre 
     {
         [Key]
         public int GenreID { get; set; }
         public string GenreName { get; set; }
 
-        public ICollection<Book> Books { get; set; }
+        public IEnumerable<Book> Books { get; set; }
 
-        public Genre()
+        public BookGenre()
         {
             Books = new List<Book>();
         }

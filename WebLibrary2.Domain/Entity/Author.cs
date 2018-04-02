@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.Domain.Entity.PublicationEntity;
+using WebLibrary2.Domain.Entity.MagazineEntity;
+using WebLibrary2.Domain.Entity.ArticleEntity;
 
 namespace WebLibrary2.Domain.Entity
 {
     [Serializable]
-    public class Author /*: IEnumerable*/
+    public class Author
     {
         [Key]
         public int AuthorID { get; set; }
@@ -17,13 +19,23 @@ namespace WebLibrary2.Domain.Entity
         [Required(ErrorMessage = "Необходимо ввести имя и фамилию автора")]
         public string AuthorName { get; set; }
 
+
+
         [XmlIgnore]
         [IgnoreDataMember]
         public virtual IEnumerable<Book> Books { get; set; }
 
         [XmlIgnore]
         [IgnoreDataMember]
-        public virtual ICollection<Publication> Publications{ get; set; }
+        public virtual IEnumerable<Publication> Publicationes { get; set; }
+
+        [XmlIgnore]
+        [IgnoreDataMember]
+        public virtual IEnumerable<Magazine> Magazines { get; set; }
+
+        [XmlIgnore]
+        [IgnoreDataMember]
+        public virtual IEnumerable<Article> Articles { get; set; }
 
         [XmlIgnore]
         [IgnoreDataMember]
@@ -36,21 +48,9 @@ namespace WebLibrary2.Domain.Entity
         public Author()
         {
             Books = new List<Book>();
+            Publicationes = new List<Publication>();
+            Magazines = new List<Magazine>();
+            Articles = new List<Article>();
         }
-
-        //private IEnumerable Author()
-        //{
-        //    yield return AuthorID;
-        //    yield return AuthorName;
-        //}
-
-        //public IEnumerator GetEnumerator()
-        //{
-        //    return Author   
-        //}
-        //IEnumerator IEnumerable.GetEnumerator()
-        //{
-        //    return GetEnumerator();
-        //}
     }
 }

@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Entity;
+using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Models;
 
 

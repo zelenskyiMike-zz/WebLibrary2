@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLibrary2.Domain.Entity;
+using WebLibrary2.Domain.Entity.BookEntity;
 
 namespace WebLibrary2.Domain.Models
 {
@@ -23,7 +24,7 @@ namespace WebLibrary2.Domain.Models
         public int AuthorID { get; set; }
         public string AuthorName { get; set; }
         public IEnumerable<Author> Authors { get; set; }
-        public List<Genre> Genres { get; set; }
+        public List<BookGenre> Genres { get; set; }
 
     }
 }

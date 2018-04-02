@@ -30,8 +30,7 @@ namespace WebLibrary2.WebUI.Controllers
             this.context = dataContext;
             pathXML = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\XmlAuthors.xml";
             pathJSON = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\JsonAuthors.json";
-            string valuebla = @"https://visualstudiomagazine.com/articles/2015/12/01/opening-a-dialog-box.aspx";
-        }
+       }
 
         public ActionResult Index()
         {

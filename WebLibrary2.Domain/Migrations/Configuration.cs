@@ -6,6 +6,8 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using WebLibrary2.Domain.Entity;
+    using WebLibrary2.Domain.Entity.ArticleEntity;
+    using WebLibrary2.Domain.Entity.BookEntity;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebLibrary2.Domain.Concrete.EFDbContext>
     {
@@ -47,17 +49,17 @@
             {
                 return;
             }
-            Genre g1 = new Genre() { GenreID = 1, GenreName = "Роман" };
-            Genre g2 = new Genre() { GenreID = 2, GenreName = "Поэзия" };
-            Genre g3 = new Genre() { GenreID = 3, GenreName = "Рассказ" };
-            Genre g4 = new Genre() { GenreID = 4, GenreName = "Тёмное фэнтези" };
-            Genre g5 = new Genre() { GenreID = 5, GenreName = "Антиутопия" };
-            Genre g6 = new Genre() { GenreID = 6, GenreName = "Реализм" };
-            Genre g7 = new Genre() { GenreID = 7, GenreName = "Повесть" };
-            Genre g8 = new Genre() { GenreID = 8, GenreName = "Роман-поэма" };
-            Genre g9 = new Genre() { GenreID = 9, GenreName = "Сказка" };
-            Genre g10 = new Genre() { GenreID = 10, GenreName = "Фэнтези" };
-            context.Genres.AddRange(new List<Genre> { g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 });
+            BookGenre g1 = new BookGenre() { GenreID = 1, GenreName = "Роман" };
+            BookGenre g2 = new BookGenre() { GenreID = 2, GenreName = "Поэзия" };
+            BookGenre g3 = new BookGenre() { GenreID = 3, GenreName = "Рассказ" };
+            BookGenre g4 = new BookGenre() { GenreID = 4, GenreName = "Тёмное фэнтези" };
+            BookGenre g5 = new BookGenre() { GenreID = 5, GenreName = "Антиутопия" };
+            BookGenre g6 = new BookGenre() { GenreID = 6, GenreName = "Реализм" };
+            BookGenre g7 = new BookGenre() { GenreID = 7, GenreName = "Повесть" };
+            BookGenre g8 = new BookGenre() { GenreID = 8, GenreName = "Роман-поэма" };
+            BookGenre g9 = new BookGenre() { GenreID = 9, GenreName = "Сказка" };
+            BookGenre g10 = new BookGenre() { GenreID = 10, GenreName = "Фэнтези" };
+            context.Genres.AddRange(new List<BookGenre> { g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 });
             context.SaveChanges();
         }
 
@@ -111,11 +113,34 @@
             context.SaveChanges();
         }
 
+        private void SeedArticles(WebLibrary2.Domain.Concrete.EFDbContext context)
+        {
+            if (context.Articles.Any())
+            {
+                return;
+            }
+
+            Article ar1 = new Article() {ArticleGenreID = 1, ArticleName = "Article 1", DateOfArticlePublish = new DateTime(2003,09,30),Authors = new List<Author>() };
+            Article ar2 = new Article() { ArticleGenreID = 2, ArticleName = "Article 2", DateOfArticlePublish = new DateTime(2013, 04, 30), Authors = new List<Author>() };
+            Article ar3 = new Article() { ArticleGenreID = 3, ArticleName = "Article 3", DateOfArticlePublish = new DateTime(2004, 05, 20), Authors = new List<Author>() };
+            Article ar4 = new Article() { ArticleGenreID = 4, ArticleName = "Article 4", DateOfArticlePublish = new DateTime(2015, 06, 31), Authors = new List<Author>() }; 
+            Article ar5 = new Article() { ArticleGenreID = 5, ArticleName = "Article 5", DateOfArticlePublish = new DateTime(2006, 07, 10), Authors = new List<Author>() };
+            Article ar6 = new Article() { ArticleGenreID = 6, ArticleName = "Article 6", DateOfArticlePublish = new DateTime(2007, 08, 11), Authors = new List<Author>() };
+            Article ar7 = new Article() { ArticleGenreID = 7, ArticleName = "Article 7", DateOfArticlePublish = new DateTime(2008, 09, 16), Authors = new List<Author>() };
+            Article ar8 = new Article() { ArticleGenreID = 8, ArticleName = "Article 8", DateOfArticlePublish = new DateTime(2017, 01, 24), Authors = new List<Author>() };
+
+            context.Articles.AddRange(new List<Article> { ar1,ar2,ar3,ar4,ar5,ar6,ar7,ar8});
+
+            context.SaveChanges();
+        }
+
+
         protected override void Seed(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
             SeedAuthors(context);
             SeedGenres(context);
             SeedBooks(context);
+            SeedArticles(context);
 
             base.Seed(context);
         }

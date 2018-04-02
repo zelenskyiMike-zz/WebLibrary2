@@ -1,12 +1,9 @@
-﻿using EntityFramework.Triggers;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using WebLibrary2.Domain.Models;
 
-namespace WebLibrary2.Domain.Entity
+namespace WebLibrary2.Domain.Entity.BookEntity
 {
     public class Book
     {
@@ -23,7 +20,7 @@ namespace WebLibrary2.Domain.Entity
 
         [XmlIgnore]
         [IgnoreDataMember]
-        public Genre Genres { get; set; }
+        public BookGenre Genres { get; set; }
 
         [XmlIgnore]
         [IgnoreDataMember]
