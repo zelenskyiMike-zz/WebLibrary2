@@ -140,7 +140,7 @@
             SeedAuthors(context);
             SeedGenres(context);
             SeedBooks(context);
-            SeedArticles(context);
+            //SeedArticles(context);
 
             base.Seed(context);
         }
