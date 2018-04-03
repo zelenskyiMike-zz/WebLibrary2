@@ -12,6 +12,10 @@ using WebLibrary2.Domain.Concrete.ConcreteBook;
 using WebLibrary2.Domain.Concrete.ConcreteAuthor;
 using WebLibrary2.Domain.Abstract.AbstractArticle;
 using WebLibrary2.Domain.Concrete.ConcreteArticle;
+using WebLibrary2.Domain.Abstract.AbstractMagazine;
+using WebLibrary2.Domain.Concrete.ConcreteMagazine;
+using WebLibrary2.Domain.Abstract.AbstractPublication;
+using WebLibrary2.Domain.Concrete.ConcretePublication;
 
 namespace WebLibrary2.WebUI.Infrastructure
 {
@@ -35,11 +39,18 @@ namespace WebLibrary2.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            kernel.Bind<IBookRepository>().To<EFBookRepository>();
             kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
+
+            kernel.Bind<IBookRepository>().To<EFBookRepository>();
             kernel.Bind<IGenreRepository>().To<EFGenreRepository>();
+
             kernel.Bind<IBookAuthorsRepository>().To<EFBookAuthorRepository>();
+
             kernel.Bind<IArticleRepository>().To<EFArticleRepository>();
+
+            kernel.Bind<IMagazineRepository>().To<EFMagazineRepository>();
+
+            kernel.Bind<IPublicationRepository>().To<EFPublicationRepository>();
 
         }
     }

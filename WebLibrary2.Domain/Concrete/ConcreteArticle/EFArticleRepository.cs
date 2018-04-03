@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using WebLibrary2.Domain.Abstract.AbstractArticle;
 using WebLibrary2.Domain.Entity.ArticleEntity;
 
@@ -18,7 +19,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteArticle
 
         public IQueryable<Article> GetAllArticlesWithGenres()
         {
-            return null; //context.Articles.Include(a => a.);
+            return context.Articles.Include(g => g.ArticleGenres);
         }
     }
 }

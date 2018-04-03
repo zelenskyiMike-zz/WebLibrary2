@@ -9,7 +9,7 @@
     <h2>Список книг</h2>
     <div class="btn btn-default">
         <h4>
-            @Html.ActionLink("Добавить книгу", "CreateBook", "CRUDBook",null, new { @class = "btn btn-outline-primary" })
+            @Html.ActionLink("Добавить книгу", "CreateBook", "CRUDBook", null, new { @class = "btn btn-outline-primary" })
         </h4>
     </div>
     <br />
@@ -22,27 +22,31 @@
         </tr>
         @foreach (var book in Model)
         {
-            
-        <tr>
-            <td>
-                <h4>@book.BookName</h4>
-            </td>
-            <td>
-                <h4>@book.Genres.GenreName</h4>
-            </td>
-            <td>
-                <div class=" btn btn-default">
-                    @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = book.BookID }, null)</div> |
-                <div class=" btn btn-default">
-                        @Html.ActionLink("Удалить", "DeleteBook", "CRUDBook", new { id = book.BookID }, null)</div> |
-                <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "BookDetails", "CRUDBook", new { id = book.BookID }, null)</div> 
+
+            <tr>
+                <td>
+                    <h4>@book.BookName</h4>
+                </td>
+                <td>
+                    <h4>@book.Genres.GenreName</h4>
+                </td>
+                <td>
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = book.BookID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeleteBook", "CRUDBook", new { id = book.BookID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "BookDetails", "CRUDBook", new { id = book.BookID }, null)
+                    </div>
 
 
-</td>
-        </tr>
+                </td>
+            </tr>
         }
     </table>
+    <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
 </div>
 
 

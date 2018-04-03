@@ -16,6 +16,7 @@ namespace WebLibrary2.Domain.Entity.ArticleEntity
         [Required]
         public string ArticleName { get; set; }
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfArticlePublish { get; set; }
 
         public ArticleGenre ArticleGenres { get; set; }

@@ -53,6 +53,11 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
             Save();
         }
 
+        public IQueryable<Author> GetAllAuthors()
+        {
+            return context.Authors;
+        }
+
         public Author GetAuthorByID(int? id)
         {
             return context.Authors.Find(id);

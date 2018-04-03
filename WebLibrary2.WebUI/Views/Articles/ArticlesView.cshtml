@@ -1,0 +1,34 @@
+﻿@using WebLibrary2.Domain.Entity.ArticleEntity
+@model IEnumerable<Article>
+@{
+    ViewBag.Title = "ArticlesView";
+}
+
+<h2>ArticlesView</h2>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <table>
+        <tr>
+            <th>Статья</th>
+            <th>Тип статьи</th>
+            <th>Дата выхода</th>
+            <th>Действие</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.ArticleName</td>
+            <td>@item.ArticleGenres.ArticleGenreName</td>
+            <td>@item.DateOfArticlePublish.Day/@item.DateOfArticlePublish.Month/@item.DateOfArticlePublish.Year</td>
+            <td>
+
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+
+<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+

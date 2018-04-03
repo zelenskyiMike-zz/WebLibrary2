@@ -265,21 +265,21 @@
 
         protected override void Seed(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
-            SeedAuthors(context);
+            //SeedAuthors(context);
 
-            SeedGenres(context);
-            SeedBooks(context);
+            //SeedGenres(context);
+            //SeedBooks(context);
 
-            SeedArticlesGenres(context);
-            SeedArticles(context);
+            //SeedArticlesGenres(context);
+            //SeedArticles(context);
 
-            SeedPublicationGenres(context);
-            SeedPublications(context);
+            //SeedPublicationGenres(context);
+            //SeedPublications(context);
 
-            SeedMagazineGenres(context);
-            SeedMagazines(context);
+            //SeedMagazineGenres(context);
+            //SeedMagazines(context);
 
-            base.Seed(context);
+            //base.Seed(context);
         }
     }
 }

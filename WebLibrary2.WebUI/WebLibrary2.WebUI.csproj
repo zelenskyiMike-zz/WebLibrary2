@@ -176,10 +176,13 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticleControllers\ArticlesController.cs" />
+    <Compile Include="Controllers\AuthorControllers\AuthorController.cs" />
     <Compile Include="Controllers\BookControllers\BooksController.cs" />
     <Compile Include="Controllers\AuthorControllers\CRUDAuthorController.cs" />
     <Compile Include="Controllers\BookControllers\CRUDBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MagazineControllers\MagazinesController.cs" />
+    <Compile Include="Controllers\PublicationsControllers\PublicationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -272,12 +275,13 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Deserialize.cshtml" />
+    <Content Include="Views\Articles\ArticlesView.cshtml" />
+    <Content Include="Views\Author\AuthorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\MagazineControllers\" />
-    <Folder Include="Controllers\PublicationControllers\" />
-    <Folder Include="Views\Articles\" />
+    <Folder Include="Views\Magazines\" />
+    <Folder Include="Views\Publications\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
