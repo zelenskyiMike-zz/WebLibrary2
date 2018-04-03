@@ -11,7 +11,7 @@ using System.Net;
 using System.Data;
 
 
-namespace WebLibrary2.WebUI.Controllers
+namespace WebLibrary2.WebUI.Controllers.BookControllers
 {
     public class BooksController : Controller
     {

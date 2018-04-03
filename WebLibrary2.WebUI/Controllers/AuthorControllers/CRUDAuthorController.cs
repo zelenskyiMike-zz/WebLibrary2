@@ -11,7 +11,7 @@ using System.Net;
 using System.Data;
 using WebLibrary2.Domain.Models;
 
-namespace WebLibrary2.WebUI.Controllers
+namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {
     public class CRUDAuthorController : Controller
     {

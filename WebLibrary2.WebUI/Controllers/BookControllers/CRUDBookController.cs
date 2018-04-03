@@ -7,7 +7,7 @@ using System.Net;
 using System.Data;
 using System.Collections.Generic;
 
-namespace WebLibrary2.WebUI.Controllers
+namespace WebLibrary2.WebUI.Controllers.BookControllers
 {
     public class CRUDBookController : Controller
     {

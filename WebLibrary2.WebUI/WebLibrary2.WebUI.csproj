@@ -175,9 +175,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BooksController.cs" />
-    <Compile Include="Controllers\CRUDAuthorController.cs" />
-    <Compile Include="Controllers\CRUDBookController.cs" />
+    <Compile Include="Controllers\BookControllers\BooksController.cs" />
+    <Compile Include="Controllers\AuthorControllers\CRUDAuthorController.cs" />
+    <Compile Include="Controllers\BookControllers\CRUDBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,6 +274,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\ArticleControllers\" />
+    <Folder Include="Controllers\MagazineControllers\" />
+    <Folder Include="Controllers\PublicationControllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
