@@ -30,6 +30,12 @@ namespace WebLibrary2.WebUI.Controllers
         {
             var author = context.Authors.ToList();
             return View(author);
+
+            /*Authors = context.Authors.ToList(),
+                Books = context.Books.ToList(),
+                Articles = context.Articles.ToList(),
+                Magazines = context.Magazines.ToList(),
+                Publications = context.Publications.ToList()*/
         }
 
         public ActionResult Contact()

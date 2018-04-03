@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<WebLibrary2.Domain.Entity.Author>
 
 @{
-    ViewBag.Title = "List of books";
+    ViewBag.Title = "List of literature";
 }
+@{Html.EnableUnobtrusiveJavaScript();}
 <div>
     <h2>Список авторов</h2>
     <div>
@@ -11,38 +12,61 @@
         @Html.ActionLink("From JSON", "DeserializeJSON", "Home", null, new { onclick = "return JSONDeserializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("From XML", "DeserializeXML", "Home", null, new { onclick = "return XMLDeserializationDialog()", @class = "btn btn-light" })
     </div>
-    @*<br />
-    <div>
-        @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-outline-primary" })
-    </div>
+
     <br />
+    <div class="bs-popover">
+        <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
+            <li role="presentation"><button class="btn btn-light active show" href="#authors" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Authors</button></li>
+            <li role="presentation" class=""><button class="btn btn-light" href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Profile</button></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div role="tabpanel" class="tab-pane active " id="authors" aria-labelledby="home-tab">
+                <br />
+                <div>
+                    @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-outline-primary" })
+                </div>
+                <br />
+                <table>
+                    <tr>
+                        <th><h4>Автор</h4></th>
+                        <th><h4>Действие</h4></th>
+                    </tr>
+                    @foreach (var author in Model)
+                    {
+                        <tr>
+                            @* There is some questions about how to pass id to *@
+                            <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+                            <td>
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                                </div> |
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                                </div>|
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+                <table>
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                            <td>@Html.DisplayFor(modelItem => item .Books)</td>
 
-    <table>
-        <tr>
-            <th><h4>Автор</h4></th>
-            <th><h4>Действие</h4></th>
-        </tr>
-        @foreach (var author in Model)
-        {
-            <tr>
+                        }
+                    </tr>
+                </table>
+            </div>
 
-                <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+        </div>
+    </div>
+    @*
 
-                <td>
-
-                    <div class=" btn btn-default">
-                        @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
-                    </div> |
-                    <div class=" btn btn-default">
-                        @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
-                    </div>|
-                    <div class=" btn btn-default">
-                        @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
-                    </div>
-
-                </td>
-            </tr>
-        }
-    </table>*@
+    *@
     <br />
 </div>

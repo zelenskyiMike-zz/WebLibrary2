@@ -15,10 +15,11 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
             articlesRepository = articleRepository;
         }
         // GET: Articles
+        [HttpPost]
         public ActionResult ArticlesView()
         {
             var articles = articlesRepository.GetAllArticlesWithGenres();
-            return View(articles);
+            return PartialView(articles);
         }
     }
 }

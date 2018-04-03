@@ -96,6 +96,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthorViewModel.cs" />
     <Compile Include="Models\BookViewModel.cs" />
+    <Compile Include="Models\GetLiteratureViewModel.cs" />
     <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
     <Compile Include="Models\GetM2MCRUDBookVM.cs" />
     <Compile Include="Models\GetSelectListViewModel.cs" />
