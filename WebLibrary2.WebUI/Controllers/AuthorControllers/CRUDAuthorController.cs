@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract;
+﻿using System.Web.Mvc;
 using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Entity;
-using System.Data.Entity;
 using System.Net;
 using System.Data;
 using WebLibrary2.Domain.Models;
+using WebLibrary2.Domain.Abstract.AbstractAuthor;
+using WebLibrary2.Domain.Abstract.AbstractBook;
 
 namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {

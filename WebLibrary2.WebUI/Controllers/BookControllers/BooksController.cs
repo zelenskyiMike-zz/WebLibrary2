@@ -9,17 +9,22 @@ using WebLibrary2.Domain.Entity;
 using System.Data.Entity;
 using System.Net;
 using System.Data;
-
+using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.Domain.Abstract.AbstractBook;
 
 namespace WebLibrary2.WebUI.Controllers.BookControllers
 {
     public class BooksController : Controller
     {
-        private EFDbContext context = new EFDbContext();
+        IBookRepository booksRepository;
+        public BooksController(IBookRepository bookRepository)
+        {
+            booksRepository = bookRepository;
+        }
 
         public ViewResult BooksView()
         {
-            var book = context.Books.Include(g => g.Genres);
+            var book = booksRepository.GetAllBooksWithGenres();
                    
             return View(book);
         }

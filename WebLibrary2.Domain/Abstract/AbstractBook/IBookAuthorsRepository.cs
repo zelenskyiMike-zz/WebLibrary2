@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebLibrary2.Domain.Abstract
+namespace WebLibrary2.Domain.Abstract.AbstractBook
 {
     public interface IBookAuthorsRepository
     {

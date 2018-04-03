@@ -27,7 +27,7 @@ namespace WebLibrary2.Domain.Entity
 
         [XmlIgnore]
         [IgnoreDataMember]
-        public virtual IEnumerable<Publication> Publicationes { get; set; }
+        public virtual IEnumerable<Publication> Publications { get; set; }
 
         [XmlIgnore]
         [IgnoreDataMember]
@@ -48,7 +48,7 @@ namespace WebLibrary2.Domain.Entity
         public Author()
         {
             Books = new List<Book>();
-            Publicationes = new List<Publication>();
+            Publications = new List<Publication>();
             Magazines = new List<Magazine>();
             Articles = new List<Article>();
         }

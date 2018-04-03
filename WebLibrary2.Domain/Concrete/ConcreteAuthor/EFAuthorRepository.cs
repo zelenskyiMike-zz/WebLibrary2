@@ -8,12 +8,17 @@ using WebLibrary2.Domain.Entity;
 using System.Web;
 using WebLibrary2.Domain.Models;
 using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.Domain.Abstract.AbstractAuthor;
 
-namespace WebLibrary2.Domain.Concrete
+namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
 {
     public class EFAuthorRepository : IAuthorsRepository
     {
-        private EFDbContext context = new EFDbContext();
+        private EFDbContext context;
+        public EFAuthorRepository(EFDbContext contextParam)
+        {
+            context = contextParam;
+        }
 
         public IEnumerable<Author> Authors
         {

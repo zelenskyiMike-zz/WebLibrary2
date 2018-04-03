@@ -14,11 +14,11 @@ namespace WebLibrary2.Domain.Entity.PublicationEntity
         [Required]
         public string PublicationGenreName { get; set; }
 
-        public virtual IEnumerable<Publication> Publicationes { get; set; }
+        public virtual IEnumerable<Publication> Publications { get; set; }
 
         public PublicationGenre()
         {
-            Publicationes = new List<Publication>();
+            Publications = new List<Publication>();
         }
     }
 }

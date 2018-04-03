@@ -1,11 +1,10 @@
 ﻿using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Models;
 using System.Net;
 using System.Data;
-using System.Collections.Generic;
+using WebLibrary2.Domain.Abstract.AbstractBook;
+using WebLibrary2.Domain.Abstract.AbstractAuthor;
 
 namespace WebLibrary2.WebUI.Controllers.BookControllers
 {

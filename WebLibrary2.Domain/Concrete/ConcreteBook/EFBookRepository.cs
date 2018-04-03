@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using WebLibrary2.Domain.Abstract;
+using WebLibrary2.Domain.Abstract.AbstractBook;
 using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Models;
 
 
-namespace WebLibrary2.Domain.Concrete
+namespace WebLibrary2.Domain.Concrete.ConcreteBook
 {
     public class EFBookRepository : IBookRepository
     {
@@ -99,6 +99,11 @@ namespace WebLibrary2.Domain.Concrete
                 Authors = authorList
             };
             return bookVM;
+        }
+
+        public IQueryable<Book> GetAllBooksWithGenres()
+        {
+            return context.Books.Include(g => g.Genres);
         }
     }
 }

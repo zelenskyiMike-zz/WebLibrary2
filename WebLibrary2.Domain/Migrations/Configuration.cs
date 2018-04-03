@@ -45,6 +45,7 @@
             context.Authors.AddRange(new List<Author> { a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15 });
             context.SaveChanges();
         }
+
         private void SeedGenres(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
             if (context.Genres.Any())
@@ -64,7 +65,6 @@
             context.Genres.AddRange(new List<BookGenre> { g1, g2, g3, g4, g5, g6, g7, g8, g9, g10 });
             context.SaveChanges();
         }
-
         private void SeedBooks(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
             if (context.Books.Any())
@@ -135,7 +135,6 @@
 
             context.SaveChanges();
         }
-
         private void SeedArticlesGenres(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
             if (context.ArticleGenres.Any())
@@ -157,10 +156,9 @@
             context.SaveChanges();
         }
 
-
         private void SeedPublications(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
-            if (context.Publicationes.Any())
+            if (context.Publications.Any())
             {
                 return;
             }
@@ -178,17 +176,17 @@
             Publication ar11 = new Publication() { PublicationGenreID = 1, PublicationName ="Публикация 11", DateOfPublicationPublish = new DateTime(2000, 1, 5), Authors = new List<Author>() };
 
 
-            context.Publicationes.Add(ar1);
-            context.Publicationes.Add(ar2);
-            context.Publicationes.Add(ar3);
-            context.Publicationes.Add(ar4);
-            context.Publicationes.Add(ar5);
-            context.Publicationes.Add(ar6);
-            context.Publicationes.Add(ar7);
-            context.Publicationes.Add(ar8);
-            context.Publicationes.Add(ar9);
-            context.Publicationes.Add(ar10);
-            context.Publicationes.Add(ar11);
+            context.Publications.Add(ar1);
+            context.Publications.Add(ar2);
+            context.Publications.Add(ar3);
+            context.Publications.Add(ar4);
+            context.Publications.Add(ar5);
+            context.Publications.Add(ar6);
+            context.Publications.Add(ar7);
+            context.Publications.Add(ar8);
+            context.Publications.Add(ar9);
+            context.Publications.Add(ar10);
+            context.Publications.Add(ar11);
 
 
             context.SaveChanges();
@@ -267,10 +265,10 @@
 
         protected override void Seed(WebLibrary2.Domain.Concrete.EFDbContext context)
         {
-            //SeedAuthors(context);
+            SeedAuthors(context);
 
-            //SeedGenres(context);
-            //SeedBooks(context);
+            SeedGenres(context);
+            SeedBooks(context);
 
             SeedArticlesGenres(context);
             SeedArticles(context);

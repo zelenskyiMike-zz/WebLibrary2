@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Entity.BookEntity;
 
-namespace WebLibrary2.Domain.Abstract
+namespace WebLibrary2.Domain.Abstract.AbstractBook
 {
     public interface IGenreRepository
     {

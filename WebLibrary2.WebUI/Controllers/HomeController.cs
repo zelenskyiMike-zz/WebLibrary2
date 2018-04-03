@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Concrete;
 using WebLibrary2.Domain.Entity;
-using System.Data.Entity;
-using System.Net;
-using System.Data;
 using System.IO;
 using Newtonsoft.Json;
-using System.Runtime.Serialization.Json;
 using System.Xml.Serialization;
+using WebLibrary2.Domain.Abstract.AbstractAuthor;
 
 namespace WebLibrary2.WebUI.Controllers
 {

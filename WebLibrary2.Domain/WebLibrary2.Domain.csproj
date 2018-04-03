@@ -65,16 +65,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractUnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="Abstract\IAuthorsRepository.cs" />
-    <Compile Include="Abstract\IBookAuthorsRepository.cs" />
-    <Compile Include="Abstract\IBookRepository.cs" />
-    <Compile Include="Abstract\IGenreRepository.cs" />
-    <Compile Include="Concrete\EFAuthorRepository.cs" />
-    <Compile Include="Concrete\EFBookAuthorRepository.cs" />
-    <Compile Include="Concrete\EFBookRepository.cs" />
+    <Compile Include="Abstract\AbstractArticle\IArticleRepository.cs" />
+    <Compile Include="Abstract\AbstractAuthor\IAuthorsRepository.cs" />
+    <Compile Include="Abstract\AbstractBook\IBookAuthorsRepository.cs" />
+    <Compile Include="Abstract\AbstractBook\IBookRepository.cs" />
+    <Compile Include="Abstract\AbstractBook\IGenreRepository.cs" />
+    <Compile Include="Concrete\ConcreteArticle\EFArticleRepository.cs" />
+    <Compile Include="Concrete\ConcreteAuthor\EFAuthorRepository.cs" />
+    <Compile Include="Concrete\ConcreteBook\EFBookAuthorRepository.cs" />
+    <Compile Include="Concrete\ConcreteBook\EFBookRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
-    <Compile Include="Concrete\EFGenreRepository.cs" />
+    <Compile Include="Concrete\ConcreteBook\EFGenreRepository.cs" />
     <Compile Include="Entity\ArticleEntity\Article.cs" />
     <Compile Include="Entity\ArticleEntity\ArticleAuthor.cs" />
     <Compile Include="Entity\ArticleEntity\ArticleGenre.cs" />
@@ -102,6 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\AbstractMagazine\" />
+    <Folder Include="Abstract\AbstractPublication\" />
+    <Folder Include="Concrete\ConcreteMagazine\" />
+    <Folder Include="Concrete\ConcretePublication\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

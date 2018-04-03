@@ -15,7 +15,7 @@ namespace WebLibrary2.Domain.Entity.PublicationEntity
         [Key, Column(Order = 2)]
         public int AuthorID { get; set; }
 
-        public Publication Publicationes { get; set; }
+        public Publication Publications { get; set; }
         public Author Authors { get; set; }
     }
 }

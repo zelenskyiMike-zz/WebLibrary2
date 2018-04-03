@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Models;
 
-namespace WebLibrary2.Domain.Abstract
+namespace WebLibrary2.Domain.Abstract.AbstractBook
 {
     public interface IBookRepository
     {
@@ -17,5 +18,7 @@ namespace WebLibrary2.Domain.Abstract
 
         GetM2MCRUDBookVM GetBooksDetails(int? id);
         List<Author> GetAuthorsNotExistInBook(int bookID);
+
+        IQueryable<Book> GetAllBooksWithGenres();
     }
 }

@@ -4,7 +4,7 @@ using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Models;
 
-namespace WebLibrary2.Domain.Abstract
+namespace WebLibrary2.Domain.Abstract.AbstractAuthor
 {
     public interface IAuthorsRepository
     {

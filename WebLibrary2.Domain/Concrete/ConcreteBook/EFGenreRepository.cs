@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebLibrary2.Domain.Entity;
-using WebLibrary2.Domain.Abstract;
+﻿using System.Collections.Generic;
 using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.Domain.Abstract.AbstractBook;
 
-namespace WebLibrary2.Domain.Concrete
+namespace WebLibrary2.Domain.Concrete.ConcreteBook
 {
     public class EFGenreRepository : IGenreRepository
     {

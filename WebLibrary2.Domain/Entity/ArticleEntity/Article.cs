@@ -10,7 +10,7 @@ namespace WebLibrary2.Domain.Entity.ArticleEntity
     public class Article
     {
         [Key]
-        public int ArticeID { get; set; }
+        public int ArticleID { get; set; }
         [Required]
         public int ArticleGenreID { get; set; }
         [Required]

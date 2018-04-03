@@ -16,7 +16,7 @@ namespace WebLibrary2.Domain.Concrete
 
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<Publication> Publicationes { get; set; }
+        public DbSet<Publication> Publications { get; set; }
         public DbSet<Magazine> Magazines { get; set; }
         public DbSet<Article> Articles { get; set; }
 

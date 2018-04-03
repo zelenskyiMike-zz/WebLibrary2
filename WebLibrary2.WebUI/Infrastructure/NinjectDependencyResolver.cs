@@ -6,6 +6,12 @@ using Moq;
 using WebLibrary2.Domain.Abstract;
 using WebLibrary2.Domain.Entity;
 using WebLibrary2.Domain.Concrete;
+using WebLibrary2.Domain.Abstract.AbstractBook;
+using WebLibrary2.Domain.Abstract.AbstractAuthor;
+using WebLibrary2.Domain.Concrete.ConcreteBook;
+using WebLibrary2.Domain.Concrete.ConcreteAuthor;
+using WebLibrary2.Domain.Abstract.AbstractArticle;
+using WebLibrary2.Domain.Concrete.ConcreteArticle;
 
 namespace WebLibrary2.WebUI.Infrastructure
 {
@@ -33,6 +39,8 @@ namespace WebLibrary2.WebUI.Infrastructure
             kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
             kernel.Bind<IGenreRepository>().To<EFGenreRepository>();
             kernel.Bind<IBookAuthorsRepository>().To<EFBookAuthorRepository>();
+            kernel.Bind<IArticleRepository>().To<EFArticleRepository>();
+
         }
     }
 }
