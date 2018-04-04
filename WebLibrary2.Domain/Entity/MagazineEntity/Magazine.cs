@@ -27,6 +27,10 @@ namespace WebLibrary2.Domain.Entity.MagazineEntity
         [IgnoreDataMember]
         public virtual IEnumerable<Author> Authors { get; set; }
 
+        [XmlIgnore]
+        [IgnoreDataMember]
+        public List<int> AuthorsIDs { get; set; }
+
         public Magazine()
         {
             Authors = new List<Author>();

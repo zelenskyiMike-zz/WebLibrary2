@@ -25,10 +25,15 @@ namespace WebLibrary2.WebUI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/jquery.ui.datepicker.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/custom/DialogFile.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                      "~/Scripts/datepicker/jquery.ui.datepicker.js",
+                      "~/Scripts/datepicker/jquery.ui.datepicker.min.js"));
         }
     }
 }

@@ -11,10 +11,12 @@ namespace WebLibrary2.Domain.Models
     public class BookViewModel
     {
         [Required(ErrorMessage = "Неободимо добавить название книги")]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "Длинна строки должна быть не менее 5 и не более 50 символов")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Длинна строки должна быть не менее 3 и не более 50 символов")]
         public string BookName { get; set; }
+
         [Required(ErrorMessage ="Выберите жанр")]
         public int GenreID { get; set; }
+
         [Required(ErrorMessage ="Выберите хотя бы одного автора")]
         public List<int> AuthorsIDs { get; set; }
 

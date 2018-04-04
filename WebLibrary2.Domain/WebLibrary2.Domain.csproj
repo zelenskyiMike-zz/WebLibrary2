@@ -70,12 +70,14 @@
     <Compile Include="Abstract\AbstractBook\IBookAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IBookRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IGenreRepository.cs" />
+    <Compile Include="Abstract\AbstractMagazine\IMagazineAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractMagazine\IMagazineRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationRepository.cs" />
     <Compile Include="Concrete\ConcreteArticle\EFArticleRepository.cs" />
     <Compile Include="Concrete\ConcreteAuthor\EFAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteBook\EFBookAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteBook\EFBookRepository.cs" />
+    <Compile Include="Concrete\ConcreteMagazine\EFMagazineAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteMagazine\EFMagazineRepository.cs" />
     <Compile Include="Concrete\ConcretePublication\EFPublicationRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
@@ -99,7 +101,9 @@
     <Compile Include="Models\GetLiteratureViewModel.cs" />
     <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
     <Compile Include="Models\GetM2MCRUDBookVM.cs" />
+    <Compile Include="Models\GetM2MCRUDMagazineVM.cs" />
     <Compile Include="Models\GetSelectListViewModel.cs" />
+    <Compile Include="Models\MagazineViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

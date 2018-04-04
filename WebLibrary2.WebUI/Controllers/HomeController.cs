@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Concrete;
 using WebLibrary2.Domain.Entity;
@@ -7,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
+using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.WebUI.Controllers
 {
@@ -28,14 +30,20 @@ namespace WebLibrary2.WebUI.Controllers
 
         public ActionResult Index()
         {
-            var author = context.Authors.ToList();
-            return View(author);
+            /* mb Repo? */
+            var books = context.Books.Include(bg => bg.Genres).ToList();
+            var articles = context.Articles.Include(ag => ag.ArticleGenres).ToList();
+            var magazines = context.Magazines.Include(mg => mg.MagazineGenres).ToList();
+            var publications = context.Publications.Include(pg => pg.PublicationGenres).ToList();
 
-            /*Authors = context.Authors.ToList(),
-                Books = context.Books.ToList(),
-                Articles = context.Articles.ToList(),
-                Magazines = context.Magazines.ToList(),
-                Publications = context.Publications.ToList()*/
+            GetLiteratureViewModel literature = new GetLiteratureViewModel()
+            {
+                Books = books,
+                Articles = articles,
+                Magazines = magazines,
+                Publications = publications
+            };
+            return View(literature);
         }
 
         public ActionResult Contact()

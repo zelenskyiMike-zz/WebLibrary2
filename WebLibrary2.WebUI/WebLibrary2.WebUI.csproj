@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AuthorControllers\CRUDAuthorController.cs" />
     <Compile Include="Controllers\BookControllers\CRUDBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MagazineControllers\CRUDMagazineController.cs" />
     <Compile Include="Controllers\MagazineControllers\MagazinesController.cs" />
     <Compile Include="Controllers\PublicationsControllers\PublicationsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -192,6 +193,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.ui.datepicker.css" />
+    <Content Include="Content\jquery.ui.datepicker.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -207,6 +210,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\custom\DialogFile.js" />
+    <Content Include="Scripts\datepicker\jquery.ui.datepicker.js" />
+    <Content Include="Scripts\datepicker\jquery.ui.datepicker.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -277,6 +282,8 @@
     <Content Include="Views\Home\Deserialize.cshtml" />
     <Content Include="Views\Articles\ArticlesView.cshtml" />
     <Content Include="Views\Author\AuthorView.cshtml" />
+    <Content Include="Views\CRUDMagazine\CreateMagazine.cshtml" />
+    <Content Include="Views\CRUDMagazine\MagazineDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

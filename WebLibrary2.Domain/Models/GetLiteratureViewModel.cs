@@ -13,10 +13,9 @@ namespace WebLibrary2.Domain.Models
 {
     public class GetLiteratureViewModel
     {
-        public IEnumerable<Author> Authors { get; set; }
-        public IEnumerable<Book> Books { get; set; }
-        public IEnumerable<Publication> Publications { get; set; }
-        public IEnumerable<Magazine> Magazines { get; set; }
-        public IEnumerable<Article> Articles { get; set; }
+        public IEnumerable<Article> Articles;
+        public IEnumerable<Book> Books;
+        public IEnumerable<Publication> Publications;
+        public IEnumerable<Magazine> Magazines;
     }
 }

@@ -54,8 +54,8 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
         public ActionResult BookDetails(int id = 0)
         {
-            var bookVM = bookRepository.GetBooksDetails(id);
-            return View(bookVM);
+            var book = bookRepository.GetBooksDetails(id);
+            return View(book);
         }
 
         [HttpGet]

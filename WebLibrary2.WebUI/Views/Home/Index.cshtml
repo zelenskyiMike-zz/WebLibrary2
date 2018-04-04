@@ -1,12 +1,14 @@
-﻿@model IEnumerable<WebLibrary2.Domain.Entity.Author>
+﻿@using WebLibrary2.Domain.Models
+@model GetLiteratureViewModel
 
 @{
     ViewBag.Title = "List of literature";
 }
 @{Html.EnableUnobtrusiveJavaScript();}
 <div>
-    <h2>Список авторов</h2>
+    <br />
     <div>
+        <h3 style="display : inline">Список литературы</h3>
         @Html.ActionLink("To JSON", "SerializeJSON", "Home", null, new { onclick = "return JSONSerializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("To XML", "SerializeXML", "Home", null, new { onclick = "return XMLSerializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("From JSON", "DeserializeJSON", "Home", null, new { onclick = "return JSONDeserializationDialog()", @class = "btn btn-light" })
@@ -16,57 +18,133 @@
     <br />
     <div class="bs-popover">
         <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
-            <li role="presentation"><button class="btn btn-light active show" href="#authors" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Authors</button></li>
-            <li role="presentation" class=""><button class="btn btn-light" href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Profile</button></li>
+            <li role="presentation"><button class="btn btn-light active show" href="#books" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Книги</button></li>
+            <li role="presentation" class=""><button class="btn btn-light" href="#articles" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Статьи</button></li>
+            <li role="presentation" class=""><button class="btn btn-light" href="#magazines" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Журналы</button></li>
+            <li role="presentation" class=""><button class="btn btn-light" href="#publications" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Публикации</button></li>
         </ul>
         <div id="myTabContent" class="tab-content">
-            <div role="tabpanel" class="tab-pane active " id="authors" aria-labelledby="home-tab">
+            <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">
                 <br />
                 <div>
-                    @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Добавить книгу", "CreateBook", "CRUDBook", null, new { @class = "btn btn-outline-primary" })
                 </div>
                 <br />
                 <table>
                     <tr>
-                        <th><h4>Автор</h4></th>
+                        <th><h4>Название</h4></th>
                         <th><h4>Действие</h4></th>
                     </tr>
-                    @foreach (var author in Model)
+                    @foreach (var book in Model.Books)
                     {
                         <tr>
-                            @* There is some questions about how to pass id to *@
-                            <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+                            <td><h4>@Html.DisplayFor(modelItem => book.BookName)</h4></td>
                             <td>
                                 <div class=" btn btn-default">
-                                    @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                                    @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = book.BookID }, null)
                                 </div> |
                                 <div class=" btn btn-default">
-                                    @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                                    @Html.ActionLink("Удалить", "DeleteBook", "CRUDBook", new { id = book.BookID }, null)
                                 </div>|
                                 <div class=" btn btn-default">
-                                    @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
+                                    @Html.ActionLink("Детали", "BookDetails", "CRUDBook", new { id = book.BookID }, null)
                                 </div>
                             </td>
                         </tr>
                     }
                 </table>
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+            <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">
+                <br />
+                <div>
+                    @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-outline-primary" })
+                </div>
+                <br />
                 <table>
                     <tr>
-                        @foreach (var item in Model)
-                        {
-                            <td>@Html.DisplayFor(modelItem => item .Books)</td>
-
-                        }
+                        <th><h4>Название</h4></th>
+                        <th><h4>Действие</h4></th>
                     </tr>
+                    @foreach (var article in Model.Articles)
+                    {
+                        <tr>
+                            <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+                            <td>
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                                </div> |
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                                </div>|
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 </table>
             </div>
-
+            <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">
+                <br />
+                <div>
+                    @Html.ActionLink("Добавить журнал", "CreateMagazine", "CRUDMagazine", null, new { @class = "btn btn-outline-primary" })
+                </div>
+                <br />
+                <table>
+                    <tr>
+                        <th><h4>Название</h4></th>
+                        <th><h4>Действие</h4></th>
+                    </tr>
+                    @foreach (var magazine in Model.Magazines)
+                    {
+                        <tr>
+                            <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineName)</h4></td>
+                            <td>
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Редактировать", "EditMagazine", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                                </div> |
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Удалить", "DeleteMagazine", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                                </div>|
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Детали", "MagazineDetails", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">
+                <br />
+                <div>
+                    @Html.ActionLink("Добавить публикацию", "CreatePublication", "CRUDPublication", null, new { @class = "btn btn-outline-primary" })
+                </div>
+                <br />
+                <table>
+                    <tr>
+                        <th><h4>Название</h4></th>
+                        <th><h4>Действие</h4></th>
+                    </tr>
+                    @foreach (var publication in Model.Publications)
+                    {
+                        <tr>
+                            <td><h4>@Html.DisplayFor(modelItem => publication.PublicationName)</h4></td>
+                            <td>
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Редактировать", "EditPublication", "CRUDPublication", new { id = publication.PublicationID }, null)
+                                </div> |
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Удалить", "DeletePublication", "CRUDPublication", new { id = publication.PublicationID }, null)
+                                </div>|
+                                <div class=" btn btn-default">
+                                    @Html.ActionLink("Детали", "AuthorsPublication", "CRUDPublication", new { id = publication.PublicationID }, null)
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
         </div>
     </div>
-    @*
-
-    *@
     <br />
 </div>
