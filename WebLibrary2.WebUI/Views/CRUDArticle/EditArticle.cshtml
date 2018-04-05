@@ -1,0 +1,72 @@
+﻿@using WebLibrary2.Domain.Models
+@model GetM2MCRUDArticleVM
+@{
+    ViewBag.Title = "EditArticle";
+}
+
+<h2>EditArticle</h2>
+<br />
+@{Html.EnableClientValidation();}
+@{Html.EnableUnobtrusiveJavaScript();}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ArticleID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArticleGenreID, "ArticleGenreID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.ArticleGenreID, ViewData["ArticleGenres"] as SelectList, htmlAttributes: new { @class = "form-control" })
+
+
+                @Html.ValidationMessageFor(model => model.ArticleGenreID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArticleName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ArticleName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArticleName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfArticlePublish, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.DateOfArticlePublish, String.Format("{0:R}", Model.DateOfArticlePublish), new { @class = "datefield", type = "date" })
+                @Html.ValidationMessageFor(model => model.DateOfArticlePublish, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="form-row col-md-offset-2">
+            <div class="col">
+                <p>Выберите авторов,что бы удалить их для этой книги</p>
+                @foreach (var item in Model.Authors)
+                {
+                    <input type="checkbox" name="authorIDsForDelete" value="@item.AuthorID">
+                    @Html.DisplayFor(modelItem => item.AuthorName)<br />
+                }
+            </div>
+            <div class=" col">
+                <p>Выберите авторов,что бы добавить их для этой книги</p>
+                @Html.ListBox("authorIDsForInsert", ViewData["Authors"] as MultiSelectList, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <br /><input type="submit" value="Сохранить изменения" class="btn btn-default" />
+                <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -15,6 +15,8 @@ namespace WebLibrary2.Domain.Abstract.AbstractMagazine
         Magazine GetMagazineByID(int? id);
         
         void InsertMagazine(MagazineViewModel magazineVM);
+        void DeleteMagazine(int? magazineID);
+        void Save();
 
         GetM2MCRUDMagazineVM GetMagazineDetails(int? id);
         List<Author> GetAuthorsNotExistInMagazine(int id);

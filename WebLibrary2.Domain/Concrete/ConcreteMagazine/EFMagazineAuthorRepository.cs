@@ -27,6 +27,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
                         MagazineID = magazineID,
                         AuthorID = authorID
                     };
+                    context.MagazineAuthors.Add(magazineToAdd);
                     context.SaveChanges();
                 }
             }
@@ -43,6 +44,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
                         MagazineID = magazineID,
                         AuthorID = authorID
                     };
+                    context.MagazineAuthors.Add(magazineToAdd);
                     context.SaveChanges();
                 }
             }

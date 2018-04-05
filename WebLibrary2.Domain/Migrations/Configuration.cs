@@ -279,7 +279,7 @@
             //SeedMagazineGenres(context);
             //SeedMagazines(context);
 
-            //base.Seed(context);
+            base.Seed(context);
         }
     }
 }

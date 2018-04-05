@@ -18,6 +18,7 @@ namespace WebLibrary2.Domain.Entity.MagazineEntity
         [Required]
         public string MagazineName { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateOfMagazinePublish { get; set; }
 
         [XmlIgnore]

@@ -48,9 +48,9 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" />
-            <div class="btn btn-default">@Html.ActionLink("Назад к списку", "BooksView", "Books")</div>
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Удалить" class="btn btn-default" />
+        <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+    </div>
     }
 </div>

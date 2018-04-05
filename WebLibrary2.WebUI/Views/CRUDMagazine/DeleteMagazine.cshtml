@@ -1,0 +1,40 @@
+﻿@using WebLibrary2.Domain.Models
+@model GetM2MCRUDMagazineVM
+@{
+    ViewBag.Title = "DeleteMagazine";
+}
+<h2>DeleteMagazine</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MagazineName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MagazineName)
+        </dd>
+        <dt>  @Html.DisplayNameFor(model => model.Authors)</dt>
+        @foreach (var author in Model.Authors)
+        {
+            <dd>
+                @author.AuthorName
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.MagazineGenreName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MagazineGenreName)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+            <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+        </div>
+    }
+
+</div>
+

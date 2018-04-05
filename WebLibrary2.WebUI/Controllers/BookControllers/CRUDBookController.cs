@@ -93,14 +93,14 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
                 {
                     bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDsForDelete);
                     bookAuthorRepository.AddAuthorToBook(bookToUpdate.BookID, authorIDsForInsert);
-                    bookRepository.SaveBook();
+                    bookRepository.Save();
                 }
                 catch (DataException)
                 {
                     ModelState.AddModelError("", "Unable to save");
                 }
             }
-            return RedirectToAction("BooksView", "Books");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -124,7 +124,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
         public ActionResult DeleteBook(int id)
         {
             bookRepository.DeleteBook(id);
-            bookRepository.SaveBook();
+            bookRepository.Save();
             return RedirectToAction("BooksView", "Books");
         }
     }

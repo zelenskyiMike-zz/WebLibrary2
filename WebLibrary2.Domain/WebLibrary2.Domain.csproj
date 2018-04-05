@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\AbstractArticle\IArticeAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractArticle\IArticleRepository.cs" />
     <Compile Include="Abstract\AbstractAuthor\IAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IBookAuthorsRepository.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Abstract\AbstractMagazine\IMagazineAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractMagazine\IMagazineRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationRepository.cs" />
+    <Compile Include="Concrete\ConcreteArticle\EFArticleAuthorsRepository.cs" />
     <Compile Include="Concrete\ConcreteArticle\EFArticleRepository.cs" />
     <Compile Include="Concrete\ConcreteAuthor\EFAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteBook\EFBookAuthorRepository.cs" />
@@ -96,9 +98,11 @@
     <Compile Include="Entity\PublicationEntity\PublicationGenre.cs" />
     <Compile Include="Entity\PublicationEntity\Publication.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\AuthorViewModel.cs" />
     <Compile Include="Models\BookViewModel.cs" />
     <Compile Include="Models\GetLiteratureViewModel.cs" />
+    <Compile Include="Models\GetM2MCRUDArticleVM.cs" />
     <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
     <Compile Include="Models\GetM2MCRUDBookVM.cs" />
     <Compile Include="Models\GetM2MCRUDMagazineVM.cs" />

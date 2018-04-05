@@ -75,7 +75,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteBook
             context.Books.Remove(book);
         }
 
-        public void SaveBook()
+        public void Save()
         {
             context.SaveChanges();
         }

@@ -1,0 +1,27 @@
+﻿@using WebLibrary2.Domain.Models
+@model GetM2MCRUDArticleVM
+@{
+    ViewBag.Title = "ArticleDetails";
+}
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.ArticleName)</dt>
+        <dd>@Html.DisplayFor(model => model.ArticleName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.ArticleGenreName)</dt>
+        <dd>@Html.DisplayFor(model => model.ArticleGenreName)</dd>
+        <dt>
+            Authors
+        </dt>
+        @foreach (var author in Model.Authors)
+        {
+            <dd>
+                @author.AuthorName
+            </dd>
+        }
+    </dl>
+</div>
+
+@*<div class="btn btn-default"> @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = Model.FirstOrDefault()}, null)</div>*@
+<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>

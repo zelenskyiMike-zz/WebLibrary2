@@ -14,7 +14,7 @@ namespace WebLibrary2.Domain.Abstract.AbstractBook
         void InsertBook(BookViewModel bookVM);
         void UpdateBook(Book book);
         void DeleteBook(int? bookID);
-        void SaveBook();
+        void Save();
 
         GetM2MCRUDBookVM GetBooksDetails(int? id);
         List<Author> GetAuthorsNotExistInBook(int bookID);

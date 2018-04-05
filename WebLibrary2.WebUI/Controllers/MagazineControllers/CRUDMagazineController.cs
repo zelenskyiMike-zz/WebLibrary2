@@ -69,17 +69,16 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
 
             var magazine = magazineRepository.GetMagazineDetails(id);
 
-            SelectList genres = new SelectList(context.MagazineGenres, "MagazineGenreID", "MagazineGenreName", magazine.MagazineGenreID);
-            ViewData["Genres"] = genres;
-
-            MultiSelectList authors = new MultiSelectList(magazineRepository.GetAuthorsNotExistInMagazine((int)id), "AuthorID", "AuthorName", magazine.Authors);
-            ViewData["Authors"] = authors;
-
-
             if (magazine == null)
             {
                 HttpNotFound();
             }
+
+            SelectList genres = new SelectList(context.MagazineGenres, "MagazineGenreID", "MagazineGenreName", magazine.MagazineGenreID);
+            ViewData["MagazineGenres"] = genres;
+
+            MultiSelectList authors = new MultiSelectList(magazineRepository.GetAuthorsNotExistInMagazine((int)id), "AuthorID", "AuthorName", magazine.Authors);
+            ViewData["Authors"] = authors;
 
             return View(magazine);
         }
@@ -94,19 +93,46 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             }
 
             var magazineToUpdate = magazineRepository.GetMagazineByID(magazineVM.MagazineID);
-            if (ModelState.IsValid)
+
+            if (TryUpdateModel(magazineToUpdate))
             {
                 try
                 {
                     magazineAuthorsRepository.DeleteAuthorFromMagazine(magazineToUpdate.MagazineID, authorIDsForDelete);
                     magazineAuthorsRepository.AddAuthorToMagazine(magazineToUpdate.MagazineID, authorIDsForInsert);
+                    magazineRepository.Save();
                 }
-                catch (DataException)
+                catch (DataException dex)
                 {
                     ModelState.AddModelError("", "Unable to save");
+                    Console.WriteLine(dex);
                 }
             }
 
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteMagazine(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            GetM2MCRUDMagazineVM magazineVM = magazineRepository.GetMagazineDetails(id);
+            if (magazineVM == null)
+            {
+                HttpNotFound();
+            }
+            return View(magazineVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMagazine(int id)
+        {
+            magazineRepository.DeleteMagazine(id);
             return RedirectToAction("Index", "Home");
         }
     }

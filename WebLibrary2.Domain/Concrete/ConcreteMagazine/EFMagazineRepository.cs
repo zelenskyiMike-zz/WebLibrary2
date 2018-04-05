@@ -19,6 +19,13 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
             context = contextParam;
         }
 
+        public void DeleteMagazine(int? magazineID)
+        {
+            var magazineToDelete = GetMagazineByID(magazineID);
+            context.Magazines.Remove(magazineToDelete);
+            context.SaveChanges();
+        }
+
         public IQueryable<Magazine> GetAllMagazines()
         {
             return context.Magazines.Include(mg => mg.MagazineGenres);
@@ -51,7 +58,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
         public GetM2MCRUDMagazineVM GetMagazineDetails(int? id)
         {
             Magazine magazine = GetMagazineByID(id);
-            var magazinegenreName = (from mg in context.MagazineGenres
+            var magazineGenreName = (from mg in context.MagazineGenres
                              where mg.MagazineGenreID == magazine.MagazineGenreID
                              select mg.MagazineGenreName).SingleOrDefault();
             var authorsList = context.MagazineAuthors.Include(x => x.Authors).Where(x => x.MagazineID == id).Select(x => x.Authors).ToList();
@@ -60,7 +67,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
             {
                 MagazineID = magazine.MagazineID,
                 MagazineName = magazine.MagazineName,
-                MagazineGenreName = magazinegenreName,
+                MagazineGenreName = magazineGenreName,
                 Authors = authorsList
 
             };
@@ -89,6 +96,16 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
                 context.MagazineAuthors.Add(magazineAuthor);
                 context.SaveChanges();
             }
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        public void SaveMagazine()
+        {
+            context.SaveChanges();
         }
     }
 }
