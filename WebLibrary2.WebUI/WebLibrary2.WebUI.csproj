@@ -183,6 +183,7 @@
     <Compile Include="Controllers\BookControllers\CRUDBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MagazineControllers\CRUDMagazineController.cs" />
+    <Compile Include="Controllers\PublicationsControllers\CRUDPublicationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -333,10 +334,13 @@
     <Content Include="Views\CRUDArticle\ArticleDetails.cshtml" />
     <Content Include="Views\CRUDArticle\EditArticle.cshtml" />
     <Content Include="Views\CRUDArticle\DeleteArticle.cshtml" />
+    <Content Include="Views\CRUDPublication\CreatePublication.cshtml" />
+    <Content Include="Views\CRUDPublication\PublicationDetails.cshtml" />
+    <Content Include="Views\CRUDPublication\EditPublication.cshtml" />
+    <Content Include="Views\CRUDPublication\DeletePublication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\PublicationsControllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

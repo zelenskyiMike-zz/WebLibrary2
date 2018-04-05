@@ -40,9 +40,9 @@ namespace WebLibrary2.Domain.Concrete.ConcreteArticle
         {
             Article article = GetArticleByID(id);
             var articleGenreName = (from ag in context.ArticleGenres
-                                     where ag.ArticleGenreID == article.ArticleGenreID
-                                     select ag.ArticleGenreName).SingleOrDefault();
-            var authorsList = context.ArticleAuthors.Include(x => x.Authors).Where(x => x.ArticleID == id).Select(x => x.Authors).ToList();
+                                    where ag.ArticleGenreID == article.ArticleGenreID
+                                    select ag.ArticleGenreName).SingleOrDefault();
+            var authorsList = context.ArticleAuthors.Include(x => x.Authors).Where(x => x.ArticleID == article.ArticleID).Select(x => x.Authors).ToList();
 
             GetM2MCRUDArticleVM articleVM = new GetM2MCRUDArticleVM()
             {
