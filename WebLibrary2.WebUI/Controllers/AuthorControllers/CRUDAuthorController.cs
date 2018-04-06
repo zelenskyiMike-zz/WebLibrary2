@@ -5,6 +5,9 @@ using System.Data;
 using WebLibrary2.Domain.Models;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
 using WebLibrary2.Domain.Abstract.AbstractBook;
+using WebLibrary2.Domain.Abstract.AbstractArticle;
+using WebLibrary2.Domain.Abstract.AbstractMagazine;
+using WebLibrary2.Domain.Abstract.AbstractPublication;
 
 namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {
@@ -13,12 +16,20 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         private EFDbContext context;
         IAuthorsRepository authorRepository;
         IBookAuthorsRepository bookAuthorRepository;
+        IArticeAuthorsRepository articeAuthorsRepository;
+        IMagazineAuthorsRepository magazineAuthorsRepository;
+        IPublicationAuthorsRepository publicationAuthorsRepository;
 
-        public CRUDAuthorController(IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, EFDbContext dataContext)
+        public CRUDAuthorController(IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, 
+                                    IArticeAuthorsRepository articeAuthorsRepository, IMagazineAuthorsRepository magazineAuthorsRepository, 
+                                    IPublicationAuthorsRepository publicationAuthorsRepository, EFDbContext dataContext)
         {
             this.context = dataContext;
             this.authorRepository = authorsRepository;
             this.bookAuthorRepository = bookAuthorsRepository;
+            this.publicationAuthorsRepository = publicationAuthorsRepository;
+            this.articeAuthorsRepository = articeAuthorsRepository;
+            this.magazineAuthorsRepository = magazineAuthorsRepository;
         }
 
         public ActionResult CreateAuthor()

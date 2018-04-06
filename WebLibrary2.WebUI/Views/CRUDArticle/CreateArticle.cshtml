@@ -42,8 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfArticlePublish, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*Html.EditorFor(model => model.DateOfMagazinePublish, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.TextBoxFor(model => model.DateOfArticlePublish, String.Format("{0:d}", Model.DateOfArticlePublish), new { @class = "datefield", type = "date" })
+                @Html.TextBoxFor(model => model.DateOfArticlePublish, null, new { @class = "datefield", type = "date" })
                 @Html.ValidationMessageFor(model => model.DateOfArticlePublish, "", new { @class = "text-danger" })
             </div>
         </div>

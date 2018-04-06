@@ -19,6 +19,7 @@ namespace WebLibrary2.Domain.Entity.MagazineEntity
         public string MagazineName { get; set; }
         [Required]
         [DataType(DataType.Date)]
+       // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfMagazinePublish { get; set; }
 
         [XmlIgnore]

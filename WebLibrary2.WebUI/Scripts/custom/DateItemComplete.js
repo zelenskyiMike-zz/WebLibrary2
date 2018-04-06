@@ -1,5 +1,5 @@
-﻿if (!Modernizr.inputtypes.date) {
+﻿//if (!Modernizr.inputtypes.date) {
     $(function () {
-        $("input[type='date']").datepicker().get(0).setAttribute("type","text");
+        $("#DateOfPublicationPublish").datepicker()/*.get(0).setAttribute("type","text")*/;
     });
-}
+//}/*input[type='date']*/
