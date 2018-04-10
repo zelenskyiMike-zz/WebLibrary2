@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Entity;
-using System.Data.Entity;
-using System.Net;
-using System.Data;
-using WebLibrary2.Domain.Entity.BookEntity;
+﻿using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractBook;
 
 namespace WebLibrary2.WebUI.Controllers.BookControllers
@@ -22,11 +11,11 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             booksRepository = bookRepository;
         }
 
-        public ViewResult BooksView()
+        public PartialViewResult BooksView()
         {
             var book = booksRepository.GetAllBooksWithGenres();
                    
-            return View(book);
+            return PartialView(book);
         }
     }
 }

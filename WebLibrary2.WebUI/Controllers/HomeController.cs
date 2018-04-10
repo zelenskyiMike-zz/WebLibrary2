@@ -27,23 +27,23 @@ namespace WebLibrary2.WebUI.Controllers
             pathXML = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\XmlAuthors.xml";
             pathJSON = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\JsonAuthors.json";
        }
-
+        [HttpGet]
         public ActionResult Index()
         {
             /* mb Repo? */
-            var books = context.Books.Include(bg => bg.Genres).ToList();
-            var articles = context.Articles.Include(ag => ag.ArticleGenres).ToList();
-            var magazines = context.Magazines.Include(mg => mg.MagazineGenres).ToList();
-            var publications = context.Publications.Include(pg => pg.PublicationGenres).ToList();
+            //var books = context.Books.Include(bg => bg.Genres).ToList();
+            //var articles = context.Articles.Include(ag => ag.ArticleGenres).ToList();
+            //var magazines = context.Magazines.Include(mg => mg.MagazineGenres).ToList();
+            //var publications = context.Publications.Include(pg => pg.PublicationGenres).ToList();
 
-            GetLiteratureViewModel literature = new GetLiteratureViewModel()
-            {
-                Books = books,
-                Articles = articles,
-                Magazines = magazines,
-                Publications = publications
-            };
-            return View(literature);
+            //GetLiteratureViewModel literature = new GetLiteratureViewModel()
+            //{
+            //    Books = books,
+            //    Articles = articles,
+            //    Magazines = magazines,
+            //    Publications = publications
+            //};
+            return View(/*literature*/);
         }
 
         public ActionResult Contact()

@@ -15,8 +15,8 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
             articlesRepository = articleRepository;
         }
         // GET: Articles
-        [HttpPost]
-        public ActionResult ArticlesView()
+        [HttpGet]
+        public PartialViewResult ArticlesView()
         {
             var articles = articlesRepository.GetAllArticlesWithGenres();
             return PartialView(articles);

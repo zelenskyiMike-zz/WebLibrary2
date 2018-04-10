@@ -4,31 +4,34 @@
     ViewBag.Title = "ArticlesView";
 }
 
-<h2>ArticlesView</h2>
-
-<div id="articlesResult">
-    <h4>Article</h4>
-    <hr />
+<div>
+    <div class="btn btn-default">
+        @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-outline-primary" })
+    </div>
+    <br />
     <table>
         <tr>
-            <th>Статья</th>
-            <th>Тип статьи</th>
-            <th>Дата выхода</th>
-            <th>Действие</th>
+            <th><h4>Название</h4></th>
+            <th><h4>Действие</h4></th>
         </tr>
-        @foreach (var item in Model)
+        @foreach (var article in Model)
         {
-        <tr>
-            <td>@item.ArticleName</td>
-            <td>@item.ArticleGenres.ArticleGenreName</td>
-            <td>@item.DateOfArticlePublish.Day/@item.DateOfArticlePublish.Month/@item.DateOfArticlePublish.Year</td>
-            <td>
-
-            </td>
-        </tr>
+            <tr>
+                <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+                <td>
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                    </div>|
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                    </div>
+                </td>
+            </tr>
         }
     </table>
 </div>
 
-<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
 
