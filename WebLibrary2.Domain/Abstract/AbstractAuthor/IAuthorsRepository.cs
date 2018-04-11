@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using WebLibrary2.Domain.Entity;
+using WebLibrary2.Domain.Entity.ArticleEntity;
 using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.Domain.Entity.MagazineEntity;
+using WebLibrary2.Domain.Entity.PublicationEntity;
 using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.Domain.Abstract.AbstractAuthor
@@ -18,6 +21,9 @@ namespace WebLibrary2.Domain.Abstract.AbstractAuthor
         GetM2MCRUDAuthorVM GetAuthorDetails(int? id);
 
         List<Book> GetBooksNotExistInAuthor(int authorID);
+        List<Article> GetArticlesNotExistInAuthor(int authorID);
+        List<Magazine> GetMagazinesNotExistInAuthor(int authorID);
+        List<Publication> GetPublicationsNotExistInAuthor(int authorID);
         IQueryable<Author> GetAllAuthors();
     }
 }

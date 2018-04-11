@@ -29,8 +29,7 @@ namespace WebLibrary2.WebUI
                       "~/Content/jquery.ui.datepicker.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                      "~/Scripts/custom/DialogFile.js",
-                      "~/Scripts/custom/DocumentReadyFunct.js"));
+                      "~/Scripts/custom/DialogFile.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                       "~/Scripts/datepicker/jquery.ui.datepicker.js",

@@ -9,15 +9,21 @@ using System.Web;
 using WebLibrary2.Domain.Models;
 using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
+using WebLibrary2.Domain.Entity.ArticleEntity;
+using WebLibrary2.Domain.Entity.MagazineEntity;
+using WebLibrary2.Domain.Entity.PublicationEntity;
+using WebLibrary2.Domain.Abstract.AbstractArticle;
 
 namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
 {
     public class EFAuthorRepository : IAuthorsRepository
     {
         private EFDbContext context;
-        public EFAuthorRepository(EFDbContext contextParam)
+        private IArticleRepository articleRepository;
+        public EFAuthorRepository(EFDbContext contextParam, IArticleRepository articlesRepository)
         {
             context = contextParam;
+            articleRepository = articlesRepository;
         }
 
         public IEnumerable<Author> Authors
@@ -66,9 +72,9 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
         public GetM2MCRUDAuthorVM GetAuthorDetails(int? id)
         {
             Author author = GetAuthorByID(id);
-          
+
             var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
-          
+
             GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
             {
                 AuthorID = author.AuthorID,
@@ -80,11 +86,10 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
 
         public List<Book> GetBooksNotExistInAuthor(int authorID)
         {
-            var currBook = GetAuthorByID(authorID);
-
-            var initBookAuthorList = context.BookAuthors.Where(x => x.AuthorID == currBook.AuthorID).Select(x => x.Books).ToList();
-
+            var currAuthor = GetAuthorByID(authorID);
             List<Book> finalListOfBooks = new List<Book>();
+
+            var initBookAuthorList = context.BookAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Books).ToList();
 
             foreach (var item in context.Books.ToList())
             {
@@ -94,6 +99,57 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
                 }
             }
             return finalListOfBooks;
+        }
+        public List<Article> GetArticlesNotExistInAuthor(int authorID)
+        {
+            var currAuthor = GetAuthorByID(authorID);
+
+            List<Article> finalListOfArticles = new List<Article>();
+
+            var initArticleAuthorList = context.ArticleAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Articles).ToList();
+
+            foreach (var item in context.Articles.ToList())
+            {
+                if (!initArticleAuthorList.Contains(item))
+                {
+                    finalListOfArticles.Add(item);
+                }
+            }
+            return finalListOfArticles;
+        }
+
+        public List<Magazine> GetMagazinesNotExistInAuthor(int authorID)
+        {
+            var currAuthor = GetAuthorByID(authorID);
+            List<Magazine> finalListOfMagazines = new List<Magazine>();
+
+            var initMagazineAuthorsList = context.MagazineAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Magazines).ToList();
+
+            foreach (var item in context.Magazines.ToList())
+            {
+                if (!initMagazineAuthorsList.Contains(item))
+                {
+                    finalListOfMagazines.Add(item);
+                }
+            }
+            return finalListOfMagazines;
+        }
+
+        public List<Publication> GetPublicationsNotExistInAuthor(int authorID)
+        {
+            var currAuthor = GetAuthorByID(authorID);
+            List<Publication> finalListOfPublication = new List<Publication>();
+
+            var initPublicationsAuthorList = context.PublicationeAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Publications).ToList();
+
+            foreach (var item in context.Publications.ToList())
+            {
+                if (!initPublicationsAuthorList.Contains(item))
+                {
+                    finalListOfPublication.Add(item);
+                }
+            }
+            return finalListOfPublication;
         }
 
         public void Save()

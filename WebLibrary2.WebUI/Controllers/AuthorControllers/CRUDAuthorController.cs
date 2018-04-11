@@ -68,14 +68,12 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
                 return HttpNotFound();
             }
 
-            MultiSelectList books = new MultiSelectList(authorRepository.GetBooksNotExistInAuthor((int)id), "BookID","BookName", authorVM.Books);
-            ViewData["Books"] = books;
             return View(authorVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAuthor(GetM2MCRUDAuthorVM author, int [] bookIDsForDelete, int [] booksIDsForInsert)
+        public ActionResult EditAuthor(GetM2MCRUDAuthorVM author)
         {
             var authorToUpdate = authorRepository.GetAuthorByID(author.AuthorID);
 
@@ -83,8 +81,6 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             {
                 try
                 {
-                    bookAuthorRepository.DeleteBookFromAuthor(authorToUpdate.AuthorID, bookIDsForDelete);
-                    bookAuthorRepository.AddBookToAuthor(authorToUpdate.AuthorID, booksIDsForInsert);
                     authorRepository.Save();
                 }
                 catch (DataException)

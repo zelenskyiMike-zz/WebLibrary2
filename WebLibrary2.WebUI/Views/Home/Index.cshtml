@@ -4,9 +4,6 @@
 @{
     ViewBag.Title = "List of literature";
 
-    <script src="@Url.Content("~/Scripts/custom/DocumentReadyFunct.js")"
-            type="text/javascript"></script>
-
 }
 @{Html.EnableUnobtrusiveJavaScript();}
 
@@ -19,34 +16,22 @@
         @Html.ActionLink("From JSON", "DeserializeJSON", "Home", null, new { onclick = "return JSONDeserializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("From XML", "DeserializeXML", "Home", null, new { onclick = "return XMLDeserializationDialog()", @class = "btn btn-light" })
     </div>
-
-    <br />
-    <div class="bs-popover">
-        <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
-            <li role="presentation"><button class="btn btn-light active show" href="#books" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Книги</button></li>
-            @using (Ajax.BeginForm("ArticlesView", "Articles", new AjaxOptions { UpdateTargetId = "articles" }))
-            {
+        <br />
+        <div class="bs-popover">
+            <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
+                <li role="presentation"><button class="btn btn-light active show" href="#books" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" id="booksUpdate" >Книги</button></li>
                 <li role="presentation"><button class="btn btn-light" href="#articles" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Статьи</button></li>
-
-            }
-            @using (Ajax.BeginForm("MagazinesView", "Magazine", new AjaxOptions { UpdateTargetId = "magazines" }))
-            {
                 <li role="presentation"><button class="btn btn-light" href="#magazines" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Журналы</button></li>
-
-            }
-            @using (Ajax.BeginForm("PublicationsView", "Publications", new AjaxOptions { UpdateTargetId = "publications" }))
-            {
                 <li role="presentation"><button class="btn btn-light" href="#publications" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Публикации</button></li>
-
-            }
-        </ul>
-
-        <div id="myTabContent" class="tab-content">
-            <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">@*@Html.Action("BooksView", "Books")*@</div>
-            <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@*@Html.Action("ArticlesView", "Articles")*@</div>
-            <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">@*@Html.Action("MagazinesView", "Magazine")*@</div>
-            <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">@Html.Action("PublicationsView", "Publications")</div>
+            </ul>
+           
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">@Html.Action("BooksView", "Books")</div>
+                <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@Html.Action("ArticlesView", "Articles")</div>
+                <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">@Html.Action("MagazinesView", "Magazine")</div>
+                <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">@Html.Action("PublicationsView", "Publications")</div>
+            </div>
+            <div id="strange"></div>
         </div>
-    </div>
     <br />
 </div>
