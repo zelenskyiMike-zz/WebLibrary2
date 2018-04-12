@@ -68,6 +68,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteMagazine
                 MagazineID = magazine.MagazineID,
                 MagazineName = magazine.MagazineName,
                 MagazineGenreName = magazineGenreName,
+                DateOfMagazinePublish = magazine.DateOfMagazinePublish,
                 Authors = authorsList
 
             };

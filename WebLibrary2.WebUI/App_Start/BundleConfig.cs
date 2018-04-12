@@ -9,7 +9,10 @@ namespace WebLibrary2.WebUI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                      "~/Scripts/datepicker/jquery.ui.datepicker.min.js",
+                      "~/Scripts/jquery.unobtrusive-ajax.js",
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -30,12 +33,7 @@ namespace WebLibrary2.WebUI
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/custom/DialogFile.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
-                      "~/Scripts/datepicker/jquery.ui.datepicker.js",
-                      "~/Scripts/datepicker/jquery.ui.datepicker.min.js",
-                      "~/Scripts/jquery.unobtrusive-ajax.js",
-                      "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+            
         }
     }
 }

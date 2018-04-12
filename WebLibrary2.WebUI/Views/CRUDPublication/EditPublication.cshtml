@@ -40,8 +40,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfPublicationPublish, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.DateOfPublicationPublish, String.Format("{0:R}", Model.DateOfPublicationPublish), new { @class = "datefield", type = "date" })
-                @*@Html.EditorFor(model => model.DateOfPublicationPublish.ToString(), new { htmlAttributes = new { @class = "form-control" } })*@
+                   @Html.TextBoxFor(model => model.DateOfPublicationPublish, "{0:yyyy-MM-dd}", new { @class = "datefield", type = "date" })
                 @Html.ValidationMessageFor(model => model.DateOfPublicationPublish, "", new { @class = "text-danger" })
 
             </div>
@@ -69,3 +68,11 @@
         </div>
     </div>
 }
+
+@*<script>
+    $(document).ready(function () {
+        $(".date-picker").datepicker({
+            dateFormat: 'dd-M-yy'
+        });
+    });
+</script>*@

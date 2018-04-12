@@ -15,14 +15,12 @@ namespace WebLibrary2.WebUI.Controllers
     public class HomeController : Controller
     {
         private EFDbContext context;
-        IAuthorsRepository repositry;
 
         private string pathXML;
         private string pathJSON;
 
         public HomeController(IAuthorsRepository authorRepo, EFDbContext dataContext)
         {
-            this.repositry = authorRepo;
             this.context = dataContext;
             pathXML = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\XmlAuthors.xml";
             pathJSON = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\JsonAuthors.json";
@@ -30,20 +28,7 @@ namespace WebLibrary2.WebUI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            /* mb Repo? */
-            //var books = context.Books.Include(bg => bg.Genres).ToList();
-            //var articles = context.Articles.Include(ag => ag.ArticleGenres).ToList();
-            //var magazines = context.Magazines.Include(mg => mg.MagazineGenres).ToList();
-            //var publications = context.Publications.Include(pg => pg.PublicationGenres).ToList();
-
-            //GetLiteratureViewModel literature = new GetLiteratureViewModel()
-            //{
-            //    Books = books,
-            //    Articles = articles,
-            //    Magazines = magazines,
-            //    Publications = publications
-            //};
-            return View(/*literature*/);
+            return View();
         }
 
         public ActionResult Contact()
@@ -53,7 +38,6 @@ namespace WebLibrary2.WebUI.Controllers
             return View();
         }
 
-
         public ActionResult SerializeJSON()
         {
             var author = context.Authors.ToList();
@@ -62,6 +46,8 @@ namespace WebLibrary2.WebUI.Controllers
                 JsonSerializer jsonSerializer = new JsonSerializer();
                 jsonSerializer.Serialize(fs, author);
             }
+
+            
             return RedirectToAction("Index", "Home");
         }
         public ActionResult DeserializeJSON()
@@ -116,6 +102,5 @@ namespace WebLibrary2.WebUI.Controllers
             context.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }

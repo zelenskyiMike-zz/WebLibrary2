@@ -12,21 +12,21 @@
     <br />
     <table>
         <tr>
-            <th><h4>Название</h4></th>
-            <th><h4>Жанр</h4></th>
-            <th><h4>Действие</h4></th>
+            <th class="text-center"><h4>Название</h4></th>
+            <th class="text-center"><h4>Жанр</h4></th>
+            <th class="text-center"><h4>Действие</h4></th>
+            <th class="text-center"><h4>JSON/XML</h4></th>
         </tr>
         @foreach (var book in Model)
         {
-
             <tr>
                 <td>
                     <h4>@book.BookName</h4>
                 </td>
-                <td>
+                <td >
                     <h4>@book.Genres.GenreName</h4>
                 </td>
-                <td>
+                <td class="text-center">
                     <div class=" btn btn-default">
                         @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = book.BookID }, null)
                     </div> |
@@ -36,13 +36,15 @@
                     <div class=" btn btn-default">
                         @Html.ActionLink("Детали", "BookDetails", "CRUDBook", new { id = book.BookID }, null)
                     </div>
-
-
+                </td>
+                <td class="text-center">
+                    <div class=" btn btn-default">
+                        <input type="checkbox" name="bookSerializationID" value="@book.BookID" />
+                    </div>
                 </td>
             </tr>
         }
     </table>
-    @*<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>*@
 </div>
 
 

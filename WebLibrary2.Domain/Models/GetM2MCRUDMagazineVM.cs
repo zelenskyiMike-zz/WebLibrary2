@@ -16,6 +16,5 @@ namespace WebLibrary2.Domain.Models
         public DateTime DateOfMagazinePublish { get; set; }
 
         public IEnumerable<Author> Authors { get; set; }
-
     }
 }

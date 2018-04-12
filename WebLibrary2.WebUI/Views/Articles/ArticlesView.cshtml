@@ -11,25 +11,31 @@
     <br />
     <table>
         <tr>
-            <th><h4>Название</h4></th>
-            <th><h4>Действие</h4></th>
+            <th class="text-center"><h4>Название</h4></th>
+            <th class="text-center"><h4>Действие</h4></th>
+            <th class="text-center"><h4>JSON/XML</h4></th>
         </tr>
         @foreach (var article in Model)
         {
-            <tr>
-                <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
-                <td>
-                    <div class=" btn btn-default">
-                        @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
-                    </div> |
-                    <div class=" btn btn-default">
-                        @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
-                    </div>|
-                    <div class=" btn btn-default">
-                        @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+            <td>
+                <div class=" btn btn-default">
+                    @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                </div> |
+                <div class=" btn btn-default">
+                    @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                </div>|
+                <div class=" btn btn-default">
+                    @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                </div>
+            </td>
+            <td class="text-center">
+                <div class=" btn btn-default">
+                    <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
+                </div>
+            </td>
+        </tr>
         }
     </table>
 </div>

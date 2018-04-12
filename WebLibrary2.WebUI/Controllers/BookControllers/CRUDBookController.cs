@@ -103,8 +103,6 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
         public ActionResult DeleteBook(int? id)
         {
             if (id == null)
