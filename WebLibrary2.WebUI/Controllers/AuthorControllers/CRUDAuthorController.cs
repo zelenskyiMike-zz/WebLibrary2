@@ -15,21 +15,11 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
     {
         private EFDbContext context;
         IAuthorsRepository authorRepository;
-        IBookAuthorsRepository bookAuthorRepository;
-        IArticeAuthorsRepository articeAuthorsRepository;
-        IMagazineAuthorsRepository magazineAuthorsRepository;
-        IPublicationAuthorsRepository publicationAuthorsRepository;
 
-        public CRUDAuthorController(IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, 
-                                    IArticeAuthorsRepository articeAuthorsRepository, IMagazineAuthorsRepository magazineAuthorsRepository, 
-                                    IPublicationAuthorsRepository publicationAuthorsRepository, EFDbContext dataContext)
+        public CRUDAuthorController(IAuthorsRepository authorsRepository, EFDbContext dataContext)
         {
             this.context = dataContext;
             this.authorRepository = authorsRepository;
-            this.bookAuthorRepository = bookAuthorsRepository;
-            this.publicationAuthorsRepository = publicationAuthorsRepository;
-            this.articeAuthorsRepository = articeAuthorsRepository;
-            this.magazineAuthorsRepository = magazineAuthorsRepository;
         }
 
         public ActionResult CreateAuthor()
@@ -56,13 +46,13 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 
         public ActionResult AuthorsDetails(int id = 0)
         {
-            var authorVM = authorRepository.GetAuthorDetails(id);
+            var authorVM = authorRepository.GetAuthorsDetails(id);
             return View(authorVM);
         }
 
         public ActionResult EditAuthor(int? id)
         {
-            var authorVM = authorRepository.GetAuthorDetails(id);
+            var authorVM = authorRepository.GetAuthorsDetails(id);
             if (authorVM == null)
             {
                 return HttpNotFound();
@@ -71,33 +61,13 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View(authorVM);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditAuthor(GetM2MCRUDAuthorVM author)
-        {
-            var authorToUpdate = authorRepository.GetAuthorByID(author.AuthorID);
-
-            if (TryUpdateModel(authorToUpdate))
-            {
-                try
-                {
-                    authorRepository.Save();
-                }
-                catch (DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save");
-                }
-            }
-            return RedirectToAction("Index", "Home");
-        }
-
         public ActionResult DeleteAuthor(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var author = authorRepository.GetAuthorDetails(id);
+            var author = authorRepository.GetAuthorsDetails(id);
             if (author == null)
             {
                 return HttpNotFound();

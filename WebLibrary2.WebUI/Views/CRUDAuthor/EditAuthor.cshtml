@@ -37,18 +37,11 @@
 
         <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">@Html.Action("GetBooksOFAuthor", "AuthorActivity")</div>
-            <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@Html.Action("GetArticlesOfAuthor", "AuthorActivity")</div>
-            <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">Html.Action("GetBooksOFAuthor", "AuthorActivity")</div>
-            <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">Html.Action("GetBooksOFAuthor", "AuthorActivity")</div>
+            <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@Html.Action("GetArticlesOFAuthor", "AuthorActivity")</div>
+            <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">@Html.Action("GetMagazinesOFAuthor", "AuthorActivity")</div>
+            <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">@Html.Action("GetPublicationsOFAuthor", "AuthorActivity")</div>
         </div>
         <div id="strange"></div>
-    </div>
-    <div class="form-row">
-        <div class="col-md-offset-2 col-md-10">
-            <hr />
-            <input type="submit" value="Cохранить" class="btn btn-light" />
-            @Html.ActionLink("Назад к списку", "AuthorView", "Author", null, new { @class = "btn btn-light" })
-        </div>
     </div>
 </div>
 }

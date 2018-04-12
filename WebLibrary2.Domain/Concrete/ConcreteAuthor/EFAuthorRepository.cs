@@ -26,6 +26,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
             articleRepository = articlesRepository;
         }
 
+
         public IEnumerable<Author> Authors
         {
             get { return context.Authors; }
@@ -69,20 +70,12 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
             return context.Authors.Find(id);
         }
 
-        public GetM2MCRUDAuthorVM GetAuthorDetails(int? id)
+        public void Save()
         {
-            Author author = GetAuthorByID(id);
-
-            var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
-
-            GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
-            {
-                AuthorID = author.AuthorID,
-                AuthorName = author.AuthorName,
-                Books = bookList
-            };
-            return authorVM;
+            context.SaveChanges();
         }
+
+
 
         public List<Book> GetBooksNotExistInAuthor(int authorID)
         {
@@ -100,6 +93,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
             }
             return finalListOfBooks;
         }
+
         public List<Article> GetArticlesNotExistInAuthor(int authorID)
         {
             var currAuthor = GetAuthorByID(authorID);
@@ -152,9 +146,54 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
             return finalListOfPublication;
         }
 
-        public void Save()
+
+
+        public GetM2MCRUDAuthorVM GetAuthorsDetails(int? id)
         {
-            context.SaveChanges();
+            Author author = GetAuthorByID(id);
+
+            GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
+            {
+                AuthorID = author.AuthorID,
+                AuthorName = author.AuthorName
+            };
+            return authorVM;
+        }
+
+        public GetM2MCRUDAuthorVM GetAuthorsBooksDetails(int? id)
+        {
+            var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
+
+            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            authorVM.Books = bookList;
+            return authorVM;
+        }
+
+        public GetM2MCRUDAuthorVM GetAuthorsArticlesDetails(int? id)
+        {
+            var articleList = context.ArticleAuthors.Include(x => x.Articles).Where(x => x.AuthorID == id).Select(x => x.Articles).ToList();
+
+            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            authorVM.Articles = articleList;
+            return authorVM;
+        }
+
+        public GetM2MCRUDAuthorVM GetAuthorsMagazinesDetails(int? id)
+        {
+            var magazineList = context.MagazineAuthors.Include(x => x.Magazines).Where(x => x.AuthorID == id).Select(x => x.Magazines).ToList();
+
+            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            authorVM.Magazines = magazineList;
+            return authorVM;
+        }
+
+        public GetM2MCRUDAuthorVM GetAuthorsPublicationsDetails(int? id)
+        {
+            var publicationsList = context.PublicationeAuthors.Include(x => x.Publications).Where(x => x.AuthorID == id).Select(x => x.Publications).ToList();
+
+            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            authorVM.Publications = publicationsList;
+            return authorVM;
         }
     }
 }

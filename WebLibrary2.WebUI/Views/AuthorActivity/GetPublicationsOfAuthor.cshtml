@@ -1,4 +1,5 @@
-﻿@using WebLibrary2.Domain.Models
+﻿
+@using WebLibrary2.Domain.Models
 @model GetM2MCRUDAuthorVM
 
 @{
@@ -11,20 +12,21 @@
 @{Html.EnableUnobtrusiveJavaScript();}
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="form-horizontal">
 
         <div class="form-row">
             <div class="col">
-                <p>Выберите книги,что бы удалить их для этого автора</p>
-                @foreach (var item in Model.Books)
+                <p>Выберите публикации,что бы удалить их для этого автора</p>
+                @foreach (var item in Model.Publications)
                 {
-                    <input type="checkbox" name="bookIDsForDelete" value="@item.BookID">
-                    @Html.DisplayFor(modelItem => item.BookName)<br />
+                    <input type="checkbox" name="publicationsIDsForDelete" value="@item">
+                    @Html.DisplayFor(modelItem => item.PublicationName)<br />
                 }
             </div>
             <div class="col">
-                <p>Выберите книги,что бы добавить их для этого автора</p>
-                @Html.ListBox("booksIDsForInsert", ViewData["Books"] as MultiSelectList, htmlAttributes: new { @class = "form-control" })
+                <p>Выберите публикации,что бы добавить их для этого автора</p>
+                @Html.ListBox("publicationsIDsForInsert", ViewData["Publications"] as MultiSelectList, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 

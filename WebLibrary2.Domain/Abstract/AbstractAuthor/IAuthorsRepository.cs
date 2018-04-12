@@ -18,7 +18,12 @@ namespace WebLibrary2.Domain.Abstract.AbstractAuthor
         Author GetAuthorByID(int? id);
         void DeleteAuthor(int? id);
         void Save();
-        GetM2MCRUDAuthorVM GetAuthorDetails(int? id);
+
+        GetM2MCRUDAuthorVM GetAuthorsDetails(int? id);
+        GetM2MCRUDAuthorVM GetAuthorsBooksDetails(int? id);
+        GetM2MCRUDAuthorVM GetAuthorsArticlesDetails(int? id);
+        GetM2MCRUDAuthorVM GetAuthorsMagazinesDetails(int? id);
+        GetM2MCRUDAuthorVM GetAuthorsPublicationsDetails(int? id);
 
         List<Book> GetBooksNotExistInAuthor(int authorID);
         List<Article> GetArticlesNotExistInAuthor(int authorID);

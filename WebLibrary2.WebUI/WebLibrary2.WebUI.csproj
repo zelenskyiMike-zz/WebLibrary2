@@ -347,6 +347,8 @@
     <Content Include="Views\Publications\PublicationsView.cshtml" />
     <Content Include="Views\AuthorActivity\GetBooksOFAuthor.cshtml" />
     <Content Include="Views\AuthorActivity\GetArticlesOfAuthor.cshtml" />
+    <Content Include="Views\AuthorActivity\GetMagazinesOfAuthor.cshtml" />
+    <Content Include="Views\AuthorActivity\GetPublicationsOfAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
