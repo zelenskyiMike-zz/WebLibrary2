@@ -1,7 +1,4 @@
-﻿@using WebLibrary2.Domain.Models
-@model GetLiteratureViewModel
-
-@{
+﻿@{
     ViewBag.Title = "List of literature";
 
 }
@@ -11,27 +8,32 @@
     <br />
     <div>
         <h3 style="display : inline">Список литературы</h3>
-        @Html.ActionLink("To JSON", "SerializeJSON", "Home", null, new { onclick = "return JSONSerializationDialog()", @class = "btn btn-light" })
+        @using (Html.BeginForm("Deserialize", "Home", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="file" id="Upload" size="60" />
+            <input type="submit" value="Submit" id="file" />
+        }
+
         @Html.ActionLink("To XML", "SerializeXML", "Home", null, new { onclick = "return XMLSerializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("From JSON", "DeserializeJSON", "Home", null, new { onclick = "return JSONDeserializationDialog()", @class = "btn btn-light" })
         @Html.ActionLink("From XML", "DeserializeXML", "Home", null, new { onclick = "return XMLDeserializationDialog()", @class = "btn btn-light" })
     </div>
-        <br />
-        <div class="bs-popover">
-            <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
-                <li role="presentation"><button class="btn btn-light active show" href="#books" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" id="booksUpdate" >Книги</button></li>
-                <li role="presentation"><button class="btn btn-light" href="#articles" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Статьи</button></li>
-                <li role="presentation"><button class="btn btn-light" href="#magazines" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Журналы</button></li>
-                <li role="presentation"><button class="btn btn-light" href="#publications" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Публикации</button></li>
-            </ul>
-           
-            <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">@Html.Action("BooksView", "Books")</div>
-                <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@Html.Action("ArticlesView", "Articles")</div>
-                <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">@Html.Action("MagazinesView", "Magazine")</div>
-                <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">@Html.Action("PublicationsView", "Publications")</div>
-            </div>
-            <div id="strange"></div>
+    <br />
+    <div class="bs-popover">
+        <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
+            <li role="presentation"><button class="btn btn-light active show" href="#books" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" id="booksUpdate">Книги</button></li>
+            <li role="presentation"><button class="btn btn-light" href="#articles" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Статьи</button></li>
+            <li role="presentation"><button class="btn btn-light" href="#magazines" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Журналы</button></li>
+            <li role="presentation"><button class="btn btn-light" href="#publications" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Публикации</button></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+            <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">@Html.Action("BooksView", "Books")</div>
+            <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@Html.Action("ArticlesView", "Articles")</div>
+            <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">@Html.Action("MagazinesView", "Magazine")</div>
+            <div role="tabpanel" class="tab-pane fade" id="publications" aria-labelledby="profile-tab">@Html.Action("PublicationsView", "Publications")</div>
         </div>
+        <div id="strange"></div>
+    </div>
     <br />
 </div>

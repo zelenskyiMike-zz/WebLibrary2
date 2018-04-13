@@ -9,22 +9,33 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
 using WebLibrary2.Domain.Models;
+using WebLibrary2.Domain.Entity.ArticleEntity;
+using WebLibrary2.Domain.Abstract.AbstractArticle;
+using System;
+using System.Web;
 
 namespace WebLibrary2.WebUI.Controllers
 {
     public class HomeController : Controller
     {
         private EFDbContext context;
+        IArticleRepository articlesRepository;
 
         private string pathXML;
         private string pathJSON;
+        private string serializeFolderPath;
 
-        public HomeController(IAuthorsRepository authorRepo, EFDbContext dataContext)
+        public HomeController(IArticleRepository articleRepository, EFDbContext dataContext)
         {
             this.context = dataContext;
+            articleRepository = articlesRepository;
             pathXML = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\XmlAuthors.xml";
             pathJSON = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\JsonAuthors.json";
-       }
+
+            var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
+            serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
+
+        }
         [HttpGet]
         public ActionResult Index()
         {
@@ -38,26 +49,32 @@ namespace WebLibrary2.WebUI.Controllers
             return View();
         }
 
-        public ActionResult SerializeJSON()
+        [HttpPost]
+        public ActionResult SerializeJSON(int[] articleSerializationID)
         {
-            var author = context.Authors.ToList();
-            using (StreamWriter fs = new StreamWriter(pathJSON))
+            List<Article> articlesToSerialize = new List<Article>();
+
+            foreach (int article in articleSerializationID.ToList())
+            {
+                Article articleToSerialize = context.Articles.Find(article);
+
+                articlesToSerialize.Add(articleToSerialize);
+            }
+            using (StreamWriter streamWriter = new StreamWriter(new FileStream(serializeFolderPath + @"\JsonArticles.json", FileMode.OpenOrCreate)))
             {
                 JsonSerializer jsonSerializer = new JsonSerializer();
-                jsonSerializer.Serialize(fs, author);
+                jsonSerializer.Serialize(streamWriter, articlesToSerialize);
             }
-
-            
             return RedirectToAction("Index", "Home");
         }
         public ActionResult DeserializeJSON()
         {
             try
             {
-                using (StreamReader sr = new StreamReader(pathJSON))
+                using (StreamReader streamReader = new StreamReader(new FileStream(serializeFolderPath+ @"\JsonArticles.json",FileMode.Open)))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    ViewData["AuthorDataJSON"] = JsonConvert.DeserializeObject<List<Author>>(sr.ReadToEnd());
+                    ViewData["ArticleDataJSON"] = JsonConvert.DeserializeObject<List<Article>>(streamReader.ReadToEnd());
                 }
             }
             catch (FileNotFoundException)
@@ -96,6 +113,18 @@ namespace WebLibrary2.WebUI.Controllers
             }
             return View("Deserialize");
         }
+
+        public ActionResult Deserialize(HttpPostedFile file)
+        {
+            if (file != null && file.ContentLength > 0 )
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(serializeFolderPath, fileName);
+            }
+
+            return View("Deserialize");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

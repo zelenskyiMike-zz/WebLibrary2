@@ -3,7 +3,7 @@
     ViewBag.Title = "Deserialize";
 
     var authorDataXML = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataXML"];
-    var authorDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataJSON"];
+    var authorDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
 }
 
 <h2>Deserialize</h2>
@@ -23,7 +23,7 @@
     <h3>JSON Deserialization</h3>
     foreach (var item2 in authorDataJSON)
     {
-        @item2.AuthorName<br />
+        @item2.ArticleName<br />
     }
 }
 
