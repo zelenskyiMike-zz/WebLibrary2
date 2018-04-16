@@ -4,12 +4,15 @@
     ViewBag.Title = "ArticlesView";
 
 }
-@using (Html.BeginForm("SerializeJSON", "Home", FormMethod.Post))
+@using (Html.BeginForm())
 {
     <div>
         <div class="btn btn-default">
             @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-light" })
-            @Html.ActionLink("To JSON", "SerializeJSON", "Home", null, new { onclick = "return JSONSerializationDialog()", @class = "btn btn-light" })
+            <input type="submit" name="toJson" value="To JSON"
+                   formaction="~/Home/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
+            <input type="submit" name="toXml" value="To XML"
+                   formaction="~/Home/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
         </div>
         <br />
         <table>
@@ -41,7 +44,7 @@
                 </tr>
             }
         </table>
-        <br /><input type="submit" value="To JSON" class="btn btn-default" />
+        <br />
     </div>
 }
 

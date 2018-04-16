@@ -4,6 +4,7 @@
 
     var authorDataXML = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataXML"];
     var authorDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
+    var articleDataXML = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataXML"];
 }
 
 <h2>Deserialize</h2>
@@ -18,10 +19,10 @@
 }
 
 
-@if (authorDataJSON != null)
+@if (articleDataXML != null)
 {
-    <h3>JSON Deserialization</h3>
-    foreach (var item2 in authorDataJSON)
+    <h3>XML Deserialization</h3>
+    foreach (var item2 in articleDataXML)
     {
         @item2.ArticleName<br />
     }

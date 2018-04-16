@@ -3,38 +3,44 @@
 @{
     ViewBag.Title = "Авторы";
 }
+@using (Html.BeginForm("SerializeMagazineToJSON", "Home", FormMethod.Post))
+{
+    <div class="btn btn-default">
+        @Html.ActionLink("Добавить публикацию", "CreatePublication", "CRUDPublication", null, new { @class = "btn btn-light" })
+        <input type="submit" name="toJson" value="To JSON"
+               formaction="~/Home/SerializePublicationToJSON" formmethod="post" class="btn btn-light" />
+        <input type="submit" name="toXml" value="To XML"
+               formaction="~/Home/SerializePublicationToXML" formmethod="post" class="btn btn-light" />
+    </div>
+    <br />
+    <table>
+        <tr>
+            <th class="text-center"><h4>Название</h4></th>
+            <th class="text-center"><h4>Действие</h4></th>
+            <th class="text-center"><h4>JSON/XML</h4></th>
 
-<div class="btn btn-default">
-    @Html.ActionLink("Добавить публикацию", "CreatePublication", "CRUDPublication", null, new { @class = "btn btn-outline-primary" })
-</div>
-<br />
-<table>
-    <tr>
-        <th class="text-center"><h4>Название</h4></th>
-        <th class="text-center"><h4>Действие</h4></th>
-        <th class="text-center"><h4>JSON/XML</h4></th>
-
-    </tr>
-    @foreach (var publication in Model)
-    {
-    <tr>
-        <td><h4>@Html.DisplayFor(modelItem => publication.PublicationName)</h4></td>
-        <td>
-            <div class=" btn btn-default">
-                @Html.ActionLink("Редактировать", "EditPublication", "CRUDPublication", new { id = publication.PublicationID }, null)
-            </div> |
-            <div class=" btn btn-default">
-                @Html.ActionLink("Удалить", "DeletePublication", "CRUDPublication", new { id = publication.PublicationID }, null)
-            </div>|
-            <div class=" btn btn-default">
-                @Html.ActionLink("Детали", "PublicationDetails", "CRUDPublication", new { id = publication.PublicationID }, null)
-            </div>
-        </td>
-        <td class="text-center">
-            <div class=" btn btn-default">
-                <input type="checkbox" name="publicationSerializationID" value="@publication.PublicationID" />
-            </div>
-        </td>
-    </tr>
-    }
-</table>
+        </tr>
+        @foreach (var publication in Model)
+        {
+            <tr>
+                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationName)</h4></td>
+                <td>
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Редактировать", "EditPublication", "CRUDPublication", new { id = publication.PublicationID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeletePublication", "CRUDPublication", new { id = publication.PublicationID }, null)
+                    </div>|
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "PublicationDetails", "CRUDPublication", new { id = publication.PublicationID }, null)
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class=" btn btn-default">
+                        <input type="checkbox" name="publicationSerializationID" value="@publication.PublicationID" />
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+}

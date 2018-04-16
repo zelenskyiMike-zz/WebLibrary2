@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ArrayOfBook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Book>
+    <BookID>4</BookID>
+    <GenreID>4</GenreID>
+    <BookName>Простые рассказы с гоp</BookName>
+    <YearOfPublish>1885</YearOfPublish>
+  </Book>
+</ArrayOfBook>

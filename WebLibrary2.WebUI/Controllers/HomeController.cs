@@ -13,6 +13,9 @@ using WebLibrary2.Domain.Entity.ArticleEntity;
 using WebLibrary2.Domain.Abstract.AbstractArticle;
 using System;
 using System.Web;
+using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.Domain.Entity.MagazineEntity;
+using WebLibrary2.Domain.Entity.PublicationEntity;
 
 namespace WebLibrary2.WebUI.Controllers
 {
@@ -29,9 +32,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             this.context = dataContext;
             articleRepository = articlesRepository;
-            pathXML = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\XmlAuthors.xml";
-            pathJSON = @"C:\Users\Anuitex-64\source\repos\WebLibrary2\Serialization\JsonAuthors.json";
-
+            
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
 
@@ -50,28 +51,204 @@ namespace WebLibrary2.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult SerializeJSON(int[] articleSerializationID)
+        public ActionResult SerializeArticleToJSON(int[] articleSerializationID)
         {
-            List<Article> articlesToSerialize = new List<Article>();
-
-            foreach (int article in articleSerializationID.ToList())
+            if (articleSerializationID != null)
             {
-                Article articleToSerialize = context.Articles.Find(article);
+                List<Article> articlesToSerialize = new List<Article>();
 
-                articlesToSerialize.Add(articleToSerialize);
+                foreach (int article in articleSerializationID.ToList())
+                {
+                    Article articleToSerialize = context.Articles.Find(article);
+
+                    articlesToSerialize.Add(articleToSerialize);
+                }
+                using (StreamWriter streamWriter = new StreamWriter(new FileStream(serializeFolderPath + @"\JsonArticles.json", FileMode.OpenOrCreate)))
+                {
+                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    jsonSerializer.Serialize(streamWriter, articlesToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
             }
-            using (StreamWriter streamWriter = new StreamWriter(new FileStream(serializeFolderPath + @"\JsonArticles.json", FileMode.OpenOrCreate)))
-            {
-                JsonSerializer jsonSerializer = new JsonSerializer();
-                jsonSerializer.Serialize(streamWriter, articlesToSerialize);
-            }
+            //--------------------------------------------------------------------------------//
             return RedirectToAction("Index", "Home");
         }
+        [HttpPost]
+        public ActionResult SerializeBookToJSON(int[] bookSerializationID)
+        {
+            if (bookSerializationID != null)
+            { 
+                List<Book> booksToSerialize = new List<Book>();
+
+                foreach (int book in bookSerializationID.ToList())
+                {
+                    Book bookToSerialize = context.Books.Find(book);
+
+                    booksToSerialize.Add(bookToSerialize);
+                }
+                using (StreamWriter streamWriter = new StreamWriter(new FileStream(serializeFolderPath + @"\JsonBooks.json", FileMode.OpenOrCreate)))
+                {
+                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    jsonSerializer.Serialize(streamWriter, booksToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            //--------------------------------------------------------------------------------//
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult SerializeMagazineToJSON(int[] magazineSerializationID)
+        {
+            if (magazineSerializationID != null)
+            {
+                List<Magazine> magazinesToSerialize = new List<Magazine>();
+
+                foreach (int magazine in magazineSerializationID.ToList())
+                {
+                    Magazine magazineToSerialize = context.Magazines.Find(magazine);
+
+                    magazinesToSerialize.Add(magazineToSerialize);
+                }
+                using (StreamWriter streamWriter = new StreamWriter(new FileStream(serializeFolderPath + @"\JsonMagazines.json", FileMode.OpenOrCreate)))
+                {
+                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    jsonSerializer.Serialize(streamWriter, magazinesToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            //--------------------------------------------------------------------------------//
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult SerializePublicationToJSON(int[] publicationSerializationID)
+        {
+            if (publicationSerializationID != null)
+            {
+                List<Publication> publicationsToSerialize = new List<Publication>();
+
+                foreach (int publication in publicationSerializationID.ToList())
+                {
+                    Publication publicationToSerialize = context.Publications.Find(publication);
+
+                    publicationsToSerialize.Add(publicationToSerialize);
+                }
+                using (StreamWriter streamWriter = new StreamWriter(new FileStream(serializeFolderPath + @"\JsonPublications.json", FileMode.OpenOrCreate)))
+                {
+                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    jsonSerializer.Serialize(streamWriter, publicationsToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            //--------------------------------------------------------------------------------//
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpPost]
+        public ActionResult SerializeBookToXML(int[] bookSerializationID)
+        {
+            if (bookSerializationID != null)
+            {
+                List<Book> booksToSerialize = new List<Book>();
+
+                foreach (var book in bookSerializationID.ToList())
+                {
+                    Book bookToSerialize = context.Books.Find(book);
+
+                    booksToSerialize.Add(bookToSerialize);
+                }
+
+                using (FileStream fs = new FileStream(serializeFolderPath + @"\BooksXML.xml", FileMode.OpenOrCreate))
+                {
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Book>));
+                    XmlSerializer.Serialize(fs, booksToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        [HttpPost]
+        public ActionResult SerializeArticleToXML(int[] articleSerializationID)
+        {
+            if (articleSerializationID != null)
+            {
+                List<Article> articlesToSerialize = new List<Article>();
+
+                foreach (var article in articleSerializationID.ToList())
+                {
+                    Article articleToSerialize = context.Articles.Find(article);
+
+                    articlesToSerialize.Add(articleToSerialize);
+                }
+
+                using (FileStream fs = new FileStream(serializeFolderPath + @"\ArticlesXML.xml", FileMode.OpenOrCreate))
+                {
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Article>));
+                    XmlSerializer.Serialize(fs, articlesToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        [HttpPost]
+        public ActionResult SerializeMagazineToXML(int[] magazineSerializationID)
+        {
+            if (magazineSerializationID != null)
+            {
+                List<Magazine> magazinesToSerialize = new List<Magazine>();
+
+                foreach (var article in magazineSerializationID.ToList())
+                {
+                    Magazine magazineToSerialize = context.Magazines.Find(article);
+
+                    magazinesToSerialize.Add(magazineToSerialize);
+                }
+
+                using (FileStream fs = new FileStream(serializeFolderPath + @"\MagazinesXML.xml", FileMode.OpenOrCreate))
+                {
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Magazine>));
+                    XmlSerializer.Serialize(fs, magazinesToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+        [HttpPost]
+        public ActionResult SerializePublicationToXML(int[] publicationSerializationID)
+        {
+            if (publicationSerializationID != null)
+            {
+                List<Publication> publicationsToSerialize = new List<Publication>();
+
+                foreach (var article in publicationSerializationID.ToList())
+                {
+                    Publication publicationToSerialize = context.Publications.Find(article);
+
+                    publicationsToSerialize.Add(publicationToSerialize);
+                }
+
+                using (FileStream fs = new FileStream(serializeFolderPath + @"\PublicationsXML.xml", FileMode.OpenOrCreate))
+                {
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Publication>));
+                    XmlSerializer.Serialize(fs, publicationsToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+
+
         public ActionResult DeserializeJSON()
         {
             try
             {
-                using (StreamReader streamReader = new StreamReader(new FileStream(serializeFolderPath+ @"\JsonArticles.json",FileMode.Open)))
+                using (StreamReader streamReader = new StreamReader(new FileStream(serializeFolderPath + @"\JsonArticles.json", FileMode.Open)))
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     ViewData["ArticleDataJSON"] = JsonConvert.DeserializeObject<List<Article>>(streamReader.ReadToEnd());
@@ -83,28 +260,17 @@ namespace WebLibrary2.WebUI.Controllers
             }
             return View("Deserialize");
         }
-
-
-        public ActionResult SerializeXML()
+        public ActionResult DeserializeXML(HttpPostedFileBase file)
         {
-            var author = context.Authors.ToList();
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Author>));
+            string filePath = GetFilePath(file);
 
-            using (FileStream fs = new FileStream(pathXML, FileMode.OpenOrCreate))
-            {
-                XmlSerializer.Serialize(fs, author);
-            }
-            return RedirectToAction("Index", "Home");
-        }
-        public ActionResult DeserializeXML()
-        {
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Author>));
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Article>));
             try
             {
-                using (FileStream fs = new FileStream(pathXML, FileMode.Open))
+                using (FileStream fs = new FileStream(filePath, FileMode.Open))
                 {
-                    List<Author> authors = (List<Author>)XmlSerializer.Deserialize(fs);
-                    ViewData["AuthorDataXML"] = authors;
+                    List<Article> authors = (List<Article>)XmlSerializer.Deserialize(fs);
+                    ViewData["ArticleDataXML"] = authors;
                 }
             }
             catch (FileNotFoundException)
@@ -114,15 +280,17 @@ namespace WebLibrary2.WebUI.Controllers
             return View("Deserialize");
         }
 
-        public ActionResult Deserialize(HttpPostedFile file)
+        public string GetFilePath(HttpPostedFileBase file)
         {
+            string path;
+
             if (file != null && file.ContentLength > 0 )
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(serializeFolderPath, fileName);
+                path = Path.Combine(serializeFolderPath, fileName);
+                return path;
             }
-
-            return View("Deserialize");
+            throw new NotImplementedException();
         }
 
 
