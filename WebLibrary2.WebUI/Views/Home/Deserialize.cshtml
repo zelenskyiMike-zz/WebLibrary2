@@ -3,28 +3,66 @@
     ViewBag.Title = "Deserialize";
 
     var authorDataXML = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataXML"];
-    var authorDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
+
+    var articleDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
+    var magazineDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataJSON"];
+    var bookDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataJSON"];
+    var publicationDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataJSON"];
+
     var articleDataXML = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataXML"];
 }
 
 <h2>Deserialize</h2>
 
-@if (authorDataXML != null)
+@if (articleDataXML != null)
 {
     <h3>XML Deserialization</h3>
-    foreach (var item in authorDataXML)
+    foreach (var item in articleDataXML)
     {
-        @item.AuthorName<br />
+        @item.ArticleName<br />
     }
 }
 
 
-@if (articleDataXML != null)
+@if (articleDataJSON != null)
 {
     <h3>XML Deserialization</h3>
-    foreach (var item2 in articleDataXML)
+    foreach (var item2 in articleDataJSON)
     {
         @item2.ArticleName<br />
+    }
+}
+
+<br />
+
+@if (magazineDataJSON != null)
+{
+    <h3>XML Deserialization</h3>
+    foreach (var item2 in magazineDataJSON)
+    {
+        @item2.MagazineName<br />
+    }
+}
+
+<br />
+
+@if (bookDataJSON != null)
+{
+    <h3>XML Deserialization</h3>
+    foreach (var item2 in bookDataJSON)
+    {
+        @item2.BookName<br />
+    }
+}
+
+<br />
+
+@if (publicationDataJSON != null)
+{
+    <h3>XML Deserialization</h3>
+    foreach (var item2 in publicationDataJSON)
+    {
+        @item2.PublicationName<br />
     }
 }
 

@@ -99,6 +99,7 @@
     <Compile Include="Entity\PublicationEntity\PublicationeAuthor.cs" />
     <Compile Include="Entity\PublicationEntity\PublicationGenre.cs" />
     <Compile Include="Entity\PublicationEntity\Publication.cs" />
+    <Compile Include="Extensions\DeserializationExtensionClass.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\AuthorViewModel.cs" />
