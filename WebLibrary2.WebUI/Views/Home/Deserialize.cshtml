@@ -2,70 +2,109 @@
 @{
     ViewBag.Title = "Deserialize";
 
-    var authorDataXML = (IEnumerable<WebLibrary2.Domain.Entity.Author>)ViewData["AuthorDataXML"];
-
-    var articleDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
+    var articleDataJSON = (IEnumerable<dynamic>)ViewData["ArticleDataJSON"];
     var magazineDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataJSON"];
     var bookDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataJSON"];
     var publicationDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataJSON"];
 
     var articleDataXML = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataXML"];
+    var magazineDataXML = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataXML"];
+    var bookDataXML = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataXML"];
+    var publicationDataXML = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataXML"];
 }
 
 <h2>Deserialize</h2>
 
 @if (articleDataXML != null)
 {
-    <h3>XML Deserialization</h3>
+    <h3>Article list from XML </h3>
     foreach (var item in articleDataXML)
     {
-        @item.ArticleName<br />
+        if (item.ArticleID != 0)
+        {
+            @item.ArticleName<br />
+        }
+    }
+}
+@if (magazineDataXML != null)
+{
+    <h3>Magazine list from XML </h3>
+    foreach (var item in magazineDataXML)
+    {
+        if (item.MagazineID != 0)
+        {
+            @item.MagazineName <br />
+        }
     }
 }
 
+@if (bookDataXML != null)
+{
+    <h3>Magazine list from XML </h3>
+    foreach (var item in bookDataXML)
+    {
+        if (item.BookID != 0)
+        {
+            @item.BookName <br />
+        }
+    }
+}
+
+@if (publicationDataXML != null)
+{
+    <h3>Magazine list from XML </h3>
+    foreach (var item in publicationDataXML)
+    {
+        if (item.PublicationID != 0 )
+        {
+            @item.PublicationName <br />
+        }
+    }
+}
 
 @if (articleDataJSON != null)
 {
-    <h3>XML Deserialization</h3>
     foreach (var item2 in articleDataJSON)
     {
-        @item2.ArticleName<br />
+        if (item2.ArticleID != 0)
+        {
+            @item2.ArticleName<br />
+        }
     }
 }
-
-<br />
 
 @if (magazineDataJSON != null)
 {
-    <h3>XML Deserialization</h3>
     foreach (var item2 in magazineDataJSON)
     {
-        @item2.MagazineName<br />
+        if (item2.MagazineID != 0)
+        {
+            @item2.MagazineName<br />
+        }
     }
 }
 
-<br />
 
 @if (bookDataJSON != null)
 {
-    <h3>XML Deserialization</h3>
     foreach (var item2 in bookDataJSON)
     {
-        @item2.BookName<br />
+        if (item2.BookID != 0)
+        {
+            @item2.BookName<br />
+        }
     }
 }
 
-<br />
 
 @if (publicationDataJSON != null)
 {
-    <h3>XML Deserialization</h3>
     foreach (var item2 in publicationDataJSON)
     {
-        @item2.PublicationName<br />
+        if (item2.PublicationID != 0)
+        {
+            @item2.PublicationName<br />
+        }
     }
 }
-
-<br />
-
 

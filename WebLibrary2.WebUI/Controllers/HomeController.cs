@@ -21,7 +21,6 @@ namespace WebLibrary2.WebUI.Controllers
     public class HomeController : Controller
     {
         private EFDbContext context;
-        //IArticleRepository articlesRepository;
 
         private string serializeFolderPath;
         private string filePath;
@@ -307,10 +306,10 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 try
                 {
-                    ViewData["ArticleDataXML"] = DeserializationExtensionClass.DeserializeXML<Article>(filePath);
-                    ViewData["MagazineDataXML"] = DeserializationExtensionClass.DeserializeXML<Magazine>(filePath);
-                    ViewData["BookDataXML"] = DeserializationExtensionClass.DeserializeXML<Book>(filePath);
-                    ViewData["PublicationDataXML"] = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+                    ViewData["ArticleDataXML"]      = DeserializationExtensionClass.DeserializeXML<Article>(filePath);
+                    ViewData["MagazineDataXML"]     = DeserializationExtensionClass.DeserializeXML<Magazine>(filePath);
+                    ViewData["BookDataXML"]         = DeserializationExtensionClass.DeserializeXML<Book>(filePath);
+                    ViewData["PublicationDataXML"]  = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
                 }
                 catch (FileNotFoundException)
                 {
