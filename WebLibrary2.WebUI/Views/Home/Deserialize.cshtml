@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Deserialize";
 
-    var articleDataJSON = (IEnumerable<dynamic>)ViewData["ArticleDataJSON"];
+    var articleDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
     var magazineDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataJSON"];
     var bookDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataJSON"];
     var publicationDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataJSON"];

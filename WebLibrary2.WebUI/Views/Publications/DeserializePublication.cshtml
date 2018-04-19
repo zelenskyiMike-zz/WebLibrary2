@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Deserialize";
+
+    var publicationDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataJSON"];
+
+    var publicationDataXML = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataXML"];
+}
+
+<h2>Deserialize</h2>
+
+
+@if (publicationDataXML != null)
+{
+    <h3>Magazine list from XML </h3>
+    foreach (var item in publicationDataXML)
+    {
+        if (item.PublicationID != 0)
+        {
+            @item.PublicationName <br />
+        }
+    }
+}
+
+@if (publicationDataJSON != null)
+{
+    foreach (var item2 in publicationDataJSON)
+    {
+        if (item2.PublicationID != 0)
+        {
+            @item2.PublicationName<br />
+        }
+    }
+}
+
+

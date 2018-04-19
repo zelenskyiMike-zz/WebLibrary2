@@ -4,6 +4,14 @@
     ViewBag.Title = "Авторы";
 }
 
+@using (Html.BeginForm("DeserializeMagazine", "Magazine", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+{
+    <div class="btn btn-default">
+        <input type="file" name="file" id="Upload" size="60" />
+        <input type="submit" value="Deserialize" id="file" class="btn btn-light" />
+    </div>
+}
+
 @using (Html.BeginForm())
 {
     <div class="btn btn-default">

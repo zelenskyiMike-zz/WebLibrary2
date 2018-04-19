@@ -57,6 +57,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,6 +101,7 @@
     <Compile Include="Entity\PublicationEntity\PublicationGenre.cs" />
     <Compile Include="Entity\PublicationEntity\Publication.cs" />
     <Compile Include="Extensions\DeserializationExtensionClass.cs" />
+    <Compile Include="Extensions\FilePath.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\AuthorViewModel.cs" />

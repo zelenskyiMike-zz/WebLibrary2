@@ -1,0 +1,37 @@
+﻿
+
+@{
+    ViewBag.Title = "Deserialize";
+
+    var magazineDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataJSON"];
+
+    var magazineDataXML = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataXML"];
+
+}
+
+<h2>Deserialize</h2>
+
+
+@if (magazineDataXML != null)
+{
+    <h3>Magazine list from XML </h3>
+    foreach (var item in magazineDataXML)
+    {
+        if (item.MagazineID != 0)
+        {
+            @item.MagazineName <br />
+        }
+    }
+}
+
+
+@if (magazineDataJSON != null)
+{
+    foreach (var item2 in magazineDataJSON)
+    {
+        if (item2.MagazineID != 0)
+        {
+            @item2.MagazineName<br />
+        }
+    }
+}

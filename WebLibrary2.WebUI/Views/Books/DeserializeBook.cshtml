@@ -1,0 +1,34 @@
+﻿
+
+@{
+    ViewBag.Title = "Deserialize";
+
+    var bookDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataJSON"];
+
+    var bookDataXML = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataXML"];
+}
+
+<h2>Deserialize</h2>
+
+@if (bookDataXML != null)
+{
+    <h3>Magazine list from XML </h3>
+    foreach (var item in bookDataXML)
+    {
+        if (item.BookID != 0)
+        {
+            @item.BookName <br />
+        }
+    }
+}
+
+@if (bookDataJSON != null)
+{
+    foreach (var item2 in bookDataJSON)
+    {
+        if (item2.BookID != 0)
+        {
+            @item2.BookName<br />
+        }
+    }
+}

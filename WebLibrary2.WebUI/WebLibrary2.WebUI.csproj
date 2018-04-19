@@ -349,6 +349,10 @@
     <Content Include="Views\AuthorActivity\GetArticlesOfAuthor.cshtml" />
     <Content Include="Views\AuthorActivity\GetMagazinesOfAuthor.cshtml" />
     <Content Include="Views\AuthorActivity\GetPublicationsOfAuthor.cshtml" />
+    <Content Include="Views\Books\DeserializeBook.cshtml" />
+    <Content Include="Views\Articles\DeserializeArticle.cshtml" />
+    <Content Include="Views\Magazine\DeserializeMagazine.cshtml" />
+    <Content Include="Views\Publications\DeserializePublication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

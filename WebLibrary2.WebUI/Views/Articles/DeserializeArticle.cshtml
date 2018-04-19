@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Deserialize";
+
+    var articleDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
+
+    var articleDataXML = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataXML"];
+}
+
+<h2>Deserialize</h2>
+
+@if (articleDataXML != null)
+{
+    <h3>Article list from XML </h3>
+    foreach (var item in articleDataXML)
+    {
+        if (item.ArticleID != 0)
+        {
+            @item.ArticleName<br />
+        }
+    }
+}
+
+@if (articleDataJSON != null)
+{
+    foreach (var item2 in articleDataJSON)
+    {
+        if (item2.ArticleID != 0)
+        {
+            @item2.ArticleName<br />
+        }
+    }
+}
