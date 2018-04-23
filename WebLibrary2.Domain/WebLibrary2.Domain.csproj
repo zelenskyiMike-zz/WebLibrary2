@@ -98,11 +98,12 @@
     <Compile Include="Abstract\AbstractAuthor\IAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IBookAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IBookRepository.cs" />
-    <Compile Include="Abstract\AbstractBook\IGenreRepository.cs" />
     <Compile Include="Abstract\AbstractMagazine\IMagazineAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractMagazine\IMagazineRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationRepository.cs" />
+    <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="Abstract\IUnitOfWork.cs" />
     <Compile Include="Concrete\ConcreteArticle\EFArticleAuthorsRepository.cs" />
     <Compile Include="Concrete\ConcreteArticle\EFArticleRepository.cs" />
     <Compile Include="Concrete\ConcreteAuthor\EFAuthorRepository.cs" />

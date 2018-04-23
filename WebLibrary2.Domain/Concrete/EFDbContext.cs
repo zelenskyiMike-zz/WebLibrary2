@@ -29,16 +29,5 @@ namespace WebLibrary2.Domain.Concrete
         public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
         public DbSet<MagazineAuthor> MagazineAuthors { get; set; }
         public DbSet<PublicationeAuthor> PublicationeAuthors { get; set; }
-
-
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            //   modelBuilder.Entity<AuthorBook>().HasKey(ab => new { ab.BookID, ab.AuthorID });
-
-            //base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
     }
 }
