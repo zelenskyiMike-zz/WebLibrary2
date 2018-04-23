@@ -6,4 +6,16 @@
     <BookName>Простые рассказы с гоp</BookName>
     <YearOfPublish>1885</YearOfPublish>
   </Book>
+  <Book>
+    <BookID>2</BookID>
+    <GenreID>2</GenreID>
+    <BookName>Война и Мир. Том II</BookName>
+    <YearOfPublish>1866</YearOfPublish>
+  </Book>
+  <Book>
+    <BookID>5</BookID>
+    <GenreID>5</GenreID>
+    <BookName>Книга джунглей</BookName>
+    <YearOfPublish>1965</YearOfPublish>
+  </Book>
 </ArrayOfBook>

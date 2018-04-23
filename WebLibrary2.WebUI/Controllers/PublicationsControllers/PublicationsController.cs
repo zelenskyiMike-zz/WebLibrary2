@@ -14,10 +14,13 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
         string serializeFolderPath;
         private string filePath;
 
-        private MatchCollection matchXML;
-        private MatchCollection matchJSON;
         private Regex regexJSON;
         private Regex regexXML;
+        private Regex regexValidation;
+
+        private MatchCollection matchXML;
+        private MatchCollection matchJSON;
+        private MatchCollection matchValidation;
 
         IPublicationRepository publicationRepository;
 
@@ -39,6 +42,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
         {
             regexJSON = new Regex(@"(\w*).json");
             regexXML = new Regex(@"(\w*).xml");
+            regexValidation = new Regex(@"(\w*)Publication(\w*)");
 
 
             if (file != null)
@@ -47,17 +51,22 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
 
                 matchJSON = regexJSON.Matches(filePath);
                 matchXML = regexXML.Matches(filePath);
+                matchValidation = regexValidation.Matches(filePath);
             }
 
             if (matchJSON.Count != 0)
             {
                 try
                 {
-                    ViewData["MagazineDataJSON"] = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
+                    if (matchValidation.Count == 0)
+                    {
+                        throw new Exception("Wrong file for this publications type. Please, choose another file");
+                    }
+                    ViewData["PublicationDataJSON"] = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    return View("Error", new HandleErrorInfo(ex, "Publications", "PublicationsView"));
                 }
                 return View();
             }
@@ -65,11 +74,15 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             {
                 try
                 {
-                    ViewData["MagazineDataXML"] = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+                    if (matchValidation.Count == 0)
+                    {
+                        throw new Exception("Wrong file for this publications type. Please, choose another file");
+                    }
+                    ViewData["PublicationDataXML"] = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    return View("Error", new HandleErrorInfo(ex, "Publications", "PublicationsView"));
                 }
                 return View();
             }

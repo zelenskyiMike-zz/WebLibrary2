@@ -14,10 +14,13 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
         string serializeFolderPath;
         private string filePath;
 
-        private MatchCollection matchXML;
-        private MatchCollection matchJSON;
         private Regex regexJSON;
         private Regex regexXML;
+        private Regex regexValidation;
+
+        private MatchCollection matchXML;
+        private MatchCollection matchJSON;
+        private MatchCollection matchValidation;
 
         IBookRepository booksRepository;
 
@@ -40,7 +43,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
         {
             regexJSON = new Regex(@"(\w*).json");
             regexXML = new Regex(@"(\w*).xml");
-
+            regexValidation = new Regex(@"(\w*)Book(\w*)");
 
             if (file != null)
             {
@@ -48,17 +51,21 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
                 matchJSON = regexJSON.Matches(filePath);
                 matchXML = regexXML.Matches(filePath);
-
+                matchValidation = regexValidation.Matches(filePath);
 
                 if (matchJSON.Count != 0)
                 {
                     try
                     {
+                        if (matchValidation.Count == 0)
+                        {
+                            throw new Exception("Wrong filef for this publications type. Please, choose another file");
+                        }
                         ViewData["BookDataJSON"] = DeserializationExtensionClass.DeserializeJSON<Book>(filePath);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return View("Error", new HandleErrorInfo(ex,"Books","BooksView"));
                     }
                     return View();
                 }
@@ -66,11 +73,15 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
                 {
                     try
                     {
+                        if (matchValidation.Count == 0)
+                        {
+                            throw new Exception("Wrong filef for this publications type. Please, choose another file");
+                        }
                         ViewData["BookDataXML"] = DeserializationExtensionClass.DeserializeXML<Book>(filePath);
                     }
                     catch (Exception ex)
                     {
-                        throw ex;
+                        return View("Error", new HandleErrorInfo(ex, "Books", "BooksView"));
                     }
                     return View();
                 }

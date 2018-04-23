@@ -16,10 +16,13 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
         string serializeFolderPath;
         private string filePath;
 
-        private MatchCollection matchXML;
-        private MatchCollection matchJSON;
         private Regex regexJSON;
         private Regex regexXML;
+        private Regex regexValidation;
+
+        private MatchCollection matchXML;
+        private MatchCollection matchJSON;
+        private MatchCollection matchValidation;
 
         IArticleRepository articlesRepository;
 
@@ -44,7 +47,7 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
         {
             regexJSON = new Regex(@"(\w*).json");
             regexXML = new Regex(@"(\w*).xml");
-
+            regexValidation = new Regex(@"(\w*)Article(\w*)");
 
             if (file != null)
             {
@@ -52,17 +55,22 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
 
                 matchJSON = regexJSON.Matches(filePath);
                 matchXML = regexXML.Matches(filePath);
+                matchValidation = regexValidation.Matches(filePath);
 
 
                 if (matchJSON.Count != 0)
                 {
                     try
                     {
-                        ViewData["BookDataJSON"] = DeserializationExtensionClass.DeserializeJSON<Article>(filePath);
+                        if (matchValidation.Count == 0)
+                        {
+                            throw new Exception("Wrong filef for this publications type. Please, choose another file");
+                        }
+                        ViewData["ArticleDataJSON"] = DeserializationExtensionClass.DeserializeJSON<Article>(filePath);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return View("Error", new HandleErrorInfo(ex, "Articles", "ArticlesView"));
                     }
                     return View();
                 }
@@ -70,11 +78,15 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
                 {
                     try
                     {
-                        ViewData["BookDataXML"] = DeserializationExtensionClass.DeserializeXML<Article>(filePath);
+                        if (matchValidation.Count == 0)
+                        {
+                            throw new Exception("Wrong filef for this publications type. Please, choose another file");
+                        }
+                        ViewData["ArticleDataXML"] = DeserializationExtensionClass.DeserializeXML<Article>(filePath);
                     }
                     catch (Exception ex)
                     {
-                        throw ex;
+                        return View("Error", new HandleErrorInfo(ex, "Articles", "ArticlesView"));
                     }
                     return View();
                 }

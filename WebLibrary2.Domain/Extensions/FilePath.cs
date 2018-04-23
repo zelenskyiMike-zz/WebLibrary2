@@ -13,15 +13,10 @@ namespace WebLibrary2.Domain.Extensions
         public static string GetFilePath(HttpPostedFileBase file, string serializeFolderPath)
         {
             string path;
+            var fileName = Path.GetFileName(file.FileName);
+            path = Path.Combine(serializeFolderPath, fileName);
+            return path;
 
-            if (file != null && file.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                path = Path.Combine(serializeFolderPath, fileName);
-                return path;
-            }
-            throw new NotImplementedException();
         }
-
     }
 }
