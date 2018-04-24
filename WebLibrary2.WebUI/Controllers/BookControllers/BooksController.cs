@@ -24,6 +24,12 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
         IBookRepository booksRepository;
 
+        public BooksController()
+        {
+
+        }
+
+
         public BooksController(IBookRepository bookRepository)
         {
             booksRepository = bookRepository;

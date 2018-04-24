@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract.AbstractAuthor;
+using WebLibrary2.BLL.Sevices;
 
 namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {
     public class AuthorController : Controller
     {
-        IAuthorsRepository authorsRepository;
-        public AuthorController(IAuthorsRepository authorRepository)
+        private readonly AuthorService service;
+
+        public AuthorController(AuthorService service)
         {
-            authorsRepository = authorRepository;
+            this.service = service;
         }
-        // GET: Author
+
+        [HttpGet]
         public ActionResult AuthorView()
         {
-            var author = authorsRepository.GetAllAuthors().ToList();
+            var author = service.GetAuthorViews().ToList();
             return View(author);
         }
     }

@@ -8,13 +8,14 @@
 <h2>Details</h2>
 <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
 <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
+<div>
+    <dt>Book name</dt>
+    @foreach (var b in Model.Books)
+    {
+        <dd> @b.BookName</dd>
 
-<dt>Book name</dt>
-@foreach (var b in Model.Books)
-{
-    <dd> @b.BookName</dd>
-
-}
+    }
+</div>
 <button>@Html.ActionLink("Назад к списку", "AuthorView", "Author",null, new { @class = "btn" })</button>
 
 

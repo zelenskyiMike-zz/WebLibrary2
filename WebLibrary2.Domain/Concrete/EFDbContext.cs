@@ -10,7 +10,8 @@ namespace WebLibrary2.Domain.Concrete
 {
     public class EFDbContext : DbContext
     {
-        public EFDbContext()
+        public EFDbContext() { }
+        public EFDbContext(string connectionString):base("EFDbContext")
         {
         }
 

@@ -11,7 +11,11 @@ namespace WebLibrary2.Domain.Concrete.ConcreteBook
 {
     public class EFBookRepository : IBookRepository
     {
-        private EFDbContext context = new EFDbContext();
+        private EFDbContext context;
+        public EFBookRepository(EFDbContext contextParam)
+        {
+            context = contextParam;
+        }
 
         public IEnumerable<Book> Books
         {

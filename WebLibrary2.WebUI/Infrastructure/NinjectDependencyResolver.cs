@@ -16,6 +16,8 @@ using WebLibrary2.Domain.Abstract.AbstractMagazine;
 using WebLibrary2.Domain.Concrete.ConcreteMagazine;
 using WebLibrary2.Domain.Abstract.AbstractPublication;
 using WebLibrary2.Domain.Concrete.ConcretePublication;
+using WebLibrary2.Domain.Abstract.AbstractUnitOfWork;
+using WebLibrary2.Domain.Concrete.ConcreteUnitOfWork;
 
 namespace WebLibrary2.WebUI.Infrastructure
 {
@@ -42,7 +44,6 @@ namespace WebLibrary2.WebUI.Infrastructure
             kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
 
             kernel.Bind<IBookRepository>().To<EFBookRepository>();
-            kernel.Bind<IGenreRepository>().To<EFGenreRepository>();
 
             kernel.Bind<IBookAuthorsRepository>().To<EFBookAuthorRepository>();
 
@@ -55,6 +56,7 @@ namespace WebLibrary2.WebUI.Infrastructure
             kernel.Bind<IPublicationRepository>().To<EFPublicationRepository>();
             kernel.Bind<IPublicationAuthorsRepository>().To<EFPublicationAuthorsRepository>();
 
+            //kernel.Bind<IUnitOfWork>().To<EFUnitOfWork>();
         }
     }
 }

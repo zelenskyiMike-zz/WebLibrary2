@@ -12,7 +12,7 @@ using WebLibrary2.Domain.Entity.PublicationEntity;
 
 namespace WebLibrary2.Domain.Models
 {
-    public class GetM2MCRUDAuthorVM
+    public class GetAuthorLiteratureVM
     {
         public int AuthorID { get; set; }
 

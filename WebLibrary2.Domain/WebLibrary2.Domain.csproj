@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="CoContra.net45, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CoContra.1.0.2\lib\net45\CoContra.net45.dll</HintPath>
     </Reference>
@@ -102,8 +105,7 @@
     <Compile Include="Abstract\AbstractMagazine\IMagazineRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationRepository.cs" />
-    <Compile Include="Abstract\IRepository.cs" />
-    <Compile Include="Abstract\IUnitOfWork.cs" />
+    <Compile Include="Abstract\AbstractUnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Concrete\ConcreteArticle\EFArticleAuthorsRepository.cs" />
     <Compile Include="Concrete\ConcreteArticle\EFArticleRepository.cs" />
     <Compile Include="Concrete\ConcreteAuthor\EFAuthorRepository.cs" />
@@ -113,8 +115,8 @@
     <Compile Include="Concrete\ConcreteMagazine\EFMagazineRepository.cs" />
     <Compile Include="Concrete\ConcretePublication\EFPublicationAuthorsRepository.cs" />
     <Compile Include="Concrete\ConcretePublication\EFPublicationRepository.cs" />
+    <Compile Include="Concrete\ConcreteUnitOfWork\EFUnitOfWork.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
-    <Compile Include="Concrete\ConcreteBook\EFGenreRepository.cs" />
     <Compile Include="Entity\ArticleEntity\Article.cs" />
     <Compile Include="Entity\ArticleEntity\ArticleAuthor.cs" />
     <Compile Include="Entity\ArticleEntity\ArticleGenre.cs" />
@@ -133,11 +135,10 @@
     <Compile Include="Extensions\FilePath.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
-    <Compile Include="Models\AuthorViewModel.cs" />
+    <Compile Include="Models\AuthorView.cs" />
     <Compile Include="Models\BookViewModel.cs" />
-    <Compile Include="Models\GetLiteratureViewModel.cs" />
     <Compile Include="Models\GetM2MCRUDArticleVM.cs" />
-    <Compile Include="Models\GetM2MCRUDAuthorVM.cs" />
+    <Compile Include="Models\GetAuthorLiteratureVM.cs" />
     <Compile Include="Models\GetM2MCRUDBookVM.cs" />
     <Compile Include="Models\GetM2MCRUDMagazineVM.cs" />
     <Compile Include="Models\GetM2MCRUDPublicationVM.cs" />

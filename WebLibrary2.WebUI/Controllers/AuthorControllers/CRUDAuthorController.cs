@@ -4,22 +4,20 @@ using System.Net;
 using System.Data;
 using WebLibrary2.Domain.Models;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
-using WebLibrary2.Domain.Abstract.AbstractBook;
-using WebLibrary2.Domain.Abstract.AbstractArticle;
-using WebLibrary2.Domain.Abstract.AbstractMagazine;
-using WebLibrary2.Domain.Abstract.AbstractPublication;
+using WebLibrary2.BLL.Sevices;
 
 namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {
     public class CRUDAuthorController : Controller
     {
-        private EFDbContext context;
-        IAuthorsRepository authorRepository;
+        private readonly AuthorService service;
 
-        public CRUDAuthorController(IAuthorsRepository authorsRepository, EFDbContext dataContext)
+        private EFDbContext context;
+
+        public CRUDAuthorController(EFDbContext dataContext, AuthorService service)
         {
+            this.service = service;
             this.context = dataContext;
-            this.authorRepository = authorsRepository;
         }
 
         public ActionResult CreateAuthor()
@@ -31,11 +29,11 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAuthor(AuthorViewModel authorVM)
+        public ActionResult CreateAuthor(AuthorView authorVM)
         {
             if (ModelState.IsValid)
             {
-                authorRepository.CreateAuthor(authorVM);
+                service.CreateAuthor(authorVM);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -44,15 +42,19 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View(authorVM);
         }
 
-        public ActionResult AuthorsDetails(int id = 0)
+        public ActionResult AuthorsDetails(int id)
         {
-            var authorVM = authorRepository.GetAuthorsDetails(id);
+            GetAuthorLiteratureVM authorVM = service.GetAuthorsDetails(id);
             return View(authorVM);
         }
 
         public ActionResult EditAuthor(int? id)
         {
-            var authorVM = authorRepository.GetAuthorsDetails(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            GetAuthorLiteratureVM authorVM = service.GetAuthorsDetails(id);
             if (authorVM == null)
             {
                 return HttpNotFound();
@@ -67,7 +69,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var author = authorRepository.GetAuthorsDetails(id);
+            GetAuthorLiteratureVM author = service.GetAuthorsDetails(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -81,13 +83,13 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         {
             try
             {
-                authorRepository.DeleteAuthor(id);
+                service.DeleteAuthor(id);
             }
             catch (DataException)
             {
                 return RedirectToAction("DeleteAuthor", new { id = id });
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AuthorView", "Author");
         }
     }
 }

@@ -19,11 +19,9 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
     public class EFAuthorRepository : IAuthorsRepository
     {
         private EFDbContext context;
-        private IArticleRepository articleRepository;
-        public EFAuthorRepository(EFDbContext contextParam, IArticleRepository articlesRepository)
+        public EFAuthorRepository(EFDbContext contextParam)
         {
             context = contextParam;
-            articleRepository = articlesRepository;
         }
 
 
@@ -32,7 +30,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
             get { return context.Authors; }
         }
 
-        public void CreateAuthor(AuthorViewModel authorVM)
+        public void CreateAuthor(AuthorView authorVM)
         {
             Author author = new Author()
             {
@@ -148,50 +146,51 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
 
 
 
-        public GetM2MCRUDAuthorVM GetAuthorsDetails(int? id)
+        public GetAuthorLiteratureVM GetAuthorsDetails(int? id)
         {
             Author author = GetAuthorByID(id);
-
-            GetM2MCRUDAuthorVM authorVM = new GetM2MCRUDAuthorVM()
+            var booksList = context.BookAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Books).ToList();
+            GetAuthorLiteratureVM authorVM = new GetAuthorLiteratureVM()
             {
                 AuthorID = author.AuthorID,
-                AuthorName = author.AuthorName
+                AuthorName = author.AuthorName,
+                Books = booksList
             };
             return authorVM;
         }
 
-        public GetM2MCRUDAuthorVM GetAuthorsBooksDetails(int? id)
+        public GetAuthorLiteratureVM GetAuthorsBooksDetails(int? id)
         {
             var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
 
-            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            GetAuthorLiteratureVM authorVM = GetAuthorsDetails(id);
             authorVM.Books = bookList;
             return authorVM;
         }
 
-        public GetM2MCRUDAuthorVM GetAuthorsArticlesDetails(int? id)
+        public GetAuthorLiteratureVM GetAuthorsArticlesDetails(int? id)
         {
             var articleList = context.ArticleAuthors.Include(x => x.Articles).Where(x => x.AuthorID == id).Select(x => x.Articles).ToList();
 
-            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            GetAuthorLiteratureVM authorVM = GetAuthorsDetails(id);
             authorVM.Articles = articleList;
             return authorVM;
         }
 
-        public GetM2MCRUDAuthorVM GetAuthorsMagazinesDetails(int? id)
+        public GetAuthorLiteratureVM GetAuthorsMagazinesDetails(int? id)
         {
             var magazineList = context.MagazineAuthors.Include(x => x.Magazines).Where(x => x.AuthorID == id).Select(x => x.Magazines).ToList();
 
-            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            GetAuthorLiteratureVM authorVM = GetAuthorsDetails(id);
             authorVM.Magazines = magazineList;
             return authorVM;
         }
 
-        public GetM2MCRUDAuthorVM GetAuthorsPublicationsDetails(int? id)
+        public GetAuthorLiteratureVM GetAuthorsPublicationsDetails(int? id)
         {
             var publicationsList = context.PublicationeAuthors.Include(x => x.Publications).Where(x => x.AuthorID == id).Select(x => x.Publications).ToList();
 
-            GetM2MCRUDAuthorVM authorVM = GetAuthorsDetails(id);
+            GetAuthorLiteratureVM authorVM = GetAuthorsDetails(id);
             authorVM.Publications = publicationsList;
             return authorVM;
         }
