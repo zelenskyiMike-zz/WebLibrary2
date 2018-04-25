@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractArticle;
 using WebLibrary2.Domain.Concrete;
+using WebLibrary2.Domain.Concrete.ConcreteArticle;
 using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.WebUI.Controllers.ArticleControllers
@@ -14,10 +15,10 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
     public class CRUDArticleController : Controller
     {
         EFDbContext context;
-        IArticleRepository articleRepository;
-        IArticeAuthorsRepository articleAuthorsRepository;
+        EFArticleRepository articleRepository;
+        EFArticleAuthorsRepository articleAuthorsRepository;
 
-        public CRUDArticleController(EFDbContext contextParam, IArticleRepository articlesRepository, IArticeAuthorsRepository articlesAuthorsRepository)
+        public CRUDArticleController(EFDbContext contextParam, EFArticleRepository articlesRepository, EFArticleAuthorsRepository articlesAuthorsRepository)
         {
             context = contextParam;
             articleRepository = articlesRepository;

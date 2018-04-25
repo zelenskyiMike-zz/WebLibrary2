@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractMagazine;
+using WebLibrary2.Domain.Concrete.ConcreteMagazine;
 using WebLibrary2.Domain.Entity.MagazineEntity;
 using WebLibrary2.Domain.Extensions;
 
@@ -22,9 +23,9 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
         private MatchCollection matchJSON;
         private MatchCollection matchValidation;
 
-        IMagazineRepository magazineRepository;
+        EFMagazineRepository magazineRepository;
 
-        public MagazineController(IMagazineRepository magazinesRepository)
+        public MagazineController(EFMagazineRepository magazinesRepository)
         {
             magazineRepository = magazinesRepository;
 

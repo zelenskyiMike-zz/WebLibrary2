@@ -41,20 +41,20 @@ namespace WebLibrary2.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
+            //kernel.Bind<IAuthorsRepository>().To<EFAuthorRepository>();
 
-            kernel.Bind<IBookRepository>().To<EFBookRepository>();
+            //kernel.Bind<IBookRepository>().To<EFBookRepository>();
 
-            kernel.Bind<IBookAuthorsRepository>().To<EFBookAuthorRepository>();
+            //kernel.Bind<IBookAuthorsRepository>().To<EFBookAuthorRepository>();
 
-            kernel.Bind<IArticleRepository>().To<EFArticleRepository>();
-            kernel.Bind<IArticeAuthorsRepository>().To<EFArticleAuthorsRepository>();
+            //kernel.Bind<IArticleRepository>().To<EFArticleRepository>();
+            //kernel.Bind<IArticeAuthorsRepository>().To<EFArticleAuthorsRepository>();
 
-            kernel.Bind<IMagazineRepository>().To<EFMagazineRepository>();
-            kernel.Bind<IMagazineAuthorsRepository>().To<EFMagazineAuthorRepository>();
+            //kernel.Bind<IMagazineRepository>().To<EFMagazineRepository>();
+            //kernel.Bind<IMagazineAuthorsRepository>().To<EFMagazineAuthorRepository>();
 
-            kernel.Bind<IPublicationRepository>().To<EFPublicationRepository>();
-            kernel.Bind<IPublicationAuthorsRepository>().To<EFPublicationAuthorsRepository>();
+            //kernel.Bind<IPublicationRepository>().To<EFPublicationRepository>();
+            //kernel.Bind<IPublicationAuthorsRepository>().To<EFPublicationAuthorsRepository>();
 
             //kernel.Bind<IUnitOfWork>().To<EFUnitOfWork>();
         }

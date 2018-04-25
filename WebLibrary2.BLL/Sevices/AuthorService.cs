@@ -28,7 +28,7 @@ namespace WebLibrary2.BLL.Sevices
         public IEnumerable<AuthorView> GetAuthorViews()
         {
             var authors = dbUnitOfWork.AuthorsRepository.GetAllAuthors().ToList();
-            return mapper.Map<IEnumerable<Author>, IEnumerable<AuthorView>>(authors);
+            return Mapper.Map<IEnumerable<Author>, IEnumerable<AuthorView>>(authors);
         }
         public GetAuthorLiteratureVM GetAuthorsDetails(int? id)
         {

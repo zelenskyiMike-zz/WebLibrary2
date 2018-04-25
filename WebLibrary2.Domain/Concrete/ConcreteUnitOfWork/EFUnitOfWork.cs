@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebLibrary2.Domain.Abstract.AbstractArticle;
+﻿using WebLibrary2.Domain.Abstract.AbstractArticle;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
 using WebLibrary2.Domain.Abstract.AbstractBook;
 using WebLibrary2.Domain.Abstract.AbstractMagazine;
@@ -14,7 +9,6 @@ using WebLibrary2.Domain.Concrete.ConcreteAuthor;
 using WebLibrary2.Domain.Concrete.ConcreteBook;
 using WebLibrary2.Domain.Concrete.ConcreteMagazine;
 using WebLibrary2.Domain.Concrete.ConcretePublication;
-
 namespace WebLibrary2.Domain.Concrete.ConcreteUnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork

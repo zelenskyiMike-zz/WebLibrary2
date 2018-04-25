@@ -101,6 +101,8 @@
     <Compile Include="Abstract\AbstractAuthor\IAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IBookAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractBook\IBookRepository.cs" />
+    <Compile Include="Abstract\AbstractIdentity\IClientManager.cs" />
+    <Compile Include="Abstract\AbstractIdentity\IIdentityUnitOfWork.cs" />
     <Compile Include="Abstract\AbstractMagazine\IMagazineAuthorsRepository.cs" />
     <Compile Include="Abstract\AbstractMagazine\IMagazineRepository.cs" />
     <Compile Include="Abstract\AbstractPublication\IPublicationAuthorsRepository.cs" />
@@ -111,6 +113,8 @@
     <Compile Include="Concrete\ConcreteAuthor\EFAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteBook\EFBookAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteBook\EFBookRepository.cs" />
+    <Compile Include="Concrete\ConcreteIdentity\ClientManager.cs" />
+    <Compile Include="Concrete\ConcreteIdentity\EFIdentityUnitOfWork.cs" />
     <Compile Include="Concrete\ConcreteMagazine\EFMagazineAuthorRepository.cs" />
     <Compile Include="Concrete\ConcreteMagazine\EFMagazineRepository.cs" />
     <Compile Include="Concrete\ConcretePublication\EFPublicationAuthorsRepository.cs" />
@@ -133,6 +137,12 @@
     <Compile Include="Extensions\DeserializationExtensionClass.cs" />
     <Compile Include="Extensions\Enums.cs" />
     <Compile Include="Extensions\FilePath.cs" />
+    <Compile Include="IdentityEntities\ApplicationRole.cs" />
+    <Compile Include="IdentityEntities\ApplicationUser.cs" />
+    <Compile Include="IdentityEntities\ClientProfile.cs" />
+    <Compile Include="Identity\ApplicationContext.cs" />
+    <Compile Include="Identity\ApplicationRoleManager.cs" />
+    <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\AuthorView.cs" />

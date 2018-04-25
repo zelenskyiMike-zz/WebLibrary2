@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractArticle;
+using WebLibrary2.Domain.Concrete.ConcreteArticle;
 using WebLibrary2.Domain.Entity.ArticleEntity;
 using WebLibrary2.Domain.Extensions;
 
@@ -24,9 +25,9 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
         private MatchCollection matchJSON;
         private MatchCollection matchValidation;
 
-        IArticleRepository articlesRepository;
+        EFArticleRepository articlesRepository;
 
-        public ArticlesController(IArticleRepository articleRepository)
+        public ArticlesController(EFArticleRepository articleRepository)
         {
             articlesRepository = articleRepository;
 

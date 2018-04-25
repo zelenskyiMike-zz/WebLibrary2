@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractMagazine;
 using WebLibrary2.Domain.Concrete;
+using WebLibrary2.Domain.Concrete.ConcreteMagazine;
 using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.WebUI.Controllers.MagazineControllers
@@ -14,9 +15,9 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
     public class CRUDMagazineController : Controller
     {
         EFDbContext context;
-        IMagazineRepository magazineRepository;
-        IMagazineAuthorsRepository magazineAuthorsRepository;
-        public CRUDMagazineController(EFDbContext contextParam, IMagazineRepository magazinesRepository, IMagazineAuthorsRepository magazinesAuthorsRepository)
+        EFMagazineRepository magazineRepository;
+        EFMagazineAuthorRepository magazineAuthorsRepository;
+        public CRUDMagazineController(EFDbContext contextParam, EFMagazineRepository magazinesRepository, EFMagazineAuthorRepository magazinesAuthorsRepository)
         {
             context = contextParam;
             magazineRepository = magazinesRepository;

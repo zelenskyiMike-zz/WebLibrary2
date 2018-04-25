@@ -5,6 +5,8 @@ using System.Net;
 using System.Data;
 using WebLibrary2.Domain.Abstract.AbstractBook;
 using WebLibrary2.Domain.Abstract.AbstractAuthor;
+using WebLibrary2.Domain.Concrete.ConcreteBook;
+using WebLibrary2.Domain.Concrete.ConcreteAuthor;
 
 namespace WebLibrary2.WebUI.Controllers.BookControllers
 {
@@ -12,11 +14,12 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
     {
         private EFDbContext context;
 
-        IBookRepository bookRepository;
-        IAuthorsRepository authorRepository;
-        IBookAuthorsRepository bookAuthorRepository;
+        EFBookRepository bookRepository;
+        EFAuthorRepository authorRepository;
+        EFBookAuthorRepository bookAuthorRepository;
+        
       
-        public CRUDBookController(IBookRepository booksRepository, IAuthorsRepository authorsRepository, IBookAuthorsRepository bookAuthorsRepository, EFDbContext dataContext)
+        public CRUDBookController(EFBookRepository booksRepository, EFAuthorRepository authorsRepository, EFBookAuthorRepository bookAuthorsRepository, EFDbContext dataContext)
         {
             this.bookRepository = booksRepository;
             this.authorRepository = authorsRepository;

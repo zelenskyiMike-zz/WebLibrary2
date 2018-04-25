@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractPublication;
+using WebLibrary2.Domain.Concrete.ConcretePublication;
 using WebLibrary2.Domain.Entity.PublicationEntity;
 using WebLibrary2.Domain.Extensions;
 
@@ -22,9 +23,9 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
         private MatchCollection matchJSON;
         private MatchCollection matchValidation;
 
-        IPublicationRepository publicationRepository;
+        EFPublicationRepository publicationRepository;
 
-        public PublicationsController(IPublicationRepository publicationsRepository)
+        public PublicationsController(EFPublicationRepository publicationsRepository)
         {
             publicationRepository = publicationsRepository;
 

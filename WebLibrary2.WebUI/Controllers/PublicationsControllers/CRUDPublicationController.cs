@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractPublication;
 using WebLibrary2.Domain.Concrete;
+using WebLibrary2.Domain.Concrete.ConcretePublication;
 using WebLibrary2.Domain.Models;
 
 namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
@@ -14,10 +15,11 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
     public class CRUDPublicationController : Controller
     {
         EFDbContext context;
-        IPublicationRepository publicationRepository;
-        IPublicationAuthorsRepository publicationAuthorsRepository;
+        EFPublicationRepository publicationRepository;
+        EFPublicationAuthorsRepository publicationAuthorsRepository;
 
-        public CRUDPublicationController(EFDbContext contextParam, IPublicationRepository publicationsRepository, IPublicationAuthorsRepository publicationsAuthorsRepository)
+
+        public CRUDPublicationController(EFDbContext contextParam, EFPublicationRepository publicationsRepository, EFPublicationAuthorsRepository publicationsAuthorsRepository)
         {
             context = contextParam;
             publicationRepository = publicationsRepository;

@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebLibrary2.Domain.Abstract.AbstractBook;
+using WebLibrary2.Domain.Concrete.ConcreteBook;
 using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Extensions;
 
@@ -22,15 +23,9 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
         private MatchCollection matchJSON;
         private MatchCollection matchValidation;
 
-        IBookRepository booksRepository;
+        EFBookRepository booksRepository;
 
-        public BooksController()
-        {
-
-        }
-
-
-        public BooksController(IBookRepository bookRepository)
+        public BooksController(EFBookRepository bookRepository)
         {
             booksRepository = bookRepository;
 

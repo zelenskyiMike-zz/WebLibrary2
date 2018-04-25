@@ -33,6 +33,8 @@
     <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
@@ -47,11 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Infrastructure\OperationDetails.cs" />
     <Compile Include="Infrastructure\ServiceModule.cs" />
+    <Compile Include="Interfaces\IServiceCreator.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Mapping\MappingProfile.cs" />
     <Compile Include="Mapping\MappingProfiles\AuthorMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sevices\AuthorService.cs" />
+    <Compile Include="Sevices\ServiceCreator.cs" />
+    <Compile Include="Sevices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebLibrary2.Domain\WebLibrary2.Domain.csproj">
