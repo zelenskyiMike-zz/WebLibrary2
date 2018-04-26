@@ -120,6 +120,7 @@
     <Compile Include="Concrete\ConcretePublication\EFPublicationAuthorsRepository.cs" />
     <Compile Include="Concrete\ConcretePublication\EFPublicationRepository.cs" />
     <Compile Include="Concrete\ConcreteUnitOfWork\EFUnitOfWork.cs" />
+    <Compile Include="Concrete\ContextFactory.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Entity\ArticleEntity\Article.cs" />
     <Compile Include="Entity\ArticleEntity\ArticleAuthor.cs" />

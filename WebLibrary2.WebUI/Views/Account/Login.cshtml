@@ -1,0 +1,10 @@
+﻿@using WebLibrary2.WebUI.RoleModels
+@model LoginModel
+
+@Html.BeginForm()
+{
+@Html.AntiForgeryToken()
+    @Html.TextBox("Email")
+    @Html.TextBox("Password")
+<input type="submit" />
+}

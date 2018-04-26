@@ -25,9 +25,9 @@ namespace WebLibrary2.WebUI.Controllers
         private string serializeFolderPath;
         private string filePath;
 
-        public HomeController(EFDbContext dataContext)
+        public HomeController(EFDbContext context)
         {
-            this.context = dataContext;
+            this.context = context;
 
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
@@ -271,10 +271,10 @@ namespace WebLibrary2.WebUI.Controllers
 
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            context.Dispose();
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    context.Dispose();
+        //    base.Dispose(disposing);
+        //}
     }
 }

@@ -5,13 +5,15 @@ using WebLibrary2.Domain.Entity.MagazineEntity;
 using WebLibrary2.Domain.Entity.BookEntity;
 using WebLibrary2.Domain.Entity.ArticleEntity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WebLibrary2.Domain.IdentityEntities;
 
 namespace WebLibrary2.Domain.Concrete
 {
-    public class EFDbContext : DbContext
+    public class EFDbContext : IdentityDbContext<ApplicationUser>
     {
-        public EFDbContext() { }
-        public EFDbContext(string connectionString):base("EFDbContext")
+        public EFDbContext() : base("EFDbContext") { }
+        public EFDbContext(string connectionString) : base("EFDbContext")
         {
         }
 
