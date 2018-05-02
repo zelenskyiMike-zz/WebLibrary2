@@ -11,8 +11,8 @@ namespace WebLibrary2.Domain.Concrete.ConcreteIdentity
 {
     public class ClientManager : IClientManager
     {
-        public ApplicationContext Database { get; set; }
-        public ClientManager(ApplicationContext dataBase)
+        public EFDbContext Database { get; set; }
+        public ClientManager(EFDbContext dataBase)
         {
             Database = dataBase;
         }

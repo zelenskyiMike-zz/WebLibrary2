@@ -26,6 +26,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             publicationAuthorsRepository = publicationsAuthorsRepository;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreatePublication()
         {
@@ -36,6 +37,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreatePublication(PublicationViewModel publicationVM)
@@ -52,6 +54,8 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             return View(publicationVM);
         }
 
+
+        [Authorize(Roles = "user,admin")]
         [HttpGet]
         public ActionResult PublicationDetails(int? id)
         {
@@ -63,6 +67,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             return View(publicationVM);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditPublication(int? id)
         {
@@ -87,6 +92,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             return View(publication);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditPublication(GetM2MCRUDPublicationVM publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
@@ -97,25 +103,30 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             }
 
             var publicationToUpdate = publicationRepository.GetPublicationByID(publicationVM.PublicationID);
+            ViewBag.ActiveTab = publicationToUpdate.PublicationID.ToString();
 
             if (TryUpdateModel(publicationToUpdate))
             {
-                try
-                {
-                    publicationAuthorsRepository.DeleteAuthorFromPublication(publicationToUpdate.PublicationID, authorIDsForDelete);
-                    publicationAuthorsRepository.AddAuthorToPublication(publicationToUpdate.PublicationID, authorIDsForInsert);
-                    publicationRepository.Save();
-                }
-                catch (DataException dex)
-                {
-                    ModelState.AddModelError("", "Unable to save");
-                    Console.WriteLine(dex);
-                }
+                publicationAuthorsRepository.DeleteAuthorFromPublication(publicationToUpdate.PublicationID, authorIDsForDelete);
+                publicationAuthorsRepository.AddAuthorToPublication(publicationToUpdate.PublicationID, authorIDsForInsert);
+                publicationRepository.Save();
+                return new RedirectResult(Url.Action("Index", "Home", new {tab = "publications" }));
             }
 
-            return RedirectToAction("Index", "Home");
+            var publication = publicationRepository.GetPublicationDetails(publicationVM.PublicationID);
+
+
+            SelectList genres = new SelectList(context.PublicationGenres, "PublicationGenreID", "PublicationGenreName", publication.PublicationGenreID);
+            ViewData["PublicationGenres"] = genres;
+
+            MultiSelectList authors = new MultiSelectList(publicationRepository.GetAuthorsNotExistInPublication((int)publication.PublicationID), "AuthorID", "AuthorName", publication.Authors);
+            ViewData["Authors"] = authors;
+
+            return View("EditPublication", publication);
+
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeletePublication(int? id)
         {
@@ -132,6 +143,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             return View(publicationVM);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeletePublication(int id)

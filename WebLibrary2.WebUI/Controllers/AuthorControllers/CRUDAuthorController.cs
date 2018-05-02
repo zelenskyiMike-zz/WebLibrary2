@@ -19,7 +19,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             this.service = service;
             this.context = dataContext;
         }
-
+        [Authorize(Roles = "admin")]
         public ActionResult CreateAuthor()
         {
             MultiSelectList books = new MultiSelectList(context.Books, "BookID", "BookName");
@@ -27,6 +27,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateAuthor(AuthorView authorVM)
@@ -42,12 +43,14 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View(authorVM);
         }
 
+        [Authorize(Roles = "user")]
         public ActionResult AuthorsDetails(int id)
         {
             GetAuthorLiteratureVM authorVM = service.GetAuthorsDetails(id);
             return View(authorVM);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult EditAuthor(int? id)
         {
             if (id == null)
@@ -63,6 +66,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View(authorVM);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteAuthor(int? id)
         {
             if (id == null)
@@ -77,6 +81,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View(author);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAuthor(int id)

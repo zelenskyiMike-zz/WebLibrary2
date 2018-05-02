@@ -23,6 +23,8 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             magazineRepository = magazinesRepository;
             magazineAuthorsRepository = magazinesAuthorsRepository;
         }
+
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreateMagazine()
         {
@@ -33,6 +35,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateMagazine(MagazineViewModel magazineVM)
@@ -49,6 +52,8 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             return View(magazineVM);
         }
 
+
+        [Authorize(Roles = "user,admin")]
         [HttpGet]
         public ActionResult MagazineDetails(int? id)
         {
@@ -60,6 +65,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             return View(magazineVM);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditMagazine(int? id)
         {
@@ -84,6 +90,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             return View(magazine);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditMagazine(GetM2MCRUDMagazineVM magazineVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
@@ -97,44 +104,47 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
 
             if (TryUpdateModel(magazineToUpdate))
             {
-                try
-                {
-                    magazineAuthorsRepository.DeleteAuthorFromMagazine(magazineToUpdate.MagazineID, authorIDsForDelete);
-                    magazineAuthorsRepository.AddAuthorToMagazine(magazineToUpdate.MagazineID, authorIDsForInsert);
-                    magazineRepository.Save();
-                }
-                catch (DataException dex)
-                {
-                    ModelState.AddModelError("", "Unable to save");
-                    Console.WriteLine(dex);
-                }
+                magazineAuthorsRepository.DeleteAuthorFromMagazine(magazineToUpdate.MagazineID, authorIDsForDelete);
+                magazineAuthorsRepository.AddAuthorToMagazine(magazineToUpdate.MagazineID, authorIDsForInsert);
+                magazineRepository.Save();
+                return RedirectToAction("Index", "Home");
             }
+            var magazine = magazineRepository.GetMagazineDetails(magazineVM.MagazineID);
 
-            return RedirectToAction("Index", "Home");
+            SelectList genres = new SelectList(context.MagazineGenres, "MagazineGenreID", "MagazineGenreName", magazine.MagazineGenreID);
+            ViewData["MagazineGenres"] = genres;
+
+            MultiSelectList authors = new MultiSelectList(magazineRepository.GetAuthorsNotExistInMagazine((int)magazine.MagazineID), "AuthorID", "AuthorName", magazine.Authors);
+            ViewData["Authors"] = authors;
+
+            return View("EditMagazine", magazine);
         }
+    
 
-        [HttpGet]
-        public ActionResult DeleteMagazine(int? id)
+    [Authorize(Roles = "admin")]
+    [HttpGet]
+    public ActionResult DeleteMagazine(int? id)
+    {
+        if (id == null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            GetM2MCRUDMagazineVM magazineVM = magazineRepository.GetMagazineDetails(id);
-            if (magazineVM == null)
-            {
-                HttpNotFound();
-            }
-            return View(magazineVM);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteMagazine(int id)
+        GetM2MCRUDMagazineVM magazineVM = magazineRepository.GetMagazineDetails(id);
+        if (magazineVM == null)
         {
-            magazineRepository.DeleteMagazine(id);
-            return RedirectToAction("Index", "Home");
+            HttpNotFound();
         }
+        return View(magazineVM);
     }
+
+    [Authorize(Roles = "admin")]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteMagazine(int id)
+    {
+        magazineRepository.DeleteMagazine(id);
+        return RedirectToAction("Index", "Home");
+    }
+}
 }

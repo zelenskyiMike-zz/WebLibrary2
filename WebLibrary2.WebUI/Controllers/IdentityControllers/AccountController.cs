@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Microsoft.Owin.Host.SystemWeb;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,6 +13,7 @@ using WebLibrary2.BLL.DTO;
 using WebLibrary2.BLL.Infrastructure;
 using WebLibrary2.BLL.Interfaces;
 using WebLibrary2.WebUI.RoleModels;
+using WebLibrary2.Domain.Identity;
 
 namespace WebLibrary2.WebUI.Controllers.IdentityControllers
 {
@@ -21,11 +23,11 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
         {
             get
             {
-                //DOESNT WORK HERE
                 return HttpContext.GetOwinContext().GetUserManager<IUserService>();
             }
         }
-        private IAuthenticationManager AuthentificationManager
+
+        private IAuthenticationManager AuthenticationManager
         {
             get
             {
@@ -33,30 +35,27 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
             }
         }
 
-        // GET: Account
         public ActionResult Login()
         {
-
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserDTO userDTO = new UserDTO { Email = model.Email, Password = model.Password };
-                ClaimsIdentity claim = await UserService.Authentificate(userDTO);
+                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password };
+                ClaimsIdentity claim = await UserService.Authenticate(userDto);
                 if (claim == null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    ModelState.AddModelError("", "Wrong login or password.");
                 }
                 else
                 {
-                    AuthentificationManager.SignOut();
-                    AuthentificationManager.SignIn(new AuthenticationProperties
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
                     {
                         IsPersistent = true
                     }, claim);
@@ -65,11 +64,14 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
             }
             return View(model);
         }
-        public ActionResult Logout()
+
+        public ActionResult LogOut()
         {
-            AuthentificationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            AuthenticationManager.SignOut();
+
+            return RedirectToAction("LogIn", "Account");
         }
+
         public ActionResult Register()
         {
             return View();
@@ -79,10 +81,10 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            await SetInitialDataAsync();
+            // await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserDTO userDTO = new UserDTO
+                UserDTO userDto = new UserDTO
                 {
                     Email = model.Email,
                     Password = model.Password,
@@ -90,28 +92,35 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
                     Name = model.Name,
                     Role = "user"
                 };
-                OperationDetails operationDetails = await UserService.Create(userDTO);
+                OperationDetails operationDetails = await UserService.Create(userDto);
                 if (operationDetails.Succedeed)
-                    return View("SuccessRegister");
-                else
+                {
+                    return RedirectToAction("RegisterSucceed", "Account");
+                }
+                if (!operationDetails.Succedeed)
+                {
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
+                }
             }
             return View(model);
         }
 
-
-
+        public ActionResult RegisterSucceed()
+        {
+            //string name = User.Identity.Name;
+            return View();
+        }
         private async Task SetInitialDataAsync()
         {
             await UserService.SetInitialData(new UserDTO
             {
-                Email = "somemail@mail.ru",
-                UserName = "somemail@mail.ru",
-                Password = "ad46D_ewr3",
-                Name = "Семен Семенович Горбунков",
-                Address = "ул. Спортивная, д.30, кв.75",
+                Email = "zzTop@mail.ru",
+                UserName = "zzAdmin",
+                Password = "11root11",
+                Name = "Zelenskiy M.",
+                Address = "ул. Целиноградская, 58",
                 Role = "admin",
-            }, new List<string> {"user","admin"});
+            }, new List<string> { "user", "admin" });
         }
     }
 }

@@ -51,6 +51,8 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
             return View(articleVM);
         }
 
+
+        [Authorize(Roles = "user,admin")]
         [HttpGet]
         public ActionResult ArticleDetails(int? id)
         {
@@ -99,20 +101,21 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
 
             if (TryUpdateModel(articleToUpdate))
             {
-                try
-                {
-                    articleAuthorsRepository.DeleteAuthorFromArticle(articleToUpdate.ArticleID, authorIDsForDelete);
-                    articleAuthorsRepository.AddAuthorToArticle(articleToUpdate.ArticleID, authorIDsForInsert);
-                    articleRepository.Save();
-                }
-                catch (DataException dex)
-                {
-                    ModelState.AddModelError("", "Unable to save");
-                    Console.WriteLine(dex);
-                }
-            }
+                articleAuthorsRepository.DeleteAuthorFromArticle(articleToUpdate.ArticleID, authorIDsForDelete);
+                articleAuthorsRepository.AddAuthorToArticle(articleToUpdate.ArticleID, authorIDsForInsert);
+                articleRepository.Save();
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+            var article = articleRepository.GetArticleDetails(articleVM.ArticleID);
+
+            SelectList genres = new SelectList(context.ArticleGenres, "ArticleGenreID", "ArticleGenreName", article.ArticleGenreID);
+            ViewData["ArticleGenres"] = genres;
+
+            MultiSelectList authors = new MultiSelectList(articleRepository.GetAuthorsNotExistInArticle((int)article.ArticleGenreID), "AuthorID", "AuthorName", article.Authors);
+            ViewData["Authors"] = authors;
+
+            return View("EditArticle", article);
         }
 
         [HttpGet]

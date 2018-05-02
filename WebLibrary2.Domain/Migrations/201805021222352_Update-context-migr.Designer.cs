@@ -7,18 +7,18 @@ namespace WebLibrary2.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class Updatecontextmigr : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Updatecontextmigr));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803231220435_Init"; }
+            get { return "201805021222352_Update-context-migr"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

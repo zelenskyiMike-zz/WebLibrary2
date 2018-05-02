@@ -6,4 +6,22 @@
     <ArticleName>Article 1</ArticleName>
     <DateOfArticlePublish>2018-04-01T00:00:00</DateOfArticlePublish>
   </Article>
+  <Article>
+    <ArticleID>1</ArticleID>
+    <ArticleGenreID>1</ArticleGenreID>
+    <ArticleName>Article 1</ArticleName>
+    <DateOfArticlePublish>2018-04-01T00:00:00</DateOfArticlePublish>
+  </Article>
+  <Article>
+    <ArticleID>2</ArticleID>
+    <ArticleGenreID>2</ArticleGenreID>
+    <ArticleName>Article 2</ArticleName>
+    <DateOfArticlePublish>2013-04-30T00:00:00</DateOfArticlePublish>
+  </Article>
+  <Article>
+    <ArticleID>3</ArticleID>
+    <ArticleGenreID>3</ArticleGenreID>
+    <ArticleName>Article 3</ArticleName>
+    <DateOfArticlePublish>2004-05-20T00:00:00</DateOfArticlePublish>
+  </Article>
 </ArrayOfArticle>

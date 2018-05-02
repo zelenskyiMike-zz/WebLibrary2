@@ -1,0 +1,53 @@
+﻿<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@{
+    Layout = null;
+}
+@using WebLibrary2.WebUI.RoleModels
+@model RegisterModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="container col-md-3">
+
+    <h4 class="text-center">Registration</h4>
+    <br />
+
+    <div>
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-mail" } })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+    <br />
+
+    <div>
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+    <br />
+
+    <div>
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+    <br />
+
+    <div>
+        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirm Password" } })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+    <br />
+
+    <div>
+        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Adress" } })
+        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+    </div>
+    <div class="text-danger list-unstyled">@Html.ValidationSummary(true)</div>
+    <br />
+    <div>
+        <div>
+            <input type="submit" value="Register" class="btn btn-lg btn-success btn-block" />
+        </div>
+    </div>
+</div>
+}

@@ -32,5 +32,7 @@ namespace WebLibrary2.Domain.Concrete
         public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
         public DbSet<MagazineAuthor> MagazineAuthors { get; set; }
         public DbSet<PublicationeAuthor> PublicationeAuthors { get; set; }
+
+        public DbSet<ClientProfile> ClientProfiles { get; set; }
     }
 }

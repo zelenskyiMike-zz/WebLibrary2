@@ -17,8 +17,8 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
         EFBookRepository bookRepository;
         EFAuthorRepository authorRepository;
         EFBookAuthorRepository bookAuthorRepository;
-        
-      
+
+
         public CRUDBookController(EFBookRepository booksRepository, EFAuthorRepository authorsRepository, EFBookAuthorRepository bookAuthorsRepository, EFDbContext dataContext)
         {
             this.bookRepository = booksRepository;
@@ -27,6 +27,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             this.context = dataContext;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreateBook()
         {
@@ -37,6 +38,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateBook(BookViewModel bookVM)
@@ -54,13 +56,14 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             return View(bookVM);
         }
 
-
+        [Authorize(Roles = "user,admin")]
         public ActionResult BookDetails(int id = 0)
         {
             var book = bookRepository.GetBooksDetails(id);
             return View(book);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditBook(int? id)
         {
@@ -73,7 +76,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
             ViewData["Genres"] = genres;
 
-            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook((int)id),"AuthorID","AuthorName",book.Authors);
+            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook((int)id), "AuthorID", "AuthorName", book.Authors);
             ViewData["Authors"] = authors;
 
             if (book == null)
@@ -84,28 +87,32 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             return View(book);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBook(GetM2MCRUDBookVM book, int [] authorIDsForDelete, int [] authorIDsForInsert)
+        public ActionResult EditBook(GetM2MCRUDBookVM bookFromView, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
-            var bookToUpdate = bookRepository.GetBookByID(book.BookID);
+            var bookToUpdate = bookRepository.GetBookByID(bookFromView.BookID);
 
             if (TryUpdateModel(bookToUpdate))
             {
-                try
-                {
-                    bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDsForDelete);
-                    bookAuthorRepository.AddAuthorToBook(bookToUpdate.BookID, authorIDsForInsert);
-                    bookRepository.Save();
-                }
-                catch (DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save");
-                }
+                bookAuthorRepository.DeleteAuthorFromBook(bookToUpdate.BookID, authorIDsForDelete);
+                bookAuthorRepository.AddAuthorToBook(bookToUpdate.BookID, authorIDsForInsert);
+                bookRepository.Save();
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+
+            var book = bookRepository.GetBooksDetails(bookFromView.BookID);
+            SelectList genres = new SelectList(context.Genres, "GenreID", "GenreName", book.GenreID);
+            ViewData["Genres"] = genres;
+
+            MultiSelectList authors = new MultiSelectList(bookRepository.GetAuthorsNotExistInBook((int)book.BookID), "AuthorID", "AuthorName", book.Authors);
+            ViewData["Authors"] = authors;
+
+            return View("EditBook", book);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteBook(int? id)
         {
             if (id == null)
@@ -120,6 +127,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             return View(book);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteBook(int id)

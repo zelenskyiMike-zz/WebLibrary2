@@ -4,55 +4,107 @@
     ViewBag.Title = "ArticlesView";
 
 }
-@using (Html.BeginForm("DeserializeArticle", "Articles", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+@if (User.IsInRole(WebLibrary2.Domain.Enums.Enum.Roles.admin.ToString()))
 {
-    <div class="btn btn-default">
-        <input type="file" name="file" id="Upload" size="60" />
-        <input type="submit" value="Deserialize" id="file" class="btn btn-light" />
-    </div>
-}
-@using (Html.BeginForm())
-{
-    <div>
+    using (Html.BeginForm("DeserializeArticle", "Articles", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
         <div class="btn btn-default">
-            @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-light" })
-            <input type="submit" name="toJson" value="To JSON"
-                   formaction="~/Home/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
-            <input type="submit" name="toXml" value="To XML"
-                   formaction="~/Home/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
+            <input type="file" name="file" id="Upload" size="60" />
+            <input type="submit" value="Deserialize" id="file" class="btn btn-light" />
         </div>
-        <br />
-        <table>
-            <tr>
-                <th class="text-center"><h4>Название</h4></th>
-                <th class="text-center"><h4>Действие</h4></th>
-                <th class="text-center"><h4>JSON/XML</h4></th>
-            </tr>
-            @foreach (var article in Model)
-            {
+    }
+    using (Html.BeginForm())
+    {
+        <div>
+            <div class="btn btn-default">
+                @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-light" })
+                <input type="submit" name="toJson" value="To JSON"
+                       formaction="~/Home/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
+                <input type="submit" name="toXml" value="To XML"
+                       formaction="~/Home/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
+            </div>
+            <br />
+            <table>
                 <tr>
-                    <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
-                    <td>
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div> |
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div>|
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class=" btn btn-default">
-                            <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
-                        </div>
-                    </td>
+                    <th class="text-center"><h4>Название</h4></th>
+                    <th class="text-center"><h4>Действие</h4></th>
+                    <th class="text-center"><h4>JSON/XML</h4></th>
                 </tr>
-            }
-        </table>
-        <br />
-    </div>
+                @foreach (var article in Model)
+                {
+                    <tr>
+                        <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+                        <td>
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div> |
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div>|
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class=" btn btn-default">
+                                <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+        </div>
+    }
 }
+
+@if (User.IsInRole(WebLibrary2.Domain.Enums.Enum.Roles.user.ToString()))
+{
+    using (Html.BeginForm("DeserializeArticle", "Articles", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
+        <div class="btn btn-default">
+            <input type="file" name="file" id="Upload" size="60" />
+            <input type="submit" value="Deserialize" id="file" class="btn btn-light" />
+        </div>
+    }
+    using (Html.BeginForm())
+    {
+        <div>
+            <div class="btn btn-default">
+                <input type="submit" name="toJson" value="To JSON"
+                       formaction="~/Home/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
+                <input type="submit" name="toXml" value="To XML"
+                       formaction="~/Home/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
+            </div>
+            <br />
+            <table>
+                <tr>
+                    <th class="text-center"><h4>Название</h4></th>
+                    <th class="text-center"><h4>Действие</h4></th>
+                    <th class="text-center"><h4>JSON/XML</h4></th>
+                </tr>
+                @foreach (var article in Model)
+                {
+                    <tr>
+                        <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+                        <td>
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class=" btn btn-default">
+                                <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+        </div>
+    }
+}
+
+
 
 

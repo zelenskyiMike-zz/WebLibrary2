@@ -1,0 +1,14 @@
+﻿<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@{
+    Layout = null;
+}
+<br />
+<div class="container col-md-3">
+    <div class="text-center">
+        <h2> Registration Succeed. Please, login to start using WebLibrary</h2>
+    </div>
+    <div>
+        @Html.ActionLink("Login", "Login", "Account",null,new { @class ="btn btn-lg btn-success btn-block" })
+    </div>
+</div>
+

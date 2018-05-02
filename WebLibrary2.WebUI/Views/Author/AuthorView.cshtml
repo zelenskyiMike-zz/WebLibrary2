@@ -7,30 +7,57 @@
 <br />
 <h2>Список авторов</h2>
 <br />
-<table>
-    <tr>
-        <th class="text-center"><h4>Автор</h4></th>
-        <th class="text-center"><h4>Действие</h4></th>
-    </tr>
-    @foreach (var author in Model)
-    {
+@if (User.IsInRole("admin"))
+{
+    @Html.ActionLink("Добавить автора", "CreateAuthor", "CRUDAuthor", null, new { @class = "btn btn-light" })
+    <table>
         <tr>
-
-            <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
-
-            <td>
-
-                <div class=" btn btn-default">
-                    @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
-                </div> |
-                <div class=" btn btn-default">
-                    @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
-                </div>|
-                <div class=" btn btn-default">
-                    @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
-                </div>
-
-            </td>
+            <th class="text-center"><h4>Автор</h4></th>
+            <th class="text-center"><h4>Действие</h4></th>
         </tr>
-    }
-</table>
+        @foreach (var author in Model)
+        {
+            <tr>
+
+                <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+
+                <td>
+
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Редактировать", "EditAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeleteAuthor", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div>|
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if (User.IsInRole("user"))
+{
+
+    <table>
+        <tr>
+            <th class="text-center"><h4>Автор</h4></th>
+            <th class="text-center"><h4>Действие</h4></th>
+        </tr>
+        @foreach (var author in Model)
+        {
+            <tr>
+
+                <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+                <td>
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "AuthorsDetails", "CRUDAuthor", new { id = author.AuthorID }, null)
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </table>
+}

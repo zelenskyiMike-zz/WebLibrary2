@@ -12,7 +12,7 @@ namespace WebLibrary2.BLL.Interfaces
     public interface IUserService : IDisposable
     {
         Task<OperationDetails> Create(UserDTO userDTO);
-        Task<ClaimsIdentity> Authentificate(UserDTO userDTO);
+        Task<ClaimsIdentity> Authenticate(UserDTO userDTO);
         Task SetInitialData(UserDTO adminDTO,List<string> roles);
     }
 }

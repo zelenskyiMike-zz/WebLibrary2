@@ -8,7 +8,8 @@ namespace WebLibrary2.WebUI.RoleModels
 {
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
@@ -17,9 +18,9 @@ namespace WebLibrary2.WebUI.RoleModels
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
     }
 }

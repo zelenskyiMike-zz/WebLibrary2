@@ -12,8 +12,7 @@ namespace WebLibrary2.Domain.Concrete.ConcreteIdentity
 {
     public class EFIdentityUnitOfWork : IIdentityUnitOfWork
     {
-        private ApplicationContext dataBase;
-        private bool disposed = false;
+        private EFDbContext db;
 
         private ApplicationUserManager userManager;
         private ApplicationRoleManager roleManager;
@@ -21,10 +20,10 @@ namespace WebLibrary2.Domain.Concrete.ConcreteIdentity
 
         public EFIdentityUnitOfWork(string connectionString)
         {
-            dataBase = new ApplicationContext(connectionString);
-            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(dataBase));
-            roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(dataBase));
-            clientManager = new ClientManager(dataBase);
+            db = new EFDbContext(connectionString);
+            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
+            clientManager = new ClientManager(db);
         }
 
         public ApplicationUserManager UserManager
@@ -42,10 +41,17 @@ namespace WebLibrary2.Domain.Concrete.ConcreteIdentity
             get { return roleManager; }
         }
 
+        public async Task SaveAsync()
+        {
+            await db.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
+        private bool disposed = false;
 
         public virtual void Dispose(bool disposing)
         {
@@ -53,16 +59,12 @@ namespace WebLibrary2.Domain.Concrete.ConcreteIdentity
             {
                 if (disposing)
                 {
-                    roleManager.Dispose();
                     userManager.Dispose();
+                    roleManager.Dispose();
                     clientManager.Dispose();
                 }
                 this.disposed = true;
             }
-        }
-        public async Task SaveAsync()
-        {
-            await dataBase.SaveChangesAsync();
         }
     }
 }

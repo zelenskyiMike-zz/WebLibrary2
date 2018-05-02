@@ -29,6 +29,7 @@ namespace WebLibrary2.WebUI
             NinjectModule registrations = new ServiceModule(connectionString);
             var kernel = new StandardKernel(registrations);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
         }
     }
 }
