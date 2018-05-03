@@ -34,7 +34,7 @@ namespace WebLibrary2.WebUI.Controllers
 
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string tabID)
         {
             return View();
         }

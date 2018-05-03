@@ -2,6 +2,7 @@
 @model GetM2MCRUDArticleVM
 @{
     ViewBag.Title = "ArticleDetails";
+
 }
 <div>
     <hr />
@@ -23,5 +24,13 @@
     </dl>
 </div>
 
-@*<div class="btn btn-default"> @Html.ActionLink("Редактировать", "EditBook", "CRUDBook", new { id = Model.FirstOrDefault()}, null)</div>*@
-<div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
+<div class="btn btn-default">
+    <a onclick="returnToBack()">Назад к списку</a>
+    @*@Html.ActionLink("Назад к списку", "Index", "Home")*@
+</div>
+
+<script>
+    function returnToBack() {
+        window.location.href = "/Home/Index" + localStorage.getItem('tabID').toString();
+    }
+</script>

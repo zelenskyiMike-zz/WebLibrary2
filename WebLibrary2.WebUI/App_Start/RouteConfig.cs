@@ -14,6 +14,12 @@ namespace WebLibrary2.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "CustomRoute",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Account", action = "Login" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }

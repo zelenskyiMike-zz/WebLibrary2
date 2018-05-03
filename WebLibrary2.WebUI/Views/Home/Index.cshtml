@@ -12,13 +12,13 @@
     <br />
     <div class="bs-popover">
         <ul id="myTabs" class="nav nav-tabs" role="tabpanel">
-            <li role="presentation"><button class="btn btn-light active show" href="#books" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" id="booksUpdate">Книги</button></li>
+            <li role="presentation"><button class="btn btn-light active show" href="#books" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Книги</button></li>
             <li role="presentation"><button class="btn btn-light" href="#articles" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Статьи</button></li>
             <li role="presentation"><button class="btn btn-light" href="#magazines" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Журналы</button></li>
             <li role="presentation"><button class="btn btn-light" href="#publications" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Публикации</button></li>
         </ul>
 
-        <div id="myTabContent" class="tab-content">
+        <div class="tab-content">
             <div role="tabpanel" class="tab-pane active " id="books" aria-labelledby="home-tab">@Html.Action("BooksView", "Books")</div>
             <div role="tabpanel" class="tab-pane fade" id="articles" aria-labelledby="profile-tab">@Html.Action("ArticlesView", "Articles")</div>
             <div role="tabpanel" class="tab-pane fade" id="magazines" aria-labelledby="profile-tab">@Html.Action("MagazinesView", "Magazine")</div>
@@ -28,3 +28,4 @@
     </div>
     <br />
 </div>
+
