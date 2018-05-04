@@ -149,12 +149,20 @@ namespace WebLibrary2.Domain.Concrete.ConcreteAuthor
         public GetAuthorLiteratureVM GetAuthorsDetails(int? id)
         {
             Author author = GetAuthorByID(id);
-            var booksList = context.BookAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Books).ToList();
+
+            List<Book> booksList = context.BookAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Books).ToList();
+            List<Article> articlesList = context.ArticleAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Articles).ToList();
+            List<Magazine> magazinesList = context.MagazineAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Magazines).ToList();
+            List<Publication> publicationsList = context.PublicationeAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Publications).ToList();
+
             GetAuthorLiteratureVM authorVM = new GetAuthorLiteratureVM()
             {
                 AuthorID = author.AuthorID,
                 AuthorName = author.AuthorName,
-                Books = booksList
+                Books = booksList,
+                Articles = articlesList,
+                Magazines = magazinesList,
+                Publications = publicationsList
             };
             return authorVM;
         }

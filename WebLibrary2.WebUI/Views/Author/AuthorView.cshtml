@@ -61,3 +61,19 @@
         }
     </table>
 }
+
+@if (!User.IsInRole("user") && !User.IsInRole("admin"))
+{
+    <table>
+        <tr>
+            <th class="text-center"><h4>Автор</h4></th>
+        </tr>
+        @foreach (var author in Model)
+        {
+            <tr>
+
+                <td><h4>@Html.DisplayFor(modelItem => author.AuthorName)</h4></td>
+            </tr>
+        }
+    </table>
+}

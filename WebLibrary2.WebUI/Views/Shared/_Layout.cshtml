@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – библиотека ASP.NET</title>
+    <title>@ViewBag.Title – Библиотека ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,26 +17,54 @@
     <script src="@Url.Content("~/Scripts/custom/TabControl.js")" type="text/javascript"></script>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top navbar-expand-sm bg-dark navbar-dark">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("WebLibrary", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav">
-                    <li>@Html.ActionLink("Список авторов", "AuthorView", "Author", new { area = "" }, new { @class = "navbar-brand" })</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
-                </ul>
-            </div>
+    @if (HttpContext.Current.User.IsInRole("admin") || HttpContext.Current.User.IsInRole("user"))
+    {
+        <div class="navbar navbar-fixed-top navbar-expand-sm bg-primary navbar-dark">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("WebLibrary", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav">
+                        <li>@Html.ActionLink("Список авторов", "AuthorView", "Author", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    </ul>
+                </div>
 
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class = "navbar-brand float-right" >Hello, @User.Identity.Name</li>
-                    <li>@Html.ActionLink("Logоut", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand float-right" })</li>
-                </ul>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class = "navbar-brand ">Hello, @User.Identity.Name</li>
+                        <li>@Html.ActionLink("Logout", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand float-right" })</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    }
+
+    @if (!HttpContext.Current.User.IsInRole("admin") && !HttpContext.Current.User.IsInRole("user"))
+    {
+        <div class="navbar navbar-fixed-top navbar-expand-sm bg-dark navbar-dark ">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("WebLibrary", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav">
+                        <li>@Html.ActionLink("Список авторов", "AuthorView", "Author", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Контакты", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li>@Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "navbar-brand float-right" })</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />

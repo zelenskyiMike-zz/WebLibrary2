@@ -24,13 +24,14 @@
     </dl>
 </div>
 
-<div class="btn btn-default">
-    <a onclick="returnToBack()">Назад к списку</a>
-    @*@Html.ActionLink("Назад к списку", "Index", "Home")*@
+<div class="btn btn-light">
+    @Html.ActionLink("Назад к списку", "Index", "Home",null,null,"articles",null,null)
 </div>
 
 <script>
     function returnToBack() {
-        window.location.href = "/Home/Index" + localStorage.getItem('tabID').toString();
+        var tabItem = localStorage.getItem('tabID');
+        window.location.href = "Home/Index" + tabItem;
+        return tabItem;
     }
 </script>

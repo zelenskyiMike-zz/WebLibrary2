@@ -69,7 +69,7 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
         {
             AuthenticationManager.SignOut();
 
-            return RedirectToAction("LogIn", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Register()
@@ -107,7 +107,6 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
 
         public ActionResult RegisterSucceed()
         {
-            //string name = User.Identity.Name;
             return View();
         }
         private async Task SetInitialDataAsync()

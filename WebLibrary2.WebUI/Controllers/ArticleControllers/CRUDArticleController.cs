@@ -109,7 +109,7 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
             }
             var article = articleRepository.GetArticleDetails(articleVM.ArticleID);
 
-            SelectList genres = new SelectList(context.ArticleGenres, "ArticleGenreID", "ArticleGenreName", article.ArticleGenreID);
+            SelectList genres = new SelectList(context.ArticleGenres, "ArticleGenreID", "ArticleGenreName", articleVM.ArticleGenreID);
             ViewData["ArticleGenres"] = genres;
 
             MultiSelectList authors = new MultiSelectList(articleRepository.GetAuthorsNotExistInArticle((int)article.ArticleGenreID), "AuthorID", "AuthorName", article.Authors);

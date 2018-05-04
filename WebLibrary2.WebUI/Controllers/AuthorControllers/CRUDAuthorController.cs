@@ -43,7 +43,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
             return View(authorVM);
         }
 
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "user,admin")]
         public ActionResult AuthorsDetails(int id)
         {
             GetAuthorLiteratureVM authorVM = service.GetAuthorsDetails(id);

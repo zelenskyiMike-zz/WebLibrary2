@@ -134,7 +134,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
         {
             bookRepository.DeleteBook(id);
             bookRepository.Save();
-            return RedirectToAction("BooksView", "Books");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

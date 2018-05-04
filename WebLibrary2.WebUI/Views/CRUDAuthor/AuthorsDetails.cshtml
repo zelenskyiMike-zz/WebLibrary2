@@ -8,15 +8,41 @@
 <h2>Details</h2>
 <dt>@Html.DisplayNameFor(model => model.AuthorName)</dt>
 <dd>@Html.DisplayFor(model => model.AuthorName)</dd>
-<div>
-    <dt>Book name</dt>
-    @foreach (var b in Model.Books)
-    {
-        <dd> @b.BookName</dd>
+<div class="row">
+    <div class="col-sm">
+        <div class="font-weight-bold">Books name</div>
+        @foreach (var b in Model.Books)
+        {
+            @b.BookName<br />
 
-    }
+        }
+    </div>
+    <div class="col-sm">
+        <div class="font-weight-bold">Articles name</div>
+        @foreach (var a in Model.Articles)
+        {
+            @a.ArticleName<br />
+
+        }
+    </div>
+    <div class="col-sm">
+        <div class="font-weight-bold">Magazines name</div>
+        @foreach (var m in Model.Magazines)
+        {
+            @m.MagazineName<br />
+
+        }
+    </div>
+    <div class="col-sm">
+        <div class="font-weight-bold">Publications name</div>
+        @foreach (var p in Model.Publications)
+        {
+            @p.PublicationName<br />
+
+        }
+    </div>
 </div>
-<button>@Html.ActionLink("Назад к списку", "AuthorView", "Author",null, new { @class = "btn" })</button>
+<button>@Html.ActionLink("Назад к списку", "AuthorView", "Author", null, new { @class = "btn" })</button>
 
 
 

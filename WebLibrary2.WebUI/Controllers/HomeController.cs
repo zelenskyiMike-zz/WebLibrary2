@@ -52,25 +52,30 @@ namespace WebLibrary2.WebUI.Controllers
             filePath = serializeFolderPath + @"\JsonArticles.json";
             if (articleSerializationID != null)
             {
-                List<Article> articlesToSerialize = new List<Article>();
-                articlesToSerialize = DeserializationExtensionClass.DeserializeJSON<Article>(filePath);
+                //if (!System.IO.File.Exists(filePath))
+                //{
+                //    HttpPostedFile file ;
 
-                foreach (int article in articleSerializationID.ToList())
-                {
-                    Article articleToSerialize = context.Articles.Find(article);
-                    if (/*doesnt work*/!articlesToSerialize.Contains(articleToSerialize))
+                //    file.SaveAs(filePath);
+                    List<Article> articlesToSerialize = new List<Article>();
+                    articlesToSerialize = DeserializationExtensionClass.DeserializeJSON<Article>(filePath);
+
+                    foreach (int article in articleSerializationID.ToList())
                     {
-                        articlesToSerialize.Add(articleToSerialize);
+                        Article articleToSerialize = context.Articles.Find(article);
+                        if (/*doesnt work*/!articlesToSerialize.Contains(articleToSerialize))
+                        {
+                            articlesToSerialize.Add(articleToSerialize);
+                        }
                     }
-                }
 
-                using (StreamWriter streamWriter = new StreamWriter(new FileStream(filePath, FileMode.OpenOrCreate)))
-                {
+                    using (StreamWriter streamWriter = new StreamWriter(new FileStream(filePath, FileMode.OpenOrCreate)))
+                    {
+                        JsonSerializer jsonSerializer = new JsonSerializer();
+                        jsonSerializer.Serialize(streamWriter, articlesToSerialize);
+                    }
 
-                    JsonSerializer jsonSerializer = new JsonSerializer();
-                    jsonSerializer.Serialize(streamWriter, articlesToSerialize);
-                }
-                return RedirectToAction("Index", "Home");
+               // }
             }
             //--------------------------------------------------------------------------------//
             return RedirectToAction("Index", "Home");

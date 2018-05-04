@@ -27,30 +27,32 @@
         <table>
             <tr>
                 <th class="text-center"><h4>Название</h4></th>
+                <th class="text-center"><h4>Жанр</h4></th>
                 <th class="text-center"><h4>Действие</h4></th>
                 <th class="text-center"><h4>JSON/XML</h4></th>
             </tr>
             @foreach (var magazine in Model)
             {
-                <tr>
-                    <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineName)</h4></td>
-                    <td>
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Редактировать", "EditMagazine", "CRUDMagazine", new { id = magazine.MagazineID }, null)
-                        </div> |
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Удалить", "DeleteMagazine", "CRUDMagazine", new { id = magazine.MagazineID }, null)
-                        </div>|
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "MagazineDetails", "CRUDMagazine", new { id = magazine.MagazineID }, null)
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class=" btn btn-default">
-                            <input type="checkbox" name="magazineSerializationID" value="@magazine.MagazineID" />
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineName)</h4></td>
+                <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineGenres.MagazineGenreName)</h4></td>
+                <td>
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Редактировать", "EditMagazine", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                    </div> |
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Удалить", "DeleteMagazine", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                    </div>|
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "MagazineDetails", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class=" btn btn-default">
+                        <input type="checkbox" name="magazineSerializationID" value="@magazine.MagazineID" />
+                    </div>
+                </td>
+            </tr>
             }
         </table>
     }
@@ -77,25 +79,46 @@
         <table>
             <tr>
                 <th class="text-center"><h4>Название</h4></th>
+                <th class="text-center"><h4>Жанр</h4></th>
                 <th class="text-center"><h4>Действие</h4></th>
                 <th class="text-center"><h4>JSON/XML</h4></th>
             </tr>
             @foreach (var magazine in Model)
             {
-                <tr>
-                    <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineName)</h4></td>
-                    <td>
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "MagazineDetails", "CRUDMagazine", new { id = magazine.MagazineID }, null)
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class=" btn btn-default">
-                            <input type="checkbox" name="magazineSerializationID" value="@magazine.MagazineID" />
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineName)</h4></td>
+                <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineGenres.MagazineGenreName)</h4></td>
+                <td>
+                    <div class=" btn btn-default">
+                        @Html.ActionLink("Детали", "MagazineDetails", "CRUDMagazine", new { id = magazine.MagazineID }, null)
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class=" btn btn-default">
+                        <input type="checkbox" name="magazineSerializationID" value="@magazine.MagazineID" />
+                    </div>
+                </td>
+            </tr>
             }
         </table>
     }
+}
+@if (!User.IsInRole(WebLibrary2.Domain.Enums.Enum.Roles.user.ToString()) && !User.IsInRole(WebLibrary2.Domain.Enums.Enum.Roles.admin.ToString()))
+{
+    <div>
+        <br />
+        <table>
+            <tr>
+                <th class="text-center"><h4>Название</h4></th>
+                <th class="text-center"><h4>Жанр</h4></th>
+            </tr>
+            @foreach (var magazine in Model)
+            {
+                <tr>
+                    <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineName)</h4></td>
+                    <td><h4>@Html.DisplayFor(modelItem => magazine.MagazineGenres.MagazineGenreName)</h4></td>
+                </tr>
+            }
+        </table>
+    </div>
 }
