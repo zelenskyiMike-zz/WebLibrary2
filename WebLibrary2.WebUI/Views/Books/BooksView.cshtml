@@ -18,10 +18,11 @@
         <div class="btn btn-default">
 
             @Html.ActionLink("Добавить книгу", "CreateBook", "CRUDBook", null, new { @class = "btn btn-light" })
+            @Html.Editor("fileName", new { htmlAttributes = new { placeholder = "Enter the name of file" , required = "required" } })
             <input type="submit" name="toJson" value="To JSON"
-                   formaction="~/Home/SerializeBookToJSON" formmethod="post" class="btn btn-light" />
+                   formaction="~/Books/SerializeBookToJSON" formmethod="post" class="btn btn-light" />
             <input type="submit" name="toXml" value="To XML"
-                   formaction="~/Home/SerializeBookToXML" formmethod="post" class="btn btn-light" />
+                   formaction="~/Books/SerializeBookToXML" formmethod="post" class="btn btn-light" />
 
         </div>
         <br />
@@ -75,10 +76,12 @@
     using (Html.BeginForm())
     {
         <div class="btn btn-default">
+            @Html.Editor("fileName", new { htmlAttributes = new { placeholder = "Enter the name of file", required = "required" } })
+
             <input type="submit" name="toJson" value="To JSON"
-                   formaction="~/Home/SerializeBookToJSON" formmethod="post" class="btn btn-light" />
+                   formaction="~/Books/SerializeBookToJSON" formmethod="post" class="btn btn-light" />
             <input type="submit" name="toXml" value="To XML"
-                   formaction="~/Home/SerializeBookToXML" formmethod="post" class="btn btn-light" />
+                   formaction="~/Books/SerializeBookToXML" formmethod="post" class="btn btn-light" />
         </div>
         <br />
         <table>

@@ -35,7 +35,8 @@ namespace WebLibrary2.WebUI
                       "~/Scripts/custom/DialogFile.js"));
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/custom/TabControl.js"));
-
+            //bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+            //          "~/Scripts/custom/IsSuccess.js"));
         }
     }
 }

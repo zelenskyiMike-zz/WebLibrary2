@@ -2,6 +2,7 @@
 @model IEnumerable<Magazine>
 @{
     ViewBag.Title = "Авторы";
+    
 }
 
 @if (User.IsInRole(WebLibrary2.Domain.Enums.Enum.Roles.admin.ToString()))
@@ -18,10 +19,12 @@
     {
         <div class="btn btn-default">
             @Html.ActionLink("Добавить журнал", "CreateMagazine", "CRUDMagazine", null, new { @class = "btn btn-light" })
+            @Html.Editor("fileName", new { htmlAttributes = new { placeholder = "Enter the name of file" , required = "required" } })
+
             <input type="submit" name="toJson" value="To JSON"
-                   formaction="~/Home/SerializeMagazineToJSON" formmethod="post" class="btn btn-light" />
+                   formaction="~/Magazine/SerializeMagazineToJSON" formmethod="post" class="btn btn-light" />
             <input type="submit" name="toXml" value="To XML"
-                   formaction="~/Home/SerializeMagazineToXML" formmethod="post" class="btn btn-light" />
+                   formaction="~/Magazine/SerializeMagazineToXML" formmethod="post" class="btn btn-light" />
         </div>
         <br />
         <table>
@@ -70,10 +73,13 @@
     using (Html.BeginForm())
     {
         <div class="btn btn-default">
+            @Html.Editor("fileName", new { htmlAttributes = new { placeholder = "Enter the name of file" , required = "required" } })
+
             <input type="submit" name="toJson" value="To JSON"
-                   formaction="~/Home/SerializeMagazineToJSON" formmethod="post" class="btn btn-light" />
+                   formaction="~/Magazine/SerializeMagazineToJSON" formmethod="post" class="btn btn-light" />
             <input type="submit" name="toXml" value="To XML"
-                   formaction="~/Home/SerializeMagazineToXML" formmethod="post" class="btn btn-light" />
+                   formaction="~/Magazine/SerializeMagazineToXML" formmethod="post" class="btn btn-light" />
+            <div id="popup"></div>
         </div>
         <br />
         <table>

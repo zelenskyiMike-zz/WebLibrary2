@@ -12,12 +12,19 @@ namespace WebLibrary2.Domain.Extensions
         public static List<TEntity> DeserializeJSON<TEntity>(string filePath)
         {
             List<TEntity> articlesViewData = new List<TEntity>();
-
-            using (StreamReader streamReader = new StreamReader(new FileStream(filePath, FileMode.Open)))
+            try
             {
-                JsonSerializer serializer = new JsonSerializer();
-                articlesViewData = JsonConvert.DeserializeObject<List<TEntity>>(streamReader.ReadToEnd());
+                using (StreamReader streamReader = new StreamReader(new FileStream(filePath, FileMode.Open)))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    articlesViewData = JsonConvert.DeserializeObject<List<TEntity>>(streamReader.ReadToEnd());
+                }
             }
+            catch (Exception)
+            {
+                return null;
+            }
+            
 
             return articlesViewData;
         }
@@ -26,10 +33,18 @@ namespace WebLibrary2.Domain.Extensions
 
             XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<TEntity>));
             List<TEntity> authors = new List<TEntity>();
-            using (FileStream fs = new FileStream(filePath, FileMode.Open))
+            try
             {
-                authors = (List<TEntity>)XmlSerializer.Deserialize(fs);
+                using (FileStream fs = new FileStream(filePath, FileMode.Open))
+                {
+                    authors = (List<TEntity>)XmlSerializer.Deserialize(fs);
+                }
             }
+            catch (Exception)
+            {
+                return null;
+            }
+           
             return authors;
         }
 

@@ -1,9 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Serialization;
 using WebLibrary2.Domain.Abstract.AbstractPublication;
+using WebLibrary2.Domain.Concrete;
 using WebLibrary2.Domain.Concrete.ConcretePublication;
 using WebLibrary2.Domain.Entity.PublicationEntity;
 using WebLibrary2.Domain.Extensions;
@@ -17,17 +22,17 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
 
         private Regex regexJSON;
         private Regex regexXML;
-        private Regex regexValidation;
 
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
-        private MatchCollection matchValidation;
 
         EFPublicationRepository publicationRepository;
+        EFDbContext context;
 
-        public PublicationsController(EFPublicationRepository publicationsRepository)
+        public PublicationsController(EFPublicationRepository publicationsRepository, EFDbContext context)
         {
             publicationRepository = publicationsRepository;
+            this.context = context;
 
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
@@ -38,12 +43,85 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             return PartialView(publications);
         }
 
+
+
+        [HttpPost]
+        public ActionResult SerializePublicationToJSON(int[] publicationSerializationID,string fileName)
+        {
+            filePath = serializeFolderPath +"\\"+ fileName + ".json";
+            if (publicationSerializationID != null)
+            {
+                List<Publication> publicationsToSerialize = new List<Publication>();
+                List<Publication> publicationsFromFile = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
+
+                if (publicationsFromFile != null)
+                {
+                    publicationsToSerialize = publicationsFromFile;
+                }
+
+                foreach (int publication in publicationSerializationID.ToList())
+                {
+                    Publication publicationToSerialize = context.Publications.Find(publication);
+                    if (!publicationsToSerialize.Contains(publicationToSerialize))
+                    {
+                        publicationsToSerialize.Add(publicationToSerialize);
+                    }
+                }
+                using (StreamWriter streamWriter = new StreamWriter(new FileStream(filePath, FileMode.OpenOrCreate)))
+                {
+                    JsonSerializer jsonSerializer = new JsonSerializer();
+                    jsonSerializer.Serialize(streamWriter, publicationsToSerialize);
+                }
+                ViewData["Message"] = "Successfully Serialized";
+                return RedirectToAction("Index", "Home");
+            }
+            ViewData["Message"] = null;
+            Exception nullEx = new Exception("There is nothing to serialize");
+            return View("Error", new HandleErrorInfo(nullEx, "Publications", "PublicationsView"));
+        }
+
+
+
+        [HttpPost]
+        public ActionResult SerializePublicationToXML(int[] publicationSerializationID, string fileName)
+        {
+            filePath = serializeFolderPath + "\\" + fileName + ".xml";
+            if (publicationSerializationID != null)
+            {
+                List<Publication> publicationsToSerialize = new List<Publication>();
+                List<Publication> publicationsFromFile = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+
+
+                if (publicationsFromFile != null)
+                {
+                    publicationsToSerialize = publicationsFromFile;
+                }
+
+                foreach (var article in publicationSerializationID.ToList())
+                {
+                    Publication publicationToSerialize = context.Publications.Find(article);
+                    if (!publicationsToSerialize.Contains(publicationToSerialize))
+                    {
+                        publicationsToSerialize.Add(publicationToSerialize);
+                    }
+                }
+
+                using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
+                {
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Publication>));
+                    XmlSerializer.Serialize(fs, publicationsToSerialize);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            Exception nullEx = new Exception("There is nothing to serialize");
+            return View("Error", new HandleErrorInfo(nullEx, "Publications", "PublicationsView"));
+        }
+
         [HttpPost]
         public ActionResult DeserializePublication(HttpPostedFileBase file)
         {
             regexJSON = new Regex(@"(\w*).json");
             regexXML = new Regex(@"(\w*).xml");
-            regexValidation = new Regex(@"(\w*)Publication(\w*)");
 
 
             if (file != null)
@@ -52,18 +130,21 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
 
                 matchJSON = regexJSON.Matches(filePath);
                 matchXML = regexXML.Matches(filePath);
-                matchValidation = regexValidation.Matches(filePath);
             }
 
             if (matchJSON.Count != 0)
             {
                 try
                 {
-                    if (matchValidation.Count == 0)
+                    List<Publication> fileContent = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
+                    for (int i = 0; i < 1; i++)
                     {
-                        throw new Exception("Wrong file for this publications type. Please, choose another file");
+                        if (fileContent[i].PublicationID == 0)
+                        {
+                            throw new Exception("Wrong file for this publications type. Please, choose another file");
+                        }
                     }
-                    ViewData["PublicationDataJSON"] = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
+                    ViewData["PublicationDataJSON"] = fileContent;
                 }
                 catch (Exception ex)
                 {
@@ -75,11 +156,15 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             {
                 try
                 {
-                    if (matchValidation.Count == 0)
+                    List<Publication> fileContent = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+                    for (int i = 0; i < 1; i++)
                     {
-                        throw new Exception("Wrong file for this publications type. Please, choose another file");
+                        if (fileContent == null)
+                        {
+                            throw new Exception("Wrong file for this publications type. Please, choose another file");
+                        }
                     }
-                    ViewData["PublicationDataXML"] = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+                    ViewData["PublicationDataXML"] = fileContent;
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +172,8 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
                 }
                 return View();
             }
-            throw new Exception("File is null");
+            Exception nullEx = new Exception("File is null");
+            return View("Error", new HandleErrorInfo(nullEx, "Publications", "PublicationsView"));
         }
     }
 }

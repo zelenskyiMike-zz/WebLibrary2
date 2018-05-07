@@ -13,15 +13,18 @@
             <input type="submit" value="Deserialize" id="file" class="btn btn-light" />
         </div>
     }
+    @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-light" })
     using (Html.BeginForm())
     {
         <div>
             <div class="btn btn-default">
                 @Html.ActionLink("Добавить статью", "CreateArticle", "CRUDArticle", null, new { @class = "btn btn-light" })
+                @Html.Editor("fileName", new { htmlAttributes = new { placeholder = "Enter the name of file" , required = "required" } })
                 <input type="submit" name="toJson" value="To JSON"
-                       formaction="~/Home/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
+                       formaction="~/Articles/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
                 <input type="submit" name="toXml" value="To XML"
-                       formaction="~/Home/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
+                       formaction="~/Articles/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
+
             </div>
             <br />
             <table>
@@ -33,26 +36,26 @@
                 </tr>
                 @foreach (var article in Model)
                 {
-                <tr>
-                    <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
-                    <td><h4>@Html.DisplayFor(modelItem => article.ArticleGenres.ArticleGenreName)</h4></td>
-                    <td>
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div> |
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div>|
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class=" btn btn-default">
-                            <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+                        <td><h4>@Html.DisplayFor(modelItem => article.ArticleGenres.ArticleGenreName)</h4></td>
+                        <td>
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Редактировать", "EditArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div> |
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Удалить", "DeleteArticle", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div>|
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class=" btn btn-default">
+                                <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
+                            </div>
+                        </td>
+                    </tr>
                 }
             </table>
             <br />
@@ -73,10 +76,11 @@
     {
         <div>
             <div class="btn btn-default">
+                @Html.Editor("fileName", new { htmlAttributes = new { placeholder = "Enter the name of file", required = "required" } })
                 <input type="submit" name="toJson" value="To JSON"
-                       formaction="~/Home/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
+                       formaction="~/Articles/SerializeArticleToJSON" formmethod="post" class="btn btn-light" />
                 <input type="submit" name="toXml" value="To XML"
-                       formaction="~/Home/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
+                       formaction="~/Articles/SerializeArticleToXML" formmethod="post" class="btn btn-light" />
             </div>
             <br />
             <table>
@@ -88,20 +92,20 @@
                 </tr>
                 @foreach (var article in Model)
                 {
-                <tr>
-                    <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
-                    <td><h4>@Html.DisplayFor(modelItem => article.ArticleGenres.ArticleGenreName)</h4></td>
-                    <td>
-                        <div class=" btn btn-default">
-                            @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <div class=" btn btn-default">
-                            <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
-                        </div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><h4>@Html.DisplayFor(modelItem => article.ArticleName)</h4></td>
+                        <td><h4>@Html.DisplayFor(modelItem => article.ArticleGenres.ArticleGenreName)</h4></td>
+                        <td>
+                            <div class=" btn btn-default">
+                                @Html.ActionLink("Детали", "ArticleDetails", "CRUDArticle", new { id = article.ArticleID }, null)
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class=" btn btn-default">
+                                <input type="checkbox" name="articleSerializationID" value="@article.ArticleID" />
+                            </div>
+                        </td>
+                    </tr>
                 }
             </table>
             <br />
