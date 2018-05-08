@@ -1,10 +1,9 @@
 ﻿using System.Web.Mvc;
-using WebLibrary2.Domain.Concrete;
 using System.Net;
 using System.Data;
-using WebLibrary2.Domain.Models;
-using WebLibrary2.Domain.Abstract.AbstractAuthor;
-using WebLibrary2.BLL.Sevices;
+using WebLibrary2.ViewModelsLayer.ViewModels;
+using WebLibrary2.DataAccessLayer.Concrete;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 
 namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {
@@ -12,9 +11,9 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
     {
         private readonly AuthorService service;
 
-        private EFDbContext context;
+        private DbContext context;
 
-        public CRUDAuthorController(EFDbContext dataContext, AuthorService service)
+        public CRUDAuthorController(DbContext dataContext, AuthorService service)
         {
             this.service = service;
             this.context = dataContext;
@@ -30,7 +29,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAuthor(AuthorView authorVM)
+        public ActionResult CreateAuthor(GetAuthorView authorVM)
         {
             if (ModelState.IsValid)
             {
@@ -46,18 +45,18 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         [Authorize(Roles = "user,admin")]
         public ActionResult AuthorsDetails(int id)
         {
-            GetAuthorLiteratureVM authorVM = service.GetAuthorsDetails(id);
+            GetAuthorLiteratureView authorVM = service.GetAuthor(id);
             return View(authorVM);
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult EditAuthor(int? id)
+        public ActionResult EditAuthor(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            GetAuthorLiteratureVM authorVM = service.GetAuthorsDetails(id);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            GetAuthorLiteratureView authorVM = service.GetAuthor(id);
             if (authorVM == null)
             {
                 return HttpNotFound();
@@ -67,13 +66,13 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult DeleteAuthor(int? id)
+        public ActionResult DeleteAuthor(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            GetAuthorLiteratureVM author = service.GetAuthorsDetails(id);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            GetAuthorLiteratureView author = service.GetAuthor(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -84,15 +83,15 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAuthor(int id)
+        public ActionResult DeleteAuthor(GetAuthorLiteratureView author)
         {
             try
             {
-                service.DeleteAuthor(id);
+                service.DeleteAuthor(author.AuthorID);
             }
             catch (DataException)
             {
-                return RedirectToAction("DeleteAuthor", new { id = id });
+                return RedirectToAction("DeleteAuthor", new { id = author.AuthorID });
             }
             return RedirectToAction("AuthorView", "Author");
         }

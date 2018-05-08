@@ -397,20 +397,24 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebLibrary2.BLL\WebLibrary2.BLL.csproj">
-      <Project>{A7C07C25-FC52-42E4-92A5-118F554015CB}</Project>
-      <Name>WebLibrary2.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebLibrary2.Domain\WebLibrary2.Domain.csproj">
-      <Project>{7ac79702-f7b7-4bd8-b9b0-5db66faa775d}</Project>
-      <Name>WebLibrary2.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebLibrary2.BusinessLogicLayer\WebLibrary2.BuisnessLogicLayer.csproj">
+      <Project>{A7C07C25-FC52-42E4-92A5-118F554015CB}</Project>
+      <Name>WebLibrary2.BuisnessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebLibrary2.DataAccessLayer\WebLibrary2.DataAccessLayer.csproj">
+      <Project>{7AC79702-F7B7-4BD8-B9B0-5DB66FAA775D}</Project>
+      <Name>WebLibrary2.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebLibrary2.ViewModelsLayer\WebLibrary2.ViewModelsLayer.csproj">
+      <Project>{df60abab-1ec6-4a1a-b057-42ac1464e522}</Project>
+      <Name>WebLibrary2.ViewModelsLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

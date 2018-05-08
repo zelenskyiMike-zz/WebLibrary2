@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Web.Mvc;
-using WebLibrary2.BLL.Sevices;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 
 namespace WebLibrary2.WebUI.Controllers.AuthorControllers
 {

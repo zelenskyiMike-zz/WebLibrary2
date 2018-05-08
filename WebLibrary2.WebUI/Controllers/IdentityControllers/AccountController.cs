@@ -1,19 +1,14 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using Microsoft.Owin.Host.SystemWeb;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebLibrary2.BLL.DTO;
-using WebLibrary2.BLL.Infrastructure;
-using WebLibrary2.BLL.Interfaces;
+using WebLibrary2.BusinessLogicLayer.DTO;
+using WebLibrary2.BusinessLogicLayer.Infrastructure;
+using WebLibrary2.BusinessLogicLayer.Interfaces;
 using WebLibrary2.WebUI.RoleModels;
-using WebLibrary2.Domain.Identity;
 
 namespace WebLibrary2.WebUI.Controllers.IdentityControllers
 {
