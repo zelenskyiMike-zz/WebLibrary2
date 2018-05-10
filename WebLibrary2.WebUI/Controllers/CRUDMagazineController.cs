@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract.AbstractMagazine;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Concrete.ConcreteMagazine;
-using WebLibrary2.Domain.Models;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.WebUI.Controllers.MagazineControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class CRUDMagazineController : Controller
     {
-        EFDbContext context;
-        EFMagazineRepository magazineRepository;
-        EFMagazineAuthorRepository magazineAuthorsRepository;
-        public CRUDMagazineController(EFDbContext contextParam, EFMagazineRepository magazinesRepository, EFMagazineAuthorRepository magazinesAuthorsRepository)
+        //EFDbContext context;
+        //EFMagazineRepository magazineRepository;
+        //EFMagazineAuthorRepository magazineAuthorsRepository;
+        public CRUDMagazineController(/*EFDbContext contextParam, EFMagazineRepository magazinesRepository, EFMagazineAuthorRepository magazinesAuthorsRepository*/)
         {
-            context = contextParam;
-            magazineRepository = magazinesRepository;
-            magazineAuthorsRepository = magazinesAuthorsRepository;
+            //context = contextParam;
+            //magazineRepository = magazinesRepository;
+            //magazineAuthorsRepository = magazinesAuthorsRepository;
         }
 
         [Authorize(Roles = "admin")]
@@ -38,7 +30,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateMagazine(MagazineViewModel magazineVM)
+        public ActionResult CreateMagazine(GetMagazineView magazineVM)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +85,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMagazine(GetM2MCRUDMagazineVM magazineVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public ActionResult EditMagazine(GetMagazineView magazineVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
             if (magazineVM == null)
             {
@@ -119,32 +111,32 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
 
             return View("EditMagazine", magazine);
         }
-    
 
-    [Authorize(Roles = "admin")]
-    [HttpGet]
-    public ActionResult DeleteMagazine(int? id)
-    {
-        if (id == null)
+
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        public ActionResult DeleteMagazine(int? id)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            GetMagazineView magazineVM = magazineRepository.GetMagazineDetails(id);
+            if (magazineVM == null)
+            {
+                HttpNotFound();
+            }
+            return View(magazineVM);
         }
 
-        GetM2MCRUDMagazineVM magazineVM = magazineRepository.GetMagazineDetails(id);
-        if (magazineVM == null)
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMagazine(int id)
         {
-            HttpNotFound();
+            magazineRepository.DeleteMagazine(id);
+            return RedirectToAction("Index", "Home");
         }
-        return View(magazineVM);
     }
-
-    [Authorize(Roles = "admin")]
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult DeleteMagazine(int id)
-    {
-        magazineRepository.DeleteMagazine(id);
-        return RedirectToAction("Index", "Home");
-    }
-}
 }

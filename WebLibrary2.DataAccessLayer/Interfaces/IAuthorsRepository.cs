@@ -13,16 +13,16 @@ namespace WebLibrary2.DataAccessLayer.Interfaces
         void DeleteAuthor(int? id);
         void Save();
 
-        Author GetAuthorsDetails(int id);
+        Author GetAuthorsDetails(Author author);
         Author GetAuthorsBooksDetails(int? id);
         Author GetAuthorsArticlesDetails(int? id);
         Author GetAuthorsMagazinesDetails(int? id);
         Author GetAuthorsPublicationsDetails(int? id);
 
-        List<Book> GetBooksNotExistInAuthor(int authorID);
-        List<Article> GetArticlesNotExistInAuthor(int authorID);
-        List<Magazine> GetMagazinesNotExistInAuthor(int authorID);
-        List<Publication> GetPublicationsNotExistInAuthor(int authorID);
+        List<Book> GetBooksNotExistInAuthor(Author author);
+        List<Article> GetArticlesNotExistInAuthor(Author author);
+        List<Magazine> GetMagazinesNotExistInAuthor(Author author);
+        List<Publication> GetPublicationsNotExistInAuthor(Author author);
         IQueryable<Author> GetAllAuthors();
     }
 }

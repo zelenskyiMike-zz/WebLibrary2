@@ -9,6 +9,7 @@ namespace WebLibrary2.ViewModelsLayer.ViewModels
 {
     public class GetArticleView
     {
+        public int ArticleID { get; set; }
         [Required(ErrorMessage = "Неободимо добавить название статьи")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длинна строки должна быть не менее 5 и не более 50 символов")]
         public string ArticleName { get; set; }

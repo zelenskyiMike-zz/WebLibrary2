@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebLibrary2.BLL.Mapping.MappingProfiles;
+using WebLibrary2.BusinessLogicLayer.Mapping.MappingProfiles;
 
 namespace WebLibrary2.BLL.Mapping
 {
@@ -15,10 +10,9 @@ namespace WebLibrary2.BLL.Mapping
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new AuthorMappingProfile());
-                //cfg.AddProfile(new MagazineMappingProfile());
-                //cfg.AddProfile(new BookMappingProfile());
-                //cfg.AddProfile(new PublicHouseMappingProfile());
-                //cfg.AddProfile(new LibraryMappingProfile());
+                cfg.AddProfile(new BookMappingProfile());
+                cfg.AddProfile(new BookGenresMappingProfile());
+                cfg.AddProfile(new ArticleMappingProfile());
             });
 
             return config;

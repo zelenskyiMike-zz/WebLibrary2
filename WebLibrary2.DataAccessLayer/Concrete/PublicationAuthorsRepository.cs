@@ -3,10 +3,10 @@ using WebLibrary2.EntitiesLayer.Entities;
 
 namespace WebLibrary2.DataAccessLayer.Concrete
 {
-    public class EFPublicationAuthorsRepository : IPublicationAuthorsRepository
+    public class PublicationAuthorsRepository : IPublicationAuthorsRepository
     {
         DbContext context;
-        public EFPublicationAuthorsRepository(DbContext contextParam)
+        public PublicationAuthorsRepository(DbContext contextParam)
         {
             context = contextParam;
         }

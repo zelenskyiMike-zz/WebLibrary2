@@ -6,7 +6,7 @@ using WebLibrary2.DataAccessLayer.Interfaces;
 
 namespace WebLibrary2.DataAccessLayer.Concrete
 {
-    public class ArticleRepository : IArticleRepository
+    public class ArticleRepository
     {
         DbContext context;
         public ArticleRepository(DbContext contextParam)
@@ -21,7 +21,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             Save();
         }
 
-        public IQueryable<Article> GetAllArticlesWithGenres()
+        public IEnumerable<Article> GetAllArticlesWithGenres()
         {
             return context.Articles.Include(g => g.ArticleGenres);
         }
@@ -34,27 +34,25 @@ namespace WebLibrary2.DataAccessLayer.Concrete
         public Article GetArticleDetails(int? id)
         {
             Article article = GetArticleByID(id);
-            var articleGenreName = (from ag in context.ArticleGenres
-                                    where ag.ArticleGenreID == article.ArticleGenreID
-                                    select ag.ArticleGenreName).SingleOrDefault();
-            var authorsList = context.ArticleAuthors.Include(x => x.Authors).Where(x => x.ArticleID == article.ArticleID).Select(x => x.Authors).ToList();
+           
+           ArticleGenre articleGenre = context.ArticleGenres.Where(x => x.ArticleGenreID == article.ArticleGenreID).SingleOrDefault();
+
+           var authorsList = context.ArticleAuthors.Include(x => x.Authors).Where(x => x.ArticleID == article.ArticleID).Select(x => x.Authors).ToList();
 
             Article articleVM = new Article()
             {
                 ArticleID = article.ArticleID,
                 ArticleName = article.ArticleName,
-                ArticleGenreName = articleGenreName,
+                ArticleGenres = articleGenre,
                 Authors = authorsList,
                 DateOfArticlePublish = article.DateOfArticlePublish
             };
             return articleVM;
         }
 
-        public List<Author> GetAuthorsNotExistInArticle(int id)
+        public List<Author> GetAuthorsNotExistInArticle(Article article)
         {
-            var currArticle = GetArticleByID(id);
-
-            var initArticleAuthorList = context.ArticleAuthors.Where(x => x.ArticleID == currArticle.ArticleID).Select(x => x.Authors).ToList();
+            var initArticleAuthorList = context.ArticleAuthors.Where(x => x.ArticleID == article.ArticleID).Select(x => x.Authors).ToList();
 
             List<Author> finalListOfAuthors = new List<Author>();
 

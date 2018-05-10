@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using WebLibrary2.BusinessLogicLayer.Sevices;
 
-namespace WebLibrary2.WebUI.Controllers.AuthorControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class AuthorController : Controller
     {
@@ -16,7 +16,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         [HttpGet]
         public ActionResult AuthorView()
         {
-            var author = service.GetAuthorViews().ToList();
+            var author = service.GetAllAuthors().ToList();
             return View(author);
         }
     }

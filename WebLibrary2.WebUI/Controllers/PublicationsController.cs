@@ -7,13 +7,10 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
-using WebLibrary2.Domain.Abstract.AbstractPublication;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Concrete.ConcretePublication;
-using WebLibrary2.Domain.Entity.PublicationEntity;
 using WebLibrary2.Domain.Extensions;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class PublicationsController : Controller
     {
@@ -26,13 +23,13 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
 
-        EFPublicationRepository publicationRepository;
-        EFDbContext context;
+        //EFPublicationRepository publicationRepository;
+        //EFDbContext context;
 
-        public PublicationsController(EFPublicationRepository publicationsRepository, EFDbContext context)
+        public PublicationsController(/*EFPublicationRepository publicationsRepository, EFDbContext context*/)
         {
-            publicationRepository = publicationsRepository;
-            this.context = context;
+            //publicationRepository = publicationsRepository;
+            //this.context = context;
 
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
@@ -51,8 +48,8 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             filePath = serializeFolderPath +"\\"+ fileName + ".json";
             if (publicationSerializationID != null)
             {
-                List<Publication> publicationsToSerialize = new List<Publication>();
-                List<Publication> publicationsFromFile = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
+                List<GetPublicationView> publicationsToSerialize = new List<GetPublicationView>();
+                List<GetPublicationView> publicationsFromFile = DeserializationExtensionClass.DeserializeJSON<GetPublicationView>(filePath);
 
                 if (publicationsFromFile != null)
                 {
@@ -61,7 +58,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
 
                 foreach (int publication in publicationSerializationID.ToList())
                 {
-                    Publication publicationToSerialize = context.Publications.Find(publication);
+                    GetPublicationView publicationToSerialize = context.Publications.Find(publication);
                     if (!publicationsToSerialize.Contains(publicationToSerialize))
                     {
                         publicationsToSerialize.Add(publicationToSerialize);
@@ -88,8 +85,8 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             filePath = serializeFolderPath + "\\" + fileName + ".xml";
             if (publicationSerializationID != null)
             {
-                List<Publication> publicationsToSerialize = new List<Publication>();
-                List<Publication> publicationsFromFile = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+                List<GetPublicationView> publicationsToSerialize = new List<GetPublicationView>();
+                List<GetPublicationView> publicationsFromFile = DeserializationExtensionClass.DeserializeXML<GetPublicationView>(filePath);
 
 
                 if (publicationsFromFile != null)
@@ -99,7 +96,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
 
                 foreach (var article in publicationSerializationID.ToList())
                 {
-                    Publication publicationToSerialize = context.Publications.Find(article);
+                    GetPublicationView publicationToSerialize = context.Publications.Find(article);
                     if (!publicationsToSerialize.Contains(publicationToSerialize))
                     {
                         publicationsToSerialize.Add(publicationToSerialize);
@@ -108,7 +105,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
 
                 using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
                 {
-                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Publication>));
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<GetPublicationView>));
                     XmlSerializer.Serialize(fs, publicationsToSerialize);
                 }
                 return RedirectToAction("Index", "Home");
@@ -136,7 +133,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             {
                 try
                 {
-                    List<Publication> fileContent = DeserializationExtensionClass.DeserializeJSON<Publication>(filePath);
+                    List<GetPublicationView> fileContent = DeserializationExtensionClass.DeserializeJSON<GetPublicationView>(filePath);
                     for (int i = 0; i < 1; i++)
                     {
                         if (fileContent[i].PublicationID == 0)
@@ -156,7 +153,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
             {
                 try
                 {
-                    List<Publication> fileContent = DeserializationExtensionClass.DeserializeXML<Publication>(filePath);
+                    List<GetPublicationView> fileContent = DeserializationExtensionClass.DeserializeXML<GetPublicationView>(filePath);
                     for (int i = 0; i < 1; i++)
                     {
                         if (fileContent == null)

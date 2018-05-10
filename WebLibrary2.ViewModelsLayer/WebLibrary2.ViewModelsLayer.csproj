@@ -42,10 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\GetAllArticleView.cs" />
-    <Compile Include="ViewModels\GetAllBookView.cs" />
-    <Compile Include="ViewModels\GetAllMagazineView.cs" />
-    <Compile Include="ViewModels\GetAllPublicationView.cs" />
+    <Compile Include="ViewModels\GetAllArticlesView.cs" />
+    <Compile Include="ViewModels\GetAllBooksView.cs" />
+    <Compile Include="ViewModels\GetAllMagazinesView.cs" />
+    <Compile Include="ViewModels\GetAllPublicationsView.cs" />
     <Compile Include="ViewModels\GetArticleView.cs" />
     <Compile Include="ViewModels\GetAuthorLiteratureView.cs" />
     <Compile Include="ViewModels\GetAuthorView.cs" />

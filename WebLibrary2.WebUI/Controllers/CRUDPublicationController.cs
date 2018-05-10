@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
-using WebLibrary2.Domain.Abstract.AbstractPublication;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Concrete.ConcretePublication;
-using WebLibrary2.Domain.Models;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class CRUDPublicationController : Controller
     {
-        EFDbContext context;
-        EFPublicationRepository publicationRepository;
-        EFPublicationAuthorsRepository publicationAuthorsRepository;
+        //EFDbContext context;
+        //EFPublicationRepository publicationRepository;
+        //EFPublicationAuthorsRepository publicationAuthorsRepository;
 
 
-        public CRUDPublicationController(EFDbContext contextParam, EFPublicationRepository publicationsRepository, EFPublicationAuthorsRepository publicationsAuthorsRepository)
+        public CRUDPublicationController(/*EFDbContext contextParam, EFPublicationRepository publicationsRepository, EFPublicationAuthorsRepository publicationsAuthorsRepository*/)
         {
-            context = contextParam;
-            publicationRepository = publicationsRepository;
-            publicationAuthorsRepository = publicationsAuthorsRepository;
+            //context = contextParam;
+            //publicationRepository = publicationsRepository;
+            //publicationAuthorsRepository = publicationsAuthorsRepository;
         }
 
         [Authorize(Roles = "admin")]
@@ -40,7 +32,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePublication(PublicationViewModel publicationVM)
+        public ActionResult CreatePublication(GetPublicationView publicationVM)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +87,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPublication(GetM2MCRUDPublicationVM publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public ActionResult EditPublication(GetPublicationView publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
             if (publicationVM == null)
             {
@@ -135,7 +127,7 @@ namespace WebLibrary2.WebUI.Controllers.PublicationsControllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            GetM2MCRUDPublicationVM publicationVM = publicationRepository.GetPublicationDetails(id);
+            GetPublicationView publicationVM = publicationRepository.GetPublicationDetails(id);
             if (publicationVM == null)
             {
                 HttpNotFound();

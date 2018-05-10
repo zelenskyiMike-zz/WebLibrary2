@@ -7,13 +7,11 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
-using WebLibrary2.Domain.Abstract.AbstractBook;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Concrete.ConcreteBook;
-using WebLibrary2.Domain.Entity.BookEntity;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 using WebLibrary2.Domain.Extensions;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.WebUI.Controllers.BookControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class BooksController : Controller
     {
@@ -25,22 +23,18 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
+        private readonly BookService bookService;
 
-        EFBookRepository booksRepository;
-        EFDbContext context;
-
-        public BooksController(EFBookRepository bookRepository, EFDbContext context)
+        public BooksController(BookService bookService)
         {
-            booksRepository = bookRepository;
-            this.context = context;
-
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
+            this.bookService = bookService;
         }
 
         public PartialViewResult BooksView()
         {
-            var book = booksRepository.GetAllBooksWithGenres();
+            var book = bookService.GetAllBooksWithGenres();
                    
             return PartialView(book);
         }
@@ -51,9 +45,9 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
             filePath = serializeFolderPath + "\\" + fileName + ".json";
             if (bookSerializationID != null)
             {
-                List<Book> booksToSerialize = new List<Book>();
+                List<GetBookView> booksToSerialize = new List<GetBookView>();
 
-                List<Book> booksfromFile = DeserializationExtensionClass.DeserializeJSON<Book>(filePath);
+                List<GetBookView> booksfromFile = DeserializationExtensionClass.DeserializeJSON<GetBookView>(filePath);
 
                 if (booksfromFile != null)
                 {
@@ -62,7 +56,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
                 foreach (int book in bookSerializationID.ToList())
                 {
-                    Book bookToSerialize = context.Books.Find(book);
+                    GetBookView bookToSerialize = bookService.GetbookByID(book); 
 
                     if (!booksToSerialize.Contains(bookToSerialize))
                     {
@@ -87,16 +81,16 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
             if (bookSerializationID != null)
             {
-                List<Book> booksToSerialize = new List<Book>();
+                List<GetBookView> booksToSerialize = new List<GetBookView>();
 
-                List<Book> booksFromFile = DeserializationExtensionClass.DeserializeXML<Book>(filePath);
+                List<GetBookView> booksFromFile = DeserializationExtensionClass.DeserializeXML<GetBookView>(filePath);
                 if (booksFromFile != null)
                 {
                     booksToSerialize = booksFromFile;
                 }
                 foreach (var book in bookSerializationID.ToList())
                 {
-                    Book bookToSerialize = context.Books.Find(book);
+                    GetBookView bookToSerialize = bookService.GetbookByID(book);
                     if (!booksToSerialize.Contains(bookToSerialize))
                     {
                         booksToSerialize.Add(bookToSerialize);
@@ -105,7 +99,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
 
                 using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
                 {
-                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Book>));
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<GetBookView>));
                     XmlSerializer.Serialize(fs, booksToSerialize);
                 }
                 return RedirectToAction("Index", "Home");
@@ -133,7 +127,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
                 {
                     try
                     {
-                        List<Book> fileContent = DeserializationExtensionClass.DeserializeJSON<Book>(filePath);
+                        List<GetBookView> fileContent = DeserializationExtensionClass.DeserializeJSON<GetBookView>(filePath);
                         for (int i = 0; i < 1; i++)
                         {
                             if (fileContent[i].BookID == 0)
@@ -154,7 +148,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
                 {
                     try
                     {
-                        List<Book> fileContent = DeserializationExtensionClass.DeserializeJSON<Book>(filePath);
+                        List<GetBookView> fileContent = DeserializationExtensionClass.DeserializeJSON<GetBookView>(filePath);
 
                         for (int i = 0; i < 1; i++)
                         {
@@ -164,7 +158,7 @@ namespace WebLibrary2.WebUI.Controllers.BookControllers
                             }
                         }
                         
-                        ViewData["BookDataXML"] = DeserializationExtensionClass.DeserializeXML<Book>(filePath);
+                        ViewData["BookDataXML"] = DeserializationExtensionClass.DeserializeXML<GetBookView>(filePath);
                     }
                     catch (Exception ex)
                     {

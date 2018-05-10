@@ -2,7 +2,7 @@
 using WebLibrary2.EntitiesLayer.Entities;
 using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.BLL.Mapping.MappingProfiles
+namespace WebLibrary2.BusinessLogicLayer.Mapping.MappingProfiles
 {
     public class AuthorMappingProfile : Profile
     {

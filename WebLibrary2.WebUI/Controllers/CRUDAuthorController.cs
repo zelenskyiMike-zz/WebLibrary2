@@ -5,23 +5,24 @@ using WebLibrary2.ViewModelsLayer.ViewModels;
 using WebLibrary2.DataAccessLayer.Concrete;
 using WebLibrary2.BusinessLogicLayer.Sevices;
 
-namespace WebLibrary2.WebUI.Controllers.AuthorControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class CRUDAuthorController : Controller
     {
         private readonly AuthorService service;
-
+        private readonly BookService bookService;
         private DbContext context;
 
-        public CRUDAuthorController(DbContext dataContext, AuthorService service)
+        public CRUDAuthorController(DbContext dataContext, AuthorService service, BookService bookService)
         {
             this.service = service;
+            this.bookService = bookService;
             this.context = dataContext;
         }
         [Authorize(Roles = "admin")]
         public ActionResult CreateAuthor()
         {
-            MultiSelectList books = new MultiSelectList(context.Books, "BookID", "BookName");
+            MultiSelectList books = new MultiSelectList(bookService.GetAllBooks(), "BookID", "BookName");
             ViewData["Books"] = books;
             return View();
         }
@@ -37,7 +38,7 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
                 return RedirectToAction("Index", "Home");
             }
 
-            MultiSelectList books = new MultiSelectList(context.Books, "BookID", "BookName");
+            MultiSelectList books = new MultiSelectList(bookService.GetAllBooks(), "BookID", "BookName");
             ViewData["Books"] = books;
             return View(authorVM);
         }
@@ -52,10 +53,6 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         [Authorize(Roles = "admin")]
         public ActionResult EditAuthor(int id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
             GetAuthorLiteratureView authorVM = service.GetAuthor(id);
             if (authorVM == null)
             {
@@ -68,10 +65,6 @@ namespace WebLibrary2.WebUI.Controllers.AuthorControllers
         [Authorize(Roles = "admin")]
         public ActionResult DeleteAuthor(int id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
             GetAuthorLiteratureView author = service.GetAuthor(id);
             if (author == null)
             {

@@ -7,13 +7,11 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
-using WebLibrary2.Domain.Abstract.AbstractArticle;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Concrete.ConcreteArticle;
-using WebLibrary2.Domain.Entity.ArticleEntity;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 using WebLibrary2.Domain.Extensions;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.WebUI.Controllers.ArticleControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class ArticlesController : Controller
     {
@@ -25,24 +23,19 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
 
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
+        private readonly ArticleService articleService;
 
-        EFArticleRepository articlesRepository;
-        EFDbContext context;
-
-        public ArticlesController(EFArticleRepository articleRepository, EFDbContext context)
+        public ArticlesController(ArticleService articleService)
         {
-            articlesRepository = articleRepository;
-            this.context = context;
-
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
-
+            this.articleService = articleService;
         }
         // GET: Articles
         [HttpGet]
         public PartialViewResult ArticlesView()
         {
-            var articles = articlesRepository.GetAllArticlesWithGenres();
+            var articles = articleService.GetAllArticlesWithGenres();
             return PartialView(articles);
         }
 
@@ -52,15 +45,15 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
             filePath = serializeFolderPath + "\\" + fileName + ".json";
             if (articleSerializationID != null)
             {
-                List<Article> articlesToSerialize = new List<Article>();
-                List<Article> articlesFromFile = DeserializationExtensionClass.DeserializeJSON<Article>(filePath);
+                List<GetArticleView> articlesToSerialize = new List<GetArticleView>();
+                List<GetArticleView> articlesFromFile = DeserializationExtensionClass.DeserializeJSON<GetArticleView>(filePath);
                 if (articlesFromFile != null)
                 {
                     articlesToSerialize = articlesFromFile;
                 }
                 foreach (int article in articleSerializationID.ToList())
                 {
-                    Article articleToSerialize = context.Articles.Find(article);
+                    GetArticleView articleToSerialize = articleService.GetArticleByID(article);
                     if (!articlesToSerialize.Contains(articleToSerialize))
                     {
                         articlesToSerialize.Add(articleToSerialize);
@@ -85,16 +78,16 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
             filePath = serializeFolderPath + "\\"+ fileName + ".xml";
             if (articleSerializationID != null)
             {
-                List<Article> articlesToSerialize = new List<Article>();
+                List<GetArticleView> articlesToSerialize = new List<GetArticleView>();
 
-                List<Article> articlesFromFile = DeserializationExtensionClass.DeserializeXML<Article>(filePath);
+                List<GetArticleView> articlesFromFile = DeserializationExtensionClass.DeserializeXML<GetArticleView>(filePath);
                 if (articlesFromFile != null)
                 {
                     articlesToSerialize = articlesFromFile;
                 }
                 foreach (var article in articleSerializationID.ToList())
                 {
-                    Article articleToSerialize = context.Articles.Find(article);
+                    GetArticleView articleToSerialize = articleService.GetArticleByID(article);
                     if (!articlesToSerialize.Contains(articleToSerialize))
                     {
                         articlesToSerialize.Add(articleToSerialize);
@@ -103,7 +96,7 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
 
                 using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
                 {
-                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Article>));
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<GetArticleView>));
                     XmlSerializer.Serialize(fs, articlesToSerialize);
                 }
                 return RedirectToAction("Index", "Home");
@@ -130,7 +123,7 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
                 {
                     try
                     {
-                        List<Article> fileContent = DeserializationExtensionClass.DeserializeJSON<Article>(filePath);
+                        List<GetArticleView> fileContent = DeserializationExtensionClass.DeserializeJSON<GetArticleView>(filePath);
                         for (int i = 0; i < 1; i++)
                         {
                             if (fileContent[i].ArticleID == 0)
@@ -150,7 +143,7 @@ namespace WebLibrary2.WebUI.Controllers.ArticleControllers
                 {
                     try
                     {
-                        List<Article> fileContent = DeserializationExtensionClass.DeserializeXML<Article>(filePath);
+                        List<GetArticleView> fileContent = DeserializationExtensionClass.DeserializeXML<GetArticleView>(filePath);
                         for (int i = 0; i < 1; i++)
                         {
                             if (fileContent == null)

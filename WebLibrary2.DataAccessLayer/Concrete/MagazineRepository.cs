@@ -53,16 +53,14 @@ namespace WebLibrary2.DataAccessLayer.Concrete
         public Magazine GetMagazineDetails(int? id)
         {
             Magazine magazine = GetMagazineByID(id);
-            var magazineGenreName = (from mg in context.MagazineGenres
-                             where mg.MagazineGenreID == magazine.MagazineGenreID
-                             select mg.MagazineGenreName).SingleOrDefault();
+            MagazineGenre magazineGenre = context.MagazineGenres.Where(x => x.MagazineGenreID == magazine.MagazineGenreID).SingleOrDefault();
             var authorsList = context.MagazineAuthors.Include(x => x.Authors).Where(x => x.MagazineID == id).Select(x => x.Authors).ToList();
 
             Magazine magazineVM = new Magazine()
             {
                 MagazineID = magazine.MagazineID,
                 MagazineName = magazine.MagazineName,
-                MagazineGenreName = magazineGenreName,
+                MagazineGenres = magazineGenre,
                 DateOfMagazinePublish = magazine.DateOfMagazinePublish,
                 Authors = authorsList
 

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebLibrary2.ViewModelsLayer.ViewModels
 {
-    public class GetAllArticleView
+    public class GetAllArticlesView
     {
         public int ArticleID { get; set; }
         public int ArticleGenreID { get; set; }

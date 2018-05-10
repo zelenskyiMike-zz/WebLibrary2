@@ -9,6 +9,7 @@ namespace WebLibrary2.ViewModelsLayer.ViewModels
 {
     public class GetMagazineView
     {
+        public int MagazineID { get; set; }
         [Required(ErrorMessage = "Неободимо добавить название журнала")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длинна строки должна быть не менее 5 и не более 50 символов")]
         public string MagazineName { get; set; }

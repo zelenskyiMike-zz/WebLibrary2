@@ -14,21 +14,9 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             context = contextParam;
         }
 
-        public IEnumerable<Book> Books
+        public List<Author> GetAuthorsNotExistInBook(Book book)
         {
-            get { return context.Books; }
-        }
-
-        public Book GetBookByID(int? bookID)
-        {
-            return context.Books.Find(bookID);
-        }
-
-        public List<Author> GetAuthorsNotExistInBook(int bookID)
-        {
-            var currBook = GetBookByID(bookID);
-
-            var initBookAuthorList = context.BookAuthors.Where(x => x.BookID == currBook.BookID).Select(x => x.Authors).ToList();
+            var initBookAuthorList = context.BookAuthors.Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             List<Author> finalListOfAuthors = new List<Author>();
 
@@ -42,7 +30,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return finalListOfAuthors;
         }
 
-        public void InsertBook(Book bookVM)
+        public override void Create(Book bookVM)
         {
             Book book = new Book()
             {
@@ -70,40 +58,24 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             context.Entry(book).State = EntityState.Modified;
         }
 
-        public void DeleteBook(int? bookID)
+        public Book GetBooksDetails(Book book)
         {
-            var book = GetBookByID(bookID);
-            context.Books.Remove(book);
-        }
+            BookGenre genre = context.Genres.Where(x => x.GenreID == book.GenreID).SingleOrDefault();
 
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        public Book GetBooksDetails(int? id)
-        {
-            Book book = GetBookByID(id);
-            //var genreName =  (from g in context.Genres
-            //                 where g.GenreID == book.GenreID
-            //                 select g.GenreName).SingleOrDefault();
-            //BookGenre genreName = context.Genres;
-            Book genre = context.Books.Include(g => g.Genres).Include(x => x.Genres.GenreName);
-            var authorList = context.BookAuthors.Include(x => x.Authors).Where(x => x.BookID == id).Select(x => x.Authors).ToList();
+            var authorList = context.BookAuthors.Include(x => x.Authors).Where(x => x.BookID == book.BookID).Select(x => x.Authors).ToList();
 
             Book bookVM = new Book()
             {
                 BookID = book.BookID,
                 BookName = book.BookName,
-                GenreID = book.GenreID,
                 YearOfPublish = book.YearOfPublish,
-                Genres = context.Genres,
+                Genres = genre,
                 Authors = authorList
             };
             return bookVM;
         }
 
-        public IQueryable<Book> GetAllBooksWithGenres()
+        public IEnumerable<Book> GetAllBooksWithGenres()
         {
             return context.Books.Include(g => g.Genres);
         }

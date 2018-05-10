@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebLibrary2.ViewModelsLayer.ViewModels
 {
-    public class GetAllPublicationView
+    public class GetAllPublicationsView
     {
         public int PublicationID { get; set; }
         public int PublicationGenreID { get; set; }

@@ -5,6 +5,7 @@ namespace WebLibrary2.ViewModelsLayer.ViewModels
 {
     public class GetBookView
     {
+        public int BookID { get; set; }
         [Required(ErrorMessage = "Неободимо добавить название книги")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длинна строки должна быть не менее 3 и не более 50 символов")]
         public string BookName { get; set; }

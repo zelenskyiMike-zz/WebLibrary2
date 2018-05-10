@@ -203,19 +203,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ArticleControllers\ArticlesController.cs" />
-    <Compile Include="Controllers\ArticleControllers\CRUDArticleController.cs" />
-    <Compile Include="Controllers\AuthorControllers\AuthorActivityController.cs" />
-    <Compile Include="Controllers\AuthorControllers\AuthorController.cs" />
-    <Compile Include="Controllers\BookControllers\BooksController.cs" />
-    <Compile Include="Controllers\AuthorControllers\CRUDAuthorController.cs" />
-    <Compile Include="Controllers\BookControllers\CRUDBookController.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\CRUDArticleController.cs" />
+    <Compile Include="Controllers\AuthorActivityController.cs" />
+    <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\CRUDAuthorController.cs" />
+    <Compile Include="Controllers\CRUDBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IdentityControllers\AccountController.cs" />
-    <Compile Include="Controllers\MagazineControllers\CRUDMagazineController.cs" />
-    <Compile Include="Controllers\MagazineControllers\MagazineController.cs" />
-    <Compile Include="Controllers\PublicationsControllers\CRUDPublicationController.cs" />
-    <Compile Include="Controllers\PublicationsControllers\PublicationsController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CRUDMagazineController.cs" />
+    <Compile Include="Controllers\MagazineController.cs" />
+    <Compile Include="Controllers\CRUDPublicationController.cs" />
+    <Compile Include="Controllers\PublicationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

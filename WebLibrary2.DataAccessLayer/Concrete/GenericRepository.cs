@@ -18,7 +18,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             dbSet = context.Set<TEntity>();
         }
 
-        public void Create(TEntity item)
+        public virtual void Create(TEntity item)
         {
             dbSet.Add(item);
             context.SaveChanges();

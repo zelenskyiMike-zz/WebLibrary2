@@ -7,13 +7,10 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
-using WebLibrary2.Domain.Abstract.AbstractMagazine;
-using WebLibrary2.Domain.Concrete;
-using WebLibrary2.Domain.Concrete.ConcreteMagazine;
-using WebLibrary2.Domain.Entity.MagazineEntity;
 using WebLibrary2.Domain.Extensions;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
-namespace WebLibrary2.WebUI.Controllers.MagazineControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class MagazineController : Controller
     {
@@ -26,13 +23,13 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
 
-        EFMagazineRepository magazineRepository;
-        EFDbContext context;
+        //EFMagazineRepository magazineRepository;
+        //EFDbContext context;
 
-        public MagazineController(EFMagazineRepository magazinesRepository, EFDbContext context)
+        public MagazineController(/*EFMagazineRepository magazinesRepository, EFDbContext context*/)
         {
-            magazineRepository = magazinesRepository;
-            this.context = context;
+            //magazineRepository = magazinesRepository;
+            //this.context = context;
 
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
@@ -50,9 +47,9 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             filePath = serializeFolderPath + "\\" + fileName + ".json";
             if (magazineSerializationID != null)
             {
-                List<Magazine> magazinesToSerialize = new List<Magazine>();
+                List<GetMagazineView> magazinesToSerialize = new List<GetMagazineView>();
 
-                List<Magazine> magazinesFromFile = DeserializationExtensionClass.DeserializeJSON<Magazine>(filePath);
+                List<GetMagazineView> magazinesFromFile = DeserializationExtensionClass.DeserializeJSON<GetMagazineView>(filePath);
                 if (magazinesFromFile != null)
                 {
                     magazinesToSerialize = magazinesFromFile;
@@ -60,7 +57,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
 
                 foreach (int magazine in magazineSerializationID.ToList())
                 {
-                    Magazine magazineToSerialize = context.Magazines.Find(magazine);
+                    GetMagazineView magazineToSerialize = context.Magazines.Find(magazine);
                     if (!magazinesToSerialize.Contains(magazineToSerialize))
                     {
                         magazinesToSerialize.Add(magazineToSerialize);
@@ -83,9 +80,9 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             filePath = serializeFolderPath + "\\" + fileName + ".xml";
             if (magazineSerializationID != null)
             {
-                List<Magazine> magazinesToSerialize = new List<Magazine>();
+                List<GetMagazineView> magazinesToSerialize = new List<GetMagazineView>();
 
-                List<Magazine> magazinesFromFile = DeserializationExtensionClass.DeserializeJSON<Magazine>(filePath);
+                List<GetMagazineView> magazinesFromFile = DeserializationExtensionClass.DeserializeJSON<GetMagazineView>(filePath);
                 if (magazinesFromFile != null)
                 {
                     magazinesToSerialize = magazinesFromFile;
@@ -93,7 +90,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
 
                 foreach (var article in magazineSerializationID.ToList())
                 {
-                    Magazine magazineToSerialize = context.Magazines.Find(article);
+                    GetMagazineView magazineToSerialize = context.Magazines.Find(article);
                     if (!magazinesToSerialize.Contains(magazineToSerialize))
                     {
                         magazinesToSerialize.Add(magazineToSerialize);
@@ -102,7 +99,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
 
                 using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
                 {
-                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Magazine>));
+                    XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<GetMagazineView>));
                     XmlSerializer.Serialize(fs, magazinesToSerialize);
                 }
                 ViewBag.Success = true;
@@ -131,7 +128,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             {
                 try
                 {
-                    List<Magazine> fileContent = DeserializationExtensionClass.DeserializeJSON<Magazine>(filePath);
+                    List<GetMagazineView> fileContent = DeserializationExtensionClass.DeserializeJSON<GetMagazineView>(filePath);
                     for (int i = 0; i < 1; i++)
                     {
                         if (fileContent[i].MagazineID == 0)
@@ -151,7 +148,7 @@ namespace WebLibrary2.WebUI.Controllers.MagazineControllers
             {
                 try
                 {
-                    List<Magazine> fileContent = DeserializationExtensionClass.DeserializeXML<Magazine>(filePath);
+                    List<GetMagazineView> fileContent = DeserializationExtensionClass.DeserializeXML<GetMagazineView>(filePath);
                     for (int i = 0; i < 1; i++)
                     {
                         if (fileContent == null)

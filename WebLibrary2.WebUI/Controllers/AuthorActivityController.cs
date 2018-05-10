@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using WebLibrary2.BusinessLogicLayer.Sevices;
 
-namespace WebLibrary2.WebUI.Controllers.AuthorControllers
+namespace WebLibrary2.WebUI.Controllers
 {
     public class AuthorActivityController : Controller
     {

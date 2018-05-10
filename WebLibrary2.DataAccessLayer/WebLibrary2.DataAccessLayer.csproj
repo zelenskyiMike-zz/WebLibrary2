@@ -134,7 +134,6 @@
     <Compile Include="Interfaces\IMagazineRepository.cs" />
     <Compile Include="Interfaces\IPublicationAuthorsRepository.cs" />
     <Compile Include="Interfaces\IPublicationRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Migrations\201804271325078_Init.cs" />
     <Compile Include="Migrations\201804271325078_Init.Designer.cs">
       <DependentUpon>201804271325078_Init.cs</DependentUpon>

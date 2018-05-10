@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebLibrary2.ViewModelsLayer.ViewModels
 {
-    public class GetAllBookView
+    public class GetAllBooksView
     {
         public int BookID { get; set; }
 

@@ -53,16 +53,14 @@ namespace WebLibrary2.DataAccessLayer.Concrete
         public Publication GetPublicationDetails(int? id)
         {
             Publication publication = GetPublicationByID(id);
-            var publicationGenreName = (from pg in context.PublicationGenres
-                                        where pg.PublicationGenreID == publication.PublicationGenreID
-                                        select pg.PublicationGenreName).SingleOrDefault();
+            PublicationGenre publicationGenre =context.PublicationGenres.Where(x => x.PublicationGenreID == publication.PublicationGenreID).SingleOrDefault();
             var listAuthors = context.PublicationeAuthors.Where(x => x.PublicationID == publication.PublicationID).Select(x => x.Authors).ToList();
 
             Publication publicationVM = new Publication()
             {
                 PublicationID = publication.PublicationID,
                 PublicationName = publication.PublicationName,
-                PublicationGenreName = publicationGenreName,
+                PublicationGenres= publicationGenre,
                 DateOfPublicationPublish = publication.DateOfPublicationPublish,
                 Authors = listAuthors
             };

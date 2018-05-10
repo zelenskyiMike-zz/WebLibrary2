@@ -65,12 +65,12 @@ namespace WebLibrary2.DataAccessLayer.Concrete
 
 
 
-        public List<Book> GetBooksNotExistInAuthor(int authorID)
+        public List<Book> GetBooksNotExistInAuthor(Author author)
         {
-            var currAuthor = GetAuthorByID(authorID);
+            //var currAuthor = GetAuthorByID(authorID);
             List<Book> finalListOfBooks = new List<Book>();
 
-            var initBookAuthorList = context.BookAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Books).ToList();
+            var initBookAuthorList = context.BookAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Books).ToList();
 
             foreach (var item in context.Books.ToList())
             {
@@ -82,13 +82,13 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return finalListOfBooks;
         }
 
-        public List<Article> GetArticlesNotExistInAuthor(int authorID)
+        public List<Article> GetArticlesNotExistInAuthor(Author author)
         {
-            var currAuthor = GetAuthorByID(authorID);
+            //var currAuthor = GetAuthorByID(authorID);
 
             List<Article> finalListOfArticles = new List<Article>();
 
-            var initArticleAuthorList = context.ArticleAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Articles).ToList();
+            var initArticleAuthorList = context.ArticleAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Articles).ToList();
 
             foreach (var item in context.Articles.ToList())
             {
@@ -100,12 +100,12 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return finalListOfArticles;
         }
 
-        public List<Magazine> GetMagazinesNotExistInAuthor(int authorID)
+        public List<Magazine> GetMagazinesNotExistInAuthor(Author author)
         {
-            var currAuthor = GetAuthorByID(authorID);
+            //var currAuthor = GetAuthorByID(authorID);
             List<Magazine> finalListOfMagazines = new List<Magazine>();
 
-            var initMagazineAuthorsList = context.MagazineAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Magazines).ToList();
+            var initMagazineAuthorsList = context.MagazineAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Magazines).ToList();
 
             foreach (var item in context.Magazines.ToList())
             {
@@ -117,12 +117,12 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return finalListOfMagazines;
         }
 
-        public List<Publication> GetPublicationsNotExistInAuthor(int authorID)
+        public List<Publication> GetPublicationsNotExistInAuthor(Author author)
         {
-            var currAuthor = GetAuthorByID(authorID);
+            //var currAuthor = GetAuthorByID(authorID);
             List<Publication> finalListOfPublication = new List<Publication>();
 
-            var initPublicationsAuthorList = context.PublicationeAuthors.Where(x => x.AuthorID == currAuthor.AuthorID).Select(x => x.Publications).ToList();
+            var initPublicationsAuthorList = context.PublicationeAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Publications).ToList();
 
             foreach (var item in context.Publications.ToList())
             {
@@ -157,36 +157,40 @@ namespace WebLibrary2.DataAccessLayer.Concrete
 
         public Author GetAuthorsBooksDetails(int? id)
         {
+            var author = GetAuthorByID(id);
             var bookList = context.BookAuthors.Include(x => x.Books).Where(x => x.AuthorID == id).Select(x => x.Books).ToList();
 
-            Author authorVM = GetAuthorsDetails(id);
+            Author authorVM = GetAuthorsDetails(author);
             authorVM.Books = bookList;
             return authorVM;
         }
 
         public Author GetAuthorsArticlesDetails(int? id)
         {
+            var author = GetAuthorByID(id);
             var articleList = context.ArticleAuthors.Include(x => x.Articles).Where(x => x.AuthorID == id).Select(x => x.Articles).ToList();
 
-            Author authorVM = GetAuthorsDetails(id);
+            Author authorVM = GetAuthorsDetails(author);
             authorVM.Articles = articleList;
             return authorVM;
         }
 
         public Author GetAuthorsMagazinesDetails(int? id)
         {
+            var author = GetAuthorByID(id);
             var magazineList = context.MagazineAuthors.Include(x => x.Magazines).Where(x => x.AuthorID == id).Select(x => x.Magazines).ToList();
 
-            Author authorVM = GetAuthorsDetails(id);
+            Author authorVM = GetAuthorsDetails(author);
             authorVM.Magazines = magazineList;
             return authorVM;
         }
 
         public Author GetAuthorsPublicationsDetails(int? id)
         {
+            var author = GetAuthorByID(id);
             var publicationsList = context.PublicationeAuthors.Include(x => x.Publications).Where(x => x.AuthorID == id).Select(x => x.Publications).ToList();
 
-            Author authorVM = GetAuthorsDetails(id);
+            Author authorVM = GetAuthorsDetails(author);
             authorVM.Publications = publicationsList;
             return authorVM;
         }
