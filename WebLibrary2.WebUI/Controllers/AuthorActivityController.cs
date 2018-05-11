@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Web.Mvc;
 using WebLibrary2.BusinessLogicLayer.Sevices;
+using WebLibrary2.ViewModelsLayer.ViewModels;
 
 namespace WebLibrary2.WebUI.Controllers
 {
@@ -19,32 +20,32 @@ namespace WebLibrary2.WebUI.Controllers
         {
             var authorVM = service.GetAuthorsBooksDetails(id);
 
-            MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor((int)id), "BookID", "BookName", authorVM.Books);
+            MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor(authorVM), "BookID", "BookName", authorVM.Books);
             ViewData["Books"] = books;
-            return PartialView(authorVM);
+            return PartialView("GetBooksOFAuthor",authorVM);
         }
 
         [HttpPost]
         [ChildActionOnly]
         [ValidateAntiForgeryToken]
-        public PartialViewResult GetBooksOFAuthor(int id, int[] bookIDsForDelete, int[] booksIDsForInsert)
+        public PartialViewResult GetBooksOFAuthor(GetAuthorLiteratureView authorVM, int[] bookIDsForDelete, int[] booksIDsForInsert)
         {
-            var authorToUpdate = service.GetAuthorByID(id);
+            var authorToUpdate = service.GetAuthorByID(authorVM.AuthorID);
 
             if (TryUpdateModel(authorToUpdate))
             {
                 try
                 {
-                    service.EditBooksOFAuthor(id, bookIDsForDelete, booksIDsForInsert);
+                    service.EditBooksOFAuthor(authorVM.AuthorID, bookIDsForDelete, booksIDsForInsert);
                 }
                 catch (DataException)
                 {
                     ModelState.AddModelError("", "Unable to save");
                 }
             }
-            var authorVM = service.GetAuthorsBooksDetails(id);
+            var author = service.GetAuthorsBooksDetails(authorVM.AuthorID);
 
-            MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor((int)id), "BookID", "BookName", authorVM.Books);
+            MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor(authorVM), "BookID", "BookName", authorVM.Books);
             ViewData["Books"] = books;
 
             return PartialView(authorVM);
@@ -56,7 +57,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             var authorVM = service.GetAuthorsArticlesDetails(id);
 
-            MultiSelectList articles = new MultiSelectList(service.GetArticlesNotExistInAuthor((int)id), "ArticleID", "ArticleName", authorVM.Books);
+            MultiSelectList articles = new MultiSelectList(service.GetArticlesNotExistInAuthor(authorVM), "ArticleID", "ArticleName", authorVM.Books);
             ViewData["Articles"] = articles;
             return PartialView(authorVM);
         }
@@ -81,7 +82,7 @@ namespace WebLibrary2.WebUI.Controllers
             }
             var authorVM = service.GetAuthorsArticlesDetails(id);
 
-            MultiSelectList articles = new MultiSelectList(service.GetArticlesNotExistInAuthor((int)id), "ArticleID", "ArticleName", authorVM.Books);
+            MultiSelectList articles = new MultiSelectList(service.GetArticlesNotExistInAuthor(authorVM), "ArticleID", "ArticleName", authorVM.Books);
             ViewData["Articles"] = articles;
 
             return PartialView(authorVM);
@@ -93,7 +94,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             var authorVM = service.GetAuthorsMagazinesDetails(id);
 
-            MultiSelectList magazines = new MultiSelectList(service.GetMagazinesNotExistInAuthor((int)id), "MagazineID", "MagazineName", authorVM.Books);
+            MultiSelectList magazines = new MultiSelectList(service.GetMagazinesNotExistInAuthor(authorVM), "MagazineID", "MagazineName", authorVM.Books);
             ViewData["Magazines"] = magazines;
             return PartialView(authorVM);
         }
@@ -119,7 +120,7 @@ namespace WebLibrary2.WebUI.Controllers
 
             var authorVM = service.GetAuthorsMagazinesDetails(id);
 
-            MultiSelectList magazines = new MultiSelectList(service.GetMagazinesNotExistInAuthor((int)id), "MagazineID", "MagazineName", authorVM.Books);
+            MultiSelectList magazines = new MultiSelectList(service.GetMagazinesNotExistInAuthor(authorVM), "MagazineID", "MagazineName", authorVM.Books);
             ViewData["Magazines"] = magazines;
 
             return PartialView(authorVM);
@@ -131,7 +132,7 @@ namespace WebLibrary2.WebUI.Controllers
         {
             var authorVM = service.GetAuthorsPublicationsDetails(id);
 
-            MultiSelectList publications = new MultiSelectList(service.GetPublicationsNotExistInAuthor((int)id), "PublicationID", "PublicationName", authorVM.Books);
+            MultiSelectList publications = new MultiSelectList(service.GetPublicationsNotExistInAuthor(authorVM), "PublicationID", "PublicationName", authorVM.Books);
             ViewData["Publications"] = publications;
             return PartialView(authorVM);
         }
@@ -157,7 +158,7 @@ namespace WebLibrary2.WebUI.Controllers
 
             var authorVM = service.GetAuthorsPublicationsDetails(id);
 
-            MultiSelectList publications = new MultiSelectList(service.GetPublicationsNotExistInAuthor((int)id), "PublicationID", "PublicationName", authorVM.Books);
+            MultiSelectList publications = new MultiSelectList(service.GetPublicationsNotExistInAuthor(authorVM), "PublicationID", "PublicationName", authorVM.Books);
             ViewData["Publications"] = publications;
 
             return PartialView(authorVM);

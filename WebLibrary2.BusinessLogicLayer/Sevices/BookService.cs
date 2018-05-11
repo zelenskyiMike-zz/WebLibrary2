@@ -69,9 +69,9 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             var authorsMapped = Mapper.Map<IEnumerable<Author>, IEnumerable<GetAuthorView>> (authors);
             return authorsMapped;
         }
-        public void EditBook(GetBookView bookFromView, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public void EditBook(GetAllBooksView bookFromView, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
-            var bookToUpdate = Mapper.Map<GetBookView,Book>(bookFromView);
+            var bookToUpdate = Mapper.Map<GetAllBooksView, Book>(bookFromView);
             genericRepository.Update(bookToUpdate);
             bookAuthorRepository.DeleteAuthorFromBook(bookFromView.BookID, authorIDsForDelete);
             bookAuthorRepository.AddAuthorToBook(bookFromView.BookID, authorIDsForInsert);

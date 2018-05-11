@@ -1,29 +1,27 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 using WebLibrary2.ViewModelsLayer.ViewModels;
 
 namespace WebLibrary2.WebUI.Controllers
 {
     public class CRUDPublicationController : Controller
     {
-        //EFDbContext context;
-        //EFPublicationRepository publicationRepository;
-        //EFPublicationAuthorsRepository publicationAuthorsRepository;
+        private readonly PublicationService publicationService;
+        private readonly AuthorService authorService;
 
-
-        public CRUDPublicationController(/*EFDbContext contextParam, EFPublicationRepository publicationsRepository, EFPublicationAuthorsRepository publicationsAuthorsRepository*/)
+        public CRUDPublicationController(PublicationService publicationService,AuthorService authorService)
         {
-            //context = contextParam;
-            //publicationRepository = publicationsRepository;
-            //publicationAuthorsRepository = publicationsAuthorsRepository;
+            this.publicationService = publicationService;
+            this.authorService = authorService;
         }
 
         [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreatePublication()
         {
-            SelectList genres = new SelectList(context.PublicationGenres, "PublicationGenreID", "PublicationGenreName");
-            MultiSelectList authors = new MultiSelectList(context.Authors, "AuthorID", "AuthorName");
+            SelectList genres = new SelectList(publicationService.GetAllPublicationGenres(), "PublicationGenreID", "PublicationGenreName");
+            MultiSelectList authors = new MultiSelectList(authorService.GetAllAuthors(), "AuthorID", "AuthorName");
             ViewData["PublicationGenres"] = genres;
             ViewData["Authors"] = authors;
             return View();
@@ -36,11 +34,11 @@ namespace WebLibrary2.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                publicationRepository.InsertPublication(publicationVM);
+                publicationService.CreatePublication(publicationVM);
                 return RedirectToAction("Index", "Home");
             }
-            SelectList genres = new SelectList(context.PublicationGenres, "PublicationGenreID", "PublicationGenreName");
-            MultiSelectList authors = new MultiSelectList(context.Authors, "AuthorID", "AuthorName");
+            SelectList genres = new SelectList(publicationService.GetAllPublicationGenres(), "PublicationGenreID", "PublicationGenreName");
+            MultiSelectList authors = new MultiSelectList(authorService.GetAllAuthors(), "AuthorID", "AuthorName");
             ViewData["PublicationGenres"] = genres;
             ViewData["Authors"] = authors;
             return View(publicationVM);
@@ -49,39 +47,30 @@ namespace WebLibrary2.WebUI.Controllers
 
         [Authorize(Roles = "user,admin")]
         [HttpGet]
-        public ActionResult PublicationDetails(int? id)
+        public ActionResult PublicationDetails(int id)
         {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
-            var publicationVM = publicationRepository.GetPublicationDetails(id);
+            var publicationVM = publicationService.GetPublicationDetails(id);
             return View(publicationVM);
         }
 
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public ActionResult EditPublication(int? id)
+        public ActionResult EditPublication(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var publication = publicationRepository.GetPublicationDetails(id);
+            var publication = publicationService.GetPublicationDetails(id);
 
             if (publication == null)
             {
                 HttpNotFound();
             }
 
-            SelectList genres = new SelectList(context.PublicationGenres, "PublicationGenreID", "PublicationGenreName", publication.PublicationGenreID);
+            SelectList genres = new SelectList(publicationService.GetAllPublicationGenres(), "PublicationGenreID", "PublicationGenreName", publication.PublicationGenreID);
             ViewData["PublicationGenres"] = genres;
 
-            MultiSelectList authors = new MultiSelectList(publicationRepository.GetAuthorsNotExistInPublication((int)id), "AuthorID", "AuthorName", publication.Authors);
+            MultiSelectList authors = new MultiSelectList(publicationService.GetAuthorsNotExistInPublication(publication), "AuthorID", "AuthorName", publication.Authors);
             ViewData["Authors"] = authors;
 
-            return View(publication);
+            return View("EditPublication", publication);
         }
 
         [Authorize(Roles = "admin")]
@@ -94,24 +83,19 @@ namespace WebLibrary2.WebUI.Controllers
                 HttpNotFound();
             }
 
-            var publicationToUpdate = publicationRepository.GetPublicationByID(publicationVM.PublicationID);
-            ViewBag.ActiveTab = publicationToUpdate.PublicationID.ToString();
-
-            if (TryUpdateModel(publicationToUpdate))
+            if (TryUpdateModel(publicationVM))
             {
-                publicationAuthorsRepository.DeleteAuthorFromPublication(publicationToUpdate.PublicationID, authorIDsForDelete);
-                publicationAuthorsRepository.AddAuthorToPublication(publicationToUpdate.PublicationID, authorIDsForInsert);
-                publicationRepository.Save();
+                publicationService.EditPublication(publicationVM, authorIDsForDelete, authorIDsForInsert);
                 return new RedirectResult(Url.Action("Index", "Home", new {tab = "publications" }));
             }
 
-            var publication = publicationRepository.GetPublicationDetails(publicationVM.PublicationID);
+            var publication = publicationService.GetPublicationDetails(publicationVM.PublicationID);
 
 
-            SelectList genres = new SelectList(context.PublicationGenres, "PublicationGenreID", "PublicationGenreName", publication.PublicationGenreID);
+            SelectList genres = new SelectList(publicationService.GetAllPublicationGenres(), "PublicationGenreID", "PublicationGenreName", publication.PublicationGenreID);
             ViewData["PublicationGenres"] = genres;
 
-            MultiSelectList authors = new MultiSelectList(publicationRepository.GetAuthorsNotExistInPublication((int)publication.PublicationID), "AuthorID", "AuthorName", publication.Authors);
+            MultiSelectList authors = new MultiSelectList(publicationService.GetAuthorsNotExistInPublication(publication), "AuthorID", "AuthorName", publication.Authors);
             ViewData["Authors"] = authors;
 
             return View("EditPublication", publication);
@@ -120,27 +104,22 @@ namespace WebLibrary2.WebUI.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public ActionResult DeletePublication(int? id)
+        public ActionResult DeletePublication(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            GetPublicationView publicationVM = publicationRepository.GetPublicationDetails(id);
+            var publicationVM = publicationService.GetPublicationDetails(id);
             if (publicationVM == null)
             {
                 HttpNotFound();
             }
-            return View(publicationVM);
+            return View("DeletePublication", publicationVM);
         }
 
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePublication(int id)
+        public ActionResult DeletePublication(GetAllPublicationsView publicationVM)
         {
-            publicationRepository.DeletePublication(id);
+            publicationService.DeletePublication(publicationVM);
             return RedirectToAction("Index", "Home");
         }
     }

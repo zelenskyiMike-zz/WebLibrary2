@@ -26,7 +26,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
         public DbSet<MagazineAuthor> MagazineAuthors { get; set; }
-        public DbSet<PublicationeAuthor> PublicationeAuthors { get; set; }
+        public DbSet<PublicationAuthor> PublicationeAuthors { get; set; }
 
         public DbSet<ClientProfile> ClientProfiles { get; set; }
     }

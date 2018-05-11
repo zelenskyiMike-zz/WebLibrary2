@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 using WebLibrary2.Domain.Extensions;
 using WebLibrary2.ViewModelsLayer.ViewModels;
 
@@ -22,22 +23,18 @@ namespace WebLibrary2.WebUI.Controllers
 
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
+        private readonly MagazineService magazineService;
 
-        //EFMagazineRepository magazineRepository;
-        //EFDbContext context;
-
-        public MagazineController(/*EFMagazineRepository magazinesRepository, EFDbContext context*/)
+        public MagazineController(MagazineService magazineService)
         {
-            //magazineRepository = magazinesRepository;
-            //this.context = context;
-
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
+            this.magazineService = magazineService;
         }
-        // GET: Magazine
+
         public PartialViewResult MagazinesView()
         {
-            var magazines = magazineRepository.GetAllMagazines();
+            var magazines = magazineService.GetAllMagazines();
             return PartialView(magazines);
         }
 
@@ -57,7 +54,7 @@ namespace WebLibrary2.WebUI.Controllers
 
                 foreach (int magazine in magazineSerializationID.ToList())
                 {
-                    GetMagazineView magazineToSerialize = context.Magazines.Find(magazine);
+                    GetMagazineView magazineToSerialize = magazineService.GetMagazineByID(magazine);
                     if (!magazinesToSerialize.Contains(magazineToSerialize))
                     {
                         magazinesToSerialize.Add(magazineToSerialize);
@@ -88,9 +85,9 @@ namespace WebLibrary2.WebUI.Controllers
                     magazinesToSerialize = magazinesFromFile;
                 }
 
-                foreach (var article in magazineSerializationID.ToList())
+                foreach (var magazine in magazineSerializationID.ToList())
                 {
-                    GetMagazineView magazineToSerialize = context.Magazines.Find(article);
+                    GetMagazineView magazineToSerialize = magazineService.GetMagazineByID(magazine);
                     if (!magazinesToSerialize.Contains(magazineToSerialize))
                     {
                         magazinesToSerialize.Add(magazineToSerialize);

@@ -75,7 +75,7 @@ namespace WebLibrary2.WebUI.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditBook(GetBookView bookFromView, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public ActionResult EditBook(GetAllBooksView bookFromView, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
             if (TryUpdateModel(bookFromView))
             {
@@ -84,14 +84,13 @@ namespace WebLibrary2.WebUI.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var book = bookService.GetBookDetails(bookFromView.BookID);
-            SelectList genres = new SelectList(bookService.GetAllGenres(), "GenreID", "GenreName", book.GenreID);
+            SelectList genres = new SelectList(bookService.GetAllGenres(), "GenreID", "GenreName", bookFromView.GenreID);
             ViewData["Genres"] = genres;
 
-            MultiSelectList authors = new MultiSelectList(bookService.GetAuthorsNotExistInBook(book), "AuthorID", "AuthorName", book.Authors);
+            MultiSelectList authors = new MultiSelectList(bookService.GetAuthorsNotExistInBook(bookFromView), "AuthorID", "AuthorName", bookFromView.Authors);
             ViewData["Authors"] = authors;
 
-            return View("EditBook", book);
+            return View("EditBook", bookFromView);
         }
 
         [Authorize(Roles = "admin")]

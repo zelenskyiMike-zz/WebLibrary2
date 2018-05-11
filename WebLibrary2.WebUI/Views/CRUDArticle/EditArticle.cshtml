@@ -1,5 +1,5 @@
-﻿@using WebLibrary2.Domain.Models
-@model GetM2MCRUDArticleVM
+﻿@using WebLibrary2.ViewModelsLayer.ViewModels
+@model GetAllArticlesView
 @{
     ViewBag.Title = "EditArticle";
 }
@@ -62,7 +62,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <br /><input type="submit" value="Сохранить изменения" class="btn btn-default" tabindex="articles"/>
+                <br /><input type="submit" value="Сохранить изменения" class="btn btn-default" tabindex="articles" />
                 <div class="btn btn-default">@Html.ActionLink("Назад к списку", "Index", "Home")</div>
             </div>
         </div>

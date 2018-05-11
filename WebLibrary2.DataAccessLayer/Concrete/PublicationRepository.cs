@@ -6,7 +6,7 @@ using WebLibrary2.EntitiesLayer.Entities;
 
 namespace WebLibrary2.DataAccessLayer.Concrete
 {
-    public class PublicationRepository : IPublicationRepository
+    public class PublicationRepository
     {
         DbContext context;
         public PublicationRepository(DbContext contextParam)
@@ -26,13 +26,11 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return context.Publications.Include(pg => pg.PublicationGenres);
         }
 
-        public List<Author> GetAuthorsNotExistInPublication(int id)
+        public List<Author> GetAuthorsNotExistInPublication(Publication publication)
         {
-            Publication currPublication = GetPublicationByID(id);
+           List<Author> finalListOfAuthors = new List<Author>();
 
-            List<Author> finalListOfAuthors = new List<Author>();
-
-            var initialListOfAuthors = context.PublicationeAuthors.Where(x => x.PublicationID == currPublication.PublicationID).Select(x => x.Authors).ToList();
+            var initialListOfAuthors = context.PublicationeAuthors.Where(x => x.PublicationID == publication.PublicationID).Select(x => x.Authors).ToList();
 
             foreach (var item in context.Authors.ToList())
             {

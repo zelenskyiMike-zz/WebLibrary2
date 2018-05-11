@@ -31,7 +31,7 @@ namespace WebLibrary2.WebUI.Controllers
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
             this.articleService = articleService;
         }
-        // GET: Articles
+
         [HttpGet]
         public PartialViewResult ArticlesView()
         {

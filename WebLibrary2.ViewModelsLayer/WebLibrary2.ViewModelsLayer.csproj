@@ -45,6 +45,7 @@
     <Compile Include="ViewModels\GetAllArticlesView.cs" />
     <Compile Include="ViewModels\GetAllBooksView.cs" />
     <Compile Include="ViewModels\GetAllMagazinesView.cs" />
+    <Compile Include="ViewModels\GetPublicationGenreView.cs" />
     <Compile Include="ViewModels\GetAllPublicationsView.cs" />
     <Compile Include="ViewModels\GetArticleView.cs" />
     <Compile Include="ViewModels\GetAuthorLiteratureView.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="ViewModels\GetBookGenreView.cs" />
     <Compile Include="ViewModels\GetBooksWithAllAuthorsView.cs" />
     <Compile Include="ViewModels\GetBookView.cs" />
+    <Compile Include="ViewModels\GetMagazineGenreView.cs" />
     <Compile Include="ViewModels\GetMagazineView.cs" />
     <Compile Include="ViewModels\GetPublicationView.cs" />
     <Compile Include="ViewModels\RegisterAccountView.cs" />

@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
+using WebLibrary2.BusinessLogicLayer.Sevices;
 using WebLibrary2.Domain.Extensions;
 using WebLibrary2.ViewModelsLayer.ViewModels;
 
@@ -22,25 +23,19 @@ namespace WebLibrary2.WebUI.Controllers
 
         private MatchCollection matchXML;
         private MatchCollection matchJSON;
+        private readonly PublicationService publicationService;
 
-        //EFPublicationRepository publicationRepository;
-        //EFDbContext context;
-
-        public PublicationsController(/*EFPublicationRepository publicationsRepository, EFDbContext context*/)
+        public PublicationsController(PublicationService publicationService)
         {
-            //publicationRepository = publicationsRepository;
-            //this.context = context;
-
             var userProfilePath = Environment.GetEnvironmentVariable("USERPROFILE");
             serializeFolderPath = Path.Combine(userProfilePath, @"source\repos\WebLibrary2\Serialization");
+            this.publicationService = publicationService;
         }
         public PartialViewResult PublicationsView()
         {
-            var publications = publicationRepository.GetAllPublications();
+            var publications = publicationService.GetAllPubications();
             return PartialView(publications);
         }
-
-
 
         [HttpPost]
         public ActionResult SerializePublicationToJSON(int[] publicationSerializationID,string fileName)
@@ -58,7 +53,7 @@ namespace WebLibrary2.WebUI.Controllers
 
                 foreach (int publication in publicationSerializationID.ToList())
                 {
-                    GetPublicationView publicationToSerialize = context.Publications.Find(publication);
+                    GetPublicationView publicationToSerialize = publicationService.GetPublicationByID(publication);
                     if (!publicationsToSerialize.Contains(publicationToSerialize))
                     {
                         publicationsToSerialize.Add(publicationToSerialize);
@@ -94,9 +89,9 @@ namespace WebLibrary2.WebUI.Controllers
                     publicationsToSerialize = publicationsFromFile;
                 }
 
-                foreach (var article in publicationSerializationID.ToList())
+                foreach (var publication in publicationSerializationID.ToList())
                 {
-                    GetPublicationView publicationToSerialize = context.Publications.Find(article);
+                    GetPublicationView publicationToSerialize = publicationService.GetPublicationByID(publication);
                     if (!publicationsToSerialize.Contains(publicationToSerialize))
                     {
                         publicationsToSerialize.Add(publicationToSerialize);

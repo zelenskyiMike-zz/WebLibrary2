@@ -42,9 +42,11 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             var author = genericRepository.GetByID(id);
             return Mapper.Map<Author, GetAuthorLiteratureView>(author);
         }
-        public Author GetAuthorByID(int id)
+        public GetAuthorView GetAuthorByID(int id)
         {
-            return genericRepository.GetByID(id);
+            var author = genericRepository.GetByID(id);
+            var authorMapped = Mapper.Map<Author,GetAuthorView>(author);
+            return authorMapped;
         }
 
 
@@ -92,27 +94,31 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
 
 
 
-        public List<GetBookView> GetBooksNotExistInAuthor(Author author)
+        public List<GetBookView> GetBooksNotExistInAuthor(GetAuthorLiteratureView authorVM)
         {
+            var author = Mapper.Map<GetAuthorLiteratureView, Author>(authorVM);
             var listBooks = authorRepository.GetBooksNotExistInAuthor(author);
 
             var booksMapped = Mapper.Map<List<Book>, List<GetBookView>>(listBooks);
             return booksMapped;
         }
-        public List<GetArticleView> GetArticlesNotExistInAuthor(Author author)
+        public List<GetArticleView> GetArticlesNotExistInAuthor(GetAuthorLiteratureView authorVM)
         {
+            var author = Mapper.Map<GetAuthorLiteratureView, Author>(authorVM);
             var listArticles = authorRepository.GetArticlesNotExistInAuthor(author);
             var articlesMapped = Mapper.Map<List<Article>, List<GetArticleView>>(listArticles);
             return articlesMapped;
         }
-        public List<GetMagazineView> GetMagazinesNotExistInAuthor(Author author)
+        public List<GetMagazineView> GetMagazinesNotExistInAuthor(GetAuthorLiteratureView authorVM)
         {
+            var author = Mapper.Map<GetAuthorLiteratureView, Author>(authorVM);
             var listMagazines = authorRepository.GetMagazinesNotExistInAuthor(author);
             var magazinesMapped = Mapper.Map<List<Magazine>, List<GetMagazineView>>(listMagazines);
             return magazinesMapped;
         }
-        public List<GetPublicationView> GetPublicationsNotExistInAuthor(Author author)
+        public List<GetPublicationView> GetPublicationsNotExistInAuthor(GetAuthorLiteratureView authorVM)
         {
+            var author = Mapper.Map<GetAuthorLiteratureView, Author>(authorVM);
             var listPublications = authorRepository.GetPublicationsNotExistInAuthor(author);
             var publicationsMapped = Mapper.Map<List<Publication>, List<GetPublicationView>>(listPublications);
             return publicationsMapped;

@@ -1,5 +1,5 @@
-﻿@using WebLibrary2.Domain.Entity.BookEntity;
-@model IEnumerable<Book>
+﻿@using WebLibrary2.ViewModelsLayer.ViewModels
+@model IEnumerable<GetAllBooksView>
 @{
     ViewBag.Title = "Books";
 }
@@ -40,7 +40,7 @@
                         <h4>@book.BookName</h4>
                     </td>
                     <td>
-                        <h4>@book.Genres.GenreName</h4>
+                        <h4>@book.GenreName</h4>
                     </td>
                     <td class="text-center">
                         <div class=" btn btn-default">
@@ -98,7 +98,7 @@
                         <h4>@book.BookName</h4>
                     </td>
                     <td>
-                        <h4>@book.Genres.GenreName</h4>
+                        <h4>@book.GenreName</h4>
                     </td>
                     <td class="text-center">
                         <div class=" btn btn-default">
@@ -131,7 +131,7 @@
                         <h4>@book.BookName</h4>
                     </td>
                     <td>
-                        <h4>@book.Genres.GenreName</h4>
+                        <h4>@book.GenreName</h4>
                     </td>
 
                 </tr>

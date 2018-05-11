@@ -6,7 +6,7 @@ using WebLibrary2.EntitiesLayer.Entities;
 
 namespace WebLibrary2.DataAccessLayer.Concrete
 {
-    public class MagazineRepository : IMagazineRepository
+    public class MagazineRepository
     {
         DbContext context;
         public MagazineRepository(DbContext contextParam)
@@ -26,11 +26,9 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return context.Magazines.Include(mg => mg.MagazineGenres);
         }
 
-        public List<Author> GetAuthorsNotExistInMagazine(int id)
+        public List<Author> GetAuthorsNotExistInMagazine(Magazine magazine)
         {
-            var currMagazine = GetMagazineByID(id);
-
-            var initMagazineAuthorList = context.MagazineAuthors.Where(x => x.MagazineID == currMagazine.MagazineID).Select(x => x.Authors).ToList();
+            var initMagazineAuthorList = context.MagazineAuthors.Where(x => x.MagazineID == magazine.MagazineID).Select(x => x.Authors).ToList();
 
             List<Author> finalListOfAuthors = new List<Author>();
 
@@ -50,11 +48,10 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             return context.Magazines.Find(id);
         }
 
-        public Magazine GetMagazineDetails(int? id)
+        public Magazine GetMagazineDetails(Magazine magazine)
         {
-            Magazine magazine = GetMagazineByID(id);
             MagazineGenre magazineGenre = context.MagazineGenres.Where(x => x.MagazineGenreID == magazine.MagazineGenreID).SingleOrDefault();
-            var authorsList = context.MagazineAuthors.Include(x => x.Authors).Where(x => x.MagazineID == id).Select(x => x.Authors).ToList();
+            var authorsList = context.MagazineAuthors.Include(x => x.Authors).Where(x => x.MagazineID == magazine.MagazineID).Select(x => x.Authors).ToList();
 
             Magazine magazineVM = new Magazine()
             {

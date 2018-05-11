@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Ninject.Modules;
-using WebLibrary2.BLL.Mapping;
+using WebLibrary2.BusinessLogicLayer.Mapping;
 
-namespace WebLibrary2.BLL.Infrastructure
+namespace WebLibrary2.BusinessLogicLayer.Infrastructure
 {
     public class ServiceModule : NinjectModule
     {

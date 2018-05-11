@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
 using WebLibrary2.BusinessLogicLayer.Mapping.MappingProfiles;
 
-namespace WebLibrary2.BLL.Mapping
+namespace WebLibrary2.BusinessLogicLayer.Mapping
 {
-    public static class MappingProfile
+    public class MappingProfile
     {
-        public static MapperConfiguration InitializeAutoMapper()
+        public static void InitializeAutoMapper()
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
+            Mapper.Initialize(cfg =>
             {
-                cfg.AddProfile(new AuthorMappingProfile());
-                cfg.AddProfile(new BookMappingProfile());
-                cfg.AddProfile(new BookGenresMappingProfile());
-                cfg.AddProfile(new ArticleMappingProfile());
+                //cfg.AddProfile<AuthorMappingProfile>();
+                cfg.AddProfile<BookMappingProfile>();
+                //cfg.AddProfile<BookGenresMappingProfile>();
+                //cfg.AddProfile<ArticleMappingProfile>();
+                //cfg.AddProfile<MagazineMappingProfile>();
             });
-
-            return config;
+            Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }
