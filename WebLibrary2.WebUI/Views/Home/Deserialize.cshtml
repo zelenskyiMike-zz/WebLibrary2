@@ -1,16 +1,16 @@
-﻿
+﻿@using WebLibrary2.ViewModelsLayer.ViewModels;
 @{
     ViewBag.Title = "Deserialize";
 
-    var articleDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataJSON"];
-    var magazineDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataJSON"];
-    var bookDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataJSON"];
-    var publicationDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataJSON"];
+    var articleDataJSON = (IEnumerable<GetArticleView>)ViewData["ArticleDataJSON"];
+    var magazineDataJSON = (IEnumerable<GetMagazineView>)ViewData["MagazineDataJSON"];
+    var bookDataJSON = (IEnumerable<GetBookView>)ViewData["BookDataJSON"];
+    var publicationDataJSON = (IEnumerable<GetPublicationView>)ViewData["PublicationDataJSON"];
 
-    var articleDataXML = (IEnumerable<WebLibrary2.Domain.Entity.ArticleEntity.Article>)ViewData["ArticleDataXML"];
-    var magazineDataXML = (IEnumerable<WebLibrary2.Domain.Entity.MagazineEntity.Magazine>)ViewData["MagazineDataXML"];
-    var bookDataXML = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataXML"];
-    var publicationDataXML = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataXML"];
+    var articleDataXML = (IEnumerable<GetArticleView>)ViewData["ArticleDataXML"];
+    var magazineDataXML = (IEnumerable<GetMagazineView>)ViewData["MagazineDataXML"];
+    var bookDataXML = (IEnumerable<GetBookView>)ViewData["BookDataXML"];
+    var publicationDataXML = (IEnumerable<GetPublicationView>)ViewData["PublicationDataXML"];
 }
 
 <h2>Deserialize</h2>

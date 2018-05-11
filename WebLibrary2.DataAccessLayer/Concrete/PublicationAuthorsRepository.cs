@@ -16,7 +16,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             {
                 foreach (var authorID in authorIDsForInsert)
                 {
-                    PublicationAuthor publicationeToAdd = new PublicationAuthor()
+                    PublicationeAuthor publicationeToAdd = new PublicationeAuthor()
                     {
                         PublicationID = publicationID,
                         AuthorID = authorID
@@ -33,7 +33,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             {
                 foreach (var publicationID in publicationIDsForInsert)
                 {
-                    PublicationAuthor publicationeToAdd = new PublicationAuthor()
+                    PublicationeAuthor publicationeToAdd = new PublicationeAuthor()
                     {
                         PublicationID = publicationID,
                         AuthorID = authorID

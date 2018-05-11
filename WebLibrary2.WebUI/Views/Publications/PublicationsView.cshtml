@@ -1,5 +1,5 @@
 ﻿@using WebLibrary2.ViewModelsLayer.ViewModels
-@model IEnumerable<GetPublicationView>
+@model IEnumerable<GetAllPublicationsView>
 @{
     ViewBag.Title = "Авторы";
     }
@@ -39,7 +39,7 @@
             {
             <tr>
                 <td><h4>@Html.DisplayFor(modelItem => publication.PublicationName)</h4></td>
-                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationGenres.PublicationGenreName)</h4></td>
+                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationGenreName)</h4></td>
                 <td>
                     <div class=" btn btn-default">
                         @Html.ActionLink("Редактировать", "EditPublication", "CRUDPublication", new { id = publication.PublicationID }, null)
@@ -95,7 +95,7 @@
             {
             <tr>
                 <td><h4>@Html.DisplayFor(modelItem => publication.PublicationName)</h4></td>
-                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationGenres.PublicationGenreName)</h4></td>
+                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationGenreName)</h4></td>
                 <td>
                     <div class=" btn btn-default">
                         @Html.ActionLink("Детали", "PublicationDetails", "CRUDPublication", new { id = publication.PublicationID }, null)
@@ -123,7 +123,7 @@
         {
             <tr>
                 <td><h4>@Html.DisplayFor(modelItem => publication.PublicationName)</h4></td>
-                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationGenres.PublicationGenreName)</h4></td>
+                <td><h4>@Html.DisplayFor(modelItem => publication.PublicationGenreName)</h4></td>
             </tr>
         }
     </table>

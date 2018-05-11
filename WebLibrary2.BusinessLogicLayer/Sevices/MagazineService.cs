@@ -25,10 +25,10 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             magazineAuthorsRepository = new MagazineAuthorRepository(context);
         }
 
-        public IEnumerable<GetMagazineView> GetAllMagazines()
+        public IEnumerable<GetAllMagazinesView> GetAllMagazines()
         {
             var magazines = genericRepository.GetAll();
-            var magazinesMapped = Mapper.Map<IEnumerable<Magazine>,IEnumerable<GetMagazineView>>(magazines);
+            var magazinesMapped = Mapper.Map<IEnumerable<Magazine>,IEnumerable<GetAllMagazinesView>>(magazines);
             return magazinesMapped;
         }
         public GetMagazineView GetMagazineByID(int id)

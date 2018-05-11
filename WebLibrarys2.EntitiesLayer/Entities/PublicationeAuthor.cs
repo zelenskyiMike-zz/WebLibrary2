@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebLibrary2.EntitiesLayer.Entities
 {
-    public class PublicationAuthor
+    public class PublicationeAuthor
     {
         [Key, Column(Order = 1)]
         public int PublicationID { get; set; }

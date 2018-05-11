@@ -25,10 +25,10 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             publicationAuthorsRepository = new PublicationAuthorsRepository(context);
         }
 
-        public IEnumerable<GetPublicationView> GetAllPubications()
+        public IEnumerable<GetAllPublicationsView> GetAllPubications()
         {
             var publications = genericRepository.GetAll().ToList();
-            var publicationsMapped = Mapper.Map<IEnumerable<Publication>,IEnumerable< GetPublicationView>> (publications);
+            var publicationsMapped = Mapper.Map<IEnumerable<Publication>,IEnumerable<GetAllPublicationsView>> (publications);
             return publicationsMapped;
         }
         public GetPublicationView GetPublicationByID(int id)

@@ -9,13 +9,15 @@ namespace WebLibrary2.BusinessLogicLayer.Mapping
         {
             Mapper.Initialize(cfg =>
             {
-                //cfg.AddProfile<AuthorMappingProfile>();
+                cfg.AddProfile<AuthorMappingProfile>();
                 cfg.AddProfile<BookMappingProfile>();
-                //cfg.AddProfile<BookGenresMappingProfile>();
-                //cfg.AddProfile<ArticleMappingProfile>();
-                //cfg.AddProfile<MagazineMappingProfile>();
+                cfg.AddProfile<BookGenresMappingProfile>();
+                cfg.AddProfile<ArticleMappingProfile>();
+                cfg.AddProfile<MagazineMappingProfile>();
+                cfg.AddProfile<PublicationMappingProfile>();
+                cfg.AddProfile<PublicationGenresMappingProfile>();
             });
-            Mapper.Configuration.AssertConfigurationIsValid();
+            //Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }
