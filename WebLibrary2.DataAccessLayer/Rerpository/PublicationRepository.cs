@@ -21,7 +21,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             Save();
         }
 
-        public IQueryable<Publication> GetAllPublications()
+        public IQueryable<Publication> GetAllPubicationsWithGenres()
         {
             return context.Publications.Include(pg => pg.PublicationGenres);
         }

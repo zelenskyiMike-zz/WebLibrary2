@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebLibrary2.DataAccessLayer.Concrete;
-using WebLibrary2.DataAccessLayer.Interfaces;
 using WebLibrary2.EntitiesLayer.Entities;
 using WebLibrary2.ViewModelsLayer.ViewModels;
 
@@ -21,7 +17,7 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
         private readonly PublicationAuthorsRepository publicationAuthorsRepository;
         private readonly AuthorRepository authorRepository;
 
-        public AuthorService(DbContext context, BookAuthorRepository bookAuthorRepository)
+        public AuthorService(DbContext context)
         {
             this.context = context;
             genericRepository = new GenericRepository<Author>(context);
@@ -39,8 +35,10 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
         }
         public GetAuthorLiteratureView GetAuthor(int id)
         {
-            var author = genericRepository.GetByID(id);
-            return Mapper.Map<Author, GetAuthorLiteratureView>(author);
+            var author = GetAuthorByID(id);
+            var authorMapped = Mapper.Map<GetAuthorView,Author>(author);
+            var authorDetails = authorRepository.GetAuthorsDetails(authorMapped);
+            return Mapper.Map<Author, GetAuthorLiteratureView>(authorDetails);
         }
         public GetAuthorView GetAuthorByID(int id)
         {

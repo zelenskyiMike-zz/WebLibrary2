@@ -20,41 +20,39 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             Database = uow;
         }
 
-        public async Task<OperationDetails> Create(UserDTO userDto)
+        public async Task<OperationDetails> Create(UserView userDto)
         {
             ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
-            if (user == null)
-            {
-                user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
-                var result = await Database.UserManager.CreateAsync(user, userDto.Password);
-                if (result.Errors.Count() > 0)
-                    return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
-
-                await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-
-                ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
-                Database.ClientManager.Create(clientProfile);
-                await Database.SaveAsync();
-                return new OperationDetails(true, "Registration is succes", "");
-            }
-            else
+            if (user != null)
             {
                 return new OperationDetails(false, "User with the same login is already exists", "Email");
             }
+            user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
+            var result = await Database.UserManager.CreateAsync(user, userDto.Password);
+            if (result.Errors.Count() > 0)
+                return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
+
+            await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+
+            ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
+            Database.ClientManager.Create(clientProfile);
+            await Database.SaveAsync();
+            return new OperationDetails(true, "Registration is succes", "");
         }
 
-        public async Task<ClaimsIdentity> Authenticate(UserDTO userDto)
+        public async Task<ClaimsIdentity> Authenticate(UserView userDto)
         {
             ClaimsIdentity claim = null;
             ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
 
             if (user != null)
-                claim = await Database.UserManager.CreateIdentityAsync(user,
-                                            DefaultAuthenticationTypes.ApplicationCookie);
+            {
+                claim = await Database.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            }
             return claim;
         }
 
-        public async Task SetInitialData(UserDTO adminDto, List<string> roles)
+        public async Task SetInitialData(UserView adminDto, List<string> roles)
         {
             foreach (string roleName in roles)
             {

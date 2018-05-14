@@ -11,8 +11,8 @@ namespace WebLibrary2.BusinessLogicLayer.Interfaces
 {
     public interface IUserService : IDisposable
     {
-        Task<OperationDetails> Create(UserDTO userDTO);
-        Task<ClaimsIdentity> Authenticate(UserDTO userDTO);
-        Task SetInitialData(UserDTO adminDTO,List<string> roles);
+        Task<OperationDetails> Create(UserView userDTO);
+        Task<ClaimsIdentity> Authenticate(UserView userDTO);
+        Task SetInitialData(UserView adminDTO,List<string> roles);
     }
 }

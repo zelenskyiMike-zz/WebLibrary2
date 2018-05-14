@@ -76,7 +76,7 @@ namespace WebLibrary2.WebUI.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPublication(GetPublicationView publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public ActionResult EditPublication(GetAllPublicationsView publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
             if (publicationVM == null)
             {
@@ -117,9 +117,9 @@ namespace WebLibrary2.WebUI.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePublication(GetAllPublicationsView publicationVM)
+        public ActionResult DeletePublication(int? id)
         {
-            publicationService.DeletePublication(publicationVM);
+            publicationService.DeletePublication((int)id);
             return RedirectToAction("Index", "Home");
         }
     }

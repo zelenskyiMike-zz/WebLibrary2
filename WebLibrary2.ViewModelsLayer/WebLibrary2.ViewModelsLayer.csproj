@@ -42,21 +42,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\GetAllArticlesView.cs" />
-    <Compile Include="ViewModels\GetAllBooksView.cs" />
-    <Compile Include="ViewModels\GetAllMagazinesView.cs" />
-    <Compile Include="ViewModels\GetPublicationGenreView.cs" />
-    <Compile Include="ViewModels\GetAllPublicationsView.cs" />
-    <Compile Include="ViewModels\GetArticleView.cs" />
-    <Compile Include="ViewModels\GetAuthorLiteratureView.cs" />
-    <Compile Include="ViewModels\GetAuthorView.cs" />
-    <Compile Include="ViewModels\GetBookGenreView.cs" />
-    <Compile Include="ViewModels\GetBooksWithAllAuthorsView.cs" />
-    <Compile Include="ViewModels\GetBookView.cs" />
-    <Compile Include="ViewModels\GetMagazineGenreView.cs" />
-    <Compile Include="ViewModels\GetMagazineView.cs" />
-    <Compile Include="ViewModels\GetPublicationView.cs" />
-    <Compile Include="ViewModels\RegisterAccountView.cs" />
+    <Compile Include="ViewModels\Articles\GetAllArticlesView.cs" />
+    <Compile Include="ViewModels\Books\GetAllBooksView.cs" />
+    <Compile Include="ViewModels\Identity\UserView.cs" />
+    <Compile Include="ViewModels\Magazines\GetAllMagazinesView.cs" />
+    <Compile Include="ViewModels\Articles\GetArticleGenreView.cs" />
+    <Compile Include="ViewModels\Publications\GetPublicationGenreView.cs" />
+    <Compile Include="ViewModels\Publications\GetAllPublicationsView.cs" />
+    <Compile Include="ViewModels\Articles\GetArticleView.cs" />
+    <Compile Include="ViewModels\Author\GetAuthorLiteratureView.cs" />
+    <Compile Include="ViewModels\Author\GetAuthorView.cs" />
+    <Compile Include="ViewModels\Books\GetBookGenreView.cs" />
+    <Compile Include="ViewModels\Books\GetBooksWithAllAuthorsView.cs" />
+    <Compile Include="ViewModels\Books\GetBookView.cs" />
+    <Compile Include="ViewModels\Magazines\GetMagazineGenreView.cs" />
+    <Compile Include="ViewModels\Magazines\GetMagazineView.cs" />
+    <Compile Include="ViewModels\Publications\GetPublicationView.cs" />
+    <Compile Include="ViewModels\Identity\RegisterAccountView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebLibrarys2.EntitiesLayer\WebLibrary2.EntitiesLayer.csproj">

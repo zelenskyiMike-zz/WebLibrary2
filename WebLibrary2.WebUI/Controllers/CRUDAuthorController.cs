@@ -76,15 +76,15 @@ namespace WebLibrary2.WebUI.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAuthor(GetAuthorLiteratureView author)
+        public ActionResult DeleteAuthor(int? id)
         {
             try
-            {
-                service.DeleteAuthor(author.AuthorID);
+            { 
+                service.DeleteAuthor((int)id);
             }
             catch (DataException)
             {
-                return RedirectToAction("DeleteAuthor", new { id = author.AuthorID });
+                return RedirectToAction("DeleteAuthor", new { id = id});
             }
             return RedirectToAction("AuthorView", "Author");
         }

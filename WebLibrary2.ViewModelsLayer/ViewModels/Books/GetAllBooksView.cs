@@ -9,6 +9,7 @@ namespace WebLibrary2.ViewModelsLayer.ViewModels
 
         [Required(ErrorMessage = "Неободимо добавить название книги")]
         public string BookName { get; set; }
+
         public int GenreID { get; set; }
         public string GenreName { get; set; }
 

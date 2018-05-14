@@ -9,6 +9,7 @@ namespace WebLibrary2.BusinessLogicLayer.Mapping.MappingProfiles
         public AuthorMappingProfile()
         {
             CreateMap<Author, GetAuthorView>().ReverseMap();
+            CreateMap<Author, GetAuthorLiteratureView>().ReverseMap();
         }
     }
 }

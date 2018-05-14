@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Deserialize";
 
-    var publicationDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataJSON"];
+    var publicationDataJSON = (IEnumerable<WebLibrary2.ViewModelsLayer.ViewModels.GetPublicationView>)ViewData["PublicationDataJSON"];
 
-    var publicationDataXML = (IEnumerable<WebLibrary2.Domain.Entity.PublicationEntity.Publication>)ViewData["PublicationDataXML"];
+    var publicationDataXML = (IEnumerable<WebLibrary2.ViewModelsLayer.ViewModels.GetPublicationView>)ViewData["PublicationDataXML"];
 }
 
 <h2>Deserialize</h2>

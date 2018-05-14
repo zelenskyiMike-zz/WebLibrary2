@@ -56,7 +56,7 @@ namespace WebLibrary2.WebUI.Controllers
 
                 foreach (int book in bookSerializationID.ToList())
                 {
-                    GetBookView bookToSerialize = bookService.GetbookByID(book); 
+                    GetBookView bookToSerialize = bookService.GetBookByID(book); 
 
                     if (!booksToSerialize.Contains(bookToSerialize))
                     {
@@ -90,7 +90,7 @@ namespace WebLibrary2.WebUI.Controllers
                 }
                 foreach (var book in bookSerializationID.ToList())
                 {
-                    GetBookView bookToSerialize = bookService.GetbookByID(book);
+                    GetBookView bookToSerialize = bookService.GetBookByID(book);
                     if (!booksToSerialize.Contains(bookToSerialize))
                     {
                         booksToSerialize.Add(bookToSerialize);

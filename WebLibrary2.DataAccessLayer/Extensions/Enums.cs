@@ -13,7 +13,7 @@ namespace WebLibrary2.Domain.Extensions
         public enum ErrorList
         {
             [Description("Wrong filef for this publications type. Please, choose another file")]
-            WrongFileFormat
+            WrongFileFormat = 0
         }
     }
 }

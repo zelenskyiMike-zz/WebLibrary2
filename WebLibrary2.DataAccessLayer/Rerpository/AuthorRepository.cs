@@ -67,7 +67,6 @@ namespace WebLibrary2.DataAccessLayer.Concrete
 
         public List<Book> GetBooksNotExistInAuthor(Author author)
         {
-            //var currAuthor = GetAuthorByID(authorID);
             List<Book> finalListOfBooks = new List<Book>();
 
             var initBookAuthorList = context.BookAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Books).ToList();
@@ -84,8 +83,6 @@ namespace WebLibrary2.DataAccessLayer.Concrete
 
         public List<Article> GetArticlesNotExistInAuthor(Author author)
         {
-            //var currAuthor = GetAuthorByID(authorID);
-
             List<Article> finalListOfArticles = new List<Article>();
 
             var initArticleAuthorList = context.ArticleAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Articles).ToList();
@@ -102,7 +99,6 @@ namespace WebLibrary2.DataAccessLayer.Concrete
 
         public List<Magazine> GetMagazinesNotExistInAuthor(Author author)
         {
-            //var currAuthor = GetAuthorByID(authorID);
             List<Magazine> finalListOfMagazines = new List<Magazine>();
 
             var initMagazineAuthorsList = context.MagazineAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Magazines).ToList();
@@ -119,7 +115,6 @@ namespace WebLibrary2.DataAccessLayer.Concrete
 
         public List<Publication> GetPublicationsNotExistInAuthor(Author author)
         {
-            //var currAuthor = GetAuthorByID(authorID);
             List<Publication> finalListOfPublication = new List<Publication>();
 
             var initPublicationsAuthorList = context.PublicationeAuthors.Where(x => x.AuthorID == author.AuthorID).Select(x => x.Publications).ToList();

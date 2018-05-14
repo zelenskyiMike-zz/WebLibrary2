@@ -114,9 +114,9 @@ namespace WebLibrary2.WebUI.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteMagazine(GetAllMagazinesView magazineVM)
+        public ActionResult DeleteMagazine(int? id)
         {
-            magazineService.DeleteMagazine(magazineVM);
+            magazineService.DeleteMagazine((int)id);
             return RedirectToAction("Index", "Home");
         }
     }

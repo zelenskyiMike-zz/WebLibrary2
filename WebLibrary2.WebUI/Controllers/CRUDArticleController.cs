@@ -66,7 +66,7 @@ namespace WebLibrary2.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditArticle(GetArticleView articleVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public ActionResult EditArticle(GetAllArticlesView articleVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
             if (articleVM == null)
             {
@@ -99,14 +99,14 @@ namespace WebLibrary2.WebUI.Controllers
             {
                 HttpNotFound();
             }
-            return View("DeleteArticle", articleVM);
+            return View(articleVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteArticle(GetAllArticlesView articleVM)
+        public ActionResult DeleteArticle(int? id)
         {
-            articleService.DeleteArticle(articleVM);
+            articleService.DeleteArticle((int)id);
             return RedirectToAction("Index", "Home");
         }
     }

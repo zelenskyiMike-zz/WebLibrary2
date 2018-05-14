@@ -25,10 +25,10 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             this.articleAuthorsRepository = articleAuthorsRepository;
         }
 
-        public IEnumerable<GetArticleView> GetAllArticles()
+        public IEnumerable<GetArticleGenreView> GetAllArticles()
         {
-            var articles = context.Articles;
-            var articlesMapped = Mapper.Map<IEnumerable<Article>,IEnumerable<GetArticleView>>(articles);
+            var articles = context.ArticleGenres.ToList();
+            var articlesMapped = Mapper.Map<IEnumerable<ArticleGenre>,IEnumerable<GetArticleGenreView>>(articles);
             return articlesMapped;
         }
         public void CreateArticle(GetArticleView articleVM)
@@ -55,17 +55,17 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             var listAuthorsMapped = Mapper.Map<IEnumerable<Author>,IEnumerable<GetAuthorView>>(listAuthors);
             return listAuthorsMapped;
         }
-        public void EditArticle(GetArticleView articleVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public void EditArticle(GetAllArticlesView articleVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
-            var article = Mapper.Map<GetArticleView, Article>(articleVM);
+            var article = Mapper.Map<GetAllArticlesView, Article>(articleVM);
             genericRepository.Update(article);
             articleAuthorsRepository.DeleteAuthorFromArticle(articleVM.ArticleID, authorIDsForDelete);
             articleAuthorsRepository.AddAuthorToArticle(articleVM.ArticleID, authorIDsForInsert);
             articleRepository.Save();
         }
-        public void DeleteArticle(GetAllArticlesView articleVM)
+        public void DeleteArticle(int id)
         {
-            var article = Mapper.Map<GetAllArticlesView, Article>(articleVM);
+            var article = genericRepository.GetByID(id);
             genericRepository.Remove(article);
         }
         public IEnumerable<GetAllArticlesView> GetAllArticlesWithGenres()

@@ -21,7 +21,7 @@ namespace WebLibrary2.DataAccessLayer.Concrete
             context.SaveChanges();
         }
 
-        public IQueryable<Magazine> GetAllMagazines()
+        public IQueryable<Magazine> GetAllMagazinesWithGenres()
         {
             return context.Magazines.Include(mg => mg.MagazineGenres);
         }

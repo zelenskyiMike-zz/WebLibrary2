@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<ArrayOfMagazine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Magazine>
-    <MagazineID>1</MagazineID>
-    <MagazineGenreID>1</MagazineGenreID>
-    <MagazineName>Журнал 122</MagazineName>
-    <DateOfMagazinePublish>2018-04-05T00:00:00</DateOfMagazinePublish>
-  </Magazine>
-</ArrayOfMagazine>

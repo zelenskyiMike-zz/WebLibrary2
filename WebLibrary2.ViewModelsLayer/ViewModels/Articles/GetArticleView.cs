@@ -16,6 +16,7 @@ namespace WebLibrary2.ViewModelsLayer.ViewModels
 
         [Required(ErrorMessage = "Необходимо выбрать жанр")]
         public int ArticleGenreID { get; set; }
+        public string ArticleGenreName { get; set; }
 
         [Required(ErrorMessage = "Выберите хотя бы одного автора")]
         public List<int> AuthorsIDs { get; set; }

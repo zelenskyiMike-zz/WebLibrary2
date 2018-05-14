@@ -34,7 +34,7 @@ namespace WebLibrary2.WebUI.Controllers
 
         public PartialViewResult MagazinesView()
         {
-            var magazines = magazineService.GetAllMagazines();
+            var magazines = magazineService.GetAllMagazinesWithGenres();
             return PartialView(magazines);
         }
 

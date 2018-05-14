@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Deserialize";
 
-    var bookDataJSON = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataJSON"];
+    var bookDataJSON = (IEnumerable<WebLibrary2.ViewModelsLayer.ViewModels.GetBookView>)ViewData["BookDataJSON"];
 
-    var bookDataXML = (IEnumerable<WebLibrary2.Domain.Entity.BookEntity.Book>)ViewData["BookDataXML"];
+    var bookDataXML = (IEnumerable<WebLibrary2.ViewModelsLayer.ViewModels.GetBookView>)ViewData["BookDataXML"];
 }
 
 <h2>Deserialize</h2>

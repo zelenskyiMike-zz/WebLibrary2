@@ -7,9 +7,12 @@ namespace WebLibrary2.ViewModelsLayer.ViewModels
     public class GetAllArticlesView
     {
         public int ArticleID { get; set; }
+        [Required(ErrorMessage = "Неободимо добавить название статьи")]
+        public string ArticleName { get; set; }
+
         public int ArticleGenreID { get; set; }
         public string ArticleGenreName { get; set; }
-        public string ArticleName { get; set; }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfArticlePublish { get; set; }
 

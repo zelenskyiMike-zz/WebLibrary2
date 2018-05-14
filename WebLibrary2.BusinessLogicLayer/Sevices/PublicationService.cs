@@ -25,9 +25,9 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             publicationAuthorsRepository = new PublicationAuthorsRepository(context);
         }
 
-        public IEnumerable<GetAllPublicationsView> GetAllPubications()
+        public IEnumerable<GetAllPublicationsView> GetAllPubicationsWithGenres()
         {
-            var publications = genericRepository.GetAll().ToList();
+            var publications = publicationRepository.GetAllPubicationsWithGenres();
             var publicationsMapped = Mapper.Map<IEnumerable<Publication>,IEnumerable<GetAllPublicationsView>> (publications);
             return publicationsMapped;
         }
@@ -62,18 +62,18 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             var publication = Mapper.Map<GetPublicationView,Publication>(publicationVM);
             genericRepository.Create(publication);
         }
-        public void EditPublication(GetPublicationView publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
+        public void EditPublication(GetAllPublicationsView publicationVM, int[] authorIDsForDelete, int[] authorIDsForInsert)
         {
-            var publicationMapped = Mapper.Map<GetPublicationView,Publication>(publicationVM);
+            var publicationMapped = Mapper.Map<GetAllPublicationsView, Publication>(publicationVM);
             genericRepository.Update(publicationMapped);
             publicationAuthorsRepository.DeleteAuthorFromPublication(publicationVM.PublicationID, authorIDsForDelete);
             publicationAuthorsRepository.AddAuthorToPublication(publicationVM.PublicationID, authorIDsForInsert);
             publicationRepository.Save();
         }
-        public void DeletePublication(GetAllPublicationsView publicationVM)
+        public void DeletePublication(int id)
         {
-            var publicationMapped = Mapper.Map<GetAllPublicationsView,Publication>(publicationVM);
-            genericRepository.Remove(publicationMapped);
+            var publication = genericRepository.GetByID(id);
+            genericRepository.Remove(publication);
         }
     }
 }

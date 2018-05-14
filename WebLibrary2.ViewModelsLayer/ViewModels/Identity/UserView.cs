@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebLibrary2.BusinessLogicLayer.DTO
 {
-    public class UserDTO
+    public class UserView
     {
         public string Id { get; set; }
         public string Email { get; set; }

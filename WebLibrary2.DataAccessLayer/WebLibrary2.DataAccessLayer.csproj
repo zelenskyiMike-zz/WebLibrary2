@@ -99,22 +99,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concrete\ArticleAuthorsRepository.cs" />
-    <Compile Include="Concrete\ArticleRepository.cs" />
-    <Compile Include="Concrete\AuthorRepository.cs" />
-    <Compile Include="Concrete\BookAuthorRepository.cs" />
-    <Compile Include="Concrete\BookRepository.cs" />
-    <Compile Include="Concrete\ClientManager.cs" />
-    <Compile Include="Concrete\GenericRepository.cs" />
-    <Compile Include="Concrete\IdentityUnitOfWork.cs" />
-    <Compile Include="Concrete\MagazineAuthorRepository.cs" />
-    <Compile Include="Concrete\MagazineRepository.cs" />
-    <Compile Include="Concrete\PublicationAuthorsRepository.cs" />
-    <Compile Include="Concrete\PublicationRepository.cs" />
-    <Compile Include="Concrete\ContextFactory.cs" />
-    <Compile Include="Concrete\DbContext.cs" />
+    <Compile Include="Rerpository\ArticleAuthorsRepository.cs" />
+    <Compile Include="Rerpository\ArticleRepository.cs" />
+    <Compile Include="Rerpository\AuthorRepository.cs" />
+    <Compile Include="Rerpository\BookAuthorRepository.cs" />
+    <Compile Include="Rerpository\BookRepository.cs" />
+    <Compile Include="Rerpository\ClientManager.cs" />
+    <Compile Include="Rerpository\GenericRepository.cs" />
+    <Compile Include="UnitOfWork\IdentityUnitOfWork.cs" />
+    <Compile Include="Rerpository\MagazineAuthorRepository.cs" />
+    <Compile Include="Rerpository\MagazineRepository.cs" />
+    <Compile Include="Rerpository\PublicationAuthorsRepository.cs" />
+    <Compile Include="Rerpository\PublicationRepository.cs" />
+    <Compile Include="Rerpository\ContextFactory.cs" />
+    <Compile Include="DbContext.cs" />
     <Compile Include="Enums\Enum.cs" />
-    <Compile Include="Extensions\Class1.cs" />
     <Compile Include="Extensions\DeserializationExtensionClass.cs" />
     <Compile Include="Extensions\Enums.cs" />
     <Compile Include="Extensions\FilePath.cs" />

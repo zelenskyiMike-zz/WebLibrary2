@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ArrayOfGetArticleView xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GetArticleView>
+    <ArticleID>3</ArticleID>
+    <ArticleName>Article 3</ArticleName>
+    <ArticleGenreID>3</ArticleGenreID>
+    <DateOfArticlePublish>2004-05-20T00:00:00</DateOfArticlePublish>
+  </GetArticleView>
+  <GetArticleView>
+    <ArticleID>6</ArticleID>
+    <ArticleName>Article 6</ArticleName>
+    <ArticleGenreID>1</ArticleGenreID>
+    <DateOfArticlePublish>2007-08-11T00:00:00</DateOfArticlePublish>
+  </GetArticleView>
+  <GetArticleView>
+    <ArticleID>9</ArticleID>
+    <ArticleName>ASP.NET MVC 5 </ArticleName>
+    <ArticleGenreID>2</ArticleGenreID>
+    <DateOfArticlePublish>2018-04-02T00:00:00</DateOfArticlePublish>
+  </GetArticleView>
+</ArrayOfGetArticleView>

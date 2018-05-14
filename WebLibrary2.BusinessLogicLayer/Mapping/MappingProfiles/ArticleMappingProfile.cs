@@ -15,7 +15,7 @@ namespace WebLibrary2.BusinessLogicLayer.Mapping.MappingProfiles
         {
             CreateMap<Article, GetArticleView>().ReverseMap();
             CreateMap<Article, GetAllArticlesView>().ForMember(dest => dest.ArticleGenreID, opt => opt.MapFrom(src => src.ArticleGenres.ArticleGenreID)).
-                                                    ForMember(dest => dest.ArticleName, opt => opt.MapFrom(src => src.ArticleGenres.ArticleGenreName)).ReverseMap();
+                                                    ForMember(dest => dest.ArticleGenreName, opt => opt.MapFrom(src => src.ArticleGenres.ArticleGenreName)).ReverseMap();
         }
     }
 }

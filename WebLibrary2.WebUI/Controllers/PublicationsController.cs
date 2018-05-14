@@ -33,7 +33,7 @@ namespace WebLibrary2.WebUI.Controllers
         }
         public PartialViewResult PublicationsView()
         {
-            var publications = publicationService.GetAllPubications();
+            var publications = publicationService.GetAllPubicationsWithGenres();
             return PartialView(publications);
         }
 

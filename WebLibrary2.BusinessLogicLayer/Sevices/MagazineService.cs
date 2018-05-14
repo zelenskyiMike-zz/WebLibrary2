@@ -25,9 +25,9 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             magazineAuthorsRepository = new MagazineAuthorRepository(context);
         }
 
-        public IEnumerable<GetAllMagazinesView> GetAllMagazines()
+        public IEnumerable<GetAllMagazinesView> GetAllMagazinesWithGenres()
         {
-            var magazines = genericRepository.GetAll();
+            var magazines = magazineRepository.GetAllMagazinesWithGenres() ;
             var magazinesMapped = Mapper.Map<IEnumerable<Magazine>,IEnumerable<GetAllMagazinesView>>(magazines);
             return magazinesMapped;
         }
@@ -57,9 +57,9 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             magazineAuthorsRepository.AddAuthorToMagazine(magazineToUpdate.MagazineID, authorIDsForInsert);
             magazineRepository.Save();
         }
-        public void DeleteMagazine(GetAllMagazinesView magazineVM)
+        public void DeleteMagazine(int id)
         {
-            var magazine = Mapper.Map<GetAllMagazinesView, Magazine>(magazineVM);
+            var magazine = genericRepository.GetByID(id);
             genericRepository.Remove(magazine);
         }
         public IEnumerable<GetMagazineGenreView> GetAllGenres()

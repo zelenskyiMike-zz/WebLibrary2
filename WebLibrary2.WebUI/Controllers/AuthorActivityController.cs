@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Web.Mvc;
 using WebLibrary2.BusinessLogicLayer.Sevices;
 using WebLibrary2.ViewModelsLayer.ViewModels;
@@ -22,33 +23,33 @@ namespace WebLibrary2.WebUI.Controllers
 
             MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor(authorVM), "BookID", "BookName", authorVM.Books);
             ViewData["Books"] = books;
-            return PartialView("GetBooksOFAuthor",authorVM);
+            return PartialView("GetBooksOFAuthor", authorVM);
         }
 
         [HttpPost]
         [ChildActionOnly]
         [ValidateAntiForgeryToken]
-        public PartialViewResult GetBooksOFAuthor(GetAuthorLiteratureView authorVM, int[] bookIDsForDelete, int[] booksIDsForInsert)
+        public PartialViewResult GetBooksOFAuthor(int id, int[] bookIDsForDelete, int[] booksIDsForInsert)
         {
-            var authorToUpdate = service.GetAuthorByID(authorVM.AuthorID);
+            var authorToUpdate = service.GetAuthorsBooksDetails(id);
 
             if (TryUpdateModel(authorToUpdate))
             {
                 try
                 {
-                    service.EditBooksOFAuthor(authorVM.AuthorID, bookIDsForDelete, booksIDsForInsert);
+                    service.EditBooksOFAuthor(authorToUpdate.AuthorID, bookIDsForDelete, booksIDsForInsert);
                 }
                 catch (DataException)
                 {
                     ModelState.AddModelError("", "Unable to save");
                 }
             }
-            var author = service.GetAuthorsBooksDetails(authorVM.AuthorID);
+            var author = service.GetAuthorsBooksDetails(authorToUpdate.AuthorID);
 
-            MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor(authorVM), "BookID", "BookName", authorVM.Books);
+            MultiSelectList books = new MultiSelectList(service.GetBooksNotExistInAuthor(authorToUpdate), "BookID", "BookName", authorToUpdate.Books);
             ViewData["Books"] = books;
 
-            return PartialView(authorVM);
+            return PartialView(authorToUpdate);
         }
 
         [HttpGet]
@@ -69,16 +70,18 @@ namespace WebLibrary2.WebUI.Controllers
         {
             var authorToUpdate = service.GetAuthorByID(id);
 
-            if (TryUpdateModel(authorToUpdate))
+            if (authorToUpdate == null)
             {
-                try
-                {
-                    service.EditArticlesOFAuthor(id, articlesIDsForDelete, articlesIDsForInsert);
-                }
-                catch (DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save");
-                }
+                Exception nullEx = new Exception("Entity not found");
+                return PartialView("Error", new HandleErrorInfo(nullEx, "Books", "BooksView"));
+            }
+            try
+            {
+                service.EditArticlesOFAuthor(id, articlesIDsForDelete, articlesIDsForInsert);
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save");
             }
             var authorVM = service.GetAuthorsArticlesDetails(id);
 

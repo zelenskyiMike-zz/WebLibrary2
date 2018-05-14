@@ -41,7 +41,7 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
         {
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password };
+                UserView userDto = new UserView { Email = model.Email, Password = model.Password };
                 ClaimsIdentity claim = await UserService.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -79,7 +79,7 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
             // await SetInitialDataAsync();
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO
+                UserView userDto = new UserView
                 {
                     Email = model.Email,
                     Password = model.Password,
@@ -106,7 +106,7 @@ namespace WebLibrary2.WebUI.Controllers.IdentityControllers
         }
         private async Task SetInitialDataAsync()
         {
-            await UserService.SetInitialData(new UserDTO
+            await UserService.SetInitialData(new UserView
             {
                 Email = "zzTop@mail.ru",
                 UserName = "zzAdmin",

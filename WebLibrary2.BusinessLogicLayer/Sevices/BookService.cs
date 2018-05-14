@@ -38,7 +38,7 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             var genresMapped = Mapper.Map<IEnumerable<BookGenre>, IEnumerable<GetBookGenreView>>(genres);
             return genresMapped;
         }
-        public GetBookView GetbookByID(int id)
+        public GetBookView GetBookByID(int id)
         {
             var book = genericRepository.GetByID(id);
             var bookMapped = Mapper.Map<Book,GetBookView>(book);
@@ -77,10 +77,10 @@ namespace WebLibrary2.BusinessLogicLayer.Sevices
             bookAuthorRepository.AddAuthorToBook(bookFromView.BookID, authorIDsForInsert);
             context.SaveChanges();
         }
-        public void DeleteBook(GetAllBooksView book)
+        public void DeleteBook(int id)
         {
-            var bookMaped = Mapper.Map<GetAllBooksView,Book>(book); 
-            genericRepository.Remove(bookMaped);
+            var book = genericRepository.GetByID(id);
+            genericRepository.Remove(book);
         }
     }
 }

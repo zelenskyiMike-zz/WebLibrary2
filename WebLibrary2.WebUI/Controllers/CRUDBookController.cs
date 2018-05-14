@@ -107,9 +107,9 @@ namespace WebLibrary2.WebUI.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteBook(GetAllBooksView bookFromView)
+        public ActionResult DeleteBook(int? id)
         {
-            bookService.DeleteBook(bookFromView);
+            bookService.DeleteBook((int)id);
             return RedirectToAction("Index", "Home");
         }
     }
